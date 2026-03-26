@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { TopNav } from "@/components/layout/top-nav";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -28,7 +30,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <TopNav />
           {children}
+          <MobileNav />
         </ThemeProvider>
       </body>
     </html>
