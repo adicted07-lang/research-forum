@@ -114,6 +114,14 @@ model User {
   comments   Comment[]
   bookmarks  Bookmark[]
 
+  // Social relations
+  badges           Badge[]
+  following        Follow[]                 @relation("Following")
+  followers        Follow[]                 @relation("Followers")
+  collections      Collection[]
+  notifications    Notification[]
+  newsletterSubs   NewsletterSubscription[]
+
   @@index([email])
   @@index([username])
   @@index([role])
@@ -270,4 +278,92 @@ model Bookmark {
 
   @@unique([userId, targetType, targetId])
   @@map("bookmarks")
+}
+
+// === SOCIAL MODELS ===
+
+model Badge {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  category  String
+  earnedAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, name])
+  @@index([userId])
+  @@map("badges")
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+
+  follower  User @relation("Following", fields: [followerId], references: [id])
+  following User @relation("Followers", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
+}
+
+model Collection {
+  id        String   @id @default(cuid())
+  name      String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User             @relation(fields: [userId], references: [id])
+  items CollectionItem[]
+
+  @@index([userId])
+  @@map("collections")
+}
+
+model CollectionItem {
+  id           String     @id @default(cuid())
+  collectionId String
+  targetType   TargetType
+  targetId     String
+  createdAt    DateTime   @default(now())
+
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  @@unique([collectionId, targetType, targetId])
+  @@map("collection_items")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  title     String
+  body      String?
+  link      String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId, isRead])
+  @@index([userId, createdAt])
+  @@map("notifications")
+}
+
+model NewsletterSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, type])
+  @@map("newsletter_subscriptions")
 }
