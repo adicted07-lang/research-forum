@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bell, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { SearchBar } from "@/components/shared/search-bar";
 
@@ -18,6 +19,7 @@ const navLinks = [
 export function TopNav() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const { data: session } = useSession();
 
   return (
     <nav className="sticky top-0 z-50 bg-white/92 backdrop-blur-xl border-b border-border-light dark:bg-[#0F0F13]/92 dark:border-border-dark-light">
@@ -70,22 +72,48 @@ export function TopNav() {
             )}
           </button>
 
-          <button
-            className="relative w-9 h-9 rounded-md flex items-center justify-center text-text-secondary hover:bg-surface dark:hover:bg-surface-dark transition-colors"
-            aria-label="Notifications"
-          >
-            <Bell className="w-5 h-5" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full border-2 border-white dark:border-[#0F0F13]" />
-          </button>
+          {session ? (
+            <>
+              <button
+                className="relative w-9 h-9 rounded-md flex items-center justify-center text-text-secondary hover:bg-surface dark:hover:bg-surface-dark transition-colors"
+                aria-label="Notifications"
+              >
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full border-2 border-white dark:border-[#0F0F13]" />
+              </button>
 
-          <div className="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-primary to-warning cursor-pointer border-2 border-transparent hover:border-primary transition-colors" />
+              <div
+                className="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-primary to-warning cursor-pointer border-2 border-transparent hover:border-primary transition-colors flex items-center justify-center text-white text-xs font-bold"
+                title={session.user?.name ?? session.user?.email ?? "Account"}
+              >
+                {session.user?.name?.[0]?.toUpperCase() ?? session.user?.email?.[0]?.toUpperCase() ?? "U"}
+              </div>
 
-          <Link
-            href="/forum/new"
-            className="hidden sm:inline-flex px-4 py-2 bg-primary text-white text-[13.5px] font-semibold rounded-md hover:bg-primary-hover transition-all hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(218,85,47,0.25)]"
-          >
-            Ask Question
-          </Link>
+              {session.user?.role !== "COMPANY" && (
+                <Link
+                  href="/forum/new"
+                  className="hidden sm:inline-flex px-4 py-2 bg-primary text-white text-[13.5px] font-semibold rounded-md hover:bg-primary-hover transition-all hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(218,85,47,0.25)]"
+                >
+                  Ask Question
+                </Link>
+              )}
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-text-primary dark:text-text-dark-primary hover:bg-surface dark:hover:bg-surface-dark rounded-md transition-colors"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/signup"
+                className="hidden sm:inline-flex px-4 py-2 bg-primary text-white text-[13.5px] font-semibold rounded-md hover:bg-primary-hover transition-all hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(218,85,47,0.25)]"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
