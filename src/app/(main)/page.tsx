@@ -1,9 +1,15 @@
 import { PageLayout } from "@/components/layout/page-layout";
 import { SectionHeader } from "@/components/shared/section-header";
 import { EmptyState } from "@/components/shared/empty-state";
+import { QuestionCard } from "@/components/forum/question-card";
+import { getQuestions } from "@/server/actions/questions";
 import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const { questions } = await getQuestions({ sort: "trending", limit: 4 });
+
   return (
     <PageLayout
       sidebar={
@@ -25,11 +31,19 @@ export default function HomePage() {
     >
       <section className="mb-8">
         <SectionHeader title="Trending Questions" href="/forum" />
-        <EmptyState
-          title="No questions yet"
-          description="Be the first to ask a question and start the conversation."
-          icon={<MessageSquare className="w-12 h-12" />}
-        />
+        {questions.length > 0 ? (
+          <div className="space-y-3">
+            {questions.map((q) => (
+              <QuestionCard key={q.id} question={q} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            title="No questions yet"
+            description="Be the first to ask a question and start the conversation."
+            icon={<MessageSquare className="w-12 h-12" />}
+          />
+        )}
       </section>
 
       <section className="mb-8">
