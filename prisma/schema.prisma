@@ -60,6 +60,11 @@ enum HiringStatus {
   NOT_HIRING
 }
 
+enum ListingType {
+  SERVICE
+  TOOL
+}
+
 // === USER SYSTEM ===
 
 model User {
@@ -121,6 +126,10 @@ model User {
   collections      Collection[]
   notifications    Notification[]
   newsletterSubs   NewsletterSubscription[]
+
+  // Marketplace relations
+  listings Listing[]
+  reviews  Review[]
 
   @@index([email])
   @@index([username])
@@ -366,4 +375,53 @@ model NewsletterSubscription {
 
   @@unique([userId, type])
   @@map("newsletter_subscriptions")
+}
+
+// === MARKETPLACE MODELS ===
+
+model Listing {
+  id                   String      @id @default(cuid())
+  title                String
+  tagline              String
+  description          String      @db.Text
+  slug                 String      @unique
+  type                 ListingType
+  categoryTags         String[]
+  pricingInfo          String?
+  mediaGallery         String[]
+  websiteUrl           String?
+  demoUrl              String?
+  authorId             String
+  isActive             Boolean     @default(false)
+  stripeSubscriptionId String?
+  upvoteCount          Int         @default(0)
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  deletedAt            DateTime?
+
+  author User @relation(fields: [authorId], references: [id])
+
+  @@index([authorId])
+  @@index([slug])
+  @@index([type])
+  @@index([isActive])
+  @@map("listings")
+}
+
+model Review {
+  id         String     @id @default(cuid())
+  reviewerId String
+  targetType TargetType
+  targetId   String
+  rating     Int
+  body       String     @db.Text
+  tags       String[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  reviewer User @relation(fields: [reviewerId], references: [id])
+
+  @@unique([reviewerId, targetType, targetId])
+  @@index([targetType, targetId])
+  @@map("reviews")
 }
