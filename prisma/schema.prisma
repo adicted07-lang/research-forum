@@ -8,6 +8,32 @@ datasource db {
 
 // === ENUMS ===
 
+enum QuestionStatus {
+  OPEN
+  ANSWERED
+  CLOSED
+}
+
+enum VoteValue {
+  UPVOTE
+  DOWNVOTE
+}
+
+enum TargetType {
+  QUESTION
+  ANSWER
+  LISTING
+  ARTICLE
+  COMMENT
+}
+
+enum CommentAward {
+  INSIGHTFUL
+  WELL_RESEARCHED
+  HELPFUL
+  GOOD_FIND
+}
+
 enum UserRole {
   RESEARCHER
   COMPANY
@@ -81,6 +107,13 @@ model User {
   longestStreak Int @default(0)
   lastVisitDate DateTime?
 
+  // Forum relations
+  questions  Question[]
+  answers    Answer[]
+  votes      Vote[]
+  comments   Comment[]
+  bookmarks  Bookmark[]
+
   @@index([email])
   @@index([username])
   @@index([role])
@@ -134,4 +167,107 @@ model Tag {
   createdAt DateTime @default(now())
 
   @@map("tags")
+}
+
+// === FORUM MODELS ===
+
+model Question {
+  id              String         @id @default(cuid())
+  title           String
+  body            String         @db.Text
+  slug            String         @unique
+  tags            String[]
+  category        String         @default("General Discussion")
+  authorId        String
+  upvoteCount     Int            @default(0)
+  downvoteCount   Int            @default(0)
+  viewCount       Int            @default(0)
+  answerCount     Int            @default(0)
+  status          QuestionStatus @default(OPEN)
+  isPinned        Boolean        @default(false)
+  isFeatured      Boolean        @default(false)
+  bounty          Int            @default(0)
+  bountyExpiresAt DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  deletedAt       DateTime?
+
+  author  User     @relation(fields: [authorId], references: [id])
+  answers Answer[]
+
+  @@index([authorId])
+  @@index([slug])
+  @@index([status])
+  @@index([createdAt])
+  @@map("questions")
+}
+
+model Answer {
+  id           String    @id @default(cuid())
+  body         String    @db.Text
+  authorId     String
+  questionId   String
+  upvoteCount  Int       @default(0)
+  isAccepted   Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  author   User     @relation(fields: [authorId], references: [id])
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([authorId])
+  @@index([questionId])
+  @@map("answers")
+}
+
+model Vote {
+  id         String     @id @default(cuid())
+  userId     String
+  targetType TargetType
+  targetId   String
+  value      VoteValue
+  createdAt  DateTime   @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, targetType, targetId])
+  @@index([targetType, targetId])
+  @@map("votes")
+}
+
+model Comment {
+  id          String       @id @default(cuid())
+  body        String       @db.Text
+  authorId    String
+  targetType  TargetType
+  targetId    String
+  parentId    String?
+  upvoteCount Int          @default(0)
+  award       CommentAward?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  deletedAt   DateTime?
+
+  author  User      @relation(fields: [authorId], references: [id])
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies Comment[] @relation("CommentReplies")
+
+  @@index([authorId])
+  @@index([targetType, targetId])
+  @@index([parentId])
+  @@map("comments")
+}
+
+model Bookmark {
+  id         String     @id @default(cuid())
+  userId     String
+  targetType TargetType
+  targetId   String
+  createdAt  DateTime   @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, targetType, targetId])
+  @@map("bookmarks")
 }
