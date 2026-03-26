@@ -23,11 +23,17 @@ export async function QuestionList({
   sort = "newest",
   page = 1,
 }: QuestionListProps) {
-  const { questions, totalPages, currentPage } = await getQuestions({
-    category,
-    sort,
-    page,
-  });
+  let questions: Awaited<ReturnType<typeof getQuestions>>["questions"] = [];
+  let totalPages = 1;
+  let currentPage = page;
+  try {
+    const result = await getQuestions({ category, sort, page });
+    questions = result.questions;
+    totalPages = result.totalPages;
+    currentPage = result.currentPage;
+  } catch {
+    // Database not connected yet
+  }
 
   function buildUrl(params: Record<string, string | number | undefined>) {
     const searchParams = new URLSearchParams();

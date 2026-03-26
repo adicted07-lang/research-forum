@@ -8,7 +8,13 @@ import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const { questions } = await getQuestions({ sort: "trending", limit: 4 });
+  let questions: Awaited<ReturnType<typeof getQuestions>>["questions"] = [];
+  try {
+    const result = await getQuestions({ sort: "trending", limit: 4 });
+    questions = result.questions;
+  } catch {
+    // Database not connected yet — show empty state
+  }
 
   return (
     <PageLayout
