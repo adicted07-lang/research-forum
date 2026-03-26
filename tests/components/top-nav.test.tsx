@@ -10,6 +10,10 @@ vi.mock("next/navigation", () => ({
   usePathname: () => "/forum",
 }));
 
+vi.mock("next-auth/react", () => ({
+  useSession: () => ({ data: null, status: "unauthenticated" }),
+}));
+
 describe("TopNav", () => {
   it("renders the logo", () => {
     render(<TopNav />);
@@ -32,8 +36,9 @@ describe("TopNav", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders ask question button", () => {
+  it("renders sign in and sign up when unauthenticated", () => {
     render(<TopNav />);
-    expect(screen.getByText("Ask Question")).toBeInTheDocument();
+    expect(screen.getByText("Sign in")).toBeInTheDocument();
+    expect(screen.getByText("Sign up")).toBeInTheDocument();
   });
 });
