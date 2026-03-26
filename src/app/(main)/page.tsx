@@ -1,9 +1,25 @@
+import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
 import { SectionHeader } from "@/components/shared/section-header";
 import { EmptyState } from "@/components/shared/empty-state";
 import { QuestionCard } from "@/components/forum/question-card";
+import { LeaderboardCard } from "@/components/social/leaderboard-card";
+import { BadgePill } from "@/components/shared/badge-pill";
 import { getQuestions } from "@/server/actions/questions";
 import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
+
+const POPULAR_TAGS = [
+  "machine-learning",
+  "climate-science",
+  "genomics",
+  "neuroscience",
+  "statistics",
+  "deep-learning",
+  "epidemiology",
+  "quantum-computing",
+  "nlp",
+  "bioinformatics",
+];
 
 export const dynamic = "force-dynamic";
 
@@ -20,17 +36,18 @@ export default async function HomePage() {
     <PageLayout
       sidebar={
         <div className="space-y-6">
+          <LeaderboardCard />
           <div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary dark:text-text-dark-secondary mb-4">
-              Top Researchers This Week
-            </h3>
-            <p className="text-sm text-text-tertiary">Coming soon...</p>
-          </div>
-          <div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary dark:text-text-dark-secondary mb-4">
+            <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-4">
               Trending Topics
             </h3>
-            <p className="text-sm text-text-tertiary">Coming soon...</p>
+            <div className="flex flex-wrap gap-2">
+              {POPULAR_TAGS.map((tag) => (
+                <Link key={tag} href={`/forum?tag=${tag}`}>
+                  <BadgePill label={tag} variant="primary" />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       }

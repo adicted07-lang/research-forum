@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { SearchBar } from "@/components/shared/search-bar";
+import { NotificationBell } from "@/components/social/notification-bell";
 
 const navLinks = [
   { label: "Forum", href: "/forum" },
@@ -74,13 +75,7 @@ export function TopNav() {
 
           {session ? (
             <>
-              <button
-                className="relative w-9 h-9 rounded-md flex items-center justify-center text-text-secondary hover:bg-surface dark:hover:bg-surface-dark transition-colors"
-                aria-label="Notifications"
-              >
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full border-2 border-white dark:border-[#0F0F13]" />
-              </button>
+              <NotificationBell />
 
               <div
                 className="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-primary to-warning cursor-pointer border-2 border-transparent hover:border-primary transition-colors flex items-center justify-center text-white text-xs font-bold"
