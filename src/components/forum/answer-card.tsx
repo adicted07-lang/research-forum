@@ -1,0 +1,102 @@
+import { CheckCircle } from "lucide-react";
+import { UserAvatar } from "@/components/shared/user-avatar";
+import { VoteButton } from "@/components/forum/vote-button";
+import { AcceptAnswerButton } from "@/components/forum/accept-answer-button";
+
+interface AnswerAuthor {
+  id: string;
+  name: string | null;
+  username: string | null;
+  image: string | null;
+}
+
+interface AnswerCardProps {
+  answer: {
+    id: string;
+    body: string;
+    upvoteCount: number;
+    isAccepted: boolean;
+    author: AnswerAuthor;
+    createdAt: Date;
+  };
+  questionAuthorId?: string | null;
+  currentUserId?: string | null;
+  questionHasAccepted: boolean;
+}
+
+function relativeTime(date: Date): string {
+  const now = Date.now();
+  const diff = now - new Date(date).getTime();
+  const seconds = Math.floor(diff / 1000);
+  if (seconds < 60) return `${seconds}s ago`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+  return new Date(date).toLocaleDateString();
+}
+
+export function AnswerCard({
+  answer,
+  questionAuthorId,
+  currentUserId,
+  questionHasAccepted,
+}: AnswerCardProps) {
+  const authorName =
+    answer.author.name ?? answer.author.username ?? "Anonymous";
+  const isQuestionAuthor = currentUserId === questionAuthorId;
+  const canAccept = isQuestionAuthor && !answer.isAccepted;
+
+  return (
+    <div
+      className={`flex gap-4 bg-white border rounded-md p-4 dark:bg-surface-dark ${
+        answer.isAccepted
+          ? "border-success/40 bg-success/5 dark:bg-success/5"
+          : "border-border-light dark:border-border-dark-light"
+      }`}
+    >
+      {/* Vote */}
+      <div className="shrink-0 flex flex-col items-center gap-2">
+        <VoteButton
+          targetType="ANSWER"
+          targetId={answer.id}
+          initialCount={answer.upvoteCount}
+          initialVote={null}
+        />
+        {answer.isAccepted && (
+          <div className="flex flex-col items-center gap-0.5">
+            <CheckCircle className="w-5 h-5 text-success" />
+            <span className="text-[10px] font-semibold text-success">
+              Accepted
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        <div className="text-sm text-text-primary dark:text-text-dark-primary leading-relaxed whitespace-pre-wrap mb-3">
+          {answer.body}
+        </div>
+
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <UserAvatar name={authorName} src={answer.author.image} size="sm" />
+            <span className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary">
+              {authorName}
+            </span>
+            <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
+              {relativeTime(answer.createdAt)}
+            </span>
+          </div>
+
+          {canAccept && (
+            <AcceptAnswerButton answerId={answer.id} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
