@@ -90,42 +90,54 @@ export async function getQuestions(opts: {
       break;
   }
 
-  const [questions, total] = await Promise.all([
-    db.question.findMany({
-      where,
-      orderBy,
-      skip,
-      take: limit,
-      include: { author: { select: authorSelect } },
-    }),
-    db.question.count({ where }),
-  ]);
+  try {
+    const [questions, total] = await Promise.all([
+      db.question.findMany({
+        where,
+        orderBy,
+        skip,
+        take: limit,
+        include: { author: { select: authorSelect } },
+      }),
+      db.question.count({ where }),
+    ]);
 
-  return {
-    questions,
-    totalPages: Math.ceil(total / limit),
-    currentPage: page,
-  };
+    return {
+      questions,
+      totalPages: Math.ceil(total / limit),
+      currentPage: page,
+    };
+  } catch {
+    return { questions: [], totalPages: 1, currentPage: page };
+  }
 }
 
 export async function getQuestionBySlug(slug: string) {
-  const question = await db.question.findFirst({
-    where: { slug, deletedAt: null },
-    include: {
-      author: { select: authorSelect },
-      answers: {
-        where: { deletedAt: null },
-        orderBy: [{ isAccepted: "desc" }, { upvoteCount: "desc" }],
-        include: { author: { select: authorSelect } },
+  try {
+    const question = await db.question.findFirst({
+      where: { slug, deletedAt: null },
+      include: {
+        author: { select: authorSelect },
+        answers: {
+          where: { deletedAt: null },
+          orderBy: [{ isAccepted: "desc" }, { upvoteCount: "desc" }],
+          include: { author: { select: authorSelect } },
+        },
       },
-    },
-  });
-  return question;
+    });
+    return question;
+  } catch {
+    return null;
+  }
 }
 
 export async function incrementViewCount(questionId: string) {
-  await db.question.update({
-    where: { id: questionId },
-    data: { viewCount: { increment: 1 } },
-  });
+  try {
+    await db.question.update({
+      where: { id: questionId },
+      data: { viewCount: { increment: 1 } },
+    });
+  } catch {
+    // Database not available
+  }
 }
