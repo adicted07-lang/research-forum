@@ -65,6 +65,31 @@ enum ListingType {
   TOOL
 }
 
+enum ProjectType {
+  ONE_TIME
+  ONGOING
+  CONTRACT
+}
+
+enum LocationPreference {
+  REMOTE
+  ON_SITE
+  HYBRID
+}
+
+enum JobStatus {
+  OPEN
+  FILLED
+  CLOSED
+}
+
+enum ApplicationStatus {
+  PENDING
+  SHORTLISTED
+  ACCEPTED
+  REJECTED
+}
+
 // === USER SYSTEM ===
 
 model User {
@@ -130,6 +155,13 @@ model User {
   // Marketplace relations
   listings Listing[]
   reviews  Review[]
+
+  // Hire relations
+  companyJobs        Job[]           @relation("CompanyJobs")
+  applications       Application[]   @relation("ResearcherApplications")
+  threadParticipant1 MessageThread[] @relation("ThreadParticipant1")
+  threadParticipant2 MessageThread[] @relation("ThreadParticipant2")
+  sentMessages       Message[]       @relation("SentMessages")
 
   @@index([email])
   @@index([username])
@@ -424,4 +456,94 @@ model Review {
   @@unique([reviewerId, targetType, targetId])
   @@index([targetType, targetId])
   @@map("reviews")
+}
+
+// === HIRE MODELS ===
+
+model Job {
+  id                 String             @id @default(cuid())
+  title              String
+  description        String             @db.Text
+  slug               String             @unique
+  researchDomain     String[]
+  requiredSkills     String[]
+  projectType        ProjectType
+  budgetMin          Float?
+  budgetMax          Float?
+  budgetNegotiable   Boolean            @default(false)
+  timeline           String?
+  locationPreference LocationPreference @default(REMOTE)
+  companyId          String
+  applicationsCount  Int                @default(0)
+  viewsCount         Int                @default(0)
+  status             JobStatus          @default(OPEN)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  deletedAt          DateTime?
+
+  company      User            @relation("CompanyJobs", fields: [companyId], references: [id])
+  applications Application[]
+  threads      MessageThread[]
+
+  @@index([companyId])
+  @@index([slug])
+  @@index([status])
+  @@index([createdAt])
+  @@map("jobs")
+}
+
+model Application {
+  id                String            @id @default(cuid())
+  jobId             String
+  researcherId      String
+  coverLetter       String            @db.Text
+  proposedRate      Float?
+  estimatedTimeline String?
+  portfolioLinks    String[]
+  status            ApplicationStatus @default(PENDING)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  job        Job  @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  researcher User @relation("ResearcherApplications", fields: [researcherId], references: [id])
+
+  @@unique([jobId, researcherId])
+  @@index([jobId])
+  @@index([researcherId])
+  @@map("applications")
+}
+
+model MessageThread {
+  id           String   @id @default(cuid())
+  participant1 String
+  participant2 String
+  jobId        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user1    User      @relation("ThreadParticipant1", fields: [participant1], references: [id])
+  user2    User      @relation("ThreadParticipant2", fields: [participant2], references: [id])
+  job      Job?      @relation(fields: [jobId], references: [id])
+  messages Message[]
+
+  @@unique([participant1, participant2])
+  @@index([participant1])
+  @@index([participant2])
+  @@map("message_threads")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  threadId  String
+  senderId  String
+  body      String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  thread MessageThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  sender User          @relation("SentMessages", fields: [senderId], references: [id])
+
+  @@index([threadId, createdAt])
+  @@index([senderId])
+  @@map("messages")
 }
