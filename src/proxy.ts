@@ -6,7 +6,7 @@ const authHandler = auth((req) => {
   const isLoggedIn = !!req.auth;
   const { pathname } = req.nextUrl;
 
-  const protectedPaths = ["/settings", "/dashboard", "/messages", "/forum/new", "/marketplace/new", "/hire/new", "/news/submit"];
+  const protectedPaths = ["/settings", "/dashboard", "/messages", "/forum/new", "/marketplace/new", "/hire/new", "/news/submit", "/admin"];
   const isProtected = protectedPaths.some((p) => pathname.startsWith(p));
 
   const authPaths = ["/login", "/signup"];
