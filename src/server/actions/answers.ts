@@ -3,6 +3,8 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { answerSchema } from "@/lib/validations/forum";
+import { sendEmail } from "@/lib/email";
+import { newAnswerEmail } from "@/lib/email-templates";
 
 export async function createAnswer(questionId: string, formData: FormData) {
   const session = await auth();
@@ -13,7 +15,7 @@ export async function createAnswer(questionId: string, formData: FormData) {
   if (!parsed.success) return { error: parsed.error.issues[0].message };
 
   try {
-    const answer = await db.$transaction(async (tx) => {
+    const [answer, question] = await db.$transaction(async (tx) => {
       const created = await tx.answer.create({
         data: {
           body: parsed.data.body,
@@ -21,12 +23,33 @@ export async function createAnswer(questionId: string, formData: FormData) {
           questionId,
         },
       });
-      await tx.question.update({
+      const q = await tx.question.update({
         where: { id: questionId },
         data: { answerCount: { increment: 1 } },
+        select: { title: true, authorId: true },
       });
-      return created;
+      return [created, q];
     });
+
+    // Fire-and-forget email to question author
+    if (question.authorId !== session.user.id) {
+      try {
+        const questionAuthor = await db.user.findUnique({
+          where: { id: question.authorId },
+          select: { email: true },
+        });
+        if (questionAuthor?.email) {
+          sendEmail({
+            to: questionAuthor.email,
+            subject: `New answer on your question: ${question.title}`,
+            html: newAnswerEmail(question.title),
+          });
+        }
+      } catch {
+        // Email lookup failed — continue
+      }
+    }
+
     return { answer };
   } catch {
     return { error: "Failed to create answer" };

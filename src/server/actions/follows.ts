@@ -3,6 +3,8 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { createNotification } from "./notifications";
+import { sendEmail } from "@/lib/email";
+import { newFollowerEmail } from "@/lib/email-templates";
 
 export async function toggleFollow(targetUserId: string) {
   const session = await auth();
@@ -30,10 +32,16 @@ export async function toggleFollow(targetUserId: string) {
       });
 
       // Notify the target user
-      const follower = await db.user.findUnique({
-        where: { id: followerId },
-        select: { name: true, username: true },
-      });
+      const [follower, targetUser] = await Promise.all([
+        db.user.findUnique({
+          where: { id: followerId },
+          select: { name: true, username: true },
+        }),
+        db.user.findUnique({
+          where: { id: targetUserId },
+          select: { email: true },
+        }),
+      ]);
       const followerName = follower?.name || follower?.username || "Someone";
       await createNotification(
         targetUserId,
@@ -42,6 +50,15 @@ export async function toggleFollow(targetUserId: string) {
         undefined,
         `/profile/${follower?.username || followerId}`
       );
+
+      // Fire-and-forget email
+      if (targetUser?.email) {
+        sendEmail({
+          to: targetUser.email,
+          subject: `${followerName} started following you on ResearchHub`,
+          html: newFollowerEmail(followerName),
+        });
+      }
 
       return { following: true };
     }

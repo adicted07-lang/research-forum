@@ -3,6 +3,8 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { messageSchema } from "@/lib/validations/hire";
+import { sendEmail } from "@/lib/email";
+import { newMessageEmail } from "@/lib/email-templates";
 
 export async function getOrCreateThread(otherUserId: string, jobId?: string) {
   const session = await auth();
@@ -72,6 +74,26 @@ export async function sendMessage(threadId: string, formData: FormData) {
       where: { id: threadId },
       data: { updatedAt: new Date() },
     });
+
+    // Fire-and-forget email to recipient
+    const recipientId =
+      thread.participant1 === userId ? thread.participant2 : thread.participant1;
+    try {
+      const [sender, recipient] = await Promise.all([
+        db.user.findUnique({ where: { id: userId }, select: { name: true, username: true } }),
+        db.user.findUnique({ where: { id: recipientId }, select: { email: true } }),
+      ]);
+      if (recipient?.email) {
+        const senderName = sender?.name || sender?.username || "Someone";
+        sendEmail({
+          to: recipient.email,
+          subject: `New message from ${senderName} on ResearchHub`,
+          html: newMessageEmail(senderName),
+        });
+      }
+    } catch {
+      // Email lookup failed — continue
+    }
 
     return message;
   } catch {

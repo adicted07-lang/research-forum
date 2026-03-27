@@ -4,6 +4,8 @@ import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { applicationSchema } from "@/lib/validations/hire";
 import { ApplicationStatus } from "@prisma/client";
+import { sendEmail } from "@/lib/email";
+import { applicationStatusEmail } from "@/lib/email-templates";
 
 export async function createApplication(jobId: string, formData: FormData) {
   const session = await auth();
@@ -98,7 +100,10 @@ export async function updateApplicationStatus(
   try {
     const application = await db.application.findUnique({
       where: { id: applicationId },
-      include: { job: { select: { companyId: true } } },
+      include: {
+        job: { select: { companyId: true, title: true } },
+        researcher: { select: { email: true } },
+      },
     });
 
     if (!application) return { error: "Application not found" };
@@ -108,6 +113,15 @@ export async function updateApplicationStatus(
       where: { id: applicationId },
       data: { status },
     });
+
+    // Fire-and-forget email to researcher
+    if (application.researcher?.email) {
+      sendEmail({
+        to: application.researcher.email,
+        subject: `Application update for: ${application.job.title}`,
+        html: applicationStatusEmail(application.job.title, status),
+      });
+    }
 
     return { success: true };
   } catch {
