@@ -138,6 +138,7 @@ export async function updateProfile(formData: FormData) {
             : undefined,
           availability: (formData.get("availability") as "AVAILABLE" | "BUSY" | "NOT_AVAILABLE") || undefined,
           socialLinks: Object.keys(socialLinksRaw).length > 0 ? socialLinksRaw : undefined,
+          image: (formData.get("image") as string) || undefined,
         },
       });
     } else if (user.role === "COMPANY") {
@@ -158,6 +159,7 @@ export async function updateProfile(formData: FormData) {
           companySize: (formData.get("companySize") as "SIZE_1_10" | "SIZE_11_50" | "SIZE_51_200" | "SIZE_201_500" | "SIZE_500_PLUS") || undefined,
           website: (formData.get("website") as string) || undefined,
           socialLinks: Object.keys(socialLinksRaw).length > 0 ? socialLinksRaw : undefined,
+          companyLogo: (formData.get("image") as string) || undefined,
         },
       });
     }

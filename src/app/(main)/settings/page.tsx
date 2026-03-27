@@ -41,6 +41,7 @@ export default async function SettingsPage() {
     industry: user.industry,
     companySize: user.companySize,
     website: user.website,
+    image: user.image,
   };
 
   const isResearcher = user.role === "RESEARCHER";

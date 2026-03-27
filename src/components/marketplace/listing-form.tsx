@@ -4,6 +4,8 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createListing } from "@/server/actions/listings";
 import { createCheckoutSession } from "@/server/actions/stripe";
+import { FileUpload } from "@/components/shared/file-upload";
+import { RichTextEditor } from "@/components/shared/rich-text-editor";
 
 const LISTING_TYPES = [
   { value: "SERVICE", label: "Service" },
@@ -14,6 +16,8 @@ export function ListingForm() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [descriptionHtml, setDescriptionHtml] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,12 +90,10 @@ export function ListingForm() {
         <label className="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-1">
           Description <span className="text-red-500">*</span>
         </label>
-        <textarea
-          name="description"
-          required
-          rows={5}
+        <input type="hidden" name="description" value={descriptionHtml} />
+        <RichTextEditor
           placeholder="Describe what you offer, your experience, and what makes you stand out..."
-          className="w-full rounded-md border border-border-light px-3 py-2 text-sm text-text-primary bg-white placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-y dark:bg-surface-dark dark:border-border-dark-light dark:text-text-dark-primary"
+          onChange={setDescriptionHtml}
         />
       </div>
 
@@ -122,6 +124,18 @@ export function ListingForm() {
           type="text"
           placeholder="e.g., data-analysis, statistics, machine-learning"
           className="w-full rounded-md border border-border-light px-3 py-2 text-sm text-text-primary bg-white placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-surface-dark dark:border-border-dark-light dark:text-text-dark-primary"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-1">
+          Cover Image <span className="text-text-tertiary font-normal ml-1">(optional)</span>
+        </label>
+        <input type="hidden" name="coverImage" value={imageUrl} />
+        <FileUpload
+          accept="image/jpeg,image/png,image/gif,image/webp"
+          maxSize={10 * 1024 * 1024}
+          onChange={setImageUrl}
         />
       </div>
 

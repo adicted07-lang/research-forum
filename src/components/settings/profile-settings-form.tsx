@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { updateProfile } from "@/server/actions/profiles";
+import { FileUpload } from "@/components/shared/file-upload";
 
 type UserRole = "RESEARCHER" | "COMPANY" | "MODERATOR" | "ADMIN";
 type Availability = "AVAILABLE" | "BUSY" | "NOT_AVAILABLE";
@@ -24,6 +25,7 @@ interface ProfileSettingsFormProps {
     industry?: string | null;
     companySize?: CompanySize | null;
     website?: string | null;
+    image?: string | null;
   };
 }
 
@@ -44,6 +46,7 @@ const companySizeOptions: { value: CompanySize; label: string }[] = [
 export function ProfileSettingsForm({ role, initialData }: ProfileSettingsFormProps) {
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string>(initialData.image ?? "");
 
   const socialLinks = initialData.socialLinks ?? {};
 
@@ -81,6 +84,16 @@ export function ProfileSettingsForm({ role, initialData }: ProfileSettingsFormPr
 
       {role === "RESEARCHER" ? (
         <>
+          <div>
+            <label className={labelClass}>Profile photo</label>
+            <input type="hidden" name="image" value={avatarUrl} />
+            <FileUpload
+              accept="image/jpeg,image/png,image/gif,image/webp"
+              maxSize={5 * 1024 * 1024}
+              onChange={setAvatarUrl}
+            />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className={labelClass} htmlFor="name">Full name</label>
@@ -199,6 +212,16 @@ export function ProfileSettingsForm({ role, initialData }: ProfileSettingsFormPr
         </>
       ) : (
         <>
+          <div>
+            <label className={labelClass}>Profile photo</label>
+            <input type="hidden" name="image" value={avatarUrl} />
+            <FileUpload
+              accept="image/jpeg,image/png,image/gif,image/webp"
+              maxSize={5 * 1024 * 1024}
+              onChange={setAvatarUrl}
+            />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className={labelClass} htmlFor="companyName">Company name</label>
