@@ -18,7 +18,7 @@ export interface ArticleCardData {
   category: string;
   tags: string[];
   coverImage: string | null;
-  readTime: number;
+  readTime: number | null;
   upvoteCount: number;
   author: ArticleAuthor;
   publishedAt: Date | null;
@@ -137,10 +137,12 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
                   <span>{dateDisplay}</span>
                 </div>
               )}
-              <div className="flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" />
-                <span>{article.readTime} min read</span>
-              </div>
+              {article.readTime != null && (
+                <div className="flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>{article.readTime} min read</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -181,11 +183,15 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
               <UserAvatar name={authorName} src={article.author.image} size="sm" />
               <span>{authorName}</span>
             </div>
-            <span>·</span>
-            <div className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
-              <span>{article.readTime} min</span>
-            </div>
+            {article.readTime != null && (
+              <>
+                <span>·</span>
+                <div className="flex items-center gap-1">
+                  <Clock className="w-3 h-3" />
+                  <span>{article.readTime} min</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
