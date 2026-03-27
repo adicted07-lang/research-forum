@@ -685,6 +685,29 @@ model AdEvent {
   @@map("ad_events")
 }
 
+// === GRANTS ===
+
+model Grant {
+  id             String    @id @default(cuid())
+  title          String
+  description    String    @db.Text
+  slug           String    @unique
+  funder         String
+  fundingRange   String?
+  deadline       DateTime?
+  eligibility    String?
+  applicationUrl String?
+  tags           String[]
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([isActive])
+  @@index([deadline])
+  @@map("grants")
+}
+
 // === TAG FOLLOWS ===
 
 model TagFollow {
