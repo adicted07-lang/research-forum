@@ -29,8 +29,9 @@ export function DangerZone() {
         Delete Account
       </h3>
       <p className="text-sm text-text-secondary dark:text-text-dark-secondary mb-4">
-        Once you delete your account, there is no going back. Your account will be
-        deactivated immediately and permanently deleted after 30 days. Please be certain.
+        Your account will be deactivated immediately and permanently deleted after 30 days.
+        During the grace period, you can reactivate at{" "}
+        <a href="/reactivate" className="text-primary hover:underline">/reactivate</a>.
       </p>
 
       {!showConfirm ? (

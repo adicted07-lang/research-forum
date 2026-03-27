@@ -226,6 +226,33 @@ export async function deleteAccount() {
   }
 }
 
+export async function reactivateAccount(email: string) {
+  try {
+    const user = await db.user.findFirst({
+      where: { email, deletedAt: { not: null } },
+    });
+
+    if (!user) return { error: "No deactivated account found with this email" };
+
+    const daysSinceDeletion = Math.floor(
+      (Date.now() - user.deletedAt!.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    if (daysSinceDeletion > 30) {
+      return { error: "Grace period expired. Account has been permanently deleted." };
+    }
+
+    await db.user.update({
+      where: { id: user.id },
+      data: { deletedAt: null },
+    });
+
+    return { success: true };
+  } catch {
+    return { error: "Failed to reactivate account" };
+  }
+}
+
 export async function getCurrentUser() {
   const session = await auth();
   if (!session?.user?.id) return null;
