@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PageLayout } from "@/components/layout/page-layout";
 import { ResearcherProfile } from "@/components/profile/researcher-profile";
 import { getResearcherProfile } from "@/server/actions/profiles";
+import { getUserActivity } from "@/server/actions/activity";
 
 export const dynamic = "force-dynamic";
 
@@ -38,9 +39,11 @@ export default async function UserProfilePage({ params }: UserProfilePageProps) 
 
   if (!profile) notFound();
 
+  const activity = await getUserActivity(profile.id);
+
   return (
     <PageLayout>
-      <ResearcherProfile profile={profile} />
+      <ResearcherProfile profile={profile} activity={activity} />
     </PageLayout>
   );
 }

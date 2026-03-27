@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   BadgeCheck,
   Clock,
@@ -17,6 +16,8 @@ import { StreakFire } from "@/components/shared/streak-fire";
 import { FollowButton } from "@/components/social/follow-button";
 import { isFollowing } from "@/server/actions/follows";
 import { auth } from "@/auth";
+import { ActivityFeed } from "@/components/profile/activity-feed";
+import { getReputationTier } from "@/lib/reputation";
 
 type ResearcherProfileData = {
   id: string;
@@ -58,14 +59,16 @@ function getSocialLinks(socialLinks: unknown): Record<string, string> {
 
 interface ResearcherProfileProps {
   profile: ResearcherProfileData;
+  activity: Array<{ type: "question" | "answer" | "article"; title: string; url: string; createdAt: Date }>;
 }
 
-export async function ResearcherProfile({ profile }: ResearcherProfileProps) {
+export async function ResearcherProfile({ profile, activity }: ResearcherProfileProps) {
   const session = await auth();
   const following = session?.user?.id ? await isFollowing(profile.id) : false;
   const links = getSocialLinks(profile.socialLinks);
   const displayName = profile.name || profile.username || "Researcher";
   const availability = profile.availability ? availabilityConfig[profile.availability] : null;
+  const tier = getReputationTier(profile.points);
 
   return (
     <div className="w-full">
@@ -142,6 +145,9 @@ export async function ResearcherProfile({ profile }: ResearcherProfileProps) {
             </span>
             <span>points</span>
           </div>
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${tier.color} ${tier.bgColor}`}>
+            {tier.name}
+          </span>
           <div className="flex items-center gap-1.5 text-sm text-text-secondary dark:text-text-dark-secondary">
             <MessageSquare className="w-4 h-4" />
             <span className="font-semibold text-text-primary dark:text-text-dark-primary">
@@ -237,34 +243,11 @@ export async function ResearcherProfile({ profile }: ResearcherProfileProps) {
         </div>
       )}
 
-      {/* Activity tabs placeholder */}
       <div className="mt-4 bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-xl p-6">
-        <div className="flex gap-4 border-b border-border dark:border-border-dark mb-4">
-          {["Recent Activity", "Answers", "Collections"].map((tab) => (
-            <button
-              key={tab}
-              className={`pb-3 text-sm font-medium transition-colors ${
-                tab === "Answers"
-                  ? "border-b-2 border-primary text-primary"
-                  : "text-text-secondary dark:text-text-dark-secondary hover:text-text-primary"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-        <div className="text-center py-8 text-text-secondary dark:text-text-dark-secondary text-sm">
-          <MessageSquare className="w-8 h-8 mx-auto mb-2 opacity-30" />
-          <p>
-            {profile._count.answers} answer{profile._count.answers !== 1 ? "s" : ""} contributed
-          </p>
-          <Link
-            href={`/forum?answered_by=${profile.username}`}
-            className="text-primary text-sm hover:underline mt-1 inline-block"
-          >
-            Browse answers →
-          </Link>
-        </div>
+        <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-4">
+          Recent Activity
+        </h2>
+        <ActivityFeed items={activity} />
       </div>
     </div>
   );
