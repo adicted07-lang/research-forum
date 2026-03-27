@@ -20,6 +20,8 @@ import {
   Wrench,
 } from "lucide-react";
 import { SearchWithResults } from "@/components/search/search-with-results";
+import { NotificationBell } from "@/components/notifications/notification-bell";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 import {
   Accordion,
@@ -206,6 +208,8 @@ const Navbar1 = ({
           </div>
           <div className="flex items-center gap-3">
             <SearchWithResults />
+            <NotificationBell />
+            <ThemeToggle />
             <a href={auth.login.url} className={buttonVariants({ variant: "outline", size: "sm" })}>
               {auth.login.text}
             </a>
@@ -242,7 +246,13 @@ const Navbar1 = ({
                   </SheetTitle>
                 </SheetHeader>
                 <div className="my-6 flex flex-col gap-6">
-                  <SearchWithResults />
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1">
+                      <SearchWithResults />
+                    </div>
+                    <NotificationBell />
+                    <ThemeToggle />
+                  </div>
                   <Accordion
                     type="single"
                     collapsible
