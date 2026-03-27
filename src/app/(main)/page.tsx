@@ -11,6 +11,46 @@ import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
 import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
+import { AnimatedTooltipGroup, type TooltipItem } from "@/components/ui/animated-tooltip";
+
+const sampleResearchers: TooltipItem[] = [
+  {
+    id: 1,
+    name: "Dr. Sarah Chen",
+    designation: "ML Researcher",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face",
+  },
+  {
+    id: 2,
+    name: "Prof. James Okafor",
+    designation: "Climate Scientist",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
+  },
+  {
+    id: 3,
+    name: "Dr. Emily Torres",
+    designation: "Neuroscientist",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
+  },
+  {
+    id: 4,
+    name: "Dr. Marcus Webb",
+    designation: "Bioinformatician",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
+  },
+  {
+    id: 5,
+    name: "Dr. Priya Sharma",
+    designation: "Genomics Expert",
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&h=80&fit=crop&crop=face",
+  },
+  {
+    id: 6,
+    name: "Dr. Alex Kim",
+    designation: "Quantum Computing",
+    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=80&h=80&fit=crop&crop=face",
+  },
+];
 
 const POPULAR_TAGS = [
   "machine-learning",
@@ -70,6 +110,21 @@ export default async function HomePage() {
         </div>
       }
     >
+      <div className="text-center py-12 mb-8 border-b border-border-light dark:border-border-dark-light">
+        <h1 className="text-3xl font-bold text-text-primary dark:text-text-dark-primary mb-3 tracking-tight">
+          The Research Community Platform
+        </h1>
+        <p className="text-text-secondary dark:text-text-dark-secondary text-lg mb-6 max-w-xl mx-auto">
+          Ask questions, share knowledge, hire experts, and discover research tools.
+        </p>
+        <div className="flex items-center justify-center gap-3">
+          <AnimatedTooltipGroup items={sampleResearchers} />
+          <span className="text-sm text-text-secondary dark:text-text-dark-secondary">
+            Join 12,000+ researchers
+          </span>
+        </div>
+      </div>
+
       <section className="mb-8">
         <SectionHeader title="Trending Questions" href="/forum" />
         {questions.length > 0 ? (
