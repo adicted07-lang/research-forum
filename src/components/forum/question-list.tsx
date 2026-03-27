@@ -4,6 +4,8 @@ import { FORUM_CATEGORIES } from "@/lib/validations/forum";
 import { QuestionCard } from "@/components/forum/question-card";
 import { EmptyState } from "@/components/shared/empty-state";
 import { MessageSquare } from "lucide-react";
+import { getActiveFeedAds } from "@/server/actions/campaigns";
+import { AdFeedCard } from "@/components/advertising/ad-feed-card";
 
 const SORT_OPTIONS = [
   { label: "Trending", value: "trending" },
@@ -33,6 +35,13 @@ export async function QuestionList({
     currentPage = result.currentPage;
   } catch {
     // Database not connected yet
+  }
+
+  let feedAds: Awaited<ReturnType<typeof getActiveFeedAds>> = [];
+  try {
+    feedAds = await getActiveFeedAds(2);
+  } catch {
+    // Ads not available — show nothing
   }
 
   function buildUrl(params: Record<string, string | number | undefined>) {
@@ -120,8 +129,24 @@ export async function QuestionList({
         />
       ) : (
         <div className="space-y-3">
-          {questions.map((q) => (
-            <QuestionCard key={q.id} question={q} />
+          {questions.map((q, index) => (
+            <div key={q.id}>
+              <QuestionCard question={q} />
+              {(index + 1) % 5 === 0 && feedAds.length > 0 && (() => {
+                const adIndex = Math.floor((index + 1) / 5) - 1;
+                const ad = feedAds[adIndex % feedAds.length];
+                return (
+                  <div className="mt-3">
+                    <AdFeedCard
+                      campaignId={ad.id}
+                      headline={ad.creativeHeadline}
+                      description={ad.creativeDescription}
+                      ctaUrl={ad.creativeCtaUrl}
+                    />
+                  </div>
+                );
+              })()}
+            </div>
           ))}
         </div>
       )}

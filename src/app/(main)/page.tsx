@@ -14,6 +14,8 @@ import { getArticles } from "@/server/actions/articles";
 import { ArticleCard } from "@/components/news/article-card";
 import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
 import { AnimatedTooltipGroup, type TooltipItem } from "@/components/ui/animated-tooltip";
+import { getActiveBannerAd } from "@/server/actions/campaigns";
+import { AdBanner } from "@/components/advertising/ad-banner";
 
 const sampleResearchers: TooltipItem[] = [
   {
@@ -100,6 +102,13 @@ export default async function HomePage() {
     // Database not connected yet — show empty state
   }
 
+  let bannerAd: Awaited<ReturnType<typeof getActiveBannerAd>> = null;
+  try {
+    bannerAd = await getActiveBannerAd();
+  } catch {
+    // Ads not available — show nothing
+  }
+
   return (
     <PageLayout
       sidebar={
@@ -117,6 +126,14 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
+          {bannerAd && (
+            <AdBanner
+              campaignId={bannerAd.id}
+              headline={bannerAd.creativeHeadline}
+              description={bannerAd.creativeDescription}
+              ctaUrl={bannerAd.creativeCtaUrl}
+            />
+          )}
         </div>
       }
     >
