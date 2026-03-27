@@ -5,6 +5,8 @@ import { db } from "@/lib/db";
 import { answerSchema } from "@/lib/validations/forum";
 import { sendEmail } from "@/lib/email";
 import { newAnswerEmail } from "@/lib/email-templates";
+import { awardPoints } from "@/server/actions/points";
+import { POINTS } from "@/lib/points-config";
 
 export async function createAnswer(questionId: string, formData: FormData) {
   const session = await auth();
@@ -30,6 +32,8 @@ export async function createAnswer(questionId: string, formData: FormData) {
       });
       return [created, q];
     });
+
+    awardPoints(session.user.id, POINTS.POST_ANSWER);
 
     // Fire-and-forget email to question author
     if (question.authorId !== session.user.id) {
@@ -90,6 +94,8 @@ export async function acceptAnswer(answerId: string) {
         data: { status: "ANSWERED" },
       });
     });
+
+    awardPoints(answer.authorId, POINTS.ANSWER_ACCEPTED);
 
     return { success: true };
   } catch {

@@ -3,6 +3,8 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { questionSchema } from "@/lib/validations/forum";
+import { awardPoints } from "@/server/actions/points";
+import { POINTS } from "@/lib/points-config";
 
 function generateSlug(title: string): string {
   const base = title
@@ -51,6 +53,7 @@ export async function createQuestion(formData: FormData) {
         authorId: session.user.id,
       },
     });
+    awardPoints(session.user.id, POINTS.POST_QUESTION);
     return { slug: question.slug };
   } catch (e) {
     return { error: "Failed to create question" };

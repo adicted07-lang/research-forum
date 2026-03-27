@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { commentSchema } from "@/lib/validations/forum";
 import { TargetType } from "@prisma/client";
+import { awardPoints } from "@/server/actions/points";
 
 const authorSelect = {
   id: true,
@@ -53,6 +54,8 @@ export async function createComment(
       },
       include: { author: { select: authorSelect } },
     });
+
+    awardPoints(session.user.id, 2);
 
     return { comment };
   } catch {
