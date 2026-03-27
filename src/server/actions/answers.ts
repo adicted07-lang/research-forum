@@ -97,6 +97,15 @@ export async function acceptAnswer(answerId: string) {
 
     awardPoints(answer.authorId, POINTS.ANSWER_ACCEPTED);
 
+    // Award bounty to answer author if question has one
+    const q = await db.question.findUnique({
+      where: { id: answer.question.id },
+      select: { bounty: true },
+    });
+    if (q?.bounty && q.bounty > 0) {
+      awardPoints(answer.authorId, q.bounty);
+    }
+
     return { success: true };
   } catch {
     return { error: "Failed to accept answer" };

@@ -79,10 +79,11 @@ export function QuestionDetail({ question, currentUserId }: QuestionDetailProps)
             <BadgePill label={question.category} variant="primary" />
             <StatusBadge status={normalizeStatus(question.status)} />
             {question.bounty > 0 && (
-              <BadgePill
-                label={`$${question.bounty} bounty`}
-                variant="bounty"
-              />
+              question.status === "ANSWERED" ? (
+                <BadgePill label={`$${question.bounty} bounty awarded`} variant="bounty" />
+              ) : (
+                <BadgePill label={`$${question.bounty} bounty`} variant="bounty" />
+              )
             )}
           </div>
 

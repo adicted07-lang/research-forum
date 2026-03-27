@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { questionSchema } from "@/lib/validations/forum";
-import { awardPoints } from "@/server/actions/points";
+import { awardPoints, deductPoints } from "@/server/actions/points";
 import { POINTS } from "@/lib/points-config";
 
 function generateSlug(title: string): string {
@@ -54,6 +54,9 @@ export async function createQuestion(formData: FormData) {
       },
     });
     awardPoints(session.user.id, POINTS.POST_QUESTION);
+    if (parsed.data.bounty > 0) {
+      deductPoints(session.user.id, parsed.data.bounty);
+    }
     return { slug: question.slug };
   } catch (e) {
     return { error: "Failed to create question" };

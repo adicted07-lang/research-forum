@@ -22,6 +22,7 @@ import {
 import { SearchWithResults } from "@/components/search/search-with-results";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { UnreadMessageBadge } from "@/components/messages/unread-badge";
 
 import {
   Accordion,
@@ -209,6 +210,7 @@ const Navbar1 = ({
           <div className="flex items-center gap-3">
             <SearchWithResults />
             <NotificationBell />
+            <UnreadMessageBadge />
             <ThemeToggle />
             <a href={auth.login.url} className={buttonVariants({ variant: "outline", size: "sm" })}>
               {auth.login.text}
@@ -251,6 +253,7 @@ const Navbar1 = ({
                       <SearchWithResults />
                     </div>
                     <NotificationBell />
+                    <UnreadMessageBadge />
                     <ThemeToggle />
                   </div>
                   <Accordion

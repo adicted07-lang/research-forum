@@ -7,6 +7,7 @@ interface Message {
   body: string;
   senderId: string;
   createdAt: Date;
+  isRead: boolean;
 }
 
 interface MessageThreadProps {
@@ -84,6 +85,9 @@ export function MessageThread({ messages, currentUserId }: MessageThreadProps) {
                   }`}
                 >
                   {formatTime(message.createdAt)}
+                  {isOwn && (
+                    <span className="ml-1">{message.isRead ? " · Read" : " · Delivered"}</span>
+                  )}
                 </p>
               </div>
             </div>
