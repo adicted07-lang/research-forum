@@ -9,6 +9,8 @@ import { BadgePill } from "@/components/shared/badge-pill";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { getMyApplications } from "@/server/actions/applications";
 import { getJobs } from "@/server/actions/jobs";
+import { getUserBookmarks } from "@/server/actions/bookmarks";
+import { BookmarksList } from "@/components/bookmarks/bookmarks-list";
 import { Briefcase, FileText, Users, BookmarkIcon } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -83,6 +85,8 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
   } catch {
     // DB not available
   }
+
+  const { bookmarks } = await getUserBookmarks();
 
   return (
     <div className="space-y-6">
@@ -164,20 +168,15 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
         )}
       </section>
 
-      {/* Saved Jobs placeholder */}
+      {/* Saved Items */}
       <section>
         <div className="flex items-center gap-2 mb-4">
           <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary flex items-center gap-2">
             <BookmarkIcon className="w-5 h-5 text-primary" />
-            Saved Jobs
+            Saved Items
           </h2>
         </div>
-        <EmptyState
-          title="No saved jobs"
-          description="Save interesting job postings to review them later."
-          icon={<BookmarkIcon className="w-10 h-10" />}
-          className="py-8"
-        />
+        <BookmarksList bookmarks={bookmarks} />
       </section>
     </div>
   );
