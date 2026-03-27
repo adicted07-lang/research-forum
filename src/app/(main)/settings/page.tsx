@@ -6,6 +6,8 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { ProfileSettingsForm } from "@/components/settings/profile-settings-form";
 import { PasswordForm } from "@/components/settings/password-form";
 import { DangerZone } from "@/components/settings/danger-zone";
+import { NewsletterSettings } from "@/components/settings/newsletter-settings";
+import { getUserSubscriptions } from "@/server/actions/newsletter";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +22,8 @@ export default async function SettingsPage() {
 
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+
+  const { subscriptions } = await getUserSubscriptions();
 
   const socialLinks =
     typeof user.socialLinks === "object" && user.socialLinks !== null && !Array.isArray(user.socialLinks)
@@ -80,6 +84,17 @@ export default async function SettingsPage() {
             Update your password. If you signed in with Google, you may not have a password set.
           </p>
           <PasswordForm />
+        </section>
+
+        {/* Newsletter Preferences */}
+        <section className="bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-xl p-6 mb-6">
+          <h2 className="text-base font-semibold text-text-primary dark:text-text-dark-primary mb-1">
+            Newsletter Preferences
+          </h2>
+          <p className="text-sm text-text-secondary dark:text-text-dark-secondary mb-4">
+            Choose which newsletters you&apos;d like to receive.
+          </p>
+          <NewsletterSettings initialSubscriptions={subscriptions} />
         </section>
 
         {/* Danger zone */}

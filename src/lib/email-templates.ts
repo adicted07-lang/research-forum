@@ -126,3 +126,20 @@ export function newMessageEmail(senderName: string): string {
     </div>
   `;
 }
+
+export function newsletterEmail(subject: string, body: string): string {
+  return `
+    <div style="${baseStyles}">
+      <h2 style="margin: 0 0 8px; font-size: 20px; font-weight: 700;">
+        ${subject}
+      </h2>
+      <div style="margin: 0 0 16px; color: #374151; font-size: 14px; line-height: 1.6;">
+        ${body}
+      </div>
+      <div style="${footerStyles}">
+        <p>You're receiving this because you subscribed to ResearchHub newsletters.</p>
+        <p><a href="https://researchhub.com/settings" style="color: #DA552F;">Manage preferences</a></p>
+      </div>
+    </div>
+  `;
+}

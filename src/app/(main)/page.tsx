@@ -16,6 +16,9 @@ import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
 import { AnimatedTooltipGroup, type TooltipItem } from "@/components/ui/animated-tooltip";
 import { getActiveBannerAd } from "@/server/actions/campaigns";
 import { AdBanner } from "@/components/advertising/ad-banner";
+import { NewsletterSubscribe } from "@/components/newsletter/newsletter-subscribe";
+import { auth } from "@/auth";
+import { updateStreak } from "@/server/actions/streaks";
 
 const sampleResearchers: TooltipItem[] = [
   {
@@ -72,6 +75,12 @@ const POPULAR_TAGS = [
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
+  // Update streak on each homepage visit
+  const session = await auth();
+  if (session?.user?.id) {
+    updateStreak(session.user.id);
+  }
+
   let questions: Awaited<ReturnType<typeof getQuestions>>["questions"] = [];
   try {
     const result = await getQuestions({ sort: "trending", limit: 4 });
@@ -126,6 +135,7 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
+          <NewsletterSubscribe />
           {bannerAd && (
             <AdBanner
               campaignId={bannerAd.id}
