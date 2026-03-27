@@ -10,6 +10,8 @@ import { JobCard } from "@/components/hire/job-card";
 import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
+import { getArticles } from "@/server/actions/articles";
+import { ArticleCard } from "@/components/news/article-card";
 import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
 import { AnimatedTooltipGroup, type TooltipItem } from "@/components/ui/animated-tooltip";
 
@@ -86,6 +88,14 @@ export default async function HomePage() {
   let jobs: Awaited<ReturnType<typeof getJobs>> = [];
   try {
     jobs = await getJobs({ sort: "newest", limit: 3 });
+  } catch {
+    // Database not connected yet — show empty state
+  }
+
+  let articles: Awaited<ReturnType<typeof getArticles>>["articles"] = [];
+  try {
+    const articlesResult = await getArticles({ sort: "latest", limit: 3 });
+    articles = articlesResult.articles;
   } catch {
     // Database not connected yet — show empty state
   }
@@ -178,11 +188,26 @@ export default async function HomePage() {
 
       <section className="mb-8">
         <SectionHeader title="Latest News" href="/news" />
-        <EmptyState
-          title="No articles yet"
-          description="Check back soon for research news and insights."
-          icon={<Newspaper className="w-12 h-12" />}
-        />
+        {articles.length > 0 ? (
+          <div className="space-y-4">
+            {articles[0] && (
+              <ArticleCard article={articles[0]} variant="featured" />
+            )}
+            {articles.length > 1 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {articles.slice(1).map((article) => (
+                  <ArticleCard key={article.id} article={article} variant="default" />
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <EmptyState
+            title="No articles yet"
+            description="Check back soon for research news and insights."
+            icon={<Newspaper className="w-12 h-12" />}
+          />
+        )}
       </section>
     </PageLayout>
   );
