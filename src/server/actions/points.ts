@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { checkAndAwardBadges } from "@/server/actions/badges";
 
 export async function awardPoints(userId: string, amount: number) {
   try {
@@ -12,6 +13,8 @@ export async function awardPoints(userId: string, amount: number) {
         },
       },
     });
+    // Fire-and-forget badge check
+    checkAndAwardBadges(userId);
   } catch (error) {
     console.error("Failed to award points:", error);
   }
