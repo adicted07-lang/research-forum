@@ -20,8 +20,22 @@ export async function generateMetadata({
   const { slug } = await params;
   const question = await getQuestionBySlug(slug);
   if (!question) return { title: "Question Not Found — ResearchHub" };
+
+  const description = question.body.replace(/<[^>]*>/g, "").slice(0, 160);
+
   return {
     title: `${question.title} — ResearchHub`,
+    description,
+    openGraph: {
+      title: question.title,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title: question.title,
+      description,
+    },
   };
 }
 

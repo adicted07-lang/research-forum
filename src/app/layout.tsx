@@ -13,6 +13,20 @@ export const metadata: Metadata = {
   title: "ResearchHub — Research Forum & Marketplace",
   description:
     "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
+  openGraph: {
+    title: "ResearchHub — Research Forum & Marketplace",
+    description:
+      "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
+    siteName: "ResearchHub",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ResearchHub — Research Forum & Marketplace",
+    description:
+      "A professional platform for researchers, academics, and companies.",
+  },
 };
 
 export default function RootLayout({

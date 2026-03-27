@@ -17,8 +17,23 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
   if (!article) return { title: "Article Not Found — ResearchHub" };
+
+  const description = article.body.replace(/<[^>]*>/g, "").slice(0, 160);
+
   return {
     title: `${article.title} — ResearchHub`,
+    description,
+    openGraph: {
+      title: article.title,
+      description,
+      type: "article",
+      ...(article.coverImage ? { images: [{ url: article.coverImage }] } : {}),
+    },
+    twitter: {
+      card: article.coverImage ? "summary_large_image" : "summary",
+      title: article.title,
+      description,
+    },
   };
 }
 

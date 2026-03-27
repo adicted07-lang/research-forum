@@ -18,9 +18,21 @@ export async function generateMetadata({ params }: JobPageProps): Promise<Metada
   if (!job) return { title: "Job Not Found — ResearchHub" };
 
   const companyName = job.company.companyName ?? job.company.username ?? "Company";
+  const title = `${job.title} at ${companyName} — ResearchHub`;
+  const description = job.description.replace(/<[^>]*>/g, "").slice(0, 160);
   return {
-    title: `${job.title} at ${companyName} — ResearchHub`,
-    description: job.description.slice(0, 160),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
   };
 }
 

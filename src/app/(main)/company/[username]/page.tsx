@@ -15,9 +15,20 @@ export async function generateMetadata({ params }: CompanyProfilePageProps): Pro
   const profile = await getCompanyProfile(username);
   if (!profile) return { title: "Company not found — ResearchHub" };
   const displayName = profile.companyName || profile.username || "Company";
+  const description = profile.description || `View ${displayName}'s profile on ResearchHub`;
   return {
     title: `${displayName} — ResearchHub`,
-    description: profile.description || `View ${displayName}'s profile on ResearchHub`,
+    description,
+    openGraph: {
+      title: displayName,
+      description,
+      type: "profile",
+    },
+    twitter: {
+      card: "summary",
+      title: displayName,
+      description,
+    },
   };
 }
 

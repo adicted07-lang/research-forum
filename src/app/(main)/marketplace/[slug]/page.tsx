@@ -20,9 +20,20 @@ export async function generateMetadata({ params }: ListingPageProps): Promise<Me
     if (!listing) {
       return { title: "Listing Not Found — ResearchHub" };
     }
+    const description = listing.tagline ?? undefined;
     return {
       title: `${listing.title} — ResearchHub Marketplace`,
-      description: listing.tagline,
+      description,
+      openGraph: {
+        title: listing.title,
+        description,
+        type: "website",
+      },
+      twitter: {
+        card: "summary",
+        title: listing.title,
+        description,
+      },
     };
   } catch {
     return { title: "Marketplace — ResearchHub" };

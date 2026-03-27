@@ -15,9 +15,20 @@ export async function generateMetadata({ params }: UserProfilePageProps): Promis
   const profile = await getResearcherProfile(username);
   if (!profile) return { title: "User not found — ResearchHub" };
   const displayName = profile.name || profile.username || "Researcher";
+  const description = profile.bio || `View ${displayName}'s profile on ResearchHub`;
   return {
     title: `${displayName} — ResearchHub`,
-    description: profile.bio || `View ${displayName}'s profile on ResearchHub`,
+    description,
+    openGraph: {
+      title: displayName,
+      description,
+      type: "profile",
+    },
+    twitter: {
+      card: "summary",
+      title: displayName,
+      description,
+    },
   };
 }
 
