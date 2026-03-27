@@ -1,0 +1,35 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { PageLayout } from "@/components/layout/page-layout";
+import { CompanyProfile } from "@/components/profile/company-profile";
+import { getCompanyProfile } from "@/server/actions/profiles";
+
+export const dynamic = "force-dynamic";
+
+interface CompanyProfilePageProps {
+  params: Promise<{ username: string }>;
+}
+
+export async function generateMetadata({ params }: CompanyProfilePageProps): Promise<Metadata> {
+  const { username } = await params;
+  const profile = await getCompanyProfile(username);
+  if (!profile) return { title: "Company not found — ResearchHub" };
+  const displayName = profile.companyName || profile.username || "Company";
+  return {
+    title: `${displayName} — ResearchHub`,
+    description: profile.description || `View ${displayName}'s profile on ResearchHub`,
+  };
+}
+
+export default async function CompanyProfilePage({ params }: CompanyProfilePageProps) {
+  const { username } = await params;
+  const profile = await getCompanyProfile(username);
+
+  if (!profile) notFound();
+
+  return (
+    <PageLayout>
+      <CompanyProfile profile={profile} />
+    </PageLayout>
+  );
+}
