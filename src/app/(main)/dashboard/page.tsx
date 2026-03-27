@@ -10,7 +10,9 @@ import { UserAvatar } from "@/components/shared/user-avatar";
 import { getMyApplications } from "@/server/actions/applications";
 import { getJobs } from "@/server/actions/jobs";
 import { getUserBookmarks } from "@/server/actions/bookmarks";
+import { getUserAnalytics } from "@/server/actions/analytics";
 import { BookmarksList } from "@/components/bookmarks/bookmarks-list";
+import { AnalyticsCards } from "@/components/dashboard/analytics-cards";
 import { Briefcase, FileText, Users, BookmarkIcon } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -87,9 +89,19 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
   }
 
   const { bookmarks } = await getUserBookmarks();
+  const analytics = await getUserAnalytics();
 
   return (
     <div className="space-y-6">
+      {analytics && (
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-4">
+            Your Stats
+          </h2>
+          <AnalyticsCards data={analytics} />
+        </section>
+      )}
+
       {/* My Applications */}
       <section>
         <div className="flex items-center justify-between mb-4">
@@ -185,6 +197,7 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
 async function CompanyDashboard({ userId }: { userId: string }) {
   type JobWithCount = Awaited<ReturnType<typeof getJobs>>[number];
   let jobs: JobWithCount[] = [];
+  const analytics = await getUserAnalytics();
   try {
     // getJobs already filters by status=OPEN, we fetch company's own jobs via a workaround:
     // We pass the company's userId context through session (handled in getJobs).
@@ -215,6 +228,15 @@ async function CompanyDashboard({ userId }: { userId: string }) {
 
   return (
     <div className="space-y-6">
+      {analytics && (
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-4">
+            Your Stats
+          </h2>
+          <AnalyticsCards data={analytics} />
+        </section>
+      )}
+
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary flex items-center gap-2">
