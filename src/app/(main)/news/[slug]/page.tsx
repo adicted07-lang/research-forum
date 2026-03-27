@@ -8,6 +8,8 @@ import { NewsSidebar } from "@/components/news/news-sidebar";
 import { CommentSection } from "@/components/forum/comment-section";
 import { getArticleBySlug } from "@/server/actions/articles";
 import { getComments } from "@/server/actions/comments";
+import { getRelatedContent } from "@/server/actions/citations";
+import { RelatedContent } from "@/components/shared/related-content";
 
 export async function generateMetadata({
   params,
@@ -64,6 +66,8 @@ export default async function ArticleDetailPage({
     // DB not available
   }
 
+  const relatedContent = await getRelatedContent("article", article.id, article.tags);
+
   return (
     <PageLayout sidebar={<NewsSidebar />}>
       <div className="space-y-6">
@@ -81,6 +85,9 @@ export default async function ArticleDetailPage({
             comments={articleComments}
           />
         </div>
+
+        {/* Related content */}
+        {relatedContent.length > 0 && <RelatedContent items={relatedContent} />}
       </div>
     </PageLayout>
   );

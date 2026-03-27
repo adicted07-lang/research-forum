@@ -11,6 +11,10 @@ import { CommentSection } from "@/components/forum/comment-section";
 import { ForumSidebar } from "@/components/forum/forum-sidebar";
 import { getQuestionBySlug, incrementViewCount } from "@/server/actions/questions";
 import { getComments } from "@/server/actions/comments";
+import { getSuggestedAnswers } from "@/server/actions/suggestions";
+import { SuggestedAnswers } from "@/components/forum/suggested-answers";
+import { getRelatedContent } from "@/server/actions/citations";
+import { RelatedContent } from "@/components/shared/related-content";
 
 export async function generateMetadata({
   params,
@@ -74,11 +78,21 @@ export default async function QuestionDetailPage({
 
   const hasAcceptedAnswer = question.answers.some((a) => a.isAccepted);
 
+  const [suggestions, relatedContent] = await Promise.all([
+    question.answerCount === 0
+      ? getSuggestedAnswers(question.id, question.tags)
+      : Promise.resolve([]),
+    getRelatedContent("question", question.id, question.tags),
+  ]);
+
   return (
     <PageLayout sidebar={<ForumSidebar />}>
       <div className="space-y-6">
         {/* Question */}
         <QuestionDetail question={question} currentUserId={currentUserId} />
+
+        {/* Suggested answers for unanswered questions */}
+        {suggestions.length > 0 && <SuggestedAnswers suggestions={suggestions} />}
 
         {/* Question comments */}
         <div className="bg-white border border-border-light rounded-md px-6 pb-4 dark:bg-surface-dark dark:border-border-dark-light">
@@ -129,6 +143,9 @@ export default async function QuestionDetailPage({
           </h2>
           <AnswerForm questionId={question.id} />
         </div>
+
+        {/* Related content */}
+        {relatedContent.length > 0 && <RelatedContent items={relatedContent} />}
       </div>
     </PageLayout>
   );
