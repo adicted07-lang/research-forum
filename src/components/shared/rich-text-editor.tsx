@@ -3,6 +3,8 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
+import { MathInline } from "@/lib/tiptap-math";
+import "katex/dist/katex.min.css";
 import { useEffect } from "react";
 import {
   Bold,
@@ -15,6 +17,7 @@ import {
   Quote,
   Undo,
   Redo,
+  Sigma,
 } from "lucide-react";
 
 interface RichTextEditorProps {
@@ -64,6 +67,7 @@ export function RichTextEditor({
       Placeholder.configure({
         placeholder,
       }),
+      MathInline,
     ],
     content,
     onUpdate({ editor }) {
@@ -157,6 +161,18 @@ export function RichTextEditor({
           title="Blockquote"
         >
           <Quote className="w-4 h-4" />
+        </ToolbarButton>
+
+        <ToolbarButton
+          onClick={() => {
+            const latex = window.prompt("Enter LaTeX expression:");
+            if (latex) {
+              (editor.chain().focus() as any).insertMath(latex).run();
+            }
+          }}
+          title="Insert Math (LaTeX)"
+        >
+          <Sigma className="w-4 h-4" />
         </ToolbarButton>
 
         <div className="w-px h-5 bg-border dark:bg-border-dark mx-0.5" />
