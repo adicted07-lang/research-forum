@@ -11,6 +11,8 @@ import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
 import { getArticles } from "@/server/actions/articles";
+import { getFollowedTags } from "@/server/actions/tag-follows";
+import { TagFollowButton } from "@/components/forum/tag-follow-button";
 import { ArticleCard } from "@/components/news/article-card";
 import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
 import { AnimatedTooltipGroup, type TooltipItem } from "@/components/ui/animated-tooltip";
@@ -81,6 +83,8 @@ export default async function HomePage() {
     updateStreak(session.user.id);
   }
 
+  const followedTags = session?.user?.id ? await getFollowedTags() : [];
+
   let questions: Awaited<ReturnType<typeof getQuestions>>["questions"] = [];
   try {
     const result = await getQuestions({ sort: "trending", limit: 4 });
@@ -123,16 +127,36 @@ export default async function HomePage() {
       sidebar={
         <div className="space-y-6">
           <LeaderboardCard />
+          {session?.user?.id && followedTags.length > 0 && (
+            <div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light">
+              <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-4">
+                Your Tags
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {followedTags.map((tag) => (
+                  <TagFollowButton key={tag} tag={tag} initialFollowing={true} />
+                ))}
+              </div>
+            </div>
+          )}
           <div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light">
             <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-4">
               Trending Topics
             </h3>
             <div className="flex flex-wrap gap-2">
-              {POPULAR_TAGS.map((tag) => (
-                <Link key={tag} href={`/forum?tag=${tag}`}>
-                  <BadgePill label={tag} variant="primary" />
-                </Link>
-              ))}
+              {POPULAR_TAGS.map((tag) =>
+                session?.user?.id ? (
+                  <TagFollowButton
+                    key={tag}
+                    tag={tag}
+                    initialFollowing={followedTags.includes(tag)}
+                  />
+                ) : (
+                  <Link key={tag} href={`/forum?tag=${tag}`}>
+                    <BadgePill label={tag} variant="primary" />
+                  </Link>
+                )
+              )}
             </div>
           </div>
           <NewsletterSubscribe />

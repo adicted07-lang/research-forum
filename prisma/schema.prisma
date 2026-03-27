@@ -201,6 +201,9 @@ model User {
   threadParticipant2 MessageThread[] @relation("ThreadParticipant2")
   sentMessages       Message[]       @relation("SentMessages")
 
+  // Tag follows
+  tagFollows TagFollow[]
+
   @@index([email])
   @@index([username])
   @@index([role])
@@ -680,4 +683,19 @@ model AdEvent {
   @@index([campaignId, type])
   @@index([createdAt])
   @@map("ad_events")
+}
+
+// === TAG FOLLOWS ===
+
+model TagFollow {
+  id        String   @id @default(cuid())
+  userId    String
+  tag       String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, tag])
+  @@index([userId])
+  @@map("tag_follows")
 }

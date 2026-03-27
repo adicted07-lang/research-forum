@@ -63,6 +63,7 @@ export async function createQuestion(formData: FormData) {
 export async function getQuestions(opts: {
   category?: string;
   tag?: string;
+  tags?: string[];
   sort?: string;
   page?: number;
   limit?: number;
@@ -74,6 +75,9 @@ export async function getQuestions(opts: {
   const where: Record<string, unknown> = { deletedAt: null };
   if (opts.category) where.category = opts.category;
   if (opts.tag) where.tags = { has: opts.tag };
+  if (opts.tags && opts.tags.length > 0) {
+    where.tags = { hasSome: opts.tags };
+  }
   if (opts.sort === "unanswered") where.answerCount = 0;
 
   let orderBy: Record<string, string> | Array<Record<string, string>>;
