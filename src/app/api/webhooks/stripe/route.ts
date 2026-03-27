@@ -33,6 +33,16 @@ export async function POST(req: NextRequest) {
             data: { stripeSubscriptionId: subscriptionId, isActive: true },
           });
         }
+        const campaignId = session.metadata?.campaignId;
+        if (campaignId) {
+          await db.campaign.update({
+            where: { id: campaignId },
+            data: {
+              status: "PENDING_APPROVAL",
+              stripePaymentId: session.payment_intent as string | null,
+            },
+          });
+        }
         break;
       }
       case "customer.subscription.deleted": {
