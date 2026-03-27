@@ -19,6 +19,7 @@ import {
   Store,
   Wrench,
 } from "lucide-react";
+import { SearchWithResults } from "@/components/search/search-with-results";
 
 import {
   Accordion,
@@ -203,7 +204,8 @@ const Navbar1 = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <SearchWithResults />
             <a href={auth.login.url} className={buttonVariants({ variant: "outline", size: "sm" })}>
               {auth.login.text}
             </a>
@@ -240,6 +242,7 @@ const Navbar1 = ({
                   </SheetTitle>
                 </SheetHeader>
                 <div className="my-6 flex flex-col gap-6">
+                  <SearchWithResults />
                   <Accordion
                     type="single"
                     collapsible
