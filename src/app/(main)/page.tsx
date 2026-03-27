@@ -6,8 +6,10 @@ import { QuestionCard } from "@/components/forum/question-card";
 import { LeaderboardCard } from "@/components/social/leaderboard-card";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { ListingCard } from "@/components/marketplace/listing-card";
+import { JobCard } from "@/components/hire/job-card";
 import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
+import { getJobs } from "@/server/actions/jobs";
 import { MessageSquare, ShoppingBag, Users, Newspaper } from "lucide-react";
 
 const POPULAR_TAGS = [
@@ -37,6 +39,13 @@ export default async function HomePage() {
   let listings: Awaited<ReturnType<typeof getListings>> = [];
   try {
     listings = await getListings({ sort: "trending", limit: 4 });
+  } catch {
+    // Database not connected yet — show empty state
+  }
+
+  let jobs: Awaited<ReturnType<typeof getJobs>> = [];
+  try {
+    jobs = await getJobs({ sort: "newest", limit: 3 });
   } catch {
     // Database not connected yet — show empty state
   }
@@ -97,11 +106,19 @@ export default async function HomePage() {
 
       <section className="mb-8">
         <SectionHeader title="Hire a Researcher" href="/hire" />
-        <EmptyState
-          title="No job postings yet"
-          description="Post a research project and find the perfect expert."
-          icon={<Users className="w-12 h-12" />}
-        />
+        {jobs.length > 0 ? (
+          <div className="space-y-3">
+            {jobs.map((job) => (
+              <JobCard key={job.id} job={job} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            title="No job postings yet"
+            description="Post a research project and find the perfect expert."
+            icon={<Users className="w-12 h-12" />}
+          />
+        )}
       </section>
 
       <section className="mb-8">
