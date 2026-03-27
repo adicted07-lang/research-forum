@@ -8,6 +8,30 @@ datasource db {
 
 // === ENUMS ===
 
+enum AdType {
+  FEED
+  BANNER
+  FEATURED_LISTING
+}
+
+enum CampaignStatus {
+  DRAFT
+  PENDING_APPROVAL
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+enum BudgetType {
+  DAILY
+  TOTAL
+}
+
+enum BidType {
+  CPM
+  CPC
+}
+
 enum ArticleStatus {
   DRAFT
   PENDING_REVIEW
@@ -166,6 +190,9 @@ model User {
 
   // News relations
   articles Article[] @relation("AuthoredArticles")
+
+  // Advertising relations
+  campaigns Campaign[] @relation("Campaigns")
 
   // Hire relations
   companyJobs        Job[]           @relation("CompanyJobs")
@@ -602,4 +629,55 @@ model RSSFeedSource {
   createdAt     DateTime  @default(now())
 
   @@map("rss_feed_sources")
+}
+
+// === ADVERTISING MODELS ===
+
+model Campaign {
+  id                    String         @id @default(cuid())
+  campaignName          String
+  adType                AdType
+  creativeImage         String?
+  creativeHeadline      String
+  creativeDescription   String
+  creativeCtaUrl        String
+  targetingCategories   String[]
+  targetingUserType     String[]
+  targetingGeography    String[]
+  budgetType            BudgetType
+  budgetAmount          Float
+  bidType               BidType
+  bidAmount             Float
+  startDate             DateTime
+  endDate               DateTime
+  status                CampaignStatus @default(DRAFT)
+  advertiserId          String
+  stripePaymentId       String?
+  impressions           Int            @default(0)
+  clicks                Int            @default(0)
+  spend                 Float          @default(0)
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+
+  advertiser User      @relation("Campaigns", fields: [advertiserId], references: [id])
+  events     AdEvent[]
+
+  @@index([advertiserId])
+  @@index([status])
+  @@index([adType])
+  @@map("campaigns")
+}
+
+model AdEvent {
+  id         String   @id @default(cuid())
+  campaignId String
+  type       String
+  userId     String?
+  createdAt  DateTime @default(now())
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, type])
+  @@index([createdAt])
+  @@map("ad_events")
 }
