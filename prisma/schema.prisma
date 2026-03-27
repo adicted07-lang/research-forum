@@ -8,6 +8,14 @@ datasource db {
 
 // === ENUMS ===
 
+enum ArticleStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  PUBLISHED
+}
+
 enum QuestionStatus {
   OPEN
   ANSWERED
@@ -155,6 +163,9 @@ model User {
   // Marketplace relations
   listings Listing[]
   reviews  Review[]
+
+  // News relations
+  articles Article[] @relation("AuthoredArticles")
 
   // Hire relations
   companyJobs        Job[]           @relation("CompanyJobs")
@@ -546,4 +557,49 @@ model Message {
   @@index([threadId, createdAt])
   @@index([senderId])
   @@map("messages")
+}
+
+// === NEWS MODELS ===
+
+model Article {
+  id              String        @id @default(cuid())
+  title           String
+  body            String        @db.Text
+  slug            String        @unique
+  authorId        String
+  category        String        @default("news")
+  coverImage      String?
+  readTime        Int?
+  tags            String[]
+  isFeatured      Boolean       @default(false)
+  status          ArticleStatus @default(DRAFT)
+  rejectionReason String?
+  publishedAt     DateTime?
+  sourceUrl       String?
+  sourceTitle     String?
+  upvoteCount     Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?
+
+  author User @relation("AuthoredArticles", fields: [authorId], references: [id])
+
+  @@index([authorId])
+  @@index([slug])
+  @@index([status])
+  @@index([category])
+  @@index([publishedAt])
+  @@map("articles")
+}
+
+model RSSFeedSource {
+  id            String    @id @default(cuid())
+  name          String
+  url           String    @unique
+  pollInterval  Int       @default(3600)
+  lastPolledAt  DateTime?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+
+  @@map("rss_feed_sources")
 }
