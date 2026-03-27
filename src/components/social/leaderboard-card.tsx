@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getLeaderboard } from "@/server/actions/leaderboard";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { StreakFire } from "@/components/shared/streak-fire";
+import { AnimatedTooltipGroup, type TooltipItem } from "@/components/ui/animated-tooltip";
 
 const rankColors: Record<number, string> = {
   1: "text-yellow-500 font-bold",
@@ -12,11 +13,26 @@ const rankColors: Record<number, string> = {
 export async function LeaderboardCard() {
   const users = await getLeaderboard(5);
 
+  // Build tooltip items for the animated avatar group
+  const tooltipItems: TooltipItem[] = users.map((user) => ({
+    id: user.id,
+    name: user.name ?? user.username ?? "Researcher",
+    designation: `${user.points} pts`,
+    image: user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${user.name ?? user.username}`,
+  }));
+
   return (
-    <div className="bg-white border border-border-light rounded-lg p-5">
-      <h3 className="text-sm font-semibold text-text-primary mb-4">
+    <div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light">
+      <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary dark:text-text-dark-secondary mb-4">
         Top Researchers This Week
       </h3>
+
+      {/* Animated avatar group at top */}
+      {tooltipItems.length > 0 && (
+        <div className="mb-4 flex justify-center pt-6">
+          <AnimatedTooltipGroup items={tooltipItems} />
+        </div>
+      )}
 
       <ul className="space-y-3">
         {users.map((user, index) => {
@@ -36,7 +52,7 @@ export async function LeaderboardCard() {
                 size="sm"
               />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-text-primary truncate">
+                <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary truncate">
                   {user.name ?? user.username}
                 </p>
                 <p className="text-xs text-text-tertiary">{user.points} pts</p>
@@ -48,6 +64,12 @@ export async function LeaderboardCard() {
           );
         })}
       </ul>
+
+      {users.length === 0 && (
+        <p className="text-sm text-text-tertiary text-center py-4">
+          No researchers yet. Be the first!
+        </p>
+      )}
 
       <Link
         href="/leaderboard"
