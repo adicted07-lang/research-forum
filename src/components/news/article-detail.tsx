@@ -2,6 +2,7 @@ import { Calendar, Clock } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { VoteButton } from "@/components/forum/vote-button";
+import { RichTextDisplay } from "@/components/shared/rich-text-display";
 
 interface ArticleAuthor {
   id: string;
@@ -125,8 +126,8 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         </div>
 
         {/* Body */}
-        <div className="prose prose-sm max-w-none text-text-primary dark:text-text-dark-primary leading-relaxed whitespace-pre-wrap mb-6">
-          {article.body}
+        <div className="mb-6">
+          <RichTextDisplay content={article.body} />
         </div>
 
         {/* Tags */}

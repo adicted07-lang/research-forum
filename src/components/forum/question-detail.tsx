@@ -3,6 +3,7 @@ import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { StatusBadge } from "@/components/shared/status-badge";
 import { VoteButton } from "@/components/forum/vote-button";
+import { RichTextDisplay } from "@/components/shared/rich-text-display";
 
 interface QuestionAuthor {
   id: string;
@@ -91,8 +92,8 @@ export function QuestionDetail({ question, currentUserId }: QuestionDetailProps)
           </h1>
 
           {/* Body */}
-          <div className="text-text-primary dark:text-text-dark-primary text-sm leading-relaxed whitespace-pre-wrap mb-4">
-            {question.body}
+          <div className="mb-4">
+            <RichTextDisplay content={question.body} />
           </div>
 
           {/* Tags */}

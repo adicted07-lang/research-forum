@@ -2,6 +2,7 @@ import { CheckCircle } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { VoteButton } from "@/components/forum/vote-button";
 import { AcceptAnswerButton } from "@/components/forum/accept-answer-button";
+import { RichTextDisplay } from "@/components/shared/rich-text-display";
 
 interface AnswerAuthor {
   id: string;
@@ -77,8 +78,8 @@ export function AnswerCard({
 
       {/* Content */}
       <div className="flex-1 min-w-0">
-        <div className="text-sm text-text-primary dark:text-text-dark-primary leading-relaxed whitespace-pre-wrap mb-3">
-          {answer.body}
+        <div className="mb-3">
+          <RichTextDisplay content={answer.body} />
         </div>
 
         <div className="flex items-center justify-between flex-wrap gap-2">

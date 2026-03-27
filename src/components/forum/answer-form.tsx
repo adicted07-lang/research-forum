@@ -4,6 +4,7 @@ import { useRef, useState, useTransition } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { createAnswer } from "@/server/actions/answers";
+import { RichTextEditor } from "@/components/shared/rich-text-editor";
 
 interface AnswerFormProps {
   questionId: string;
@@ -15,6 +16,7 @@ export function AnswerForm({ questionId }: AnswerFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const [bodyHtml, setBodyHtml] = useState("");
 
   if (!session) {
     return (
@@ -36,6 +38,7 @@ export function AnswerForm({ questionId }: AnswerFormProps) {
     e.preventDefault();
     setError(null);
     const formData = new FormData(e.currentTarget);
+    formData.set("body", bodyHtml);
 
     startTransition(async () => {
       const result = await createAnswer(questionId, formData);
@@ -65,12 +68,10 @@ export function AnswerForm({ questionId }: AnswerFormProps) {
       </h3>
 
       <form ref={formRef} onSubmit={handleSubmit}>
-        <textarea
-          name="body"
-          rows={6}
-          required
+        <RichTextEditor
+          content={bodyHtml}
+          onChange={setBodyHtml}
           placeholder="Write your answer here..."
-          className="w-full border border-border rounded-md px-3.5 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary-light outline-none resize-y bg-white dark:bg-surface-dark dark:border-border-dark dark:text-text-dark-primary placeholder:text-text-tertiary"
         />
 
         {error && (

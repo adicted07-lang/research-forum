@@ -4,12 +4,14 @@ import { useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createQuestion } from "@/server/actions/questions";
 import { FORUM_CATEGORIES } from "@/lib/validations/forum";
+import { RichTextEditor } from "@/components/shared/rich-text-editor";
 
 export function QuestionForm() {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [bodyHtml, setBodyHtml] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,6 +19,9 @@ export function QuestionForm() {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+
+    // Inject rich text body
+    formData.set("body", bodyHtml);
 
     // Convert comma-separated tags to individual form entries
     const tagsRaw = formData.get("tagsInput") as string;
@@ -63,19 +68,13 @@ export function QuestionForm() {
 
         {/* Body */}
         <div>
-          <label
-            htmlFor="body"
-            className="block text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-1.5"
-          >
+          <label className="block text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-1.5">
             Body <span className="text-error">*</span>
           </label>
-          <textarea
-            id="body"
-            name="body"
-            rows={8}
-            required
+          <RichTextEditor
+            content={bodyHtml}
+            onChange={setBodyHtml}
             placeholder="Describe your question in detail..."
-            className="w-full border border-border rounded-md px-3.5 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary-light outline-none resize-y bg-white dark:bg-surface-dark dark:border-border-dark dark:text-text-dark-primary placeholder:text-text-tertiary"
           />
         </div>
 
