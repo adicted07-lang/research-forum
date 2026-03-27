@@ -204,6 +204,9 @@ model User {
   // Tag follows
   tagFollows TagFollow[]
 
+  // Dataset relations
+  datasets Dataset[]
+
   @@index([email])
   @@index([username])
   @@index([role])
@@ -706,6 +709,34 @@ model Grant {
   @@index([isActive])
   @@index([deadline])
   @@map("grants")
+}
+
+// === DATASET MARKETPLACE ===
+
+model Dataset {
+  id            String    @id @default(cuid())
+  title         String
+  description   String    @db.Text
+  slug          String    @unique
+  authorId      String
+  tags          String[]
+  license       String?
+  format        String?
+  size          String?
+  downloadUrl   String?
+  price         Float     @default(0)
+  downloadCount Int       @default(0)
+  upvoteCount   Int       @default(0)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  author User @relation(fields: [authorId], references: [id])
+
+  @@index([authorId])
+  @@index([slug])
+  @@map("datasets")
 }
 
 // === TAG FOLLOWS ===
