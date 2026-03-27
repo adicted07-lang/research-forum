@@ -1,12 +1,10 @@
-import { TopNav } from "@/components/layout/top-nav";
-import { MobileNav } from "@/components/layout/mobile-nav";
+import { Navbar1 } from "@/components/ui/navbar";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <TopNav />
+      <Navbar1 />
       {children}
-      <MobileNav />
     </>
   );
 }
