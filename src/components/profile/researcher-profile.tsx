@@ -15,7 +15,9 @@ import { BadgePill } from "@/components/shared/badge-pill";
 import { StreakFire } from "@/components/shared/streak-fire";
 import { FollowButton } from "@/components/social/follow-button";
 import { isFollowing } from "@/server/actions/follows";
+import { getUserBadges } from "@/server/actions/badges";
 import { auth } from "@/auth";
+import { Award, Flame, Trophy } from "lucide-react";
 import { ActivityFeed } from "@/components/profile/activity-feed";
 import { getReputationTier } from "@/lib/reputation";
 
@@ -62,9 +64,16 @@ interface ResearcherProfileProps {
   activity: Array<{ type: "question" | "answer" | "article"; title: string; url: string; createdAt: Date }>;
 }
 
+const badgeIcons: Record<string, { icon: typeof Award; color: string }> = {
+  streak: { icon: Flame, color: "text-orange-500" },
+  community: { icon: Award, color: "text-blue-500" },
+  expertise: { icon: Trophy, color: "text-amber-500" },
+};
+
 export async function ResearcherProfile({ profile, activity }: ResearcherProfileProps) {
   const session = await auth();
   const following = session?.user?.id ? await isFollowing(profile.id) : false;
+  const badges = await getUserBadges(profile.id);
   const links = getSocialLinks(profile.socialLinks);
   const displayName = profile.name || profile.username || "Researcher";
   const availability = profile.availability ? availabilityConfig[profile.availability] : null;
@@ -243,6 +252,39 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
         </div>
       )}
 
+      {/* Badges */}
+      {badges.length > 0 && (
+        <div className="mt-4 bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-xl p-6">
+          <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-4 flex items-center gap-2">
+            <Award className="w-5 h-5 text-primary" />
+            Badges
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {badges.map((badge) => {
+              const config = badgeIcons[badge.category] || { icon: Award, color: "text-gray-500" };
+              const BadgeIcon = config.icon;
+              return (
+                <div
+                  key={badge.id}
+                  className="flex items-center gap-2 px-3 py-2 bg-surface dark:bg-surface-dark rounded-lg border border-border dark:border-border-dark"
+                >
+                  <BadgeIcon className={`w-4 h-4 ${config.color}`} />
+                  <div>
+                    <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary">
+                      {badge.name}
+                    </p>
+                    <p className="text-[10px] text-text-tertiary">
+                      {new Date(badge.earnedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Recent Activity */}
       <div className="mt-4 bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-xl p-6">
         <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-4">
           Recent Activity
