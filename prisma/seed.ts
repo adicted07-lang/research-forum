@@ -32,16 +32,32 @@ async function main() {
   // Hash password for all users
   const passwordHash = await bcrypt.hash("password123", 10);
 
+  // ==================== AVATARS ====================
+
+  const AVATAR_SEEDS = [
+    "Felix", "Aneka", "Jade", "Leo", "Mia", "Oscar", "Zara", "Kai",
+    "Luna", "Max", "Aria", "Finn", "Nova", "Theo", "Iris", "Axel",
+    "Sage", "Ruby", "Orion", "Cleo", "Atlas", "Lyra", "Hugo", "Piper",
+    "Miles", "Wren", "Quinn", "Juno", "Ezra", "Ember", "Dash", "Ivy",
+    "Rio", "Skye", "Knox", "Nora", "Beck", "Lila", "Cole", "Faye",
+  ];
+
+  function randomAvatar(seed?: string): string {
+    const s = seed || AVATAR_SEEDS[Math.floor(Math.random() * AVATAR_SEEDS.length)];
+    return `https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(s)}&backgroundColor=fdba74,fed7aa,fecaca,fde68a,ffedd5&backgroundType=gradientLinear`;
+  }
+
   // ==================== USERS ====================
 
   const alice = await prisma.user.upsert({
     where: { email: "alice@example.com" },
-    update: {},
+    update: { image: randomAvatar("Aria") },
     create: {
       email: "alice@example.com",
       username: "alice_chen",
       name: "Alice Chen",
       role: "RESEARCHER",
+      image: randomAvatar("Aria"),
       bio: "Computational biologist specializing in ML-driven genomics research.",
       about:
         "I'm a computational biologist with 8 years of experience applying machine learning to genomics problems. I've worked on everything from single-cell RNA-seq analysis to protein structure prediction. Passionate about open science and reproducible research.",
@@ -58,12 +74,13 @@ async function main() {
 
   const bob = await prisma.user.upsert({
     where: { email: "bob@example.com" },
-    update: {},
+    update: { image: randomAvatar("Hugo") },
     create: {
       email: "bob@example.com",
       username: "bob_martinez",
       name: "Bob Martinez",
       role: "RESEARCHER",
+      image: randomAvatar("Hugo"),
       bio: "Survey methodologist and biostatistician with 12 years of field experience.",
       about:
         "I specialize in survey design, statistical analysis, and biostatistics. Over my 12-year career I've worked with academic institutions, public health agencies, and private research firms on large-scale epidemiological studies.",
@@ -80,12 +97,13 @@ async function main() {
 
   const carol = await prisma.user.upsert({
     where: { email: "carol@example.com" },
-    update: {},
+    update: { image: randomAvatar("Luna") },
     create: {
       email: "carol@example.com",
       username: "carol_nguyen",
       name: "Carol Nguyen",
       role: "RESEARCHER",
+      image: randomAvatar("Luna"),
       bio: "UX researcher focused on qualitative methods and cross-cultural usability studies.",
       about:
         "With 6 years in UX research I bring expertise in contextual inquiry, usability testing, and cross-cultural design. I've conducted studies across North America, Europe, and Southeast Asia.",
@@ -107,12 +125,13 @@ async function main() {
 
   const techcorp = await prisma.user.upsert({
     where: { email: "admin@techcorp.com" },
-    update: {},
+    update: { image: randomAvatar("Atlas") },
     create: {
       email: "admin@techcorp.com",
       username: "techcorp_research",
       name: "TechCorp Research",
       role: "COMPANY",
+      image: randomAvatar("Atlas"),
       companyName: "TechCorp Research",
       description:
         "TechCorp Research is an AI-first company building the next generation of research tools. Series B funded, we're on a mission to accelerate scientific discovery through AI.",
@@ -126,12 +145,13 @@ async function main() {
 
   const admin = await prisma.user.upsert({
     where: { email: "admin@researchhub.com" },
-    update: {},
+    update: { image: randomAvatar("Orion") },
     create: {
       email: "admin@researchhub.com",
       username: "researchhub_admin",
       name: "ResearchHub Admin",
       role: "ADMIN",
+      image: randomAvatar("Orion"),
       bio: "Platform administrator for ResearchHub.",
       isVerified: true,
       emailVerified: new Date(),
