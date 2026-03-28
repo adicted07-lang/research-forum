@@ -160,7 +160,7 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
                   </div>
                   {app.job.researchDomain.length > 0 && (
                     <div className="flex flex-wrap gap-1 mt-2">
-                      {app.job.researchDomain.slice(0, 3).map((d) => (
+                      {app.job.researchDomain.slice(0, 3).map((d: string) => (
                         <BadgePill key={d} label={d} variant="primary" />
                       ))}
                     </div>
@@ -259,7 +259,7 @@ async function CompanyDashboard({ userId }: { userId: string }) {
 
         {jobs.length > 0 ? (
           <div className="space-y-3">
-            {jobs.map((job) => (
+            {jobs.map((job: any) => (
               <div
                 key={job.id}
                 className="bg-white border border-border-light rounded-lg p-4 dark:bg-surface-dark dark:border-border-dark-light"
@@ -304,7 +304,7 @@ async function CompanyDashboard({ userId }: { userId: string }) {
                 </div>
                 {job.researchDomain.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
-                    {job.researchDomain.slice(0, 3).map((d) => (
+                    {job.researchDomain.slice(0, 3).map((d: string) => (
                       <BadgePill key={d} label={d} variant="primary" />
                     ))}
                   </div>
