@@ -81,6 +81,18 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     console.error("[PROFILE] DB error:", err);
   }
 
-  console.log("[PROFILE] not found for:", username);
-  notFound();
+  // If we get here, profile wasn't found or DB failed
+  // Return a "not found" UI instead of notFound() to debug
+  return (
+    <PageLayout>
+      <div className="max-w-md mx-auto text-center py-20">
+        <h1 className="text-2xl font-bold text-text-primary dark:text-text-dark-primary mb-2">
+          Profile not found
+        </h1>
+        <p className="text-sm text-text-secondary dark:text-text-dark-secondary">
+          Could not find a user with username &quot;{username}&quot;. The database may be warming up — try refreshing.
+        </p>
+      </div>
+    </PageLayout>
+  );
 }
