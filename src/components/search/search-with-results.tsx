@@ -99,7 +99,8 @@ export function SearchWithResults() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
-          onFocus={() => { if (query.trim() && results && hasResults(results)) setOpen(true); else if (!query.trim()) setShowActions(true); }}
+          onClick={() => { if (query.trim() && results && hasResults(results)) setOpen(true); else if (!query.trim()) setShowActions(true); }}
+          onFocus={() => { /* only open via click, not auto-focus */ }}
           placeholder="Search..."
           className="w-full py-2 pl-10 pr-9 text-[13.5px] rounded-md border border-border bg-surface text-text-primary placeholder:text-text-tertiary outline-none transition-all focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary-light dark:bg-surface-dark dark:border-border-dark dark:text-text-dark-primary dark:focus:bg-background dark:focus:ring-primary/20"
         />
