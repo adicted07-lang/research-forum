@@ -2,6 +2,7 @@ import { getUsers } from "@/server/actions/admin";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { Badge } from "@/components/ui/badge";
 import { UserActions } from "./user-actions";
+import { BanActions } from "./ban-actions";
 import Link from "next/link";
 
 interface UserTableProps {
@@ -76,13 +77,16 @@ export async function UserTable({ search, role, page = 1 }: UserTableProps) {
                 <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                   Actions
                 </th>
+                <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                  Ban / Suspend
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {users.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={6}
+                    colSpan={7}
                     className="px-4 py-10 text-center text-muted-foreground"
                   >
                     No users found.
@@ -135,6 +139,13 @@ export async function UserTable({ search, role, page = 1 }: UserTableProps) {
                         currentRole={user.role}
                         isSuspended={!!user.deletedAt}
                         isVerified={user.isVerified}
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <BanActions
+                        userId={user.id}
+                        isBanned={user.isBanned}
+                        suspendedUntil={user.suspendedUntil}
                       />
                     </td>
                   </tr>

@@ -33,6 +33,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!user) return null;
 
+        if (user.isBanned) return null;
+        if (
+          user.suspendedUntil &&
+          new Date(user.suspendedUntil) > new Date()
+        )
+          return null;
+
         const passwordAccount = user.accounts.find(
           (a) => a.provider === "credentials"
         );

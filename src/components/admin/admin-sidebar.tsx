@@ -11,6 +11,9 @@ import {
   Newspaper,
   Megaphone,
   Tags,
+  Flag,
+  AlertTriangle,
+  ClipboardList,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +26,9 @@ const navItems = [
   { href: "/admin/news", label: "News", icon: Newspaper },
   { href: "/admin/advertising", label: "Advertising", icon: Megaphone },
   { href: "/admin/tags", label: "Tags", icon: Tags },
+  { href: "/admin/reports", label: "Reports", icon: Flag },
+  { href: "/admin/spam", label: "Spam Detection", icon: AlertTriangle },
+  { href: "/admin/audit", label: "Audit Log", icon: ClipboardList },
 ];
 
 export function AdminSidebar() {

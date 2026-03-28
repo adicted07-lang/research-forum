@@ -3,6 +3,7 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { createNotification } from "./notifications";
+import { logAdminAction } from "./audit";
 
 export async function assignReviewer(articleId: string, reviewerId: string) {
   const session = await auth();
@@ -66,6 +67,7 @@ export async function submitReview(
         feedback || undefined,
         `/news/${articleId}`
       );
+      await logAdminAction("approve_article", "article", articleId, article.title);
     } else if (decision === "reject") {
       await db.article.update({
         where: { id: articleId },
@@ -77,6 +79,7 @@ export async function submitReview(
         `Your article "${article.title}" was not accepted`,
         feedback || undefined
       );
+      await logAdminAction("reject_article", "article", articleId, article.title);
     } else {
       // revise — set back to DRAFT with feedback
       await db.article.update({
@@ -89,6 +92,7 @@ export async function submitReview(
         `Revisions requested for "${article.title}"`,
         feedback || undefined
       );
+      await logAdminAction("request_revision_article", "article", articleId, article.title);
     }
 
     return { success: true };

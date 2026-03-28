@@ -163,6 +163,12 @@ model User {
   website      String?
   hiringStatus HiringStatus?
 
+  // Ban / Suspend
+  isBanned       Boolean   @default(false)
+  bannedAt       DateTime?
+  banReason      String?
+  suspendedUntil DateTime?
+
   // Points & Streaks
   points       Int @default(0)
   currentStreak Int @default(0)
@@ -203,6 +209,10 @@ model User {
 
   // Tag follows
   tagFollows TagFollow[]
+
+  // Safety relations
+  reports   Report[]   @relation("ReportsMade")
+  auditLogs AuditLog[] @relation("AuditLogs")
 
   // Dataset relations
   datasets Dataset[]
@@ -822,6 +832,43 @@ model ProjectDocument {
 
   @@index([projectId])
   @@map("project_documents")
+}
+
+// === SAFETY MODELS ===
+
+model Report {
+  id         String     @id @default(cuid())
+  reporterId String
+  targetType TargetType
+  targetId   String
+  reason     String
+  status     String     @default("pending")
+  resolvedBy String?
+  resolvedAt DateTime?
+  resolution String?
+  createdAt  DateTime   @default(now())
+
+  reporter User @relation("ReportsMade", fields: [reporterId], references: [id])
+
+  @@index([status])
+  @@index([targetType, targetId])
+  @@map("reports")
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  adminId    String
+  action     String
+  targetType String?
+  targetId   String?
+  details    String?
+  createdAt  DateTime @default(now())
+
+  admin User @relation("AuditLogs", fields: [adminId], references: [id])
+
+  @@index([adminId])
+  @@index([createdAt])
+  @@map("audit_logs")
 }
 
 // === TAG FOLLOWS ===
