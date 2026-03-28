@@ -78,8 +78,13 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   try { return await HomePageContent(); } catch (e: any) {
-    console.error("[HOME] FATAL:", e?.message?.slice(0, 200));
-    return <div style={{padding:"40px",textAlign:"center"}}><h1>Something went wrong</h1><p>{e?.message?.slice(0, 100)}</p></div>;
+    return (
+      <div style={{padding:"40px",textAlign:"center",fontFamily:"system-ui"}}>
+        <h1 style={{fontSize:"24px",marginBottom:"8px"}}>Something went wrong</h1>
+        <p style={{color:"#666"}}>{String(e?.message || e).slice(0, 200)}</p>
+        <p style={{color:"#999",fontSize:"12px",marginTop:"8px"}}>{e?.stack?.slice(0, 300)}</p>
+      </div>
+    );
   }
 }
 
