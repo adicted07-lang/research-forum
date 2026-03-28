@@ -4,11 +4,9 @@ function createPrismaClient() {
   const connectionString = process.env.DATABASE_URL || "";
 
   if (connectionString.includes("neon.tech")) {
-    // Use Neon HTTP adapter for serverless environments
-    const { neon } = require("@neondatabase/serverless");
+    // PrismaNeonHttp takes connectionString directly (not neon() function)
     const { PrismaNeonHttp } = require("@prisma/adapter-neon");
-    const sql = neon(connectionString);
-    const adapter = new PrismaNeonHttp(sql);
+    const adapter = new PrismaNeonHttp(connectionString);
     return new PrismaClient({
       adapter,
       log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
