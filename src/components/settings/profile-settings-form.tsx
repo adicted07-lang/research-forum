@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { updateProfile } from "@/server/actions/profiles";
 import { FileUpload } from "@/components/shared/file-upload";
+import { AvatarPicker } from "@/components/settings/avatar-picker";
 
 type UserRole = "RESEARCHER" | "COMPANY" | "MODERATOR" | "ADMIN";
 type Availability = "AVAILABLE" | "BUSY" | "NOT_AVAILABLE";
@@ -85,13 +86,20 @@ export function ProfileSettingsForm({ role, initialData }: ProfileSettingsFormPr
       {role === "RESEARCHER" ? (
         <>
           <div>
-            <label className={labelClass}>Profile photo</label>
+            <label className={labelClass}>Avatar</label>
             <input type="hidden" name="image" value={avatarUrl} />
-            <FileUpload
-              accept="image/jpeg,image/png,image/gif,image/webp"
-              maxSize={5 * 1024 * 1024}
+            <AvatarPicker
+              selected={avatarUrl}
               onChange={setAvatarUrl}
             />
+            <div className="mt-3">
+              <p className="text-xs text-text-tertiary mb-2">Or upload a photo:</p>
+              <FileUpload
+                accept="image/jpeg,image/png,image/gif,image/webp"
+                maxSize={5 * 1024 * 1024}
+                onChange={setAvatarUrl}
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -213,13 +221,20 @@ export function ProfileSettingsForm({ role, initialData }: ProfileSettingsFormPr
       ) : (
         <>
           <div>
-            <label className={labelClass}>Profile photo</label>
+            <label className={labelClass}>Avatar</label>
             <input type="hidden" name="image" value={avatarUrl} />
-            <FileUpload
-              accept="image/jpeg,image/png,image/gif,image/webp"
-              maxSize={5 * 1024 * 1024}
+            <AvatarPicker
+              selected={avatarUrl}
               onChange={setAvatarUrl}
             />
+            <div className="mt-3">
+              <p className="text-xs text-text-tertiary mb-2">Or upload a logo:</p>
+              <FileUpload
+                accept="image/jpeg,image/png,image/gif,image/webp"
+                maxSize={5 * 1024 * 1024}
+                onChange={setAvatarUrl}
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
