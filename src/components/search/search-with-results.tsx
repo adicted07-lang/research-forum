@@ -204,7 +204,7 @@ export function SearchWithResults() {
                     const avatar = u.image || u.companyLogo;
                     const href = u.role === "COMPANY"
                       ? `/company/${u.username}`
-                      : `/user/${u.username}`;
+                      : `/@${u.username}`;
                     return (
                       <a
                         key={u.id}
