@@ -62,7 +62,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
     .toUpperCase();
 
   const actionMap: Record<string, () => void> = {
-    profile: () => router.push(`/@${user.username || ""}`),
+    profile: () => router.push(`/profile/${user.username || ""}`),
     dashboard: () => router.push("/dashboard"),
     settings: () => router.push("/settings"),
     notifications: () => router.push("/dashboard"),

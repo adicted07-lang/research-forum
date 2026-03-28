@@ -187,8 +187,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                       const displayName = u.name || u.companyName || u.username || "User";
                       const avatar = u.image || u.companyLogo;
                       const href = u.role === "COMPANY"
-                        ? `/company/${u.username}`
-                        : `/@${u.username}`;
+                        ? `/profile/${u.username}`
+                        : `/profile/${u.username}`;
                       return (
                         <Link
                           key={u.id}

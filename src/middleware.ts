@@ -1,31 +1,30 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// All known top-level routes — these should NOT be treated as usernames
-const RESERVED_ROUTES = new Set([
-  "admin", "api", "forum", "hire", "marketplace", "news", "search",
-  "settings", "dashboard", "messages", "leaderboard", "researchers",
-  "advertise", "datasets", "grants", "office-hours", "projects",
-  "preview", "reactivate", "login", "signup", "user", "company",
-  "_next", "favicon.ico", "uploads",
-]);
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Handle /@username → /user/username
+  // /@username → /profile/username
   if (pathname.startsWith("/@")) {
-    const username = pathname.slice(2); // remove "/@"
+    const username = pathname.slice(2);
     const url = request.nextUrl.clone();
-    url.pathname = `/user/${username}`;
+    url.pathname = `/profile/${username}`;
     return NextResponse.redirect(url, 301);
   }
 
-  // Handle /profile/username → /user/username
-  if (pathname.startsWith("/profile/")) {
-    const username = pathname.slice(9); // remove "/profile/"
+  // /user/username → /profile/username
+  if (pathname.startsWith("/user/")) {
+    const username = pathname.slice(6);
     const url = request.nextUrl.clone();
-    url.pathname = `/user/${username}`;
+    url.pathname = `/profile/${username}`;
+    return NextResponse.redirect(url, 301);
+  }
+
+  // /company/username → /profile/username
+  if (pathname.startsWith("/company/")) {
+    const username = pathname.slice(9);
+    const url = request.nextUrl.clone();
+    url.pathname = `/profile/${username}`;
     return NextResponse.redirect(url, 301);
   }
 
@@ -33,5 +32,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/@:path*", "/profile/:path*"],
+  matcher: ["/@:path*", "/user/:path*", "/company/:path*"],
 };

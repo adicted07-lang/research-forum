@@ -35,7 +35,7 @@ function availabilityClass(availability: string | null): string {
 
 export function ResearcherCard({ researcher }: ResearcherCardProps) {
   const displayName = researcher.name ?? researcher.username ?? "Researcher";
-  const profileHref = researcher.username ? `/@${researcher.username}` : "#";
+  const profileHref = researcher.username ? `/profile/${researcher.username}` : "#";
 
   return (
     <div className="bg-white border border-border-light rounded-lg p-5 hover:border-primary/40 hover:shadow-sm transition-all dark:bg-surface-dark dark:border-border-dark-light">

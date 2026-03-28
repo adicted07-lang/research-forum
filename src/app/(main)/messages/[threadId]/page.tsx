@@ -70,7 +70,7 @@ export default async function ThreadPage({ params }: ThreadPageProps) {
             </p>
             {otherUsername && (
               <Link
-                href={`/@${otherUsername}`}
+                href={`/profile/${otherUsername}`}
                 className="text-xs text-primary hover:underline"
               >
                 @{otherUsername}

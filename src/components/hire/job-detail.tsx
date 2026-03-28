@@ -93,7 +93,7 @@ export async function JobDetail({ job }: JobDetailProps) {
                 {job.title}
               </h1>
               <Link
-                href={job.company.username ? `/@${job.company.username}` : "#"}
+                href={job.company.username ? `/profile/${job.company.username}` : "#"}
                 className="text-sm text-primary hover:underline mt-0.5 block"
               >
                 {displayName}
