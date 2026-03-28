@@ -87,15 +87,20 @@ export default async function HomePage() {
     // Auth/DB not available
   }
 
-  // Fetch all data in parallel for speed
-  const [followedTags, questions, listings, jobs, articles, bannerAd] = await Promise.all([
-    (session?.user?.id ? getFollowedTags() : Promise.resolve([])).catch(() => [] as string[]),
-    getQuestions({ sort: "trending", limit: 4 }).then(r => r.questions).catch(() => [] as any[]),
-    getListings({ sort: "trending", limit: 4 }).catch(() => [] as any[]),
-    getJobs({ sort: "newest", limit: 3 }).catch(() => [] as any[]),
-    getArticles({ sort: "latest", limit: 3 }).then(r => r.articles).catch(() => [] as any[]),
-    getActiveBannerAd().catch(() => null),
-  ]);
+  // Fetch data sequentially (Neon HTTP adapter doesn't support concurrent queries well)
+  let followedTags: string[] = [];
+  let questions: any[] = [];
+  let listings: any[] = [];
+  let jobs: any[] = [];
+  let articles: any[] = [];
+  let bannerAd: any = null;
+
+  try { followedTags = session?.user?.id ? await getFollowedTags() : []; } catch {}
+  try { questions = (await getQuestions({ sort: "trending", limit: 4 })).questions; } catch {}
+  try { listings = await getListings({ sort: "trending", limit: 4 }); } catch {}
+  try { jobs = await getJobs({ sort: "newest", limit: 3 }); } catch {}
+  try { articles = (await getArticles({ sort: "latest", limit: 3 })).articles; } catch {}
+  try { bannerAd = await getActiveBannerAd(); } catch {}
 
   return (
     <PageLayout
