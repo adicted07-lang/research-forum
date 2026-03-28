@@ -5,20 +5,23 @@ import {
   FlaskConical,
   Wrench,
   Briefcase,
-  Mic,
-  Hand,
+  CircleHelp,
+  BookOpen,
+  Lightbulb,
   Megaphone,
 } from "lucide-react";
 import { FORUM_CATEGORIES } from "@/lib/validations/forum";
 
+const iconClass = "w-5 h-5 text-text-primary dark:text-text-dark-primary stroke-[1.5]";
+
 const categoryIcons: Record<string, React.ReactNode> = {
-  "General Discussion": <MessageSquare className="w-4 h-4 text-blue-500" />,
-  "Research Methodologies": <FlaskConical className="w-4 h-4 text-purple-500" />,
-  "Services and Tools": <Wrench className="w-4 h-4 text-orange-500" />,
-  "Hiring": <Briefcase className="w-4 h-4 text-green-500" />,
-  "AMA": <Mic className="w-4 h-4 text-red-500" />,
-  "Introduce Yourself": <Hand className="w-4 h-4 text-yellow-500" />,
-  "Self-Promotion": <Megaphone className="w-4 h-4 text-teal-500" />,
+  "General Discussion": <MessageSquare className={iconClass} />,
+  "Research Methodologies": <FlaskConical className={iconClass} />,
+  "Services and Tools": <Wrench className={iconClass} />,
+  "Hiring": <Briefcase className={iconClass} />,
+  "AMA": <CircleHelp className={iconClass} />,
+  "Introduce Yourself": <BookOpen className={iconClass} />,
+  "Self-Promotion": <Lightbulb className={iconClass} />,
 };
 
 export function ForumSidebar() {
@@ -41,9 +44,9 @@ export function ForumSidebar() {
           <li>
             <Link
               href="/forum"
-              className="flex items-center gap-2.5 px-2 py-1.5 text-sm text-text-secondary dark:text-text-dark-secondary hover:text-primary hover:bg-primary-lighter rounded-md transition-colors"
+              className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-text-secondary dark:text-text-dark-secondary hover:text-primary hover:bg-primary-lighter rounded-md transition-colors"
             >
-              <LayoutGrid className="w-4 h-4 text-text-tertiary" />
+              <LayoutGrid className={iconClass} />
               All Categories
             </Link>
           </li>
@@ -51,9 +54,9 @@ export function ForumSidebar() {
             <li key={cat}>
               <Link
                 href={`/forum?category=${encodeURIComponent(cat)}`}
-                className="flex items-center gap-2.5 px-2 py-1.5 text-sm text-text-secondary dark:text-text-dark-secondary hover:text-primary hover:bg-primary-lighter rounded-md transition-colors"
+                className="flex items-center gap-3 px-2 py-2 text-sm font-medium text-text-secondary dark:text-text-dark-secondary hover:text-primary hover:bg-primary-lighter rounded-md transition-colors"
               >
-                {categoryIcons[cat] ?? <MessageSquare className="w-4 h-4 text-text-tertiary" />}
+                {categoryIcons[cat] ?? <MessageSquare className={iconClass} />}
                 {cat}
               </Link>
             </li>
