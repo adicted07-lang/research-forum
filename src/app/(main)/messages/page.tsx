@@ -45,7 +45,7 @@ export default async function MessagesPage() {
 
       {threads.length > 0 ? (
         <div className="space-y-2">
-          {threads.map((thread) => {
+          {threads.map((thread: any) => {
             const isParticipant1 = thread.participant1 === currentUserId;
             const other = isParticipant1 ? thread.user2 : thread.user1;
             const otherName =

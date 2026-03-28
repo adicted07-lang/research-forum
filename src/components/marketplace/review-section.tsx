@@ -77,7 +77,7 @@ export async function ReviewSection({ targetType, targetId }: ReviewSectionProps
         </p>
       ) : (
         <div className="space-y-4">
-          {reviews.map((review) => {
+          {reviews.map((review: any) => {
             const reviewerName =
               review.reviewer.name ?? review.reviewer.username ?? "Anonymous";
             return (
@@ -106,7 +106,7 @@ export async function ReviewSection({ targetType, targetId }: ReviewSectionProps
                 </p>
                 {review.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5">
-                    {review.tags.map((tag) => (
+                    {review.tags.map((tag: any) => (
                       <BadgePill key={tag} label={tag} variant="primary" />
                     ))}
                   </div>

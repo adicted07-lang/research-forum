@@ -30,7 +30,7 @@ export async function getRecentContacts(limit = 4): Promise<DockContact[]> {
       take: limit,
     });
 
-    return threads.map((t) => {
+    return threads.map((t: any) => {
       const other = t.participant1 === userId ? t.user2 : t.user1;
       return {
         id: other.id,

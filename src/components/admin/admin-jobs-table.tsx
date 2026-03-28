@@ -79,7 +79,7 @@ export async function AdminJobsTable({
                   </td>
                 </tr>
               ) : (
-                jobs.map((job) => (
+                jobs.map((job: any) => (
                   <tr
                     key={job.id}
                     className="hover:bg-muted/20 transition-colors"

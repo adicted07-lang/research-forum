@@ -58,7 +58,7 @@ export async function getMyProjects() {
       },
       orderBy: { joinedAt: "desc" },
     });
-    return { projects: memberships.map((m) => ({ ...m.project, myRole: m.role })) };
+    return { projects: memberships.map((m: any) => ({ ...m.project, myRole: m.role })) };
   } catch {
     return { projects: [] };
   }

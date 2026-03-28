@@ -30,7 +30,7 @@ export async function ModerationQueue({ page = 1 }: ModerationQueueProps) {
 
   return (
     <div className="space-y-4">
-      {articles.map((article) => (
+      {articles.map((article: any) => (
         <div
           key={article.id}
           className="bg-white dark:bg-[#13131A] border border-border rounded-xl p-5"

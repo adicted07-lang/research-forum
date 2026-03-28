@@ -53,11 +53,11 @@ export async function getSuspiciousAccounts() {
     });
 
     const suspicious = newUsers
-      .map((user) => {
+      .map((user: any) => {
         const allContent = [
-          ...user.questions.map((q) => q.body),
-          ...user.answers.map((a) => a.body),
-          ...user.articles.map((a) => a.body),
+          ...user.questions.map((q: any) => q.body),
+          ...user.answers.map((a: any) => a.body),
+          ...user.articles.map((a: any) => a.body),
         ];
 
         const postCount =

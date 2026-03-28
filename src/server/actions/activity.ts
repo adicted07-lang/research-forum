@@ -33,9 +33,9 @@ export async function getUserActivity(userId: string, limit = 20): Promise<Activ
     ]);
 
     const items: ActivityItem[] = [
-      ...questions.map((q) => ({ type: "question" as const, title: `Asked: ${q.title}`, url: `/forum/${q.slug}`, createdAt: q.createdAt })),
-      ...answers.map((a) => ({ type: "answer" as const, title: `Answered: ${a.question.title}`, url: `/forum/${a.question.slug}`, createdAt: a.createdAt })),
-      ...articles.map((a) => ({ type: "article" as const, title: `Published: ${a.title}`, url: `/news/${a.slug}`, createdAt: a.createdAt })),
+      ...questions.map((q: any) => ({ type: "question" as const, title: `Asked: ${q.title}`, url: `/forum/${q.slug}`, createdAt: q.createdAt })),
+      ...answers.map((a: any) => ({ type: "answer" as const, title: `Answered: ${a.question.title}`, url: `/forum/${a.question.slug}`, createdAt: a.createdAt })),
+      ...articles.map((a: any) => ({ type: "article" as const, title: `Published: ${a.title}`, url: `/news/${a.slug}`, createdAt: a.createdAt })),
     ];
 
     items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());

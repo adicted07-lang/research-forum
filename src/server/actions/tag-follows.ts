@@ -34,7 +34,7 @@ export async function getFollowedTags(): Promise<string[]> {
       select: { tag: true },
       orderBy: { createdAt: "desc" },
     });
-    return follows.map((f) => f.tag);
+    return follows.map((f: any) => f.tag);
   } catch {
     return [];
   }

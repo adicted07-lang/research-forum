@@ -93,7 +93,7 @@ export async function ListingGrid({
       {listings.length > 0 ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {listings.map((listing) => (
+            {listings.map((listing: any) => (
               <ListingCard key={listing.id} listing={listing} />
             ))}
           </div>

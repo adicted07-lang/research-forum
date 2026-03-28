@@ -75,7 +75,7 @@ export default async function AdminSpamPage() {
                   </td>
                 </tr>
               ) : (
-                accounts.map((account) => (
+                accounts.map((account: any) => (
                   <tr
                     key={account.id}
                     className="hover:bg-muted/20 transition-colors"

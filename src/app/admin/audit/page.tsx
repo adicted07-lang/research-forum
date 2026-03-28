@@ -36,7 +36,7 @@ export default async function AdminAuditPage({
   const { logs } = result;
 
   // Collect unique action types for filtering
-  const actionTypes = Array.from(new Set(logs.map((l) => l.action))).sort();
+  const actionTypes = Array.from(new Set(logs.map((l: any) => l.action))).sort();
   const filterAction = params.action ?? "";
   const filtered = filterAction
     ? logs.filter((l) => l.action === filterAction)
@@ -57,7 +57,7 @@ export default async function AdminAuditPage({
           className="text-sm border border-border rounded-lg px-3 py-2 bg-background text-foreground"
         >
           <option value="">All actions</option>
-          {actionTypes.map((a) => (
+          {actionTypes.map((a: any) => (
             <option key={a} value={a}>
               {a}
             </option>
@@ -104,7 +104,7 @@ export default async function AdminAuditPage({
                   </td>
                 </tr>
               ) : (
-                filtered.map((log) => (
+                filtered.map((log: any) => (
                   <tr
                     key={log.id}
                     className="hover:bg-muted/20 transition-colors"

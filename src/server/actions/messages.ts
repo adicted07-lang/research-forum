@@ -199,7 +199,7 @@ export async function getUnreadMessageCount() {
       select: { id: true },
     });
 
-    const threadIds = threads.map((t) => t.id);
+    const threadIds = threads.map((t: any) => t.id);
 
     const count = await db.message.count({
       where: {

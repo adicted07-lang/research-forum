@@ -69,7 +69,7 @@ export default async function QuestionDetailPage({
   // Fetch comments for all answers
   const answerCommentsMap: Record<string, typeof questionComments> = {};
   await Promise.all(
-    question.answers.map(async (answer) => {
+    question.answers.map(async (answer: any) => {
       const result = await getComments("ANSWER", answer.id);
       answerCommentsMap[answer.id] =
         "comments" in result && result.comments ? result.comments : [];
@@ -111,7 +111,7 @@ export default async function QuestionDetailPage({
               {question.answers.length === 1 ? "Answer" : "Answers"}
             </h2>
             <div className="space-y-4">
-              {question.answers.map((answer) => {
+              {question.answers.map((answer: any) => {
                 const answerComments = answerCommentsMap[answer.id] ?? [];
 
                 return (

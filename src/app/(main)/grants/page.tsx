@@ -33,7 +33,7 @@ export default async function GrantsPage({
         />
       ) : (
         <div className="space-y-3">
-          {grants.map((grant) => (
+          {grants.map((grant: any) => (
             <GrantCard key={grant.id} grant={grant} />
           ))}
         </div>

@@ -80,7 +80,7 @@ export async function AdminListingsTable({
                   </td>
                 </tr>
               ) : (
-                listings.map((listing) => (
+                listings.map((listing: any) => (
                   <tr
                     key={listing.id}
                     className="hover:bg-muted/20 transition-colors"

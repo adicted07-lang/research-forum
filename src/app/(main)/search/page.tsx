@@ -87,7 +87,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                     <span className="text-xs text-text-tertiary">({results.questions.length})</span>
                   </div>
                   <div className="space-y-2">
-                    {results.questions.map((q) => (
+                    {results.questions.map((q: any) => (
                       <Link
                         key={q.id}
                         href={`/forum/${q.slug}`}
@@ -116,7 +116,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                     <span className="text-xs text-text-tertiary">({results.listings.length})</span>
                   </div>
                   <div className="space-y-2">
-                    {results.listings.map((l) => (
+                    {results.listings.map((l: any) => (
                       <Link
                         key={l.id}
                         href={`/marketplace/${l.slug}`}
@@ -150,7 +150,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                     <span className="text-xs text-text-tertiary">({results.articles.length})</span>
                   </div>
                   <div className="space-y-2">
-                    {results.articles.map((a) => (
+                    {results.articles.map((a: any) => (
                       <Link
                         key={a.id}
                         href={`/news/${a.slug}`}
@@ -183,7 +183,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                     <span className="text-xs text-text-tertiary">({results.users.length})</span>
                   </div>
                   <div className="space-y-2">
-                    {results.users.map((u) => {
+                    {results.users.map((u: any) => {
                       const displayName = u.name || u.companyName || u.username || "User";
                       const avatar = u.image || u.companyLogo;
                       const href = u.role === "COMPANY"
@@ -225,7 +225,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                     <span className="text-xs text-text-tertiary">({results.jobs.length})</span>
                   </div>
                   <div className="space-y-2">
-                    {results.jobs.map((j) => (
+                    {results.jobs.map((j: any) => (
                       <Link
                         key={j.id}
                         href={`/hire/${j.slug}`}

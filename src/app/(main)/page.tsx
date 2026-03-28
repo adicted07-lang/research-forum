@@ -133,7 +133,7 @@ export default async function HomePage() {
                 Your Tags
               </h3>
               <div className="flex flex-wrap gap-2">
-                {followedTags.map((tag) => (
+                {followedTags.map((tag: any) => (
                   <TagFollowButton key={tag} tag={tag} initialFollowing={true} />
                 ))}
               </div>
@@ -144,7 +144,7 @@ export default async function HomePage() {
               Trending Topics
             </h3>
             <div className="flex flex-wrap gap-2">
-              {POPULAR_TAGS.map((tag) =>
+              {POPULAR_TAGS.map((tag: any) =>
                 session?.user?.id ? (
                   <TagFollowButton
                     key={tag}
@@ -190,7 +190,7 @@ export default async function HomePage() {
         <SectionHeader title="Trending Questions" href="/forum" />
         {questions.length > 0 ? (
           <div className="space-y-3">
-            {questions.map((q) => (
+            {questions.map((q: any) => (
               <QuestionCard key={q.id} question={q} />
             ))}
           </div>
@@ -207,7 +207,7 @@ export default async function HomePage() {
         <SectionHeader title="Top Services & Tools" href="/marketplace" />
         {listings.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {listings.map((listing) => (
+            {listings.map((listing: any) => (
               <ListingCard key={listing.id} listing={listing} />
             ))}
           </div>
@@ -224,7 +224,7 @@ export default async function HomePage() {
         <SectionHeader title="Hire a Researcher" href="/hire" />
         {jobs.length > 0 ? (
           <div className="space-y-3">
-            {jobs.map((job) => (
+            {jobs.map((job: any) => (
               <JobCard key={job.id} job={job} />
             ))}
           </div>
@@ -246,7 +246,7 @@ export default async function HomePage() {
             )}
             {articles.length > 1 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {articles.slice(1).map((article) => (
+                {articles.slice(1).map((article: any) => (
                   <ArticleCard key={article.id} article={article} variant="default" />
                 ))}
               </div>

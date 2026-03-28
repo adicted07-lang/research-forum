@@ -60,7 +60,7 @@ export async function getInviteCodes() {
 
   return {
     success: true,
-    codes: codes.map((c) => ({
+    codes: codes.map((c: any) => ({
       id: c.id,
       code: c.code,
       createdBy: c.creator.name ?? c.creator.email,

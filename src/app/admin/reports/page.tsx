@@ -74,7 +74,7 @@ export default async function AdminReportsPage() {
                   </td>
                 </tr>
               ) : (
-                reports.map((report) => (
+                reports.map((report: any) => (
                   <tr
                     key={report.id}
                     className="hover:bg-muted/20 transition-colors"

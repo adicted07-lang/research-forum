@@ -60,7 +60,7 @@ export default async function LeaderboardPage() {
           />
         ) : (
           <div className="space-y-2">
-            {users.map((user, index) => {
+            {users.map((user: any, index: number) => {
               const rank = index + 1;
               const rowClass = rankRowClass[rank] ?? "border-border-light dark:border-border-dark-light";
               const numClass = rankNumClass[rank] ?? "text-text-tertiary dark:text-text-dark-tertiary";

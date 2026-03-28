@@ -28,7 +28,7 @@ export async function AdminCampaignsTable() {
 
   return (
     <div className="grid grid-cols-1 gap-4">
-      {campaigns.map((campaign) => (
+      {campaigns.map((campaign: any) => (
         <div
           key={campaign.id}
           className="bg-white dark:bg-[#13131A] border border-border rounded-xl p-5"

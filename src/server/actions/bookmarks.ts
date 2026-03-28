@@ -75,7 +75,7 @@ export async function getUserBookmarks() {
     });
 
     const results = await Promise.all(
-      bookmarks.map(async (bm) => {
+      bookmarks.map(async (bm: any) => {
         let title = "";
         let url = "";
 

@@ -93,7 +93,7 @@ export async function UserTable({ search, role, page = 1 }: UserTableProps) {
                   </td>
                 </tr>
               ) : (
-                users.map((user) => (
+                users.map((user: any) => (
                   <tr key={user.id} className="hover:bg-muted/20 transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3 min-w-0">

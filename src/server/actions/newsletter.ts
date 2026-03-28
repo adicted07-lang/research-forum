@@ -85,7 +85,7 @@ export async function sendNewsletter(type: string, subject: string, body: string
     });
 
     const emails = subscribers
-      .map((s) => s.user.email)
+      .map((s: any) => s.user.email)
       .filter((e): e is string => !!e);
 
     for (const email of emails) {
