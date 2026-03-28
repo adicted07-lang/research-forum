@@ -87,49 +87,15 @@ export default async function HomePage() {
     // Auth/DB not available
   }
 
-  let followedTags: string[] = [];
-  try {
-    followedTags = session?.user?.id ? await getFollowedTags() : [];
-  } catch {
-    // DB not available
-  }
-
-  let questions: Awaited<ReturnType<typeof getQuestions>>["questions"] = [];
-  try {
-    const result = await getQuestions({ sort: "trending", limit: 4 });
-    questions = result.questions;
-  } catch {
-    // Database not connected yet — show empty state
-  }
-
-  let listings: Awaited<ReturnType<typeof getListings>> = [];
-  try {
-    listings = await getListings({ sort: "trending", limit: 4 });
-  } catch {
-    // Database not connected yet — show empty state
-  }
-
-  let jobs: Awaited<ReturnType<typeof getJobs>> = [];
-  try {
-    jobs = await getJobs({ sort: "newest", limit: 3 });
-  } catch {
-    // Database not connected yet — show empty state
-  }
-
-  let articles: Awaited<ReturnType<typeof getArticles>>["articles"] = [];
-  try {
-    const articlesResult = await getArticles({ sort: "latest", limit: 3 });
-    articles = articlesResult.articles;
-  } catch {
-    // Database not connected yet — show empty state
-  }
-
-  let bannerAd: Awaited<ReturnType<typeof getActiveBannerAd>> = null;
-  try {
-    bannerAd = await getActiveBannerAd();
-  } catch {
-    // Ads not available — show nothing
-  }
+  // Fetch all data in parallel for speed
+  const [followedTags, questions, listings, jobs, articles, bannerAd] = await Promise.all([
+    (session?.user?.id ? getFollowedTags() : Promise.resolve([])).catch(() => [] as string[]),
+    getQuestions({ sort: "trending", limit: 4 }).then(r => r.questions).catch(() => [] as any[]),
+    getListings({ sort: "trending", limit: 4 }).catch(() => [] as any[]),
+    getJobs({ sort: "newest", limit: 3 }).catch(() => [] as any[]),
+    getArticles({ sort: "latest", limit: 3 }).then(r => r.articles).catch(() => [] as any[]),
+    getActiveBannerAd().catch(() => null),
+  ]);
 
   return (
     <PageLayout
