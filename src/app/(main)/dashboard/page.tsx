@@ -122,7 +122,7 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
 
         {applications.length > 0 ? (
           <div className="space-y-3">
-            {applications.map((app) => {
+            {applications.map((app: any) => {
               const companyName =
                 app.job.company.companyName ?? app.job.company.username ?? "Company";
               return (
