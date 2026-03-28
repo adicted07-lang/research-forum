@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { MenuBar, type MenuBarItem } from "@/components/ui/bottom-menu";
 import {
   MessageSquare,
