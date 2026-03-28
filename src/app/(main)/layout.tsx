@@ -19,8 +19,6 @@ export default async function MainLayout({ children }: { children: React.ReactNo
       <Navbar1 />
       <main className="min-h-screen pb-20 lg:pb-0">{children}</main>
       <Footer />
-      <QuickDMDock />
-      <MobileBottomNav />
     </>
   );
 }
