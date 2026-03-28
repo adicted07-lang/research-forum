@@ -1,0 +1,174 @@
+"use client";
+
+import Link from "next/link";
+import {
+  Globe,
+  ExternalLink,
+  Mail,
+  MessageSquare,
+  BookOpen,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+const footerConfig = {
+  description:
+    "ResearchHub is a professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
+  contact: {
+    email: "support@researchhub.com",
+  },
+  socials: [
+    { icon: Globe, href: "#", label: "Website" },
+    { icon: ExternalLink, href: "#", label: "Twitter" },
+    { icon: BookOpen, href: "#", label: "Blog" },
+    { icon: MessageSquare, href: "/forum", label: "Forum" },
+    { icon: Mail, href: "mailto:support@researchhub.com", label: "Email" },
+  ],
+  columns: [
+    {
+      title: "Community",
+      links: [
+        { label: "Forum", href: "/forum" },
+        { label: "Ask a Question", href: "/forum/new" },
+        { label: "Leaderboard", href: "/leaderboard" },
+        { label: "Researchers", href: "/researchers" },
+        { label: "News & Articles", href: "/news" },
+      ],
+    },
+    {
+      title: "Marketplace",
+      links: [
+        { label: "Browse Services", href: "/marketplace?type=SERVICE" },
+        { label: "Browse Tools", href: "/marketplace?type=TOOL" },
+        { label: "List a Service", href: "/marketplace/new" },
+        { label: "Datasets", href: "/datasets" },
+      ],
+    },
+    {
+      title: "Hiring",
+      links: [
+        { label: "Browse Jobs", href: "/hire" },
+        { label: "Post a Job", href: "/hire/new" },
+        { label: "Research Grants", href: "/grants" },
+        { label: "Office Hours", href: "/office-hours" },
+      ],
+    },
+    {
+      title: "Platform",
+      links: [
+        { label: "Projects", href: "/projects" },
+        { label: "Dashboard", href: "/dashboard" },
+        { label: "Settings", href: "/settings" },
+        { label: "Messages", href: "/messages" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { label: "Privacy Policy", href: "#" },
+        { label: "Terms of Service", href: "#" },
+        { label: "Cookie Policy", href: "#" },
+      ],
+    },
+  ],
+};
+
+export default function Footer() {
+  return (
+    <footer className="bg-white dark:bg-[#0F0F13] text-text-primary dark:text-text-dark-primary px-6 py-14 border-t border-border dark:border-border-dark">
+      <div className="max-w-[1280px] mx-auto">
+        {/* Top Section: Logo and Description */}
+        <div className="mb-12">
+          <Link href="/" className="flex items-center gap-2.5 mb-6">
+            <div className="w-9 h-9 bg-primary rounded-[10px] flex items-center justify-center text-white font-bold text-lg shadow-[0_2px_8px_rgba(218,85,47,0.3)]">
+              R
+            </div>
+            <span className="text-xl font-bold tracking-tight">
+              ResearchHub
+            </span>
+          </Link>
+          <p className="text-sm text-text-secondary dark:text-text-dark-secondary leading-relaxed max-w-2xl">
+            {footerConfig.description}
+          </p>
+        </div>
+
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-10">
+          {/* Left Side: Links */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 flex-1">
+            {footerConfig.columns.map((col, idx) => (
+              <div key={idx}>
+                <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">
+                  {col.title}
+                </h3>
+                <ul className="space-y-2">
+                  {col.links.map((link, i) => (
+                    <li key={i}>
+                      <Link
+                        href={link.href}
+                        className="text-[0.85rem] text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Side: CTA and Quick Links */}
+          <div className="lg:w-1/4">
+            <Card className="shadow-none border-none bg-transparent mb-4">
+              <CardContent className="p-0 space-y-3">
+                <p className="text-sm font-semibold text-text-primary dark:text-text-dark-primary">
+                  For Companies & Universities
+                </p>
+                <p className="text-xs text-text-secondary dark:text-text-dark-secondary">
+                  Post research jobs, find expert researchers, and accelerate your projects.
+                </p>
+                <Link href="/signup/company">
+                  <Button variant="outline" className="w-full mt-2">
+                    Join as a Company
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-none border-none bg-transparent">
+              <CardContent className="p-0">
+                {/* Social Links */}
+                <div className="pt-3 border-t border-border dark:border-border-dark">
+                  <p className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">
+                    Follow Us
+                  </p>
+                  <div className="flex gap-3">
+                    {footerConfig.socials.map(({ icon: Icon, href, label }, idx) => (
+                      <Link
+                        key={idx}
+                        href={href}
+                        className="p-2 rounded-md text-text-tertiary hover:text-primary hover:bg-surface dark:hover:bg-surface-dark transition-colors"
+                        aria-label={label}
+                      >
+                        <Icon className="w-4 h-4" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="mt-12 pt-6 border-t border-border dark:border-border-dark flex flex-col md:flex-row justify-between items-center text-xs text-text-tertiary dark:text-text-dark-tertiary gap-4">
+          <p>&copy; {new Date().getFullYear()} ResearchHub. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
+            <Link href="#" className="hover:text-primary transition-colors">Terms</Link>
+            <Link href="#" className="hover:text-primary transition-colors">Sitemap</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
