@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-dynamic";
 
 import { useState, useTransition } from "react";
 import { generateInviteCode, getInviteCodes } from "@/server/actions/invite-codes";

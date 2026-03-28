@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { PageLayout } from "@/components/layout/page-layout";
 import { JobForm } from "@/components/hire/job-form";
