@@ -19,7 +19,19 @@ export async function loginAction(formData: FormData): Promise<AuthActionResult>
   try {
     await signIn("credentials", { email: parsed.data.email, password: parsed.data.password, redirect: false });
     return { success: true };
-  } catch {
+  } catch (error: unknown) {
+    // NextAuth/Next.js throws redirect errors on successful sign-in — re-throw those
+    const err = error as { digest?: string; message?: string };
+    if (err?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+    // AuthError from next-auth has a `type` property
+    const authErr = error as { type?: string };
+    if (authErr?.type === "CredentialsSignin") {
+      return { error: "Invalid email or password" };
+    }
+    // Unknown error — could still be auth success with unexpected throw
+    console.error("Login error:", error);
     return { error: "Invalid email or password" };
   }
 }

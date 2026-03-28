@@ -26,7 +26,7 @@ const TooltipAvatar = ({ item }: { item: TooltipItem }) => {
     <div className="group relative">
       <motion.div
         style={{ translateX, rotate }}
-        className="pointer-events-none absolute -top-16 left-1/2 hidden -translate-x-1/2 flex-col items-center rounded-md bg-primary px-4 py-2 text-xs shadow-xl group-hover:flex"
+        className="pointer-events-none absolute -top-16 left-1/2 z-50 hidden -translate-x-1/2 flex-col items-center rounded-md bg-primary px-4 py-2 text-xs shadow-xl group-hover:flex"
       >
         <p className="whitespace-nowrap text-sm font-medium text-white">
           {item.name}
