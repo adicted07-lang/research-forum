@@ -1,37 +1,22 @@
 import { PrismaClient } from "@prisma/client";
-import { Pool, neonConfig } from "@neondatabase/serverless";
-import { PrismaNeon } from "@prisma/adapter-neon";
-
-// Set up WebSocket for non-edge environments
-if (typeof globalThis.WebSocket === "undefined") {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    neonConfig.webSocketConstructor = require("ws");
-  } catch {
-    // ws not available (edge runtime)
-  }
-}
+import { neon } from "@neondatabase/serverless";
+import { PrismaNeonHttp } from "@prisma/adapter-neon";
 
 function createPrismaClient() {
   const connectionString = process.env.DATABASE_URL || "";
 
-  // Only use Neon adapter if we have a real connection string
-  if (connectionString && !connectionString.includes("localhost")) {
-    try {
-      const pool = new Pool({ connectionString });
-      const adapter = new PrismaNeon(pool as any);
-      return new PrismaClient({
-        adapter,
-        log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-      });
-    } catch {
-      // Fallback
-    }
+  if (connectionString.includes("neon.tech")) {
+    // Use Neon HTTP adapter (no WebSocket needed — works everywhere)
+    const sql = neon(connectionString);
+    const adapter = new PrismaNeonHttp(sql);
+    return new PrismaClient({
+      adapter,
+      log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
+    });
   }
 
-  // Local development or fallback — use PrismaPg
+  // Local development — use PrismaPg
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { PrismaPg } = require("@prisma/adapter-pg");
     const adapter = new PrismaPg({ connectionString });
     return new PrismaClient({
@@ -39,9 +24,7 @@ function createPrismaClient() {
       log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
     });
   } catch {
-    return new PrismaClient({
-      log: ["error"],
-    });
+    return new PrismaClient({ log: ["error"] });
   }
 }
 
