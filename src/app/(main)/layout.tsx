@@ -15,10 +15,8 @@ export default async function MainLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      <AnnouncementBanner announcement={announcement} />
       <Navbar1 />
-      <main className="min-h-screen pb-20 lg:pb-0">{children}</main>
-      <Footer />
+      <main className="min-h-screen">{children}</main>
     </>
   );
 }
