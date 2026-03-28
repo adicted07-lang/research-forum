@@ -23,6 +23,7 @@ import { SearchWithResults } from "@/components/search/search-with-results";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { UnreadMessageBadge } from "@/components/messages/unread-badge";
+import { AuthButtons } from "@/components/ui/auth-buttons";
 
 import {
   Accordion,
@@ -212,12 +213,12 @@ const Navbar1 = ({
             <NotificationBell />
             <UnreadMessageBadge />
             <ThemeToggle />
-            <a href={auth.login.url} className={buttonVariants({ variant: "outline", size: "sm" })}>
-              {auth.login.text}
-            </a>
-            <a href={auth.signup.url} className={buttonVariants({ size: "sm", className: "bg-primary hover:bg-primary/90" })}>
-              {auth.signup.text}
-            </a>
+            <AuthButtons
+              loginUrl={auth.login.url}
+              loginText={auth.login.text}
+              signupUrl={auth.signup.url}
+              signupText={auth.signup.text}
+            />
           </div>
         </nav>
         <div className="block lg:hidden">
@@ -277,12 +278,12 @@ const Navbar1 = ({
                     </div>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <a href={auth.login.url} className={buttonVariants({ variant: "outline", className: "w-full justify-center" })}>
-                      {auth.login.text}
-                    </a>
-                    <a href={auth.signup.url} className={buttonVariants({ className: "w-full justify-center bg-primary hover:bg-primary/90" })}>
-                      {auth.signup.text}
-                    </a>
+                    <AuthButtons
+                      loginUrl={auth.login.url}
+                      loginText={auth.login.text}
+                      signupUrl={auth.signup.url}
+                      signupText={auth.signup.text}
+                    />
                   </div>
                 </div>
               </SheetContent>
