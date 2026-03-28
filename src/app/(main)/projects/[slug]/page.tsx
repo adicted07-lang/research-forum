@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { AddMemberForm } from "@/components/projects/add-member-form";
 import { NewDocumentForm } from "@/components/projects/new-document-form";
 import { getProjectBySlug, getProjectDocuments } from "@/server/actions/projects";
+import { ProjectChatDock } from "@/components/dock/project-chat-dock";
 import { FileText, Lock, Globe } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -181,6 +182,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           )}
         </div>
       </div>
+
+      {/* Team chat dock */}
+      <ProjectChatDock
+        members={project.members.map(m => ({
+          id: m.user.id,
+          name: m.user.name,
+          username: m.user.username,
+          image: m.user.image,
+        }))}
+        currentUserId={session.user.id}
+      />
     </PageLayout>
   );
 }
