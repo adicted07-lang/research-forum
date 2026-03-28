@@ -72,21 +72,16 @@ export function QuestionCard({ question }: QuestionCardProps) {
         {/* Meta row */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Author */}
-          <div className="flex items-center gap-1.5">
+          <Link
+            href={`/profile/${question.author.username ?? ""}`}
+            className="flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+            onClick={(e) => e.stopPropagation()}
+          >
             <UserAvatar name={authorName} src={question.author.image} size="sm" />
-            {question.author.username ? (
-              <Link
-                href={`/profile/${question.author.username}`}
-                className="text-xs text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors"
-              >
-                {authorName}
-              </Link>
-            ) : (
-              <span className="text-xs text-text-secondary dark:text-text-dark-secondary">
-                {authorName}
-              </span>
-            )}
-          </div>
+            <span className="text-xs text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors">
+              {authorName}
+            </span>
+          </Link>
 
           {/* Answer count */}
           <div className="flex items-center gap-1 text-xs text-text-tertiary">
