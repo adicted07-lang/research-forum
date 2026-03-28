@@ -74,9 +74,18 @@ export function QuestionCard({ question }: QuestionCardProps) {
           {/* Author */}
           <div className="flex items-center gap-1.5">
             <UserAvatar name={authorName} src={question.author.image} size="sm" />
-            <span className="text-xs text-text-secondary dark:text-text-dark-secondary">
-              {authorName}
-            </span>
+            {question.author.username ? (
+              <Link
+                href={`/profile/${question.author.username}`}
+                className="text-xs text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors"
+              >
+                {authorName}
+              </Link>
+            ) : (
+              <span className="text-xs text-text-secondary dark:text-text-dark-secondary">
+                {authorName}
+              </span>
+            )}
           </div>
 
           {/* Answer count */}

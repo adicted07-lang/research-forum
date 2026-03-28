@@ -97,10 +97,10 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
 
   if (variant === "featured") {
     return (
-      <Link href={`/news/${article.slug}`} className="block group">
+      <div className="group">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white border border-border-light rounded-xl overflow-hidden hover:shadow-md transition-all duration-200 dark:bg-surface-dark dark:border-border-dark-light">
           {/* Left: Cover image */}
-          <div className="relative h-56 md:h-full min-h-[220px] overflow-hidden">
+          <Link href={`/news/${article.slug}`} className="block relative h-56 md:h-full min-h-[220px] overflow-hidden">
             <CoverGradient
               category={article.category}
               coverImage={article.coverImage}
@@ -112,24 +112,35 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
                 {categoryLabel}
               </span>
             </div>
-          </div>
+          </Link>
 
           {/* Right: Content */}
           <div className="p-6 flex flex-col justify-center">
-            <h2 className="text-xl font-bold text-text-primary dark:text-text-dark-primary group-hover:text-primary transition-colors line-clamp-3 mb-3">
-              {article.title}
-            </h2>
-            <p className="text-sm text-text-secondary dark:text-text-dark-secondary line-clamp-3 mb-4 leading-relaxed">
-              {getExcerpt(article.body, 200)}
-            </p>
+            <Link href={`/news/${article.slug}`} className="block">
+              <h2 className="text-xl font-bold text-text-primary dark:text-text-dark-primary group-hover:text-primary transition-colors line-clamp-3 mb-3">
+                {article.title}
+              </h2>
+              <p className="text-sm text-text-secondary dark:text-text-dark-secondary line-clamp-3 mb-4 leading-relaxed">
+                {getExcerpt(article.body, 200)}
+              </p>
+            </Link>
 
             {/* Author + meta */}
             <div className="flex items-center gap-3 text-xs text-text-tertiary dark:text-text-dark-tertiary">
               <div className="flex items-center gap-1.5">
                 <UserAvatar name={authorName} src={article.author.image} size="sm" />
-                <span className="font-medium text-text-secondary dark:text-text-dark-secondary">
-                  {authorName}
-                </span>
+                {article.author.username ? (
+                  <Link
+                    href={`/profile/${article.author.username}`}
+                    className="font-medium text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors"
+                  >
+                    {authorName}
+                  </Link>
+                ) : (
+                  <span className="font-medium text-text-secondary dark:text-text-dark-secondary">
+                    {authorName}
+                  </span>
+                )}
               </div>
               {dateDisplay && (
                 <div className="flex items-center gap-1">
@@ -146,16 +157,16 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     );
   }
 
   // Default (compact) variant
   return (
-    <Link href={`/news/${article.slug}`} className="block group">
+    <div className="group">
       <div className="bg-white border border-border-light rounded-xl overflow-hidden hover:shadow-sm hover:border-border transition-all duration-200 dark:bg-surface-dark dark:border-border-dark-light dark:hover:border-border-dark">
         {/* Cover image area */}
-        <div className="relative h-36 overflow-hidden">
+        <Link href={`/news/${article.slug}`} className="block relative h-36 overflow-hidden">
           <CoverGradient
             category={article.category}
             coverImage={article.coverImage}
@@ -166,22 +177,33 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
               {categoryLabel}
             </span>
           </div>
-        </div>
+        </Link>
 
         {/* Body */}
         <div className="p-4">
-          <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary group-hover:text-primary transition-colors line-clamp-2 mb-2">
-            {article.title}
-          </h3>
-          <p className="text-xs text-text-secondary dark:text-text-dark-secondary line-clamp-2 mb-3 leading-relaxed">
-            {getExcerpt(article.body, 120)}
-          </p>
+          <Link href={`/news/${article.slug}`} className="block">
+            <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary group-hover:text-primary transition-colors line-clamp-2 mb-2">
+              {article.title}
+            </h3>
+            <p className="text-xs text-text-secondary dark:text-text-dark-secondary line-clamp-2 mb-3 leading-relaxed">
+              {getExcerpt(article.body, 120)}
+            </p>
+          </Link>
 
           {/* Meta */}
           <div className="flex items-center gap-2 text-[11px] text-text-tertiary dark:text-text-dark-tertiary">
             <div className="flex items-center gap-1">
               <UserAvatar name={authorName} src={article.author.image} size="sm" />
-              <span>{authorName}</span>
+              {article.author.username ? (
+                <Link
+                  href={`/profile/${article.author.username}`}
+                  className="hover:text-primary transition-colors"
+                >
+                  {authorName}
+                </Link>
+              ) : (
+                <span>{authorName}</span>
+              )}
             </div>
             {article.readTime != null && (
               <>
@@ -195,6 +217,6 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

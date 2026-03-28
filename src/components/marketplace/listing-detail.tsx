@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ExternalLink, Globe, Mail } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { VoteButton } from "@/components/forum/vote-button";
@@ -73,7 +74,17 @@ export function ListingDetail({ listing }: ListingDetailProps) {
       <div className="flex items-center gap-2 mb-5 pb-5 border-b border-border-light dark:border-border-dark-light">
         <UserAvatar name={authorName} src={listing.author.image} size="sm" />
         <span className="text-sm text-text-secondary dark:text-text-dark-secondary">
-          by <span className="font-medium text-text-primary dark:text-text-dark-primary">{authorName}</span>
+          by{" "}
+          {listing.author.username ? (
+            <Link
+              href={`/profile/${listing.author.username}`}
+              className="font-medium text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors"
+            >
+              {authorName}
+            </Link>
+          ) : (
+            <span className="font-medium text-text-primary dark:text-text-dark-primary">{authorName}</span>
+          )}
         </span>
       </div>
 

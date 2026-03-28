@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
@@ -96,9 +97,18 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <div className="flex items-center gap-3">
             <UserAvatar name={authorName} src={article.author.image} size="lg" />
             <div>
-              <p className="text-sm font-semibold text-text-primary dark:text-text-dark-primary">
-                {authorName}
-              </p>
+              {article.author.username ? (
+                <Link
+                  href={`/profile/${article.author.username}`}
+                  className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors"
+                >
+                  {authorName}
+                </Link>
+              ) : (
+                <p className="text-sm font-semibold text-text-primary dark:text-text-dark-primary">
+                  {authorName}
+                </p>
+              )}
               <div className="flex items-center gap-3 text-xs text-text-tertiary dark:text-text-dark-tertiary mt-0.5">
                 {dateDisplay && (
                   <div className="flex items-center gap-1">

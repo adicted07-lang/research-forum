@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Eye } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
@@ -115,9 +116,18 @@ export function QuestionDetail({ question, currentUserId }: QuestionDetailProps)
                   src={question.author.image}
                   size="sm"
                 />
-                <span className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary">
-                  {authorName}
-                </span>
+                {question.author.username ? (
+                  <Link
+                    href={`/profile/${question.author.username}`}
+                    className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors"
+                  >
+                    {authorName}
+                  </Link>
+                ) : (
+                  <span className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary">
+                    {authorName}
+                  </span>
+                )}
               </div>
               <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
                 {relativeTime(question.createdAt)}

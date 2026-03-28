@@ -90,22 +90,26 @@ export function JobCard({ job }: JobCardProps) {
   const budget = formatBudget(job.budgetMin, job.budgetMax, job.budgetNegotiable);
 
   return (
-    <Link href={`/hire/${job.slug}`} className="block group">
+    <div className="group">
       <div className="bg-white border border-border-light rounded-lg p-5 hover:border-primary/40 hover:shadow-sm transition-all dark:bg-surface-dark dark:border-border-dark-light dark:hover:border-primary/40">
         <div className="flex gap-4">
           {/* Company logo */}
-          <div
-            className={`w-12 h-12 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-lg shrink-0`}
-          >
-            {initial}
-          </div>
+          <Link href={`/hire/${job.slug}`} className="block shrink-0">
+            <div
+              className={`w-12 h-12 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-lg`}
+            >
+              {initial}
+            </div>
+          </Link>
 
           <div className="flex-1 min-w-0">
             {/* Title + badges */}
             <div className="flex items-start justify-between gap-2 flex-wrap">
-              <h3 className="text-base font-semibold text-text-primary dark:text-text-dark-primary group-hover:text-primary transition-colors leading-snug">
-                {job.title}
-              </h3>
+              <Link href={`/hire/${job.slug}`} className="block">
+                <h3 className="text-base font-semibold text-text-primary dark:text-text-dark-primary group-hover:text-primary transition-colors leading-snug">
+                  {job.title}
+                </h3>
+              </Link>
               <div className="flex gap-1.5 flex-wrap shrink-0">
                 <span
                   className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium ${locationBadgeClass(job.locationPreference)}`}
@@ -120,7 +124,16 @@ export function JobCard({ job }: JobCardProps) {
 
             {/* Company name */}
             <p className="text-sm text-text-secondary dark:text-text-dark-secondary mt-0.5">
-              {displayName}
+              {job.company.username ? (
+                <Link
+                  href={`/profile/${job.company.username}`}
+                  className="hover:text-primary transition-colors"
+                >
+                  {displayName}
+                </Link>
+              ) : (
+                displayName
+              )}
             </p>
 
             {/* Details row */}
@@ -158,6 +171,6 @@ export function JobCard({ job }: JobCardProps) {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

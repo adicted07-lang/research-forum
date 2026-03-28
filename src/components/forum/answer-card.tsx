@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CheckCircle } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { VoteButton } from "@/components/forum/vote-button";
@@ -85,9 +86,18 @@ export function AnswerCard({
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2">
             <UserAvatar name={authorName} src={answer.author.image} size="sm" />
-            <span className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary">
-              {authorName}
-            </span>
+            {answer.author.username ? (
+              <Link
+                href={`/profile/${answer.author.username}`}
+                className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors"
+              >
+                {authorName}
+              </Link>
+            ) : (
+              <span className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary">
+                {authorName}
+              </span>
+            )}
             <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
               {relativeTime(answer.createdAt)}
             </span>

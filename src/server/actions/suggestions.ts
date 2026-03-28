@@ -7,6 +7,7 @@ interface SuggestedAnswer {
   questionSlug: string;
   answerExcerpt: string;
   authorName: string;
+  authorUsername: string | null;
   upvoteCount: number;
 }
 
@@ -50,6 +51,7 @@ export async function getSuggestedAnswers(questionId: string, tags: string[], li
           questionSlug: q.slug,
           answerExcerpt: excerpt,
           authorName: answer.author.name ?? answer.author.username ?? "Anonymous",
+          authorUsername: answer.author.username ?? null,
           upvoteCount: answer.upvoteCount,
         };
       });

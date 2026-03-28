@@ -80,7 +80,17 @@ export function DatasetCard({ dataset }: DatasetCardProps) {
       </div>
 
       <p className="text-[11px] text-text-tertiary dark:text-text-dark-tertiary mt-2">
-        by {displayName}
+        by{" "}
+        {dataset.author.username ? (
+          <Link
+            href={`/profile/${dataset.author.username}`}
+            className="hover:text-primary transition-colors"
+          >
+            {displayName}
+          </Link>
+        ) : (
+          displayName
+        )}
         {dataset.size && <span className="ml-1">· {dataset.size}</span>}
       </p>
     </div>

@@ -6,6 +6,7 @@ interface SuggestedAnswer {
   questionSlug: string;
   answerExcerpt: string;
   authorName: string;
+  authorUsername: string | null;
   upvoteCount: number;
 }
 
@@ -22,25 +23,35 @@ export function SuggestedAnswers({ suggestions }: { suggestions: SuggestedAnswer
       </div>
       <div className="space-y-3">
         {suggestions.map((s) => (
-          <Link
+          <div
             key={s.questionSlug}
-            href={`/forum/${s.questionSlug}`}
-            className="block p-3 bg-white dark:bg-surface-dark rounded-lg border border-blue-100 dark:border-blue-900/20 hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
+            className="p-3 bg-white dark:bg-surface-dark rounded-lg border border-blue-100 dark:border-blue-900/20 hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
           >
-            <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary mb-1">
-              {s.questionTitle}
-            </p>
-            <p className="text-xs text-text-secondary dark:text-text-dark-secondary line-clamp-2 mb-2">
-              {s.answerExcerpt}
-            </p>
+            <Link href={`/forum/${s.questionSlug}`} className="block">
+              <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary mb-1">
+                {s.questionTitle}
+              </p>
+              <p className="text-xs text-text-secondary dark:text-text-dark-secondary line-clamp-2 mb-2">
+                {s.answerExcerpt}
+              </p>
+            </Link>
             <div className="flex items-center gap-3 text-xs text-text-tertiary">
-              <span>{s.authorName}</span>
+              {s.authorUsername ? (
+                <Link
+                  href={`/profile/${s.authorUsername}`}
+                  className="hover:text-primary transition-colors"
+                >
+                  {s.authorName}
+                </Link>
+              ) : (
+                <span>{s.authorName}</span>
+              )}
               <span className="flex items-center gap-1">
                 <ThumbsUp className="w-3 h-3" />
                 {s.upvoteCount}
               </span>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { CommentForm } from "@/components/forum/comment-form";
@@ -62,9 +63,18 @@ function CommentItem({
         <UserAvatar name={authorName} src={comment.author.image} size="sm" />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
-            <span className="text-xs font-semibold text-text-primary dark:text-text-dark-primary">
-              {authorName}
-            </span>
+            {comment.author.username ? (
+              <Link
+                href={`/profile/${comment.author.username}`}
+                className="text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors"
+              >
+                {authorName}
+              </Link>
+            ) : (
+              <span className="text-xs font-semibold text-text-primary dark:text-text-dark-primary">
+                {authorName}
+              </span>
+            )}
             <span className="text-[11px] text-text-tertiary dark:text-text-dark-tertiary">
               {relativeTime(comment.createdAt)}
             </span>
