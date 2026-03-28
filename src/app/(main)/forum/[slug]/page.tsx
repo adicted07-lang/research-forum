@@ -76,7 +76,7 @@ export default async function QuestionDetailPage({
     })
   );
 
-  const hasAcceptedAnswer = question.answers.some((a) => a.isAccepted);
+  const hasAcceptedAnswer = question.answers.some((a: any) => a.isAccepted);
 
   const [suggestions, relatedContent] = await Promise.all([
     question.answerCount === 0
