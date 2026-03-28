@@ -1,20 +1,19 @@
 import { PrismaClient } from "@prisma/client";
+import { Pool, neonConfig } from "@neondatabase/serverless";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import ws from "ws";
 
-let prismaAdapter: any = undefined;
-
-// Only use PrismaPg adapter for local development (not serverless)
-if (typeof window === "undefined" && !process.env.VERCEL) {
-  try {
-    const { PrismaPg } = require("@prisma/adapter-pg");
-    prismaAdapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-  } catch {
-    // Adapter not available — use default
-  }
-}
+// Enable WebSocket for Neon in Node.js environments
+neonConfig.webSocketConstructor = ws;
 
 function createPrismaClient() {
+  const connectionString = process.env.DATABASE_URL || "";
+
+  const pool = new Pool({ connectionString });
+  const adapter = new PrismaNeon(pool as any);
+
   return new PrismaClient({
-    ...(prismaAdapter ? { adapter: prismaAdapter } : {}),
+    adapter,
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 }
