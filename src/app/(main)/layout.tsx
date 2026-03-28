@@ -6,7 +6,12 @@ import { AnnouncementBanner } from "@/components/ui/announcement-banner";
 import { getActiveAnnouncement } from "@/server/actions/announcements";
 
 export default async function MainLayout({ children }: { children: React.ReactNode }) {
-  const announcement = await getActiveAnnouncement();
+  let announcement = null;
+  try {
+    announcement = await getActiveAnnouncement();
+  } catch {
+    // DB not available — skip announcement
+  }
 
   return (
     <>
