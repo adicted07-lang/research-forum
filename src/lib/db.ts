@@ -8,7 +8,7 @@ function createPrismaClient() {
   if (connectionString.includes("neon.tech")) {
     // Use Neon HTTP adapter (no WebSocket needed — works everywhere)
     const sql = neon(connectionString);
-    const adapter = new PrismaNeonHttp(sql);
+    const adapter = new (PrismaNeonHttp as any)(sql);
     return new PrismaClient({
       adapter,
       log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],

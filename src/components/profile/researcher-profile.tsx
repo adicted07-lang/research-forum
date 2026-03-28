@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Link from "next/link";
 import {
   BadgeCheck,
   Clock,
@@ -9,6 +9,12 @@ import {
   Globe,
   Link as LinkIcon,
   Calendar,
+  MapPin,
+  Award,
+  Flame,
+  Trophy,
+  HelpCircle,
+  FileText,
 } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
@@ -17,7 +23,6 @@ import { FollowButton } from "@/components/social/follow-button";
 import { isFollowing } from "@/server/actions/follows";
 import { getUserBadges } from "@/server/actions/badges";
 import { auth } from "@/auth";
-import { Award, Flame, Trophy } from "lucide-react";
 import { ActivityFeed } from "@/components/profile/activity-feed";
 import { getReputationTier } from "@/lib/reputation";
 
@@ -70,6 +75,25 @@ const badgeIcons: Record<string, { icon: typeof Award; color: string }> = {
   expertise: { icon: Trophy, color: "text-amber-500" },
 };
 
+const activityDotColors: Record<string, string> = {
+  question: "bg-green-500",
+  answer: "bg-blue-500",
+  article: "bg-purple-500",
+};
+
+function timeAgo(date: Date): string {
+  const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000);
+  if (seconds < 60) return "just now";
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+  const months = Math.floor(days / 30);
+  return `${months}mo ago`;
+}
+
 export async function ResearcherProfile({ profile, activity }: ResearcherProfileProps) {
   const session = await auth();
   const following = session?.user?.id ? await isFollowing(profile.id) : false;
@@ -81,215 +105,247 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
 
   return (
     <div className="w-full">
-      {/* Banner */}
-      <div className="relative h-48 w-full rounded-t-xl overflow-hidden">
-        {profile.banner ? (
-          <Image src={profile.banner} alt="Banner" fill className="object-cover" />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-r from-primary/80 to-warning/60" />
-        )}
-      </div>
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* ===== LEFT SIDEBAR ===== */}
+        <div className="lg:w-[280px] shrink-0">
+          {/* Avatar */}
+          <div className="mb-4">
+            <UserAvatar
+              name={displayName}
+              src={profile.image}
+              size="lg"
+              className="w-[260px] h-[260px] text-6xl mx-auto lg:mx-0 border border-border dark:border-border-dark"
+            />
+          </div>
 
-      {/* Profile header */}
-      <div className="bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-b-xl px-6 pb-6">
-        <div className="flex items-end justify-between -mt-12 mb-4">
-          <div className="relative">
-            {profile.image ? (
-              <div className="w-24 h-24 rounded-full border-4 border-white dark:border-surface-dark overflow-hidden relative">
-                <Image src={profile.image} alt={displayName} fill className="object-cover" />
-              </div>
-            ) : (
-              <UserAvatar
-                name={displayName}
-                size="lg"
-                className="w-24 h-24 text-2xl border-4 border-white dark:border-surface-dark"
-              />
+          {/* Name */}
+          <div className="mb-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-2xl font-bold text-text-primary dark:text-text-dark-primary">
+                {displayName}
+              </h1>
+              {profile.isVerified && (
+                <BadgeCheck className="w-5 h-5 text-primary" />
+              )}
+            </div>
+            {profile.username && (
+              <p className="text-lg font-light text-text-secondary dark:text-text-dark-secondary">
+                {profile.username}
+              </p>
             )}
           </div>
-          <div className="flex items-center gap-2 mt-14">
+
+          {/* Bio */}
+          {profile.bio && (
+            <p className="text-sm text-text-primary dark:text-text-dark-primary leading-relaxed mb-4">
+              {profile.bio}
+            </p>
+          )}
+
+          {/* Follow button */}
+          <div className="mb-4">
             <FollowButton targetUserId={profile.id} initialFollowing={following} />
           </div>
-        </div>
 
-        {/* Name and username */}
-        <div className="flex items-center gap-2 flex-wrap mb-1">
-          <h1 className="text-2xl font-bold text-text-primary dark:text-text-dark-primary">
-            {displayName}
-          </h1>
-          {profile.isVerified && (
-            <BadgeCheck className="w-5 h-5 text-primary" aria-label="Verified" />
-          )}
-        </div>
-        {profile.username && (
-          <p className="text-sm text-text-secondary dark:text-text-dark-secondary mb-3">
-            @{profile.username}
-          </p>
-        )}
-
-        {/* Bio */}
-        {profile.bio && (
-          <p className="text-sm text-text-primary dark:text-text-dark-primary mb-4 max-w-2xl">
-            {profile.bio}
-          </p>
-        )}
-
-        {/* Availability + badges */}
-        <div className="flex flex-wrap items-center gap-2 mb-4">
-          {availability && (
-            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${availability.className}`}>
-              {availability.label}
-            </span>
-          )}
-          {profile.expertise.slice(0, 6).map((tag) => (
-            <BadgePill key={tag} label={tag} variant="primary" />
-          ))}
-        </div>
-
-        {/* Stats row */}
-        <div className="flex flex-wrap items-center gap-6 py-4 border-t border-b border-border dark:border-border-dark mb-4">
-          <div className="flex items-center gap-1.5 text-sm text-text-secondary dark:text-text-dark-secondary">
-            <Star className="w-4 h-4 text-warning" />
-            <span className="font-semibold text-text-primary dark:text-text-dark-primary">
-              {profile.points.toLocaleString()}
-            </span>
-            <span>points</span>
-          </div>
-          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${tier.color} ${tier.bgColor}`}>
-            {tier.name}
-          </span>
-          <div className="flex items-center gap-1.5 text-sm text-text-secondary dark:text-text-dark-secondary">
-            <MessageSquare className="w-4 h-4" />
-            <span className="font-semibold text-text-primary dark:text-text-dark-primary">
-              {profile._count.answers}
-            </span>
-            <span>answers</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-sm text-text-secondary dark:text-text-dark-secondary">
+          {/* Followers/Following */}
+          <div className="flex items-center gap-1 text-sm text-text-secondary dark:text-text-dark-secondary mb-4">
             <Users className="w-4 h-4" />
-            <span className="font-semibold text-text-primary dark:text-text-dark-primary">
-              {profile._count.followers}
-            </span>
+            <span className="font-semibold text-text-primary dark:text-text-dark-primary">{profile._count.followers}</span>
             <span>followers</span>
+            <span className="mx-1">·</span>
+            <span className="font-semibold text-text-primary dark:text-text-dark-primary">{profile._count.following}</span>
+            <span>following</span>
           </div>
-          <StreakFire count={profile.currentStreak} />
-        </div>
 
-        {/* Details */}
-        <div className="flex flex-wrap gap-4 text-sm text-text-secondary dark:text-text-dark-secondary mb-4">
-          {profile.hourlyRate != null && (
-            <div className="flex items-center gap-1.5">
-              <DollarSign className="w-4 h-4" />
-              <span>${profile.hourlyRate}/hr</span>
+          {/* Details */}
+          <div className="space-y-1.5 text-sm text-text-secondary dark:text-text-dark-secondary mb-4">
+            {availability && (
+              <div className="flex items-center gap-2">
+                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${availability.className}`}>
+                  {availability.label}
+                </span>
+              </div>
+            )}
+            {profile.hourlyRate != null && (
+              <div className="flex items-center gap-2">
+                <DollarSign className="w-4 h-4" />
+                <span>${profile.hourlyRate}/hr</span>
+              </div>
+            )}
+            {profile.experienceYears != null && (
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                <span>{profile.experienceYears} yrs experience</span>
+              </div>
+            )}
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4" />
+              <span>Remote</span>
             </div>
-          )}
-          {profile.experienceYears != null && (
-            <div className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4" />
-              <span>{profile.experienceYears} yrs experience</span>
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              <span>Joined {new Date(profile.createdAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}</span>
             </div>
-          )}
-          <div className="flex items-center gap-1.5">
-            <Calendar className="w-4 h-4" />
-            <span>
-              Joined{" "}
-              {new Date(profile.createdAt).toLocaleDateString("en-US", {
-                month: "long",
-                year: "numeric",
-              })}
-            </span>
-          </div>
-        </div>
-
-        {/* Social links */}
-        {Object.keys(links).length > 0 && (
-          <div className="flex flex-wrap gap-3 text-sm">
             {links.website && (
-              <a
-                href={links.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-primary hover:underline"
-              >
-                <Globe className="w-4 h-4" />
-                Website
-              </a>
+              <div className="flex items-center gap-2">
+                <LinkIcon className="w-4 h-4" />
+                <a href={links.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline truncate">
+                  {links.website.replace(/^https?:\/\//, "")}
+                </a>
+              </div>
             )}
             {links.twitter && (
-              <a
-                href={`https://twitter.com/${links.twitter.replace("@", "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-primary hover:underline"
-              >
-                <LinkIcon className="w-4 h-4" />
-                Twitter
-              </a>
+              <div className="flex items-center gap-2">
+                <Globe className="w-4 h-4" />
+                <a href={`https://twitter.com/${links.twitter.replace("@", "")}`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  {links.twitter}
+                </a>
+              </div>
             )}
             {links.linkedin && (
-              <a
-                href={links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-primary hover:underline"
-              >
+              <div className="flex items-center gap-2">
                 <LinkIcon className="w-4 h-4" />
-                LinkedIn
-              </a>
+                <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  LinkedIn
+                </a>
+              </div>
             )}
           </div>
-        )}
-      </div>
 
-      {/* About section */}
-      {profile.about && (
-        <div className="mt-4 bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-xl p-6">
-          <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-3">
-            About
-          </h2>
-          <p className="text-sm text-text-secondary dark:text-text-dark-secondary whitespace-pre-wrap leading-relaxed">
-            {profile.about}
-          </p>
-        </div>
-      )}
-
-      {/* Badges */}
-      {badges.length > 0 && (
-        <div className="mt-4 bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-xl p-6">
-          <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-4 flex items-center gap-2">
-            <Award className="w-5 h-5 text-primary" />
-            Badges
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {badges.map((badge) => {
-              const config = badgeIcons[badge.category] || { icon: Award, color: "text-gray-500" };
-              const BadgeIcon = config.icon;
-              return (
-                <div
-                  key={badge.id}
-                  className="flex items-center gap-2 px-3 py-2 bg-surface dark:bg-surface-dark rounded-lg border border-border dark:border-border-dark"
-                >
-                  <BadgeIcon className={`w-4 h-4 ${config.color}`} />
-                  <div>
-                    <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary">
+          {/* Badges */}
+          {badges.length > 0 && (
+            <div className="pt-4 border-t border-border dark:border-border-dark mb-4">
+              <h4 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3 flex items-center gap-1.5">
+                <Award className="w-4 h-4" />
+                Badges
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {badges.map((badge: any) => {
+                  const config = badgeIcons[badge.category] || { icon: Award, color: "text-gray-500" };
+                  const BadgeIcon = config.icon;
+                  return (
+                    <span
+                      key={badge.id}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-surface dark:bg-surface-dark border border-border dark:border-border-dark"
+                      title={`Earned ${new Date(badge.earnedAt).toLocaleDateString()}`}
+                    >
+                      <BadgeIcon className={`w-3.5 h-3.5 ${config.color}`} />
                       {badge.name}
-                    </p>
-                    <p className="text-[10px] text-text-tertiary">
-                      {new Date(badge.earnedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
-                    </p>
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Expertise */}
+          {profile.expertise.length > 0 && (
+            <div className="pt-4 border-t border-border dark:border-border-dark">
+              <h4 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">
+                Expertise
+              </h4>
+              <div className="flex flex-wrap gap-1.5">
+                {profile.expertise.map((tag) => (
+                  <BadgePill key={tag} label={tag} variant="primary" />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* ===== RIGHT CONTENT ===== */}
+        <div className="flex-1 min-w-0">
+          {/* Stats bar */}
+          <div className="bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-lg p-4 mb-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-sm">
+                <Star className="w-4 h-4 text-warning" />
+                <span className="font-bold text-text-primary dark:text-text-dark-primary">{profile.points.toLocaleString()}</span>
+                <span className="text-text-secondary dark:text-text-dark-secondary">points this year</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${tier.color} ${tier.bgColor}`}>
+                  {tier.name}
+                </span>
+                <StreakFire count={profile.currentStreak} />
+              </div>
+            </div>
+          </div>
+
+          {/* About */}
+          {profile.about && (
+            <div className="bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-lg p-5 mb-4">
+              <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">
+                About
+              </h3>
+              <p className="text-sm text-text-secondary dark:text-text-dark-secondary whitespace-pre-wrap leading-relaxed">
+                {profile.about}
+              </p>
+            </div>
+          )}
+
+          {/* Pinned Content */}
+          {(profile._count.questions > 0 || profile._count.answers > 0) && (
+            <>
+              <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">
+                Pinned
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                <div className="bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-lg p-4 hover:border-primary/50 transition-colors">
+                  <div className="flex items-center gap-2 mb-2">
+                    <HelpCircle className="w-4 h-4 text-text-tertiary" />
+                    <span className="text-xs text-text-tertiary">Questions</span>
                   </div>
+                  <p className="text-2xl font-bold text-text-primary dark:text-text-dark-primary">
+                    {profile._count.questions}
+                  </p>
+                  <p className="text-xs text-text-tertiary mt-1">questions asked</p>
                 </div>
-              );
-            })}
+                <div className="bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-lg p-4 hover:border-primary/50 transition-colors">
+                  <div className="flex items-center gap-2 mb-2">
+                    <MessageSquare className="w-4 h-4 text-text-tertiary" />
+                    <span className="text-xs text-text-tertiary">Answers</span>
+                  </div>
+                  <p className="text-2xl font-bold text-text-primary dark:text-text-dark-primary">
+                    {profile._count.answers}
+                  </p>
+                  <p className="text-xs text-text-tertiary mt-1">answers contributed</p>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Activity */}
+          <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">
+            Activity
+          </h3>
+          <div className="bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-lg overflow-hidden">
+            {activity.length === 0 ? (
+              <div className="p-8 text-center text-sm text-text-tertiary">
+                <MessageSquare className="w-8 h-8 mx-auto mb-2 opacity-30" />
+                No activity yet
+              </div>
+            ) : (
+              <div>
+                {activity.map((item, i) => (
+                  <Link
+                    key={`${item.type}-${i}`}
+                    href={item.url}
+                    className="flex items-center gap-3 px-4 py-3 border-b border-border/50 dark:border-border-dark/50 last:border-0 hover:bg-surface dark:hover:bg-surface-dark/60 transition-colors"
+                  >
+                    <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${activityDotColors[item.type] || "bg-gray-400"}`} />
+                    <span className="text-sm text-text-primary dark:text-text-dark-primary truncate flex-1">
+                      {item.title}
+                    </span>
+                    <span className="text-xs text-text-tertiary shrink-0">
+                      {timeAgo(item.createdAt)}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      )}
-
-      {/* Recent Activity */}
-      <div className="mt-4 bg-white dark:bg-surface-dark border border-border dark:border-border-dark rounded-xl p-6">
-        <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-4">
-          Recent Activity
-        </h2>
-        <ActivityFeed items={activity} />
       </div>
     </div>
   );
