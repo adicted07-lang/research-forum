@@ -46,15 +46,19 @@ export async function LeaderboardCard() {
               >
                 {rank}
               </span>
-              <UserAvatar
-                name={user.name ?? user.username ?? "User"}
-                src={user.image}
-                size="sm"
-              />
+              <Link href={`/profile/${user.username ?? user.id}`}>
+                <UserAvatar
+                  name={user.name ?? user.username ?? "User"}
+                  src={user.image}
+                  size="sm"
+                />
+              </Link>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary truncate">
-                  {user.name ?? user.username}
-                </p>
+                <Link href={`/profile/${user.username ?? user.id}`} className="hover:text-primary transition-colors">
+                  <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary truncate">
+                    {user.name ?? user.username}
+                  </p>
+                </Link>
                 <p className="text-xs text-text-tertiary">{user.points} pts</p>
               </div>
               {user.currentStreak > 0 && (
