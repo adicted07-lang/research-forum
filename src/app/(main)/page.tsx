@@ -77,13 +77,22 @@ const POPULAR_TAGS = [
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  // Update streak on each homepage visit
-  const session = await auth();
-  if (session?.user?.id) {
-    updateStreak(session.user.id);
+  let session: Awaited<ReturnType<typeof auth>> = null;
+  try {
+    session = await auth();
+    if (session?.user?.id) {
+      updateStreak(session.user.id);
+    }
+  } catch {
+    // Auth/DB not available
   }
 
-  const followedTags = session?.user?.id ? await getFollowedTags() : [];
+  let followedTags: string[] = [];
+  try {
+    followedTags = session?.user?.id ? await getFollowedTags() : [];
+  } catch {
+    // DB not available
+  }
 
   let questions: Awaited<ReturnType<typeof getQuestions>>["questions"] = [];
   try {
