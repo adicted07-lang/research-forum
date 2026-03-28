@@ -63,7 +63,6 @@ export function SearchWithResults() {
     if (q.trim().length < 2) {
       setResults(null);
       setOpen(false);
-      if (q.trim().length === 0) setShowActions(true);
       return;
     }
     setShowActions(false);
