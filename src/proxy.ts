@@ -26,6 +26,28 @@ const authHandler = auth((req) => {
 });
 
 export function proxy(request: NextRequest, ...args: unknown[]) {
+  const { pathname } = request.nextUrl;
+
+  // Profile URL redirects
+  if (pathname.startsWith("/@")) {
+    const username = pathname.slice(2);
+    const url = request.nextUrl.clone();
+    url.pathname = `/profile/${username}`;
+    return NextResponse.redirect(url, 301);
+  }
+  if (pathname.startsWith("/user/")) {
+    const username = pathname.slice(6);
+    const url = request.nextUrl.clone();
+    url.pathname = `/profile/${username}`;
+    return NextResponse.redirect(url, 301);
+  }
+  if (pathname.startsWith("/company/")) {
+    const username = pathname.slice(9);
+    const url = request.nextUrl.clone();
+    url.pathname = `/profile/${username}`;
+    return NextResponse.redirect(url, 301);
+  }
+
   return (authHandler as Function)(request, ...args);
 }
 
