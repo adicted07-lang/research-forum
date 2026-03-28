@@ -77,6 +77,13 @@ const POPULAR_TAGS = [
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
+  try { return await HomePageContent(); } catch (e: any) {
+    console.error("[HOME] FATAL:", e?.message?.slice(0, 200));
+    return <div style={{padding:"40px",textAlign:"center"}}><h1>Something went wrong</h1><p>{e?.message?.slice(0, 100)}</p></div>;
+  }
+}
+
+async function HomePageContent() {
   let session: any = null;
   try {
     session = await auth();
@@ -96,7 +103,7 @@ export default async function HomePage() {
   let bannerAd: any = null;
 
   try { followedTags = session?.user?.id ? await getFollowedTags() : []; } catch {}
-  try { questions = (await getQuestions({ sort: "trending", limit: 4 })).questions; } catch {}
+  try { questions = (await getQuestions({ sort: "trending", limit: 4 })).questions; } catch (e: any) { console.error("[HOME] questions error:", e?.message?.slice(0, 100)); }
   try { listings = await getListings({ sort: "trending", limit: 4 }); } catch {}
   try { jobs = await getJobs({ sort: "newest", limit: 3 }); } catch {}
   try { articles = (await getArticles({ sort: "latest", limit: 3 })).articles; } catch {}
