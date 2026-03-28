@@ -1,25 +1,20 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaNeon } from "@prisma/adapter-neon";
-import { neonConfig, Pool } from "@neondatabase/serverless";
+
+let prismaAdapter: any = undefined;
+
+// Only use PrismaPg adapter for local development (not serverless)
+if (typeof window === "undefined" && !process.env.VERCEL) {
+  try {
+    const { PrismaPg } = require("@prisma/adapter-pg");
+    prismaAdapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+  } catch {
+    // Adapter not available — use default
+  }
+}
 
 function createPrismaClient() {
-  const connectionString = process.env.DATABASE_URL || "";
-
-  // Use Neon serverless adapter for Neon/Vercel Postgres URLs
-  if (connectionString.includes("neon.tech")) {
-    const pool = new Pool({ connectionString });
-    const adapter = new PrismaNeon(pool as any);
-    return new PrismaClient({
-      adapter,
-      log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-    });
-  }
-
-  // Use PrismaPg adapter for local/standard PostgreSQL
-  const adapter = new PrismaPg({ connectionString });
   return new PrismaClient({
-    adapter,
+    ...(prismaAdapter ? { adapter: prismaAdapter } : {}),
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 }
