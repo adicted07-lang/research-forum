@@ -53,6 +53,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   // Try researcher first
   try {
     const researcher = await getResearcherProfile(username);
+    console.log("[PROFILE] username:", username, "researcher:", !!researcher);
     if (researcher) {
       let activity: any[] = [];
       try {
@@ -76,9 +77,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         </PageLayout>
       );
     }
-  } catch {
-    // DB error
+  } catch (err) {
+    console.error("[PROFILE] DB error:", err);
   }
 
+  console.log("[PROFILE] not found for:", username);
   notFound();
 }
