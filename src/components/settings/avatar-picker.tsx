@@ -2,54 +2,24 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { RefreshCw } from "lucide-react";
 
-const AVATAR_EMOJIS = [
-  // Research & Science
-  { emoji: "🧑‍🔬", bg: "bg-cyan-300", label: "Scientist" },
-  { emoji: "🔬", bg: "bg-blue-200", label: "Microscope" },
-  { emoji: "🧬", bg: "bg-violet-300", label: "DNA" },
-  { emoji: "⚗️", bg: "bg-purple-200", label: "Alchemist" },
-  { emoji: "🧪", bg: "bg-green-200", label: "Test Tube" },
-  { emoji: "📊", bg: "bg-orange-200", label: "Data Analyst" },
-  { emoji: "🧮", bg: "bg-amber-200", label: "Calculator" },
-  { emoji: "🔭", bg: "bg-indigo-200", label: "Astronomer" },
-  { emoji: "🧠", bg: "bg-pink-200", label: "Brain" },
-  { emoji: "💡", bg: "bg-yellow-200", label: "Idea" },
-  { emoji: "📡", bg: "bg-sky-200", label: "Signal" },
-  { emoji: "🛰️", bg: "bg-slate-300", label: "Satellite" },
-  { emoji: "⚛️", bg: "bg-blue-300", label: "Atom" },
-  { emoji: "🧲", bg: "bg-red-200", label: "Magnet" },
-  { emoji: "🌡️", bg: "bg-rose-200", label: "Temperature" },
-  // Academic
-  { emoji: "🎓", bg: "bg-gray-300", label: "Graduate" },
-  { emoji: "📚", bg: "bg-amber-300", label: "Scholar" },
-  { emoji: "✍️", bg: "bg-stone-200", label: "Writer" },
-  { emoji: "📝", bg: "bg-yellow-100", label: "Researcher" },
-  { emoji: "🏛️", bg: "bg-neutral-200", label: "Academic" },
-  // Tech & Space
-  { emoji: "👨‍🚀", bg: "bg-indigo-300", label: "Astronaut" },
-  { emoji: "🤖", bg: "bg-red-300", label: "Robot" },
-  { emoji: "👾", bg: "bg-purple-300", label: "Alien" },
-  { emoji: "🧑‍💻", bg: "bg-teal-200", label: "Developer" },
-  { emoji: "🦾", bg: "bg-zinc-300", label: "Cyborg" },
-  // Fun Animals
-  { emoji: "🦉", bg: "bg-amber-300", label: "Wise Owl" },
-  { emoji: "🦊", bg: "bg-orange-300", label: "Fox" },
-  { emoji: "🐙", bg: "bg-rose-300", label: "Octopus" },
-  { emoji: "🦋", bg: "bg-blue-300", label: "Butterfly" },
-  { emoji: "🐧", bg: "bg-sky-300", label: "Penguin" },
-  { emoji: "🦁", bg: "bg-yellow-400", label: "Lion" },
-  { emoji: "🐼", bg: "bg-gray-200", label: "Panda" },
-  { emoji: "🦖", bg: "bg-teal-300", label: "Dinosaur" },
-  { emoji: "🐝", bg: "bg-yellow-300", label: "Bee" },
-  { emoji: "🦜", bg: "bg-lime-300", label: "Parrot" },
-  // Fun Characters
-  { emoji: "🧙‍♂️", bg: "bg-green-300", label: "Wizard" },
-  { emoji: "🦄", bg: "bg-purple-300", label: "Unicorn" },
-  { emoji: "🥷", bg: "bg-slate-400", label: "Ninja" },
-  { emoji: "🧑‍🎨", bg: "bg-pink-300", label: "Artist" },
-  { emoji: "🦸", bg: "bg-red-300", label: "Hero" },
+// DiceBear 3D avatar seeds — each generates a unique 3D cartoon face
+const AVATAR_SEEDS = [
+  "Felix", "Aneka", "Jade", "Leo", "Mia", "Oscar", "Zara", "Kai",
+  "Luna", "Max", "Aria", "Finn", "Nova", "Theo", "Iris", "Axel",
+  "Sage", "Ruby", "Orion", "Cleo", "Atlas", "Lyra", "Hugo", "Piper",
+  "Miles", "Wren", "Quinn", "Juno", "Ezra", "Ember", "Dash", "Ivy",
+  "Rio", "Skye", "Knox", "Nora", "Beck", "Lila", "Cole", "Faye",
 ];
+
+function getAvatarUrl(seed: string): string {
+  return `https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(seed)}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&backgroundType=gradientLinear`;
+}
+
+function isDiceBearUrl(url: string): boolean {
+  return url.startsWith("https://api.dicebear.com/");
+}
 
 interface AvatarPickerProps {
   selected: string;
@@ -58,72 +28,101 @@ interface AvatarPickerProps {
 
 export function AvatarPicker({ selected, onChange }: AvatarPickerProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [page, setPage] = useState(0);
+  const perPage = 20;
+  const totalPages = Math.ceil(AVATAR_SEEDS.length / perPage);
+  const visibleSeeds = AVATAR_SEEDS.slice(page * perPage, (page + 1) * perPage);
 
-  const selectedAvatar = AVATAR_EMOJIS.find((a) => a.emoji === selected);
+  const isSelected = isDiceBearUrl(selected);
 
   return (
     <div>
       <div className="flex items-center gap-4 mb-3">
-        {/* Current selection preview */}
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className={cn(
-            "w-16 h-16 rounded-full flex items-center justify-center text-3xl border-2 border-border dark:border-border-dark hover:border-primary transition-colors cursor-pointer",
-            selectedAvatar?.bg || "bg-surface dark:bg-surface-dark"
-          )}
+          className="w-16 h-16 rounded-full overflow-hidden border-2 border-border dark:border-border-dark hover:border-primary transition-colors cursor-pointer bg-surface dark:bg-surface-dark flex items-center justify-center"
         >
-          {selectedAvatar ? selectedAvatar.emoji : "😀"}
+          {isSelected ? (
+            <img src={selected} alt="Avatar" className="w-full h-full object-cover" />
+          ) : selected ? (
+            <img src={selected} alt="Avatar" className="w-full h-full object-cover" />
+          ) : (
+            <span className="text-2xl text-text-tertiary">?</span>
+          )}
         </button>
         <div>
           <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary">
-            {selectedAvatar ? selectedAvatar.label : "Choose an avatar"}
+            {isSelected ? "Custom Avatar" : selected ? "Uploaded Photo" : "Choose an avatar"}
           </p>
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
             className="text-xs text-primary hover:underline"
           >
-            {isOpen ? "Close picker" : "Pick a fun avatar"}
+            {isOpen ? "Close picker" : "Pick an avatar"}
           </button>
         </div>
       </div>
 
       {isOpen && (
-        <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 p-3 bg-surface dark:bg-surface-dark rounded-lg border border-border dark:border-border-dark">
-          {AVATAR_EMOJIS.map((avatar) => (
-            <button
-              key={avatar.emoji}
-              type="button"
-              onClick={() => {
-                onChange(avatar.emoji);
-                setIsOpen(false);
-              }}
-              title={avatar.label}
-              className={cn(
-                "w-10 h-10 rounded-full flex items-center justify-center text-xl transition-all hover:scale-110",
-                avatar.bg,
-                selected === avatar.emoji
-                  ? "ring-2 ring-primary ring-offset-2 dark:ring-offset-surface-dark"
-                  : "hover:ring-1 hover:ring-border"
+        <div className="p-3 bg-surface dark:bg-surface-dark rounded-lg border border-border dark:border-border-dark">
+          <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
+            {visibleSeeds.map((seed) => {
+              const url = getAvatarUrl(seed);
+              return (
+                <button
+                  key={seed}
+                  type="button"
+                  onClick={() => {
+                    onChange(url);
+                    setIsOpen(false);
+                  }}
+                  title={seed}
+                  className={cn(
+                    "w-10 h-10 rounded-full overflow-hidden transition-all hover:scale-110 bg-white dark:bg-surface-dark",
+                    selected === url
+                      ? "ring-2 ring-primary ring-offset-2 dark:ring-offset-surface-dark"
+                      : "hover:ring-1 hover:ring-border"
+                  )}
+                >
+                  <img src={url} alt={seed} className="w-full h-full object-cover" loading="lazy" />
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center justify-between mt-3 pt-2 border-t border-border dark:border-border-dark">
+            <div className="flex gap-1">
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setPage(i)}
+                  className={cn(
+                    "w-6 h-6 rounded-full text-xs font-medium transition-colors",
+                    page === i
+                      ? "bg-primary text-white"
+                      : "text-text-tertiary hover:bg-surface-hover dark:hover:bg-surface-dark-hover"
+                  )}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-2">
+              {selected && (
+                <button
+                  type="button"
+                  onClick={() => { onChange(""); setIsOpen(false); }}
+                  className="text-xs text-red-500 hover:underline"
+                >
+                  Remove
+                </button>
               )}
-            >
-              {avatar.emoji}
-            </button>
-          ))}
-          {selected && (
-            <button
-              type="button"
-              onClick={() => {
-                onChange("");
-                setIsOpen(false);
-              }}
-              title="Remove avatar"
-              className="w-10 h-10 rounded-full flex items-center justify-center text-xs bg-red-100 dark:bg-red-900/30 text-red-500 hover:scale-110 transition-all"
-            >
-              ✕
-            </button>
-          )}
+            </div>
+          </div>
         </div>
       )}
     </div>
