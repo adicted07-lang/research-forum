@@ -14,7 +14,7 @@ const AVATAR_SEEDS = [
 ];
 
 function getAvatarUrl(seed: string): string {
-  return `https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(seed)}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf&backgroundType=gradientLinear`;
+  return `https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(seed)}&backgroundColor=fdba74,fed7aa,fecaca,fde68a,ffedd5&backgroundType=gradientLinear`;
 }
 
 function isDiceBearUrl(url: string): boolean {
