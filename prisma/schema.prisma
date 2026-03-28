@@ -871,6 +871,19 @@ model AuditLog {
   @@map("audit_logs")
 }
 
+// === ANNOUNCEMENTS ===
+
+model Announcement {
+  id        String    @id @default(cuid())
+  message   String
+  type      String    @default("info")
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  expiresAt DateTime?
+
+  @@map("announcements")
+}
+
 // === TAG FOLLOWS ===
 
 model TagFollow {

@@ -82,3 +82,43 @@ export async function getGrantBySlug(slug: string) {
     return null;
   }
 }
+
+export async function toggleGrantActive(grantId: string) {
+  const session = await auth();
+  if (
+    !session?.user?.id ||
+    (session.user.role !== "ADMIN" && session.user.role !== "MODERATOR")
+  ) {
+    return { error: "Forbidden" };
+  }
+  try {
+    const grant = await db.grant.findUnique({
+      where: { id: grantId },
+      select: { isActive: true },
+    });
+    if (!grant) return { error: "Grant not found" };
+    await db.grant.update({
+      where: { id: grantId },
+      data: { isActive: !grant.isActive },
+    });
+    return { success: true };
+  } catch {
+    return { error: "Failed to toggle grant" };
+  }
+}
+
+export async function getAllGrants() {
+  const session = await auth();
+  if (
+    !session?.user?.id ||
+    (session.user.role !== "ADMIN" && session.user.role !== "MODERATOR")
+  ) {
+    return { grants: [] };
+  }
+  try {
+    const grants = await db.grant.findMany({ orderBy: { createdAt: "desc" } });
+    return { grants };
+  } catch {
+    return { grants: [] };
+  }
+}

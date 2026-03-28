@@ -53,6 +53,26 @@ export async function getUserSubscriptions() {
   }
 }
 
+export async function getSubscriberCounts() {
+  const session = await auth();
+  if (!session?.user?.id) return { error: "Unauthorized" };
+  if (session.user.role !== "ADMIN") return { error: "Forbidden" };
+
+  try {
+    const types = ["weekly_digest", "product_updates", "research_highlights"];
+    const counts = await Promise.all(
+      types.map((t) =>
+        db.newsletterSubscription.count({ where: { type: t, isActive: true } })
+      )
+    );
+    return {
+      counts: Object.fromEntries(types.map((t, i) => [t, counts[i]])) as Record<string, number>,
+    };
+  } catch {
+    return { error: "Failed to fetch subscriber counts" };
+  }
+}
+
 export async function sendNewsletter(type: string, subject: string, body: string) {
   const session = await auth();
   if (!session?.user?.id) return { error: "Unauthorized" };

@@ -14,11 +14,18 @@ import {
   Flag,
   AlertTriangle,
   ClipboardList,
+  BarChart2,
+  Mail,
+  Rss,
+  DollarSign,
+  Star,
+  Bell,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
+  { href: "/admin/analytics", label: "Analytics", icon: BarChart2 },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/moderation", label: "Moderation", icon: Shield },
   { href: "/admin/marketplace", label: "Marketplace", icon: ShoppingBag },
@@ -29,6 +36,11 @@ const navItems = [
   { href: "/admin/reports", label: "Reports", icon: Flag },
   { href: "/admin/spam", label: "Spam Detection", icon: AlertTriangle },
   { href: "/admin/audit", label: "Audit Log", icon: ClipboardList },
+  { href: "/admin/newsletter", label: "Newsletter", icon: Mail },
+  { href: "/admin/rss", label: "RSS Sources", icon: Rss },
+  { href: "/admin/grants", label: "Grants", icon: DollarSign },
+  { href: "/admin/featured", label: "Featured Content", icon: Star },
+  { href: "/admin/announcements", label: "Announcements", icon: Bell },
 ];
 
 export function AdminSidebar() {
