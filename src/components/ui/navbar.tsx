@@ -24,6 +24,7 @@ import { NotificationBell } from "@/components/notifications/notification-bell";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { UnreadMessageBadge } from "@/components/messages/unread-badge";
 import { AuthButtons } from "@/components/ui/auth-buttons";
+import { useSession } from "next-auth/react";
 
 import {
   Accordion,
@@ -149,19 +150,13 @@ const Navbar1 = ({
       items: [
         {
           title: "Browse Jobs",
-          description: "Find freelance research opportunities",
+          description: "Find freelance research opportunities (For Researchers)",
           icon: <Briefcase className="size-5 shrink-0" />,
           url: "/hire",
         },
         {
-          title: "Post a Job",
-          description: "Find the perfect research expert for your project",
-          icon: <FileText className="size-5 shrink-0" />,
-          url: "/hire/new",
-        },
-        {
           title: "Browse Researchers",
-          description: "Search profiles by expertise, rate, and availability",
+          description: "Search profiles by expertise, rate, and availability (For Companies)",
           icon: <UserSearch className="size-5 shrink-0" />,
           url: "/researchers",
         },
@@ -187,6 +182,28 @@ const Navbar1 = ({
     signup: { text: "Sign up", url: "/signup" },
   },
 }: Navbar1Props) => {
+  const { data: session } = useSession();
+  const isCompany = (session?.user as any)?.role === "COMPANY";
+
+  // Inject "Post a Job" into Hire menu for company users
+  const dynamicMenu = menu.map((item) => {
+    if (item.title === "Hire" && isCompany && item.items) {
+      return {
+        ...item,
+        items: [
+          ...item.items,
+          {
+            title: "Post a Job",
+            description: "Find the perfect research expert for your project",
+            icon: <FileText className="size-5 shrink-0" />,
+            url: "/hire/new",
+          },
+        ],
+      };
+    }
+    return item;
+  });
+
   return (
     <section className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-border dark:bg-[#0F0F13]/95 dark:border-border-dark">
       <div className="max-w-[1280px] mx-auto px-6">
@@ -203,7 +220,7 @@ const Navbar1 = ({
             <div className="flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {menu.map((item) => renderMenuItem(item))}
+                  {dynamicMenu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
@@ -262,7 +279,7 @@ const Navbar1 = ({
                     collapsible
                     className="flex w-full flex-col gap-4"
                   >
-                    {menu.map((item) => renderMobileMenuItem(item))}
+                    {dynamicMenu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
                   <div className="border-t py-4">
                     <div className="grid grid-cols-2 justify-start">
