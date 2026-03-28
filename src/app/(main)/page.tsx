@@ -77,7 +77,7 @@ const POPULAR_TAGS = [
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  let session: Awaited<ReturnType<typeof auth>> = null;
+  let session: any = null;
   try {
     session = await auth();
     if (session?.user?.id) {
