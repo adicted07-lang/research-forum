@@ -15,7 +15,6 @@ export default async function MainLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      <Navbar1 />
       <main className="min-h-screen">{children}</main>
     </>
   );
