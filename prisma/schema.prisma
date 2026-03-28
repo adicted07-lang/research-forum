@@ -214,6 +214,9 @@ model User {
   reports   Report[]   @relation("ReportsMade")
   auditLogs AuditLog[] @relation("AuditLogs")
 
+  // Invite codes
+  inviteCodes InviteCode[] @relation("InviteCodesCreated")
+
   // Dataset relations
   datasets Dataset[]
 
@@ -882,6 +885,24 @@ model Announcement {
   expiresAt DateTime?
 
   @@map("announcements")
+}
+
+// === INVITE CODES ===
+
+model InviteCode {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  createdBy String
+  usedBy    String?
+  usedAt    DateTime?
+  expiresAt DateTime?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  creator User @relation("InviteCodesCreated", fields: [createdBy], references: [id])
+
+  @@index([code])
+  @@map("invite_codes")
 }
 
 // === TAG FOLLOWS ===

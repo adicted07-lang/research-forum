@@ -20,6 +20,9 @@ import {
   DollarSign,
   Star,
   Bell,
+  Ticket,
+  Eye,
+  Download,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -41,6 +44,9 @@ const navItems = [
   { href: "/admin/grants", label: "Grants", icon: DollarSign },
   { href: "/admin/featured", label: "Featured Content", icon: Star },
   { href: "/admin/announcements", label: "Announcements", icon: Bell },
+  { href: "/admin/invites", label: "Invite Codes", icon: Ticket },
+  { href: "/admin/email-preview", label: "Email Preview", icon: Eye },
+  { href: "/admin/export", label: "Data Export", icon: Download },
 ];
 
 export function AdminSidebar() {
