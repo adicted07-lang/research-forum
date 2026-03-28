@@ -110,25 +110,19 @@ export function QuestionDetail({ question, currentUserId }: QuestionDetailProps)
           {/* Meta */}
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5">
+              <Link
+                href={`/profile/${question.author.username ?? ""}`}
+                className="flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+              >
                 <UserAvatar
                   name={authorName}
                   src={question.author.image}
                   size="sm"
                 />
-                {question.author.username ? (
-                  <Link
-                    href={`/profile/${question.author.username}`}
-                    className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors"
-                  >
-                    {authorName}
-                  </Link>
-                ) : (
-                  <span className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary">
-                    {authorName}
-                  </span>
-                )}
-              </div>
+                <span className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors">
+                  {authorName}
+                </span>
+              </Link>
               <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
                 {relativeTime(question.createdAt)}
               </span>
