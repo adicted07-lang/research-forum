@@ -1,34 +1,13 @@
-import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const authHandler = auth((req) => {
-  const isLoggedIn = !!req.auth;
-  const { pathname } = req.nextUrl;
+const protectedPaths = ["/settings", "/dashboard", "/messages", "/forum/new", "/marketplace/new", "/hire/new", "/news/submit", "/admin"];
+const authPaths = ["/login", "/signup"];
 
-  const protectedPaths = ["/settings", "/dashboard", "/messages", "/forum/new", "/marketplace/new", "/hire/new", "/news/submit", "/admin"];
-  const isProtected = protectedPaths.some((p) => pathname.startsWith(p));
-
-  const authPaths = ["/login", "/signup"];
-  const isAuthPage = authPaths.some((p) => pathname.startsWith(p));
-
-  if (isProtected && !isLoggedIn) {
-    const loginUrl = new URL("/login", req.nextUrl.origin);
-    loginUrl.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  if (isAuthPage && isLoggedIn) {
-    return NextResponse.redirect(new URL("/", req.nextUrl.origin));
-  }
-
-  return NextResponse.next();
-});
-
-export function proxy(request: NextRequest, ...args: unknown[]) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Profile URL redirects — redirect aliases to /profile/
+  // Profile URL redirects
   if (pathname.startsWith("/@")) {
     const username = pathname.slice(2);
     const url = request.nextUrl.clone();
@@ -36,7 +15,20 @@ export function proxy(request: NextRequest, ...args: unknown[]) {
     return NextResponse.redirect(url, 301);
   }
 
-  return (authHandler as Function)(request, ...args);
+  // Check auth cookie for protected routes
+  const hasSession = request.cookies.has("authjs.session-token") || request.cookies.has("__Secure-authjs.session-token");
+
+  if (protectedPaths.some((p) => pathname.startsWith(p)) && !hasSession) {
+    const loginUrl = new URL("/login", request.nextUrl.origin);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  if (authPaths.some((p) => pathname.startsWith(p)) && hasSession) {
+    return NextResponse.redirect(new URL("/", request.nextUrl.origin));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
