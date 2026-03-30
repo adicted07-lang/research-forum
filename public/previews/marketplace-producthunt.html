@@ -1,0 +1,92 @@
+<!DOCTYPE html><html><head><style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f7f7f7; color: #21293C; }
+.card { background: white; border-radius: 12px; border: 1px solid #e8e8e8; padding: 24px; }
+.tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 12px; background: rgba(218,85,47,0.08); color: #DA552F; font-weight: 500; }
+.btn { padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
+.btn-primary { background: #DA552F; color: white; }
+.btn-outline { background: white; color: #21293C; border: 1px solid #e8e8e8; }
+.star { color: #f59e0b; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+</style></head><body style="padding:32px;max-width:1000px;margin:0 auto;">
+<a href="index.html" style="font-size:13px;color:#DA552F;">← Back</a>
+<h2 style="margin:16px 0;color:#6F7287;font-size:13px;text-transform:uppercase;letter-spacing:1px;">Style 1: Product Hunt Style</h2>
+
+<div style="display:grid;grid-template-columns:1fr 300px;gap:24px;">
+  <div>
+    <!-- Hero -->
+    <div class="card" style="margin-bottom:16px;">
+      <div style="display:flex;gap:20px;align-items:start;">
+        <div style="width:80px;height:80px;border-radius:16px;background:linear-gradient(135deg,#DA552F,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:36px;color:white;font-weight:bold;shrink:0;">S</div>
+        <div style="flex:1;">
+          <h1 style="font-size:24px;font-weight:700;margin-bottom:4px;">Statistical Analysis & Consulting Service</h1>
+          <p style="font-size:15px;color:#6F7287;margin-bottom:12px;">Expert biostatistical consulting for academic research and clinical trials</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="tag">statistics</span><span class="tag">data-analysis</span><span class="tag">R</span><span class="tag">visualization</span>
+          </div>
+        </div>
+        <div style="text-align:center;border:2px solid #DA552F;border-radius:8px;padding:12px 16px;cursor:pointer;">
+          <div style="font-size:20px;">▲</div>
+          <div style="font-size:16px;font-weight:700;color:#DA552F;">47</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="card" style="margin-bottom:16px;">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:12px;">About</h3>
+      <p style="font-size:14px;line-height:1.8;color:#374151;">I provide comprehensive statistical analysis services including study design and power analysis, descriptive and inferential statistics, survival analysis and longitudinal modeling, and publication-ready figures and tables. 12 years of experience across public health, psychology, and biomedical research.</p>
+    </div>
+
+    <!-- Reviews -->
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;">Reviews (12)</h3>
+      <div style="border-bottom:1px solid #f0f0f0;padding-bottom:16px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div class="avatar"><img src="https://api.dicebear.com/9.x/notionists/svg?seed=Hugo&backgroundColor=fdba74,fed7aa&backgroundType=gradientLinear"/></div>
+          <div><p style="font-size:14px;font-weight:600;">Alice Chen</p><p style="font-size:12px;color:#9ca3af;">2 days ago</p></div>
+          <div style="margin-left:auto;"><span class="star">★★★★★</span></div>
+        </div>
+        <p style="font-size:14px;color:#374151;">Excellent work on our longitudinal study analysis. Bob delivered publication-ready tables in half the expected time.</p>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div class="avatar"><img src="https://api.dicebear.com/9.x/notionists/svg?seed=Hugo&backgroundColor=fdba74,fed7aa&backgroundType=gradientLinear"/></div>
+          <div><p style="font-size:14px;font-weight:600;">Carol Nguyen</p><p style="font-size:12px;color:#9ca3af;">1 week ago</p></div>
+          <div style="margin-left:auto;"><span class="star">★★★★</span><span style="color:#ddd;">★</span></div>
+        </div>
+        <p style="font-size:14px;color:#374151;">Great communication and thorough analysis. Would recommend for any mixed-methods project.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div>
+    <div class="card" style="margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div class="avatar"><img src="https://api.dicebear.com/9.x/notionists/svg?seed=Hugo&backgroundColor=fdba74,fed7aa&backgroundType=gradientLinear"/></div>
+        <div><p style="font-size:14px;font-weight:600;">Bob Martinez</p><p style="font-size:12px;color:#6F7287;">Survey Methodologist</p></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-bottom:8px;">Contact Provider</button>
+      <button class="btn btn-outline" style="width:100%;">Visit Website</button>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">Details</h4>
+      <div style="font-size:13px;color:#6F7287;">
+        <p style="margin-bottom:6px;">💰 Starting at $80/hour</p>
+        <p style="margin-bottom:6px;">📊 Type: Service</p>
+        <p style="margin-bottom:6px;">⭐ 4.8/5 (12 reviews)</p>
+        <p>📅 Listed 2 weeks ago</p>
+      </div>
+    </div>
+    <div class="card">
+      <h4 style="font-size:14px;font-weight:600;margin-bottom:12px;">Related</h4>
+      <div style="font-size:13px;">
+        <p style="padding:8px 0;border-bottom:1px solid #f0f0f0;"><a style="color:#DA552F;text-decoration:none;">ResearchKit Survey Builder</a></p>
+        <p style="padding:8px 0;"><a style="color:#DA552F;text-decoration:none;">AI Literature Review Assistant</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

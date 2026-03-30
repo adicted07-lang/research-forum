@@ -4,7 +4,7 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { ListingDetail } from "@/components/marketplace/listing-detail";
 import { ReviewSection } from "@/components/marketplace/review-section";
 import { ReviewForm } from "@/components/marketplace/review-form";
-import { getListingBySlug } from "@/server/actions/listings";
+import { getListingBySlug, getListings } from "@/server/actions/listings";
 import { auth } from "@/auth";
 
 export const dynamic = "force-dynamic";
@@ -62,10 +62,19 @@ export default async function ListingPage({ params }: ListingPageProps) {
     // unauthenticated
   }
 
+  // Fetch related listings
+  let relatedListings: any[] = [];
+  try {
+    const allListings = await getListings({ limit: 4 });
+    relatedListings = allListings
+      .filter((l: any) => l.id !== listing.id)
+      .slice(0, 3);
+  } catch {}
+
   return (
     <PageLayout>
-      <div className="max-w-3xl mx-auto space-y-6">
-        <ListingDetail listing={listing} />
+      <div className="max-w-4xl mx-auto space-y-6">
+        <ListingDetail listing={listing} relatedListings={relatedListings} />
         <ReviewSection targetType="LISTING" targetId={listing.id} />
         <ReviewForm
           targetType="LISTING"

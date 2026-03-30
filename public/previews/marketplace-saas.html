@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f7f7f7; color: #21293C; }
+.card { background: white; border-radius: 12px; border: 1px solid #e8e8e8; padding: 24px; }
+.tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 12px; background: rgba(218,85,47,0.08); color: #DA552F; font-weight: 500; }
+.btn { padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
+.btn-primary { background: #DA552F; color: white; }
+.btn-outline { background: white; color: #21293C; border: 1px solid #e8e8e8; }
+.star { color: #f59e0b; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+</style></head><body style="max-width:1000px;margin:0 auto;">
+<div style="padding:32px;">
+<a href="index.html" style="font-size:13px;color:#DA552F;">← Back</a>
+<h2 style="margin:16px 0;color:#6F7287;font-size:13px;text-transform:uppercase;letter-spacing:1px;">Style 3: SaaS Landing Style</h2>
+</div>
+
+<!-- Full-width Hero -->
+<div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:60px 40px;text-align:center;color:white;margin-bottom:32px;">
+  <p style="font-size:13px;color:#DA552F;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Research Service</p>
+  <h1 style="font-size:36px;font-weight:700;margin-bottom:12px;">Statistical Analysis &<br>Consulting Service</h1>
+  <p style="font-size:16px;color:#94a3b8;max-width:500px;margin:0 auto 24px;">Expert biostatistical consulting for academic research and clinical trials. 12 years of experience.</p>
+  <div style="display:flex;justify-content:center;gap:12px;">
+    <button class="btn btn-primary" style="padding:14px 32px;font-size:16px;">Get Started — $80/hr</button>
+    <button class="btn" style="background:rgba(255,255,255,0.1);color:white;padding:14px 32px;font-size:16px;">Learn More</button>
+  </div>
+</div>
+
+<div style="padding:0 32px 32px;">
+  <!-- Features -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;">
+    <div class="card" style="text-align:center;padding:32px 24px;">
+      <div style="font-size:32px;margin-bottom:12px;">📊</div>
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Study Design</h3>
+      <p style="font-size:13px;color:#6F7287;">Power analysis and methodology consultation for robust research design.</p>
+    </div>
+    <div class="card" style="text-align:center;padding:32px 24px;">
+      <div style="font-size:32px;margin-bottom:12px;">📈</div>
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Full Analysis</h3>
+      <p style="font-size:13px;color:#6F7287;">Descriptive stats, inferential tests, survival analysis, and longitudinal modeling.</p>
+    </div>
+    <div class="card" style="text-align:center;padding:32px 24px;">
+      <div style="font-size:32px;margin-bottom:12px;">📄</div>
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:8px;">Publication-Ready</h3>
+      <p style="font-size:13px;color:#6F7287;">Tables, figures, and written methodology sections ready for journals.</p>
+    </div>
+  </div>
+
+  <!-- Provider + Testimonials -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;">About the Provider</h3>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+        <div class="avatar" style="width:56px;height:56px;"><img src="https://api.dicebear.com/9.x/notionists/svg?seed=Hugo&backgroundColor=fdba74,fed7aa&backgroundType=gradientLinear"/></div>
+        <div>
+          <p style="font-size:16px;font-weight:600;">Bob Martinez</p>
+          <p style="font-size:13px;color:#6F7287;">Survey Methodologist · 12 yrs</p>
+        </div>
+      </div>
+      <p style="font-size:14px;color:#374151;line-height:1.6;">Specializing in survey design, statistical analysis, and biostatistics. Worked with academic institutions and public health agencies.</p>
+      <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;">
+        <span class="tag">biostatistics</span><span class="tag">SPSS</span><span class="tag">R</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;">What Researchers Say</h3>
+      <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #f0f0f0;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span class="star">★★★★★</span><span style="font-size:13px;font-weight:600;">Alice Chen</span>
+        </div>
+        <p style="font-size:13px;color:#374151;">"Excellent work on our longitudinal study. Delivered in half the expected time."</p>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span class="star">★★★★</span><span style="color:#ddd;">★</span><span style="font-size:13px;font-weight:600;">Carol Nguyen</span>
+        </div>
+        <p style="font-size:13px;color:#374151;">"Great communication and thorough analysis. Highly recommend."</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

@@ -7,7 +7,7 @@ function createPrismaClient() {
 
   if (connectionString.includes("neon.tech")) {
     const sql = neon(connectionString);
-    const adapter = new PrismaNeonHttp(sql as any);
+    const adapter = new (PrismaNeonHttp as any)(sql);
     return new PrismaClient({
       adapter,
       log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
