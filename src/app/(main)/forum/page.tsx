@@ -55,12 +55,6 @@ export default async function ForumPage({
 
   return (
     <PageLayout sidebar={<ForumSidebar />}>
-      <div className="flex items-center gap-3 mb-6 pb-6 border-b border-border-light dark:border-border-dark-light">
-        <AnimatedTooltipGroup items={communityMembers} />
-        <span className="text-sm text-text-secondary dark:text-text-dark-secondary">
-          Active community members
-        </span>
-      </div>
       <QuestionList category={category} sort={sort} page={page} />
     </PageLayout>
   );
