@@ -115,8 +115,8 @@ export async function getListings({
 
 export async function getListingBySlug(slug: string) {
   try {
-    const listing = await db.listing.findUnique({
-      where: { slug },
+    const listing = await db.listing.findFirst({
+      where: { slug, deletedAt: null },
       include: {
         author: { select: authorSelect },
       },
