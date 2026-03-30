@@ -173,12 +173,9 @@ async function HomePageContent() {
         <p className="text-text-secondary dark:text-text-dark-secondary text-lg mb-6 max-w-xl mx-auto">
           Ask questions, share knowledge, hire experts, and discover research tools.
         </p>
-        <div className="flex items-center justify-center gap-3">
-          <AnimatedTooltipGroup items={sampleResearchers} />
-          <span className="text-sm text-text-secondary dark:text-text-dark-secondary">
-            Join 12,000+ researchers
-          </span>
-        </div>
+        <p className="text-sm text-text-secondary dark:text-text-dark-secondary">
+          Join 12,000+ researchers
+        </p>
       </div>
 
       <section className="mb-8">
