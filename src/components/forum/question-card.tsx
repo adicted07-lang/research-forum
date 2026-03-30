@@ -75,7 +75,6 @@ export function QuestionCard({ question }: QuestionCardProps) {
           <Link
             href={`/profile/${question.author.username ?? ""}`}
             className="flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-            onClick={(e) => e.stopPropagation()}
           >
             <UserAvatar name={authorName} src={question.author.image} size="sm" />
             <span className="text-xs text-text-secondary dark:text-text-dark-secondary hover:text-primary transition-colors">
