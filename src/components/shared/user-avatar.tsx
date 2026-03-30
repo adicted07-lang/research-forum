@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 interface UserAvatarProps {
   name: string;
@@ -16,10 +15,9 @@ const sizeClasses = {
 
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/);
-  if (parts.length === 1) return parts[0][0].toUpperCase();
+  if (parts.length === 1) return parts[0][0]?.toUpperCase() ?? "?";
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
-
 
 export function UserAvatar({
   name,
@@ -29,8 +27,7 @@ export function UserAvatar({
 }: UserAvatarProps) {
   const initials = getInitials(name);
 
-  // DiceBear SVG URLs — render as img tag (not Next.js Image which needs domain config)
-  if (src && src.startsWith("https://api.dicebear.com/")) {
+  if (src) {
     return (
       <div
         className={cn(
@@ -39,6 +36,7 @@ export function UserAvatar({
           className
         )}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={name} className="w-full h-full object-cover" />
       </div>
     );
@@ -52,17 +50,7 @@ export function UserAvatar({
         className
       )}
     >
-      {src ? (
-        <Image
-          src={src}
-          alt={name}
-          fill
-          className="object-cover"
-          sizes="40px"
-        />
-      ) : (
-        initials
-      )}
+      {initials}
     </div>
   );
 }
