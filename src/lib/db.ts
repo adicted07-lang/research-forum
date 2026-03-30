@@ -1,13 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaNeonHttp } from "@prisma/adapter-neon";
-import { neon } from "@neondatabase/serverless";
 
 function createPrismaClient() {
   const connectionString = process.env.DATABASE_URL || "";
 
   if (connectionString.includes("neon.tech")) {
-    const sql = neon(connectionString);
-    const adapter = new (PrismaNeonHttp as any)(sql);
+    // PrismaNeonHttp v7.6+ constructor: (connectionString, options?)
+    const adapter = new (PrismaNeonHttp as any)(connectionString);
     return new PrismaClient({
       adapter,
       log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
@@ -27,10 +26,5 @@ function createPrismaClient() {
   }
 }
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
-
-export const db = globalForPrisma.prisma ?? createPrismaClient();
-
-globalForPrisma.prisma = db;
+// Always create a fresh client per cold start (don't cache between requests on serverless)
+export const db = createPrismaClient();
