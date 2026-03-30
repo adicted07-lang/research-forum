@@ -21,6 +21,7 @@ import { AdBanner } from "@/components/advertising/ad-banner";
 import { NewsletterSubscribe } from "@/components/newsletter/newsletter-subscribe";
 import { auth } from "@/auth";
 import { updateStreak } from "@/server/actions/streaks";
+import { Suspense } from "react";
 
 const sampleResearchers: TooltipItem[] = [
   {
@@ -118,7 +119,9 @@ async function HomePageContent() {
     <PageLayout
       sidebar={
         <div className="space-y-6">
-          <LeaderboardCard />
+          <Suspense fallback={<div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light text-center text-sm text-text-tertiary py-8">Loading...</div>}>
+            <LeaderboardCard />
+          </Suspense>
           {session?.user?.id && followedTags.length > 0 && (
             <div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light">
               <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-4">
