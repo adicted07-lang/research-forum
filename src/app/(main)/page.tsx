@@ -7,11 +7,25 @@ import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
 import { getArticles } from "@/server/actions/articles";
+import { Flame, LayoutGrid, Users, Newspaper, Brain, Globe, Dna, Activity, BarChart3, Network, HeartPulse, Atom, MessageSquare, Database, type LucideIcon } from "lucide-react";
 
 const POPULAR_TAGS = [
   "machine-learning", "climate-science", "genomics", "neuroscience", "statistics",
   "deep-learning", "epidemiology", "quantum-computing", "nlp", "bioinformatics",
 ];
+
+const TAG_ICONS: Record<string, LucideIcon> = {
+  "machine-learning": Brain,
+  "climate-science": Globe,
+  "genomics": Dna,
+  "neuroscience": Activity,
+  "statistics": BarChart3,
+  "deep-learning": Network,
+  "epidemiology": HeartPulse,
+  "quantum-computing": Atom,
+  "nlp": MessageSquare,
+  "bioinformatics": Database,
+};
 
 export const dynamic = "force-dynamic";
 
@@ -35,11 +49,17 @@ export default async function HomePage() {
               Trending Topics
             </h3>
             <div className="flex flex-wrap gap-2">
-              {POPULAR_TAGS.map((tag) => (
-                <Link key={tag} href={`/forum?tag=${tag}`}>
-                  <BadgePill label={tag} variant="primary" />
-                </Link>
-              ))}
+              {POPULAR_TAGS.map((tag) => {
+                const Icon = TAG_ICONS[tag];
+                return (
+                  <Link key={tag} href={`/forum?tag=${tag}`}>
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-lighter text-primary text-xs font-medium hover:bg-primary/10 transition-colors">
+                      {Icon && <Icon className="w-3.5 h-3.5" />}
+                      {tag}
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -53,13 +73,16 @@ export default async function HomePage() {
           Ask questions, share knowledge, hire experts, and discover research tools.
         </p>
         <p className="text-sm text-text-secondary dark:text-text-dark-secondary">
-          Join 12,000+ researchers
+          Join 500+ researchers
         </p>
       </div>
 
       {/* Trending Questions */}
       <section className="mb-8">
-        <SectionHeader title="Trending Questions" href="/forum" />
+        <div className="flex items-center gap-2 mb-3">
+          <Flame className="w-5 h-5 text-primary" />
+          <SectionHeader title="Trending Questions" href="/forum" />
+        </div>
         {questions.length > 0 ? (
           <div className="space-y-3">
             {questions.map((q: any) => (
@@ -82,7 +105,10 @@ export default async function HomePage() {
 
       {/* Top Services */}
       <section className="mb-8">
-        <SectionHeader title="Top Services & Tools" href="/marketplace" />
+        <div className="flex items-center gap-2 mb-3">
+          <LayoutGrid className="w-5 h-5 text-primary" />
+          <SectionHeader title="Top Services & Tools" href="/marketplace" />
+        </div>
         {listings.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {listings.map((l: any) => (
@@ -101,7 +127,10 @@ export default async function HomePage() {
 
       {/* Jobs */}
       <section className="mb-8">
-        <SectionHeader title="Hire a Researcher" href="/hire" />
+        <div className="flex items-center gap-2 mb-3">
+          <Users className="w-5 h-5 text-primary" />
+          <SectionHeader title="Hire a Researcher" href="/hire" />
+        </div>
         {jobs.length > 0 ? (
           <div className="space-y-3">
             {jobs.map((j: any) => (
@@ -120,7 +149,10 @@ export default async function HomePage() {
 
       {/* News */}
       <section className="mb-8">
-        <SectionHeader title="Latest News" href="/news" />
+        <div className="flex items-center gap-2 mb-3">
+          <Newspaper className="w-5 h-5 text-primary" />
+          <SectionHeader title="Latest News" href="/news" />
+        </div>
         {articles.length > 0 ? (
           <div className="space-y-3">
             {articles.map((a: any) => (
