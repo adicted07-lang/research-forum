@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Clock, Calendar } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
+import { ArticleCover } from "@/components/news/article-cover";
 
 interface ArticleAuthor {
   id: string;
@@ -31,15 +32,6 @@ interface ArticleCardProps {
   variant?: "featured" | "default";
 }
 
-const CATEGORY_GRADIENTS: Record<string, string> = {
-  news: "from-[#1a1a2e] to-primary",
-  opinion: "from-[#4F86EC] to-[#8B5CF6]",
-  how_to: "from-[#00B67A] to-[#059669]",
-  interview: "from-[#F59E0B] to-[#EF4444]",
-  announcement: "from-[#6366F1] to-[#8B5CF6]",
-  makers: "from-[#0EA5E9] to-[#06B6D4]",
-};
-
 const CATEGORY_LABELS: Record<string, string> = {
   news: "News",
   opinion: "Opinion",
@@ -66,13 +58,14 @@ function getExcerpt(body: string, maxLen: number = 150): string {
 function CoverGradient({
   category,
   coverImage,
+  title,
   className,
 }: {
   category: string;
   coverImage: string | null;
+  title: string;
   className?: string;
 }) {
-  const gradient = CATEGORY_GRADIENTS[category] ?? "from-[#1a1a2e] to-primary";
   if (coverImage) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
@@ -84,8 +77,10 @@ function CoverGradient({
     );
   }
   return (
-    <div
-      className={`w-full h-full bg-gradient-to-br ${gradient} ${className ?? ""}`}
+    <ArticleCover
+      category={category}
+      title={title}
+      className={`w-full h-full ${className ?? ""}`}
     />
   );
 }
@@ -105,6 +100,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
             <CoverGradient
               category={article.category}
               coverImage={article.coverImage}
+              title={article.title}
               className="absolute inset-0"
             />
             {/* Category badge overlay */}
@@ -176,6 +172,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
           <CoverGradient
             category={article.category}
             coverImage={article.coverImage}
+            title={article.title}
           />
           {/* Category badge */}
           <div className="absolute top-2 left-2">

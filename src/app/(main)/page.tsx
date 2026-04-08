@@ -4,6 +4,7 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { EmptyState } from "@/components/shared/empty-state";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { AdUnit } from "@/components/shared/ad-unit";
+import { ArticleCover } from "@/components/news/article-cover";
 import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
@@ -156,13 +157,23 @@ export default async function HomePage() {
           <SectionHeader title="Latest News" href="/news" />
         </div>
         {articles.length > 0 ? (
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {articles.map((a: any) => (
-              <div key={a.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all">
-                <Link href={`/news/${a.slug}`}>
-                  <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1">{a.title}</h3>
+              <div key={a.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md overflow-hidden hover:border-border hover:shadow-sm transition-all">
+                <Link href={`/news/${a.slug}`} className="block">
+                  {a.coverImage ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={a.coverImage} alt="" className="w-full object-cover" style={{ aspectRatio: "16/9" }} />
+                  ) : (
+                    <ArticleCover category={a.category ?? "news"} title={a.title} />
+                  )}
                 </Link>
-                <p className="text-xs text-text-tertiary">{a.readTime} min read</p>
+                <div className="p-3">
+                  <Link href={`/news/${a.slug}`}>
+                    <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1 line-clamp-2">{a.title}</h3>
+                  </Link>
+                  <p className="text-xs text-text-tertiary">{a.readTime} min read</p>
+                </div>
               </div>
             ))}
           </div>
