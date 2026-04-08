@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { getReputationTier } from "@/lib/reputation";
+import { getLevel } from "@/lib/reputation";
 
 export async function GET(
   request: NextRequest,
@@ -17,7 +17,7 @@ export async function GET(
     return new NextResponse("User not found", { status: 404 });
   }
 
-  const tier = getReputationTier(user.points);
+  const tier = getLevel(user.points);
   const displayName = user.name || user.username || "Researcher";
 
   const svg = `

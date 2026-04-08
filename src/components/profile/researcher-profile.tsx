@@ -26,7 +26,7 @@ import { isFollowing } from "@/server/actions/follows";
 import { getUserBadges } from "@/server/actions/badges";
 import { auth } from "@/auth";
 import { ActivityFeed } from "@/components/profile/activity-feed";
-import { getReputationTier } from "@/lib/reputation";
+import { getLevel } from "@/lib/reputation";
 import { LevelBadge } from "@/components/shared/level-badge";
 
 type ResearcherProfileData = {
@@ -104,7 +104,7 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
   const links = getSocialLinks(profile.socialLinks);
   const displayName = profile.name || profile.username || "Researcher";
   const availability = profile.availability ? availabilityConfig[profile.availability] : null;
-  const tier = getReputationTier(profile.points);
+  const tier = getLevel(profile.points);
 
   return (
     <div className="w-full">

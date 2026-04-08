@@ -6,7 +6,7 @@ import { UserAvatar } from "@/components/shared/user-avatar";
 import { StreakFire } from "@/components/shared/streak-fire";
 import { getLeaderboard } from "@/server/actions/leaderboard";
 import { Trophy } from "lucide-react";
-import { getReputationTier } from "@/lib/reputation";
+import { getLevel } from "@/lib/reputation";
 
 export const dynamic = "force-dynamic";
 
@@ -111,7 +111,7 @@ export default async function LeaderboardPage() {
                       <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary ml-1">pts</span>
                     </div>
                     {(() => {
-                      const tier = getReputationTier(user.points);
+                      const tier = getLevel(user.points);
                       return (
                         <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${tier.color} ${tier.bgColor}`}>
                           {tier.name}
