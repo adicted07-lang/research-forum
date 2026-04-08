@@ -75,7 +75,7 @@ export function MessageThread({ messages, currentUserId }: MessageThreadProps) {
                 className={`max-w-[70%] rounded-2xl px-4 py-2.5 ${
                   isOwn
                     ? "bg-primary text-white rounded-br-sm"
-                    : "bg-surface dark:bg-gray-800 text-text-primary dark:text-text-dark-primary rounded-bl-sm border border-border-light dark:border-border-dark-light"
+                    : "bg-surface dark:bg-surface-dark text-text-primary dark:text-text-dark-primary rounded-bl-sm border border-border-light dark:border-border-dark-light"
                 }`}
               >
                 <p className="text-sm leading-relaxed break-words">{message.body}</p>

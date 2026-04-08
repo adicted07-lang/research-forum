@@ -88,7 +88,7 @@ export default async function DatasetPage({ params }: DatasetPageProps) {
           </div>
 
           {/* Metadata grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4 p-4 bg-surface rounded-lg dark:bg-gray-800/50 border border-border-light dark:border-border-dark-light">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4 p-4 bg-surface rounded-lg dark:bg-surface-dark/50 border border-border-light dark:border-border-dark-light">
             {dataset.format && (
               <div className="flex flex-col">
                 <span className="text-[11px] text-text-tertiary dark:text-text-dark-tertiary flex items-center gap-1 mb-1">

@@ -57,7 +57,7 @@ type ResearcherProfileData = {
 const availabilityConfig = {
   AVAILABLE: { label: "Available for hire", className: "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400" },
   BUSY: { label: "Busy", className: "bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400" },
-  NOT_AVAILABLE: { label: "Not available", className: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400" },
+  NOT_AVAILABLE: { label: "Not available", className: "bg-gray-100 text-gray-600 dark:bg-surface-dark dark:text-text-dark-tertiary" },
 };
 
 function getSocialLinks(socialLinks: unknown): Record<string, string> {

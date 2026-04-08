@@ -87,7 +87,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
       <span className="flex items-center gap-2 font-medium">
         <Icon
           icon={item.icon}
-          className={cn("size-5", item.iconClass || "text-gray-500 dark:text-gray-400")}
+          className={cn("size-5", item.iconClass || "text-gray-500 dark:text-text-dark-tertiary")}
         />
         {item.label}
       </span>

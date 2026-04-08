@@ -160,7 +160,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
             <div className="relative flex flex-col justify-start items-center min-h-[300px]">
                 <div className="w-full max-w-sm sticky top-0 bg-background z-10 pt-4 pb-1">
                     <label
-                        className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 block"
+                        className="text-xs font-medium text-gray-500 dark:text-text-dark-tertiary mb-1 block"
                         htmlFor="search"
                     >
                         Search Commands
@@ -209,7 +209,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                     <AnimatePresence>
                         {isFocused && result && !selectedAction && (
                             <motion.div
-                                className="w-full border rounded-md shadow-sm overflow-hidden dark:border-gray-800 bg-white dark:bg-black mt-1"
+                                className="w-full border rounded-md shadow-sm overflow-hidden dark:border-gray-800 bg-white dark:bg-[#0F0F13] mt-1"
                                 variants={container}
                                 initial="hidden"
                                 animate="show"
@@ -219,7 +219,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                                     {result.actions.map((action) => (
                                         <motion.li
                                             key={action.id}
-                                            className="px-3 py-2 flex items-center justify-between hover:bg-gray-200 dark:hover:bg-zinc-900 cursor-pointer rounded-md"
+                                            className="px-3 py-2 flex items-center justify-between hover:bg-gray-200 dark:hover:bg-surface-dark cursor-pointer rounded-md"
                                             variants={item}
                                             layout
                                             onClick={() =>
@@ -231,7 +231,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                                                     <span className="text-gray-500">
                                                         {action.icon}
                                                     </span>
-                                                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                                    <span className="text-sm font-medium text-gray-900 dark:text-text-dark-primary">
                                                         {action.label}
                                                     </span>
                                                     <span className="text-xs text-gray-400">

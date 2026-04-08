@@ -35,7 +35,7 @@ const STATUS_CONFIG: Record<
   DRAFT: {
     label: "Draft",
     className:
-      "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
+      "bg-gray-100 text-gray-600 dark:bg-surface-dark dark:text-text-dark-tertiary",
   },
   PENDING_APPROVAL: {
     label: "Pending",

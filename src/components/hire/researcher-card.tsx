@@ -30,7 +30,7 @@ function availabilityClass(availability: string | null): string {
     return "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400";
   if (availability === "BUSY")
     return "bg-yellow-50 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400";
-  return "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400";
+  return "bg-gray-100 text-gray-500 dark:bg-surface-dark dark:text-text-dark-tertiary";
 }
 
 export function ResearcherCard({ researcher }: ResearcherCardProps) {

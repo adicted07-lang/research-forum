@@ -94,7 +94,7 @@ export async function ResearcherGrid({
                 href={href}
                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   isActive
-                    ? "bg-white dark:bg-gray-800 text-text-primary dark:text-text-dark-primary shadow-sm"
+                    ? "bg-white dark:bg-surface-dark text-text-primary dark:text-text-dark-primary shadow-sm"
                     : "text-text-secondary dark:text-text-dark-secondary hover:text-text-primary dark:hover:text-text-dark-primary"
                 }`}
               >

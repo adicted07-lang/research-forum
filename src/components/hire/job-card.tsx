@@ -61,7 +61,7 @@ function locationLabel(pref: string): string {
 function locationBadgeClass(pref: string): string {
   if (pref === "REMOTE") return "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400";
   if (pref === "HYBRID") return "bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400";
-  return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400";
+  return "bg-gray-100 text-gray-700 dark:bg-surface-dark dark:text-text-dark-tertiary";
 }
 
 function projectTypeLabel(type: string): string {

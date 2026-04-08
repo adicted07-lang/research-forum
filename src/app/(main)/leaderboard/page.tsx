@@ -22,7 +22,7 @@ const rankMedal: Record<number, string> = {
 
 const rankRowClass: Record<number, string> = {
   1: "bg-yellow-50 dark:bg-yellow-900/10 border-yellow-200 dark:border-yellow-700/30",
-  2: "bg-gray-50 dark:bg-gray-800/20 border-gray-200 dark:border-gray-700/30",
+  2: "bg-gray-50 dark:bg-surface-dark/20 border-gray-200 dark:border-border-dark/30",
   3: "bg-amber-50 dark:bg-amber-900/10 border-amber-200 dark:border-amber-700/30",
 };
 

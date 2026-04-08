@@ -94,7 +94,7 @@ export function MessagingHub({ currentUser, onOpenChat }: MessagingHubProps) {
             return (
               <div
                 key={thread.id}
-                className="flex items-center gap-3 px-3 py-2.5 cursor-pointer hover:bg-surface dark:hover:bg-gray-800 border-b border-border-light dark:border-border-dark-light transition-colors"
+                className="flex items-center gap-3 px-3 py-2.5 cursor-pointer hover:bg-surface dark:hover:bg-surface-dark border-b border-border-light dark:border-border-dark-light transition-colors"
                 onClick={() => {
                   onOpenChat(thread.id, other);
                   setExpanded(false);

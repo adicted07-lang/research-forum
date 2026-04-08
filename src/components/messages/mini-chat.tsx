@@ -91,7 +91,7 @@ export function MiniChat({ threadId, otherUser, currentUserId, onClose, onMinimi
                     className={`max-w-[80%] px-3 py-2 rounded-2xl text-[13px] leading-relaxed ${
                       isOwn
                         ? "bg-primary text-white rounded-br-sm"
-                        : "bg-surface dark:bg-gray-800 border border-border-light dark:border-border-dark-light rounded-bl-sm"
+                        : "bg-surface dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-bl-sm"
                     }`}
                   >
                     {msg.body}

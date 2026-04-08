@@ -282,7 +282,7 @@ async function CompanyDashboard({ userId }: { userId: string }) {
                       className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium ${
                         job.status === "OPEN"
                           ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400"
-                          : "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                          : "bg-gray-100 text-gray-600 dark:bg-surface-dark dark:text-text-dark-tertiary"
                       }`}
                     >
                       {job.status === "OPEN" ? "Open" : "Closed"}

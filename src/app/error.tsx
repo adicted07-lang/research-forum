@@ -11,10 +11,10 @@ export default function ErrorPage({
 }) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-surface dark:bg-surface-dark px-4">
-      <h1 className="text-3xl font-bold text-text-primary">
+      <h1 className="text-3xl font-bold text-text-primary dark:text-text-dark-primary">
         Something went wrong
       </h1>
-      <p className="mt-2 text-center text-text-secondary">
+      <p className="mt-2 text-center text-text-secondary dark:text-text-dark-secondary">
         An unexpected error occurred. Please try again.
       </p>
       <div className="mt-8 flex gap-4">
@@ -26,7 +26,7 @@ export default function ErrorPage({
         </button>
         <Link
           href="/"
-          className="rounded-md border border-border px-4 py-2 text-text-primary hover:bg-surface-hover transition-colors"
+          className="rounded-md border border-border dark:border-border-dark px-4 py-2 text-text-primary dark:text-text-dark-primary hover:bg-surface-hover dark:hover:bg-surface-dark transition-colors"
         >
           Go Home
         </Link>
