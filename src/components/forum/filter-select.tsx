@@ -4,16 +4,26 @@ interface FilterSelectProps {
   options: string[];
   value: string;
   placeholder: string;
-  buildUrl: (value: string) => string;
+  paramName: string;
+  baseParams: Record<string, string | undefined>;
+  basePath?: string;
   className?: string;
 }
 
-export function FilterSelect({ options, value, placeholder, buildUrl, className }: FilterSelectProps) {
+export function FilterSelect({ options, value, placeholder, paramName, baseParams, basePath = "/forum", className }: FilterSelectProps) {
+  function navigate(val: string) {
+    const params = new URLSearchParams();
+    for (const [k, v] of Object.entries(baseParams)) {
+      if (v && k !== paramName) params.set(k, v);
+    }
+    if (val) params.set(paramName, val);
+    const qs = params.toString();
+    window.location.href = `${basePath}${qs ? `?${qs}` : ""}`;
+  }
+
   return (
     <select
-      onChange={(e) => {
-        window.location.href = buildUrl(e.target.value);
-      }}
+      onChange={(e) => navigate(e.target.value)}
       value={value}
       className={className}
     >

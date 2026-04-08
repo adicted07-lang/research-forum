@@ -111,7 +111,8 @@ export async function QuestionList({
             options={[...RESEARCH_DOMAINS]}
             value={researchDomain || ""}
             placeholder="All domains"
-            buildUrl={(val) => buildUrl({ category, researchDomain: val || undefined, industry, sort, page: 1 })}
+            paramName="domain"
+            baseParams={{ category, domain: researchDomain, industry, sort }}
             className="px-3 py-1.5 rounded-md text-xs font-medium border border-border dark:border-border-dark bg-white dark:bg-surface-dark text-text-secondary dark:text-text-dark-secondary transition-colors hover:border-primary hover:text-primary dark:hover:text-text-dark-primary"
           />
 
@@ -120,7 +121,8 @@ export async function QuestionList({
             options={[...INDUSTRIES]}
             value={industry || ""}
             placeholder="All industries"
-            buildUrl={(val) => buildUrl({ category, researchDomain, industry: val || undefined, sort, page: 1 })}
+            paramName="industry"
+            baseParams={{ category, domain: researchDomain, industry, sort }}
             className="px-3 py-1.5 rounded-md text-xs font-medium border border-border dark:border-border-dark bg-white dark:bg-surface-dark text-text-secondary dark:text-text-dark-secondary transition-colors hover:border-primary hover:text-primary dark:hover:text-text-dark-primary"
           />
 
