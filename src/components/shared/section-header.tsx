@@ -16,16 +16,16 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className="flex items-center justify-between mb-4">
-      <div className="flex items-center gap-2">
-        {Icon && <Icon className="w-5 h-5 text-primary" />}
-        <h2 className="text-xl font-bold text-text-primary dark:text-text-dark-primary tracking-tight">
+      <div className="flex items-center gap-2.5">
+        {Icon && <Icon className="w-[18px] h-[18px] text-primary shrink-0" strokeWidth={2.2} />}
+        <h2 className="text-lg font-bold text-text-primary dark:text-text-dark-primary tracking-tight">
           {title}
         </h2>
       </div>
       {href && (
         <Link
           href={href}
-          className="text-sm font-medium text-primary hover:underline"
+          className="text-sm font-medium text-primary hover:underline ml-4 shrink-0"
         >
           {linkText}
         </Link>
