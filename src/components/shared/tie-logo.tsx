@@ -1,28 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
+
 export function TieLogo({ size = 36, className }: { size?: number; className?: string }) {
   return (
-    <svg
+    <img
+      src="/logo.png"
+      alt="T.I.E"
       width={size}
       height={size}
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
-      <rect width="100" height="100" rx="22" fill="#DA552F" />
-      <text
-        x="50"
-        y="54"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fill="white"
-        fontFamily="var(--font-outfit), system-ui, sans-serif"
-        fontWeight="700"
-        fontSize="32"
-        letterSpacing="1"
-      >
-        T.I.E
-      </text>
-    </svg>
+      className={`rounded-[${Math.round(size * 0.22)}px] ${className || ""}`}
+      style={{ borderRadius: size * 0.22 }}
+    />
   );
 }
 
