@@ -3,6 +3,7 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { SectionHeader } from "@/components/shared/section-header";
 import { EmptyState } from "@/components/shared/empty-state";
 import { BadgePill } from "@/components/shared/badge-pill";
+import { AdUnit } from "@/components/shared/ad-unit";
 import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
@@ -62,6 +63,7 @@ export default async function HomePage() {
               })}
             </div>
           </div>
+          <AdUnit slot="homepage-sidebar" format="rectangle" className="mt-4" />
         </div>
       }
     >

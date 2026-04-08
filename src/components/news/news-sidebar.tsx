@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Newspaper, MessageCircle, BookOpen, Mic, Megaphone, Wrench, type LucideIcon } from "lucide-react";
+import { AdUnit } from "@/components/shared/ad-unit";
 
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
   news: Newspaper,
@@ -60,6 +61,8 @@ export function NewsSidebar() {
           ))}
         </ul>
       </div>
+
+      <AdUnit slot="news-sidebar" format="rectangle" />
     </div>
   );
 }
