@@ -53,7 +53,7 @@ export function MiniChat({ threadId, otherUser, currentUserId, onClose, onMinimi
       >
         <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-[11px] font-semibold shrink-0">
           {otherUser.image ? (
-            <img src={otherUser.image} alt="" className="w-7 h-7 rounded-full object-cover" />
+            <img src={otherUser.image} alt={displayName || "User avatar"} className="w-7 h-7 rounded-full object-cover" />
           ) : (
             initials
           )}

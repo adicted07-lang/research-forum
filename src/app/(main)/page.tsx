@@ -151,7 +151,7 @@ export default async function HomePage() {
                 <Link href={`/news/${a.slug}`} className="block">
                   {a.coverImage ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={a.coverImage} alt="" className="w-full object-cover" style={{ aspectRatio: "16/9" }} />
+                    <img src={a.coverImage} alt={a.title} className="w-full object-cover" style={{ aspectRatio: "16/9" }} />
                   ) : (
                     <ArticleCover category={a.category ?? "news"} title={a.title} />
                   )}

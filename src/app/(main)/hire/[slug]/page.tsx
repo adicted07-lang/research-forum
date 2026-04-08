@@ -5,7 +5,7 @@ import { JobDetail } from "@/components/hire/job-detail";
 import { ApplicationForm } from "@/components/hire/application-form";
 import { getJobBySlug, incrementJobViews } from "@/server/actions/jobs";
 import { auth } from "@/auth";
-import { jobSchema } from "@/lib/structured-data";
+import { jobSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 export const dynamic = "force-dynamic";
 
@@ -61,6 +61,18 @@ export default async function JobPage({ params }: JobPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jobSchema(job as any)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}` },
+              { name: "Talent Board", url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}/hire` },
+              { name: job.title, url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}/hire/${slug}` },
+            ])
+          ),
         }}
       />
       <div className="max-w-4xl mx-auto space-y-6">

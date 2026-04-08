@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/contact`, changeFrequency: "monthly", priority: 0.4 },
   ];
 
-  const [questions, articles, jobs, users] = await Promise.all([
+  const [questions, articles, jobs, users, listings, grants, datasets] = await Promise.all([
     db.question.findMany({
       where: { deletedAt: null },
       select: { slug: true, updatedAt: true }
@@ -35,6 +35,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     db.user.findMany({
       where: { deletedAt: null },
       select: { username: true, updatedAt: true }
+    }),
+    db.listing.findMany({
+      where: { deletedAt: null, isActive: true },
+      select: { slug: true, updatedAt: true }
+    }),
+    db.grant.findMany({
+      where: { isActive: true },
+      select: { slug: true, updatedAt: true }
+    }),
+    db.dataset.findMany({
+      where: { deletedAt: null, isActive: true },
+      select: { slug: true, updatedAt: true }
     }),
   ]);
 
@@ -62,6 +74,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: u.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.4
+    })),
+    ...listings.map((l) => ({
+      url: `${baseUrl}/marketplace/${l.slug}`,
+      lastModified: l.updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.5
+    })),
+    ...grants.map((g) => ({
+      url: `${baseUrl}/grants/${g.slug}`,
+      lastModified: g.updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.5
+    })),
+    ...datasets.map((d) => ({
+      url: `${baseUrl}/datasets/${d.slug}`,
+      lastModified: d.updatedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.5
     })),
   ];
 

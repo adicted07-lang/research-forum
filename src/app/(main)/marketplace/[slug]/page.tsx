@@ -20,10 +20,14 @@ export async function generateMetadata({ params }: ListingPageProps): Promise<Me
     if (!listing) {
       return { title: "Listing Not Found — T.I.E" };
     }
+    const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
     const description = listing.tagline ?? undefined;
     return {
       title: `${listing.title} — T.I.E Marketplace`,
       description,
+      alternates: {
+        canonical: `${baseUrl}/marketplace/${slug}`,
+      },
       openGraph: {
         title: listing.title,
         description,

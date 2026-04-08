@@ -42,7 +42,7 @@ export function MessagingHub({ currentUser, onOpenChat }: MessagingHubProps) {
       >
         <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-[11px] font-semibold shrink-0">
           {currentUser.image ? (
-            <img src={currentUser.image} alt="" className="w-7 h-7 rounded-full object-cover" />
+            <img src={currentUser.image} alt={currentUser.name || "User avatar"} className="w-7 h-7 rounded-full object-cover" />
           ) : (
             initials
           )}
@@ -102,7 +102,7 @@ export function MessagingHub({ currentUser, onOpenChat }: MessagingHubProps) {
               >
                 <div className="w-10 h-10 rounded-full bg-primary-lighter flex items-center justify-center text-primary text-sm font-semibold shrink-0">
                   {other.image ? (
-                    <img src={other.image} alt="" className="w-10 h-10 rounded-full object-cover" />
+                    <img src={other.image} alt={displayName || "User avatar"} className="w-10 h-10 rounded-full object-cover" />
                   ) : (
                     initials
                   )}

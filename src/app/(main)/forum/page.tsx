@@ -41,6 +41,17 @@ const communityMembers: TooltipItem[] = [
 
 export const metadata: Metadata = {
   title: "Forum — T.I.E",
+  description: "Browse and discuss research questions from the global community on The Intellectual Exchange.",
+  openGraph: {
+    title: "Forum — T.I.E",
+    description: "Browse and discuss research questions from the global community on The Intellectual Exchange.",
+    siteName: "The Intellectual Exchange",
+  },
+  twitter: {
+    card: "summary",
+    title: "Forum — T.I.E",
+    description: "Browse and discuss research questions from the global community on The Intellectual Exchange.",
+  },
 };
 
 export default async function ForumPage({

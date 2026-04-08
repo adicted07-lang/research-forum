@@ -113,7 +113,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
                 {dateDisplay && (
                   <div className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
-                    <span>{dateDisplay}</span>
+                    <time dateTime={new Date(article.publishedAt ?? article.createdAt).toISOString()}>{dateDisplay}</time>
                   </div>
                 )}
                 {article.readTime != null && (

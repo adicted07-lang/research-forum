@@ -57,7 +57,7 @@ export function AnswerCard({
   const canAccept = isQuestionAuthor && !answer.isAccepted;
 
   return (
-    <div
+    <article
       className={`flex gap-4 bg-white border rounded-md p-4 dark:bg-surface-dark ${
         answer.isAccepted
           ? "border-success/40 bg-success/5 dark:bg-success/5"
@@ -105,9 +105,9 @@ export function AnswerCard({
                 {authorName}
               </span>
             )}
-            <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
+            <time dateTime={new Date(answer.createdAt).toISOString()} className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
               {relativeTime(answer.createdAt)}
-            </span>
+            </time>
           </div>
 
           {canAccept && (
@@ -115,6 +115,6 @@ export function AnswerCard({
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

@@ -71,7 +71,7 @@ function CoverGradient({
       // eslint-disable-next-line @next/next/no-img-element
       <img
         src={coverImage}
-        alt=""
+        alt={title || "Article cover"}
         className={`object-cover w-full h-full ${className ?? ""}`}
       />
     );

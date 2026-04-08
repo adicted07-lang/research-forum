@@ -13,12 +13,13 @@ interface CompanyProfilePageProps {
 export async function generateMetadata({ params }: CompanyProfilePageProps): Promise<Metadata> {
   const { username } = await params;
   const profile = await getCompanyProfile(username);
-  if (!profile) return { title: "Company not found — T.I.E" };
+  if (!profile) return { title: "Company not found — T.I.E", robots: { index: false, follow: false } };
   const displayName = profile.companyName || profile.username || "Company";
   const description = profile.description || `View ${displayName}'s profile on T.I.E`;
   return {
     title: `${displayName} — T.I.E`,
     description,
+    robots: { index: false, follow: false },
     openGraph: {
       title: displayName,
       description,

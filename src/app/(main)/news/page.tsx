@@ -7,6 +7,17 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "News — T.I.E",
+  description: "Latest research news, how-tos, and insights from The Intellectual Exchange community.",
+  openGraph: {
+    title: "News — T.I.E",
+    description: "Latest research news, how-tos, and insights from The Intellectual Exchange community.",
+    siteName: "The Intellectual Exchange",
+  },
+  twitter: {
+    card: "summary",
+    title: "News — T.I.E",
+    description: "Latest research news, how-tos, and insights from The Intellectual Exchange community.",
+  },
 };
 
 export default async function NewsPage({

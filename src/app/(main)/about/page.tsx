@@ -4,6 +4,16 @@ import { PageLayout } from "@/components/layout/page-layout";
 export const metadata: Metadata = {
   title: "About Us — T.I.E",
   description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
+  openGraph: {
+    title: "About Us — T.I.E",
+    description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
+    siteName: "The Intellectual Exchange",
+  },
+  twitter: {
+    card: "summary",
+    title: "About Us — T.I.E",
+    description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
+  },
 };
 
 export default function AboutPage() {

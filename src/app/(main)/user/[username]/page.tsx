@@ -14,12 +14,13 @@ interface UserProfilePageProps {
 export async function generateMetadata({ params }: UserProfilePageProps): Promise<Metadata> {
   const { username } = await params;
   const profile = await getResearcherProfile(username);
-  if (!profile) return { title: "User not found — T.I.E" };
+  if (!profile) return { title: "User not found — T.I.E", robots: { index: false, follow: false } };
   const displayName = profile.name || profile.username || "Researcher";
   const description = profile.bio || `View ${displayName}'s profile on T.I.E`;
   return {
     title: `${displayName} — T.I.E`,
     description,
+    robots: { index: false, follow: false },
     openGraph: {
       title: displayName,
       description,

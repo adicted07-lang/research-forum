@@ -12,6 +12,16 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Talent Board — T.I.E",
   description: "Find expert researchers for your projects on T.I.E.",
+  openGraph: {
+    title: "Talent Board — T.I.E",
+    description: "Find expert researchers for your projects on T.I.E.",
+    siteName: "The Intellectual Exchange",
+  },
+  twitter: {
+    card: "summary",
+    title: "Talent Board — T.I.E",
+    description: "Find expert researchers for your projects on T.I.E.",
+  },
 };
 
 interface HirePageProps {

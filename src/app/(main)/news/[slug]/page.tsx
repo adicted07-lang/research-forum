@@ -10,7 +10,7 @@ import { getArticleBySlug } from "@/server/actions/articles";
 import { getComments } from "@/server/actions/comments";
 import { getRelatedContent } from "@/server/actions/citations";
 import { RelatedContent } from "@/components/shared/related-content";
-import { articleSchema } from "@/lib/structured-data";
+import { articleSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 export async function generateMetadata({
   params,
@@ -79,6 +79,18 @@ export default async function ArticleDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(articleSchema(article as any)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}` },
+              { name: "News", url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}/news` },
+              { name: article.title, url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}/news/${slug}` },
+            ])
+          ),
         }}
       />
       <div className="space-y-6">

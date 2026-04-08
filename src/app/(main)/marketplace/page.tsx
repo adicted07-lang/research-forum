@@ -9,6 +9,16 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Marketplace — T.I.E",
   description: "Discover research services and tools from the T.I.E community.",
+  openGraph: {
+    title: "Marketplace — T.I.E",
+    description: "Discover research services and tools from the T.I.E community.",
+    siteName: "The Intellectual Exchange",
+  },
+  twitter: {
+    card: "summary",
+    title: "Marketplace — T.I.E",
+    description: "Discover research services and tools from the T.I.E community.",
+  },
 };
 
 interface MarketplacePageProps {

@@ -26,6 +26,7 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   return {
     title: q ? `"${q}" — Search — T.I.E` : "Search — T.I.E",
     description: "Search across questions, listings, articles, researchers, and jobs on T.I.E.",
+    robots: { index: false, follow: true },
   };
 }
 

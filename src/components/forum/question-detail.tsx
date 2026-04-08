@@ -61,7 +61,7 @@ export function QuestionDetail({ question, currentUserId }: QuestionDetailProps)
   const isAuthor = currentUserId === question.author.id;
 
   return (
-    <div className="bg-white border border-border-light rounded-md p-6 dark:bg-surface-dark dark:border-border-dark-light">
+    <article className="bg-white border border-border-light rounded-md p-6 dark:bg-surface-dark dark:border-border-dark-light">
       {/* Header */}
       <div className="flex gap-4">
         {/* Vote */}
@@ -123,9 +123,9 @@ export function QuestionDetail({ question, currentUserId }: QuestionDetailProps)
                   {authorName}
                 </span>
               </Link>
-              <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
+              <time dateTime={new Date(question.createdAt).toISOString()} className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
                 {relativeTime(question.createdAt)}
-              </span>
+              </time>
               <div className="flex items-center gap-1 text-xs text-text-tertiary">
                 <Eye className="w-3.5 h-3.5" />
                 <span>{question.viewCount} views</span>
@@ -142,6 +142,6 @@ export function QuestionDetail({ question, currentUserId }: QuestionDetailProps)
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
