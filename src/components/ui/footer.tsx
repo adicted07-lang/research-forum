@@ -50,7 +50,6 @@ const footerConfig = {
         { label: "Browse Jobs", href: "/hire" },
         { label: "Post a Job", href: "/hire/new" },
         { label: "Research Grants", href: "/grants" },
-        { label: "Office Hours", href: "/office-hours" },
       ],
     },
     {

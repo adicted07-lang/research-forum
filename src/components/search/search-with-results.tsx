@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Search, MessageSquare, ShoppingBag, Newspaper, Users, Briefcase, X, HelpCircle, FileText, Database, Clock } from "lucide-react";
+import { Search, MessageSquare, ShoppingBag, Newspaper, Users, Briefcase, X, HelpCircle, FileText, Database } from "lucide-react";
 import { globalSearch, type SearchResults } from "@/server/actions/search";
 import { UserAvatar } from "@/components/shared/user-avatar";
 
@@ -32,7 +32,6 @@ const quickActions = [
   { label: "Write an Article", icon: <FileText className="w-4 h-4 text-green-500" />, href: "/news/submit" },
   { label: "Post a Job", icon: <Briefcase className="w-4 h-4 text-blue-500" />, href: "/hire/new" },
   { label: "Upload Dataset", icon: <Database className="w-4 h-4 text-amber-500" />, href: "/datasets/new" },
-  { label: "Office Hours", icon: <Clock className="w-4 h-4 text-red-500" />, href: "/office-hours" },
   { label: "Find Researchers", icon: <Users className="w-4 h-4 text-teal-500" />, href: "/researchers" },
 ];
 
