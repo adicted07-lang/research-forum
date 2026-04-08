@@ -10,7 +10,7 @@ import { Briefcase } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Hire a Researcher — ResearchHub",
+  title: "Talent Board — ResearchHub",
   description: "Find expert researchers for your projects on ResearchHub.",
 };
 
@@ -75,7 +75,7 @@ export default async function HirePage({ searchParams }: HirePageProps) {
           {!session && (
             <div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light">
               <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-2">
-                Hire a Researcher
+                Talent Board
               </h3>
               <p className="text-xs text-text-secondary dark:text-text-dark-secondary mb-3">
                 Sign in as a company to post research projects.
@@ -126,7 +126,7 @@ export default async function HirePage({ searchParams }: HirePageProps) {
         </div>
       }
     >
-      <SectionHeader title="Hire a Researcher" />
+      <SectionHeader title="Talent Board" />
       <JobList domain={domain} location={location} sort={sort} page={page} />
     </PageLayout>
   );

@@ -35,8 +35,8 @@ export function LevelBadge({ points, showProgress = false, size = "sm" }: LevelB
         return (
           <div className="mt-1.5 w-full">
             <div className="flex justify-between text-[10px] text-text-tertiary mb-0.5">
-              <span>{points} pts</span>
-              <span>{next.minPoints} pts</span>
+              <span>{points} IC</span>
+              <span>{next.minPoints} IC</span>
             </div>
             <div className="h-1.5 bg-border rounded-full overflow-hidden">
               <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${progress}%` }} />

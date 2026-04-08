@@ -18,7 +18,7 @@ const mobileNavItems: MenuBarItem[] = [
   },
   {
     icon: (props) => <MessageSquare {...props} />,
-    label: "Forum",
+    label: "Exchange",
     href: "/forum",
   },
   {
@@ -33,7 +33,7 @@ const mobileNavItems: MenuBarItem[] = [
   },
   {
     icon: (props) => <BookOpen {...props} />,
-    label: "News",
+    label: "Journal",
     href: "/news",
   },
   {

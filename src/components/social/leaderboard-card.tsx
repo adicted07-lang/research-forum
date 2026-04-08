@@ -17,7 +17,7 @@ export async function LeaderboardCard() {
   const tooltipItems: TooltipItem[] = users.map((user) => ({
     id: user.id,
     name: user.name ?? user.username ?? "Researcher",
-    designation: `${user.points} pts`,
+    designation: `${user.points} IC`,
     image: user.image ?? `https://api.dicebear.com/7.x/initials/svg?seed=${user.name ?? user.username}`,
   }));
 
@@ -59,7 +59,7 @@ export async function LeaderboardCard() {
                     {user.name ?? user.username}
                   </p>
                 </Link>
-                <p className="text-xs text-text-tertiary">{user.points} pts</p>
+                <p className="text-xs text-text-tertiary">{user.points} IC</p>
               </div>
               {user.currentStreak > 0 && (
                 <StreakFire count={user.currentStreak} />

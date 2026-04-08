@@ -21,18 +21,18 @@ const footerConfig = {
     { icon: Globe, href: "#", label: "Website" },
     { icon: ExternalLink, href: "#", label: "Twitter" },
     { icon: BookOpen, href: "#", label: "Blog" },
-    { icon: MessageSquare, href: "/forum", label: "Forum" },
+    { icon: MessageSquare, href: "/forum", label: "Exchange Floor" },
     { icon: Mail, href: "mailto:support@researchhub.com", label: "Email" },
   ],
   columns: [
     {
       title: "Community",
       links: [
-        { label: "Forum", href: "/forum" },
+        { label: "Exchange Floor", href: "/forum" },
         { label: "Ask a Question", href: "/forum/new" },
         { label: "Leaderboard", href: "/leaderboard" },
         { label: "Researchers", href: "/researchers" },
-        { label: "News & Articles", href: "/news" },
+        { label: "The Journal", href: "/news" },
       ],
     },
     {

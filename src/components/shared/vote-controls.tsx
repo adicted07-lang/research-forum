@@ -75,7 +75,7 @@ export function VoteControls({
       <button
         onClick={() => handleVote("DOWNVOTE")}
         disabled={!canDownvote}
-        title={!canDownvote ? "Reach Contributor level (50 points) to downvote" : "Downvote"}
+        title={!canDownvote ? "Reach Contributor level (50 IC) to downvote" : "Downvote"}
         className={`p-1 rounded transition-colors ${
           currentVote === "DOWNVOTE"
             ? "text-error bg-error/10"

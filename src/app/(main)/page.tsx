@@ -124,7 +124,7 @@ export default async function HomePage() {
 
       {/* Jobs */}
       <section className="mb-8">
-        <SectionHeader title="Hire a Researcher" href="/hire" icon={Users} />
+        <SectionHeader title="Talent Board" href="/hire" icon={Users} />
         {jobs.length > 0 ? (
           <div className="space-y-3">
             {jobs.map((j: any) => (
@@ -143,7 +143,7 @@ export default async function HomePage() {
 
       {/* News */}
       <section className="mb-8">
-        <SectionHeader title="Latest News" href="/news" icon={Newspaper} />
+        <SectionHeader title="The Journal" href="/news" icon={Newspaper} />
         {articles.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {articles.map((a: any) => (

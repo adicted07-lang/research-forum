@@ -262,7 +262,7 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
               <div className="flex items-center gap-2 text-sm">
                 <Star className="w-4 h-4 text-warning" />
                 <span className="font-bold text-text-primary dark:text-text-dark-primary">{profile.points.toLocaleString()}</span>
-                <span className="text-text-secondary dark:text-text-dark-secondary">points this year</span>
+                <span className="text-text-secondary dark:text-text-dark-secondary">IC this year</span>
               </div>
               <div className="flex items-center gap-4">
                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${tier.color} ${tier.bgColor}`}>

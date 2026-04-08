@@ -12,11 +12,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "ResearchHub — Research Forum & Marketplace",
+  title: "ResearchHub — Research Exchange & Marketplace",
   description:
     "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
   openGraph: {
-    title: "ResearchHub — Research Forum & Marketplace",
+    title: "ResearchHub — Research Exchange & Marketplace",
     description:
       "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
     siteName: "ResearchHub",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ResearchHub — Research Forum & Marketplace",
+    title: "ResearchHub — Research Exchange & Marketplace",
     description:
       "A professional platform for researchers, academics, and companies.",
   },

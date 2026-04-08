@@ -14,7 +14,7 @@ const EXPORT_TYPES = [
   {
     type: "users",
     label: "Users",
-    description: "All active user accounts with role, points, and join date.",
+    description: "All active user accounts with role, IC, and join date.",
     icon: Users,
   },
   {

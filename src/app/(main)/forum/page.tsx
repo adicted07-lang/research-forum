@@ -40,7 +40,7 @@ const communityMembers: TooltipItem[] = [
 ];
 
 export const metadata: Metadata = {
-  title: "Forum — ResearchHub",
+  title: "Exchange Floor — ResearchHub",
 };
 
 export default async function ForumPage({

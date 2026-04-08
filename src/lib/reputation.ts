@@ -1,10 +1,10 @@
 export const LEVELS = [
-  { level: 1, name: "Newcomer", minPoints: 0, color: "gray" },
-  { level: 2, name: "Contributor", minPoints: 50, color: "blue" },
-  { level: 3, name: "Established", minPoints: 200, color: "green" },
-  { level: 4, name: "Trusted", minPoints: 500, color: "purple" },
-  { level: 5, name: "Expert", minPoints: 1000, color: "orange" },
-  { level: 6, name: "Authority", minPoints: 2500, color: "red" },
+  { level: 1, name: "Associate", minPoints: 0, color: "gray" },
+  { level: 2, name: "Analyst", minPoints: 50, color: "blue" },
+  { level: 3, name: "Strategist", minPoints: 200, color: "green" },
+  { level: 4, name: "Director", minPoints: 500, color: "purple" },
+  { level: 5, name: "Partner", minPoints: 1000, color: "orange" },
+  { level: 6, name: "Fellow", minPoints: 2500, color: "red" },
 ] as const;
 
 export type LevelInfo = (typeof LEVELS)[number];

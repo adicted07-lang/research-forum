@@ -48,14 +48,14 @@ export default async function LeaderboardPage() {
             Leaderboard
           </h1>
           <p className="mt-1 text-sm text-text-secondary dark:text-text-dark-secondary">
-            Top researchers ranked by points earned through contributions.
+            Top researchers ranked by Intellectual Capital (IC) earned through contributions.
           </p>
         </div>
 
         {users.length === 0 ? (
           <EmptyState
             title="No researchers yet"
-            description="Be the first to earn points by asking questions and contributing answers."
+            description="Be the first to earn IC by asking questions and contributing answers."
             icon={<Trophy className="w-12 h-12" />}
           />
         ) : (
@@ -108,7 +108,7 @@ export default async function LeaderboardPage() {
                       <span className="text-sm font-semibold text-text-primary dark:text-text-dark-primary">
                         {user.points.toLocaleString()}
                       </span>
-                      <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary ml-1">pts</span>
+                      <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary ml-1">IC</span>
                     </div>
                     {(() => {
                       const tier = getLevel(user.points);

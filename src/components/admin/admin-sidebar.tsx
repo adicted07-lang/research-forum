@@ -33,7 +33,7 @@ const navItems = [
   { href: "/admin/moderation", label: "Moderation", icon: Shield },
   { href: "/admin/marketplace", label: "Marketplace", icon: ShoppingBag },
   { href: "/admin/hiring", label: "Hiring", icon: Briefcase },
-  { href: "/admin/news", label: "News", icon: Newspaper },
+  { href: "/admin/news", label: "The Journal", icon: Newspaper },
   { href: "/admin/advertising", label: "Advertising", icon: Megaphone },
   { href: "/admin/tags", label: "Tags", icon: Tags },
   { href: "/admin/reports", label: "Reports", icon: Flag },

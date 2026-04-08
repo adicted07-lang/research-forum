@@ -92,7 +92,7 @@ const Navbar1 = ({
   menu = [
     { title: "Home", url: "/" },
     {
-      title: "Forum",
+      title: "Exchange Floor",
       url: "/forum",
       items: [
         {
@@ -146,7 +146,7 @@ const Navbar1 = ({
       ],
     },
     {
-      title: "Hire",
+      title: "Talent Board",
       url: "/hire",
       items: [
         {
@@ -164,7 +164,7 @@ const Navbar1 = ({
       ],
     },
     {
-      title: "News",
+      title: "The Journal",
       url: "/news",
     },
     {
@@ -190,7 +190,7 @@ const Navbar1 = ({
 
   // Inject "Post a Job" into Hire menu for company users
   const dynamicMenu = menu.map((item) => {
-    if (item.title === "Hire" && isCompany && item.items) {
+    if (item.title === "Talent Board" && isCompany && item.items) {
       return {
         ...item,
         items: [
