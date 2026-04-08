@@ -50,6 +50,12 @@ const config: Config = {
         lg: "14px",
         xl: "20px",
       },
+      keyframes: {
+        slideUp: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+      },
       boxShadow: {
         sm: "0 1px 2px rgba(0,0,0,0.04)",
         md: "0 4px 12px rgba(0,0,0,0.06)",

@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getLevel } from "@/lib/reputation";
+import { rateLimit } from "@/lib/rate-limit";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ username: string }> }
 ) {
+  const ip = request.headers.get("x-forwarded-for") || "unknown";
+  if (!rateLimit(`embed-profile:${ip}`, 30, 60000)) {
+    return new NextResponse("Too many requests", { status: 429 });
+  }
+
   const { username } = await params;
 
   const user = await db.user.findFirst({

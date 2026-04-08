@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import CookieConsent from "@/components/shared/cookie-consent";
 import { SessionProvider } from "next-auth/react";
 import { organizationSchema } from "@/lib/structured-data";
 import "./globals.css";
@@ -63,6 +64,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <CookieConsent />
           </ThemeProvider>
         </SessionProvider>
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (

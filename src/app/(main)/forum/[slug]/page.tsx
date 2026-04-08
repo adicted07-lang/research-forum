@@ -39,6 +39,7 @@ export async function generateMetadata({
       title: question.title,
       description,
       type: "article",
+      images: [{ url: `/api/og?title=${encodeURIComponent(question.title)}&subtitle=Forum`, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary",

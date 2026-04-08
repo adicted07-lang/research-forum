@@ -34,7 +34,7 @@ export async function generateMetadata({
       title: article.title,
       description,
       type: "article",
-      ...(article.coverImage ? { images: [{ url: article.coverImage }] } : {}),
+      images: [{ url: article.coverImage || `/api/og?title=${encodeURIComponent(article.title)}&subtitle=News`, width: 1200, height: 630 }],
     },
     twitter: {
       card: article.coverImage ? "summary_large_image" : "summary",

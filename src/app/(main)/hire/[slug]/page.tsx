@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: JobPageProps): Promise<Metada
       title,
       description,
       type: "website",
+      images: [{ url: `/api/og?title=${encodeURIComponent(job.title)}&subtitle=Talent Board`, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary",
