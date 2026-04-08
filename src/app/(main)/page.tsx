@@ -82,10 +82,7 @@ export default async function HomePage() {
 
       {/* Trending Questions */}
       <section className="mb-8">
-        <div className="flex items-center gap-2 mb-3">
-          <Flame className="w-5 h-5 text-primary" />
-          <SectionHeader title="Trending Questions" href="/forum" />
-        </div>
+        <SectionHeader title="Trending Questions" href="/forum" icon={Flame} />
         {questions.length > 0 ? (
           <div className="space-y-3">
             {questions.map((q: any) => (
@@ -108,10 +105,7 @@ export default async function HomePage() {
 
       {/* Top Services */}
       <section className="mb-8">
-        <div className="flex items-center gap-2 mb-3">
-          <LayoutGrid className="w-5 h-5 text-primary" />
-          <SectionHeader title="Top Services & Tools" href="/marketplace" />
-        </div>
+        <SectionHeader title="Top Services & Tools" href="/marketplace" icon={LayoutGrid} />
         {listings.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {listings.map((l: any) => (
@@ -130,10 +124,7 @@ export default async function HomePage() {
 
       {/* Jobs */}
       <section className="mb-8">
-        <div className="flex items-center gap-2 mb-3">
-          <Users className="w-5 h-5 text-primary" />
-          <SectionHeader title="Hire a Researcher" href="/hire" />
-        </div>
+        <SectionHeader title="Hire a Researcher" href="/hire" icon={Users} />
         {jobs.length > 0 ? (
           <div className="space-y-3">
             {jobs.map((j: any) => (
@@ -152,10 +143,7 @@ export default async function HomePage() {
 
       {/* News */}
       <section className="mb-8">
-        <div className="flex items-center gap-2 mb-3">
-          <Newspaper className="w-5 h-5 text-primary" />
-          <SectionHeader title="Latest News" href="/news" />
-        </div>
+        <SectionHeader title="Latest News" href="/news" icon={Newspaper} />
         {articles.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {articles.map((a: any) => (

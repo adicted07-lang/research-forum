@@ -64,7 +64,7 @@ async function main() {
       expertise: ["machine-learning", "genomics", "bioinformatics", "Python", "R"],
       experienceYears: 8,
       hourlyRate: 150,
-      availability: "AVAILABLE",
+
       isVerified: true,
       points: 340,
       emailVerified: new Date(),
@@ -88,7 +88,7 @@ async function main() {
       expertise: ["biostatistics", "survey-methodology", "SPSS", "SAS", "R", "mixed-methods"],
       experienceYears: 12,
       hourlyRate: 120,
-      availability: "BUSY",
+
       isVerified: true,
       points: 580,
       emailVerified: new Date(),
@@ -118,7 +118,7 @@ async function main() {
       ],
       experienceYears: 6,
       hourlyRate: 95,
-      availability: "AVAILABLE",
+
       isVerified: false,
       points: 210,
       emailVerified: new Date(),
