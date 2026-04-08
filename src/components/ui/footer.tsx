@@ -8,7 +8,7 @@ import {
   MessageSquare,
   BookOpen,
 } from "lucide-react";
-import { TieLogo, TieWordmark } from "@/components/shared/tie-logo";
+import { TieBrand } from "@/components/shared/tie-logo";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -81,9 +81,8 @@ export default function Footer() {
       <div className="max-w-[1280px] mx-auto">
         {/* Top Section: Logo and Description */}
         <div className="mb-12">
-          <Link href="/" className="flex items-center gap-2.5 mb-6">
-            <TieLogo size={34} />
-            <TieWordmark className="text-[15px] tracking-[-0.01em]" />
+          <Link href="/" className="inline-flex mb-6">
+            <TieBrand />
           </Link>
           <p className="text-sm text-text-secondary dark:text-text-dark-secondary leading-relaxed max-w-2xl">
             {footerConfig.description}

@@ -1,6 +1,4 @@
 export function TieLogo({ size = 36, className }: { size?: number; className?: string }) {
-  const r = Math.round(size * 0.25);
-  const fontSize = size * 0.32;
   return (
     <svg
       width={size}
@@ -28,14 +26,20 @@ export function TieLogo({ size = 36, className }: { size?: number; className?: s
   );
 }
 
-export function TieWordmark({ className }: { className?: string }) {
+export function TieBrand({ compact }: { compact?: boolean }) {
   return (
-    <span className={className}>
-      <span className="font-medium text-text-tertiary dark:text-text-dark-tertiary">The</span>
-      {" "}
-      <span className="font-bold text-text-primary dark:text-text-dark-primary">Intellectual</span>
-      {" "}
-      <span className="font-bold text-text-primary dark:text-text-dark-primary">Exchange</span>
+    <span className="flex items-center gap-2">
+      <TieLogo size={30} />
+      <span className="flex flex-col leading-none">
+        <span className="text-[13px] font-bold tracking-wide text-text-primary dark:text-text-dark-primary uppercase" style={{ letterSpacing: "0.12em" }}>
+          T.I.E
+        </span>
+        {!compact && (
+          <span className="hidden sm:block text-[9px] font-medium tracking-widest text-text-tertiary dark:text-text-dark-tertiary uppercase" style={{ letterSpacing: "0.15em" }}>
+            Intellectual Exchange
+          </span>
+        )}
+      </span>
     </span>
   );
 }
