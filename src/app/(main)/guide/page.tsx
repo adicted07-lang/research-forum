@@ -1,249 +1,211 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
+import {
+  UserCircle, MessageSquare, Trophy, Store, Briefcase, Newspaper,
+  Database, Bell, Lightbulb, ArrowRight, Building2, Star, TrendingUp,
+  Zap, Award, Shield, BookOpen, FolderOpen, ChevronRight,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Getting Started — T.I.E",
-  description:
-    "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
-  openGraph: {
-    title: "Getting Started — T.I.E",
-    description:
-      "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
-    siteName: "The Intellectual Exchange",
-  },
-  twitter: {
-    card: "summary",
-    title: "Getting Started — T.I.E",
-    description:
-      "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
-  },
+  description: "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
 };
+
+function Section({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {
+  return (
+    <section className="space-y-4">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+          <Icon className="w-5 h-5 text-primary" />
+        </div>
+        <h2 className="text-xl font-bold text-text-primary dark:text-text-dark-primary">{title}</h2>
+      </div>
+      <div className="pl-[52px] space-y-3 text-[15px] text-text-secondary dark:text-text-dark-secondary leading-relaxed">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function PointRow({ action, points }: { action: string; points: string }) {
+  return (
+    <div className="flex items-center justify-between py-2 px-3 rounded-lg bg-surface dark:bg-surface-dark border border-border-light dark:border-border-dark-light">
+      <span className="text-text-primary dark:text-text-dark-primary text-sm">{action}</span>
+      <span className="text-primary font-bold text-sm">{points}</span>
+    </div>
+  );
+}
+
+function LevelBadge({ name, points, color, privilege }: { name: string; points: string; color: string; privilege: string }) {
+  return (
+    <div className="flex items-center gap-3 py-2">
+      <span className={`w-2 h-2 rounded-full ${color}`} />
+      <div className="flex-1">
+        <span className="font-semibold text-text-primary dark:text-text-dark-primary text-sm">{name}</span>
+        <span className="text-text-tertiary dark:text-text-dark-tertiary text-xs ml-2">{points} IC</span>
+      </div>
+      <span className="text-xs text-text-secondary dark:text-text-dark-secondary">{privilege}</span>
+    </div>
+  );
+}
 
 export default function GuidePage() {
   return (
     <PageLayout>
-      <div className="max-w-3xl mx-auto py-12">
-        <article className="prose dark:prose-invert prose-headings:font-semibold">
-          <h1>Getting Started</h1>
-          <p className="text-sm text-text-secondary dark:text-text-dark-secondary">
-            A complete guide for researchers, academics, and professionals.
+      <div className="max-w-3xl mx-auto py-12 space-y-10">
+        {/* Header */}
+        <div className="text-center pb-8 border-b border-border-light dark:border-border-dark-light">
+          <h1 className="text-3xl font-bold text-text-primary dark:text-text-dark-primary mb-3 tracking-tight">
+            Researcher Guide
+          </h1>
+          <p className="text-text-secondary dark:text-text-dark-secondary mb-4">
+            Everything you need to know to get the most out of T.I.E.
           </p>
-          <p>
-            Looking for the company guide?{" "}
-            <Link href="/guide/companies">
-              Read the guide for companies &rarr;
-            </Link>
-          </p>
+          <Link href="/guide/companies" className="inline-flex items-center gap-1.5 text-sm text-primary font-medium hover:underline">
+            <Building2 className="w-4 h-4" /> Looking for the Company Guide? <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
 
-          {/* ---- Welcome ---- */}
-          <h2>Welcome to The Intellectual Exchange</h2>
+        {/* Welcome */}
+        <Section icon={Lightbulb} title="Welcome to T.I.E">
           <p>
-            The Intellectual Exchange (T.I.E) is the professional platform where
-            researchers exchange knowledge, hire domain experts, and discover
-            tools that accelerate their work. Whether you are an early-career
-            academic, a seasoned industry scientist, or an independent
-            consultant, T.I.E gives you the community and infrastructure to
-            grow.
+            The Intellectual Exchange is the professional platform where researchers exchange knowledge,
+            hire domain experts, and discover tools that accelerate their work. Whether you are an early-career
+            academic, a seasoned industry scientist, or an independent consultant — T.I.E gives you the
+            community and infrastructure to grow.
           </p>
+        </Section>
 
-          {/* ---- Profile ---- */}
-          <h2>Creating Your Profile</h2>
-          <p>
-            After signing up, take a few minutes to build a strong profile. A
-            complete profile helps you get hired, builds credibility, and makes
-            it easier for others to find you.
-          </p>
-          <ul>
-            <li>
-              <strong>Bio:</strong> Write a concise summary of your background
-              and research interests.
-            </li>
-            <li>
-              <strong>Expertise tags:</strong> Add tags that describe your
-              skills and domains (e.g., machine learning, genomics,
-              econometrics).
-            </li>
-            <li>
-              <strong>Experience:</strong> Specify your years of experience so
-              potential clients can gauge seniority.
-            </li>
-            <li>
-              <strong>Hourly rate:</strong> Set a rate if you offer consulting
-              or freelance work.
-            </li>
-            <li>
-              <strong>Social links:</strong> Connect your Google Scholar, ORCID,
-              LinkedIn, or personal website for additional visibility.
-            </li>
+        {/* Profile */}
+        <Section icon={UserCircle} title="Creating Your Profile">
+          <p>A complete profile helps you get hired, builds credibility, and makes it easier for others to find you.</p>
+          <ul className="space-y-2">
+            {[
+              ["Bio", "Write a concise summary of your background and research interests."],
+              ["Expertise tags", "Add tags like machine learning, genomics, econometrics."],
+              ["Experience", "Specify years of experience so clients can gauge seniority."],
+              ["Hourly rate", "Set a rate if you offer consulting or freelance work."],
+              ["Social links", "Connect Google Scholar, ORCID, LinkedIn, or your website."],
+            ].map(([label, desc]) => (
+              <li key={label} className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                <span><strong className="text-text-primary dark:text-text-dark-primary">{label}:</strong> {desc}</span>
+              </li>
+            ))}
           </ul>
+        </Section>
 
-          {/* ---- Forum ---- */}
-          <h2>Forum &mdash; Ask &amp; Answer</h2>
-          <p>
-            The forum is the heart of T.I.E. It is where researchers pose
-            questions, share insights, and solve problems together.
-          </p>
+        {/* Forum */}
+        <Section icon={MessageSquare} title="Forum — Ask & Answer">
+          <p>The forum is the heart of T.I.E — where researchers pose questions, share insights, and solve problems together.</p>
 
-          <h3>Asking a Question</h3>
-          <p>
-            When you create a new question you can provide a title, a detailed
-            body (Markdown supported), tags, a category, a research domain, and
-            an industry. The more context you give, the better answers you will
-            receive.
-          </p>
+          <div className="space-y-3 mt-2">
+            <div className="p-4 rounded-lg bg-surface dark:bg-surface-dark border border-border-light dark:border-border-dark-light">
+              <h3 className="font-semibold text-text-primary dark:text-text-dark-primary text-sm mb-1">Asking a Question</h3>
+              <p className="text-sm">Provide a title, detailed body (Markdown supported), tags, category, research domain, and industry. More context = better answers.</p>
+            </div>
+            <div className="p-4 rounded-lg bg-surface dark:bg-surface-dark border border-border-light dark:border-border-dark-light">
+              <h3 className="font-semibold text-text-primary dark:text-text-dark-primary text-sm mb-1">Answering & Voting</h3>
+              <p className="text-sm">Contribute answers to earn IC. Use upvotes to surface great content. The question author can mark the best answer.</p>
+            </div>
+            <div className="p-4 rounded-lg bg-surface dark:bg-surface-dark border border-border-light dark:border-border-dark-light">
+              <h3 className="font-semibold text-text-primary dark:text-text-dark-primary text-sm mb-1">Bounties</h3>
+              <p className="text-sm">Need an urgent answer? Attach IC points as a bounty to attract more attention and reward the best response.</p>
+            </div>
+          </div>
+        </Section>
 
-          <h3>Answering Questions</h3>
-          <p>
-            Browse open questions in your areas of expertise and contribute
-            answers. Well-written answers earn upvotes and build your
-            reputation.
-          </p>
+        {/* Reputation */}
+        <Section icon={Trophy} title="Reputation & Levels">
+          <p>Your reputation is measured in <strong className="text-text-primary dark:text-text-dark-primary">IC (Intellectual Capital)</strong> points:</p>
 
-          <h3>Voting</h3>
-          <p>
-            Use upvotes to surface the most useful content and downvotes to
-            flag low-quality posts. The question author can mark one answer as
-            the accepted answer, which pins it to the top and awards bonus
-            reputation points to the answerer.
-          </p>
+          <div className="space-y-1.5 mt-2">
+            <PointRow action="Ask a question" points="+5 IC" />
+            <PointRow action="Post an answer" points="+10 IC" />
+            <PointRow action="Answer accepted" points="+25 IC" />
+            <PointRow action="Receive an upvote" points="+2 IC" />
+            <PointRow action="Write a review" points="+5 IC" />
+            <PointRow action="Publish an article" points="+15 IC" />
+          </div>
 
-          <h3>Bounties</h3>
-          <p>
-            Need an urgent or highly specialized answer? Attach a bounty of IC
-            points to your question. Bounties draw more attention and reward the
-            best response.
-          </p>
+          <p className="mt-4 font-semibold text-text-primary dark:text-text-dark-primary text-sm">Levels & Privileges</p>
+          <div className="border border-border-light dark:border-border-dark-light rounded-lg divide-y divide-border-light dark:divide-border-dark-light px-4">
+            <LevelBadge name="Associate" points="0" color="bg-gray-400" privilege="Basic posting" />
+            <LevelBadge name="Analyst" points="50" color="bg-blue-500" privilege="Downvoting" />
+            <LevelBadge name="Strategist" points="200" color="bg-green-500" privilege="Set bounties" />
+            <LevelBadge name="Director" points="500" color="bg-purple-500" privilege="Close voting" />
+            <LevelBadge name="Partner" points="1,000" color="bg-orange-500" privilege="Direct editing" />
+            <LevelBadge name="Fellow" points="2,500" color="bg-red-500" privilege="Moderation" />
+          </div>
+        </Section>
 
-          {/* ---- Reputation ---- */}
-          <h2>Reputation &amp; Levels</h2>
+        {/* Marketplace */}
+        <Section icon={Store} title="Marketplace">
           <p>
-            Your reputation is measured in <strong>IC (Intellectual Capital)</strong>{" "}
-            points. You earn IC by contributing to the platform:
+            Browse and list research services and tools. Find software, consulting, data services, and more
+            from other researchers and companies. Leave reviews to help the community — each review earns you <strong className="text-text-primary dark:text-text-dark-primary">+5 IC</strong>.
           </p>
-          <ul>
-            <li>Ask a question: <strong>+5 IC</strong></li>
-            <li>Post an answer: <strong>+10 IC</strong></li>
-            <li>Answer accepted: <strong>+25 IC</strong></li>
-            <li>Receive an upvote: <strong>+2 IC</strong></li>
-            <li>Write a review: <strong>+5 IC</strong></li>
-            <li>Publish an article: <strong>+15 IC</strong></li>
+        </Section>
+
+        {/* Finding Work */}
+        <Section icon={Briefcase} title="Finding Work">
+          <p>The Talent Board lists research jobs posted by companies and institutions.</p>
+          <ul className="space-y-2">
+            {[
+              ["Browse", "Filter by job type (one-time, ongoing, contract) and location (remote, on-site, hybrid)."],
+              ["Apply", "Submit a cover letter and proposed rate directly through the platform."],
+              ["Track", "Monitor all your applications from your dashboard."],
+            ].map(([label, desc]) => (
+              <li key={label} className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                <span><strong className="text-text-primary dark:text-text-dark-primary">{label}:</strong> {desc}</span>
+              </li>
+            ))}
           </ul>
+        </Section>
 
-          <h3>Levels</h3>
+        {/* News */}
+        <Section icon={Newspaper} title="News & Articles">
           <p>
-            As you accumulate IC you advance through six levels, each unlocking
-            new privileges:
+            Stay current with the latest research news curated by the community. Submit your own articles
+            for review — published articles earn you <strong className="text-text-primary dark:text-text-dark-primary">+15 IC</strong>.
           </p>
-          <ol>
-            <li>
-              <strong>Associate</strong> (0 IC) &mdash; Default level. Ask
-              questions, post answers, upvote.
-            </li>
-            <li>
-              <strong>Analyst</strong> (50 IC) &mdash; Unlock downvoting.
-            </li>
-            <li>
-              <strong>Strategist</strong> (200 IC) &mdash; Create and award
-              bounties.
-            </li>
-            <li>
-              <strong>Director</strong> (500 IC) &mdash; Cast close/reopen votes
-              on questions.
-            </li>
-            <li>
-              <strong>Partner</strong> (1,000 IC) &mdash; Directly edit other
-              users&apos; posts for clarity and accuracy.
-            </li>
-            <li>
-              <strong>Fellow</strong> (2,500 IC) &mdash; Access moderation tools
-              and help govern the community.
-            </li>
-          </ol>
+        </Section>
 
-          {/* ---- Marketplace ---- */}
-          <h2>Marketplace</h2>
+        {/* Datasets & Projects */}
+        <Section icon={Database} title="Datasets & Projects">
           <p>
-            The marketplace is where you can browse and list research services
-            and tools. Find software, consulting offers, data services, and more
-            from other researchers and companies.
+            Share datasets in formats like CSV, JSON, and Parquet. Create collaborative projects where you
+            can invite team members, organize shared documents, and work together in one place.
           </p>
-          <p>
-            After using a product or service, leave a review. Reviews help the
-            community make informed decisions and earn you <strong>+5 IC</strong>{" "}
-            per review.
-          </p>
+        </Section>
 
-          {/* ---- Finding Work ---- */}
-          <h2>Finding Work</h2>
+        {/* Messaging */}
+        <Section icon={Bell} title="Messaging & Notifications">
           <p>
-            The Talent Board lists research jobs posted by companies and
-            institutions. You can filter by job type (one-time, ongoing,
-            contract) and work arrangement (remote, on-site, hybrid).
+            Use direct messaging to reach out to other researchers or follow up on answers.
+            The notification center keeps you informed about new answers, upvotes, followers, and more.
           </p>
-          <ul>
-            <li>
-              <strong>Apply:</strong> Submit a cover letter and proposed rate
-              directly through the platform.
-            </li>
-            <li>
-              <strong>Track:</strong> Monitor the status of all your
-              applications from your dashboard.
-            </li>
+        </Section>
+
+        {/* Tips */}
+        <Section icon={Star} title="Tips for Success">
+          <ul className="space-y-2">
+            {[
+              ["Complete your profile", "Profiles with a photo, bio, and expertise tags get significantly more engagement."],
+              ["Be active daily", "T.I.E tracks activity streaks — consistent participation keeps you visible."],
+              ["Answer in your expertise", "Focused, high-quality answers build reputation faster than broad, shallow ones."],
+              ["Write quality content", "Detailed questions, clear answers, and thoughtful reviews all strengthen your profile."],
+              ["Engage with the community", "Upvote helpful content, leave reviews, and follow researchers whose work interests you."],
+            ].map(([label, desc]) => (
+              <li key={label} className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                <span><strong className="text-text-primary dark:text-text-dark-primary">{label}:</strong> {desc}</span>
+              </li>
+            ))}
           </ul>
-
-          {/* ---- News & Articles ---- */}
-          <h2>News &amp; Articles</h2>
-          <p>
-            Stay current with the latest research news curated by the community.
-            You can also submit your own articles for review. Published articles
-            are categorized by topic and earn you <strong>+15 IC</strong>.
-          </p>
-
-          {/* ---- Datasets & Projects ---- */}
-          <h2>Datasets &amp; Projects</h2>
-          <p>
-            Share datasets in common formats such as CSV, JSON, and Parquet.
-            Create collaborative projects where you can invite team members,
-            organize shared documents, and work together in one place.
-          </p>
-
-          {/* ---- Messaging & Notifications ---- */}
-          <h2>Messaging &amp; Notifications</h2>
-          <p>
-            Use direct messaging to reach out to other researchers, discuss
-            opportunities, or follow up on answers. The notification center
-            keeps you informed about new answers to your questions, upvotes on
-            your content, new followers, and other important activity.
-          </p>
-
-          {/* ---- Tips ---- */}
-          <h2>Tips for Success</h2>
-          <ul>
-            <li>
-              <strong>Complete your profile:</strong> Profiles with a photo,
-              bio, and expertise tags get significantly more engagement.
-            </li>
-            <li>
-              <strong>Be active daily:</strong> T.I.E tracks activity streaks.
-              Consistent participation keeps you visible and earns trust.
-            </li>
-            <li>
-              <strong>Answer in your expertise:</strong> Focused, high-quality
-              answers build your reputation faster than broad, shallow ones.
-            </li>
-            <li>
-              <strong>Write quality content:</strong> Detailed questions, clear
-              answers, and thoughtful reviews all contribute to a stronger
-              profile.
-            </li>
-            <li>
-              <strong>Engage with the community:</strong> Upvote helpful
-              content, leave reviews on marketplace listings, and follow
-              researchers whose work interests you.
-            </li>
-          </ul>
-        </article>
+        </Section>
       </div>
     </PageLayout>
   );
