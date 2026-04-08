@@ -19,6 +19,7 @@ import {
   Store,
   Wrench,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { SearchWithResults } from "@/components/search/search-with-results";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
@@ -183,6 +184,8 @@ const Navbar1 = ({
   },
 }: Navbar1Props) => {
   const { data: session } = useSession();
+  const pathname = usePathname();
+  const isProfilePage = pathname?.startsWith("/profile/");
   const isCompany = (session?.user as any)?.role === "COMPANY";
 
   // Inject "Post a Job" into Hire menu for company users
@@ -226,7 +229,7 @@ const Navbar1 = ({
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <SearchWithResults />
+            {!isProfilePage && <SearchWithResults />}
             <NotificationBell />
             <UnreadMessageBadge />
             <ThemeToggle />
@@ -267,9 +270,11 @@ const Navbar1 = ({
                 </SheetHeader>
                 <div className="my-6 flex flex-col gap-6">
                   <div className="flex items-center gap-2">
-                    <div className="flex-1">
-                      <SearchWithResults />
-                    </div>
+                    {!isProfilePage && (
+                      <div className="flex-1">
+                        <SearchWithResults />
+                      </div>
+                    )}
                     <NotificationBell />
                     <UnreadMessageBadge />
                     <ThemeToggle />
