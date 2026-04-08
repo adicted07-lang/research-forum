@@ -16,14 +16,14 @@ const footerConfig = {
     email: "support@theintellectualexchange.com",
   },
   socials: [
-    { icon: MessageSquare, href: "/forum", label: "Exchange Floor" },
+    { icon: MessageSquare, href: "/forum", label: "Forum" },
     { icon: Mail, href: "mailto:support@theintellectualexchange.com", label: "Email" },
   ],
   columns: [
     {
       title: "Community",
       links: [
-        { label: "Exchange Floor", href: "/forum" },
+        { label: "Forum", href: "/forum" },
         { label: "Ask a Question", href: "/forum/new" },
         { label: "Leaderboard", href: "/leaderboard" },
         { label: "Researchers", href: "/researchers" },

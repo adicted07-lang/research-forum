@@ -10,7 +10,7 @@ import { SearchBar } from "@/components/shared/search-bar";
 import { NotificationBell } from "@/components/social/notification-bell";
 
 const navLinks = [
-  { label: "Exchange Floor", href: "/forum" },
+  { label: "Forum", href: "/forum" },
   { label: "Marketplace", href: "/marketplace" },
   { label: "Talent Board", href: "/hire" },
   { label: "The Journal", href: "/news" },

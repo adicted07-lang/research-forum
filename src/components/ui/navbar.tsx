@@ -93,7 +93,7 @@ const Navbar1 = ({
   menu = [
     { title: "Home", url: "/" },
     {
-      title: "Exchange Floor",
+      title: "Forum",
       url: "/forum",
       items: [
         {

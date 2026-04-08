@@ -102,7 +102,7 @@ export async function GET(request: NextRequest) {
           </div>
 
           <div style="padding: 0 24px;">
-            <p style="margin: 0 0 24px; font-size: 15px; color: #374151; line-height: 1.5;">${greeting} here's what happened on the Exchange Floor this week.</p>
+            <p style="margin: 0 0 24px; font-size: 15px; color: #374151; line-height: 1.5;">${greeting} here's what happened on the Forum this week.</p>
 
             <!-- Weekly Stats Bar -->
             <div style="display: flex; background: #f9fafb; border-radius: 8px; padding: 16px; margin-bottom: 24px; text-align: center;">
@@ -111,8 +111,8 @@ export async function GET(request: NextRequest) {
               <div style="flex: 1; border-left: 1px solid #e5e7eb;"><span style="display: block; font-size: 20px; font-weight: 700; color: #1a1f36;">${newMembersCount}</span><span style="font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">New Members</span></div>
             </div>
 
-            <!-- Trending on the Exchange Floor -->
-            <h2 style="margin: 0 0 12px; font-size: 16px; font-weight: 700; color: #1a1f36;">🔥 Trending on the Exchange Floor</h2>
+            <!-- Trending on the Forum -->
+            <h2 style="margin: 0 0 12px; font-size: 16px; font-weight: 700; color: #1a1f36;">🔥 Trending on the Forum</h2>
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">${questionsHtml}</table>
 
             ${articlesHtml ? `
