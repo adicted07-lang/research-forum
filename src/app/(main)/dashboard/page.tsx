@@ -13,7 +13,7 @@ import { getUserBookmarks } from "@/server/actions/bookmarks";
 import { getUserAnalytics } from "@/server/actions/analytics";
 import { BookmarksList } from "@/components/bookmarks/bookmarks-list";
 import { AnalyticsCards } from "@/components/dashboard/analytics-cards";
-import { QuickActions } from "@/components/dashboard/quick-actions";
+
 import { Briefcase, FileText, Users, BookmarkIcon } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -94,11 +94,6 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
 
   return (
     <div className="space-y-6">
-      {/* Quick Actions */}
-      <section>
-        <QuickActions />
-      </section>
-
       {analytics && (
         <section className="mb-8">
           <h2 className="text-lg font-semibold text-text-primary dark:text-text-dark-primary mb-4">

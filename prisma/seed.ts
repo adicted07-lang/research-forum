@@ -69,6 +69,7 @@ async function main() {
       points: 340,
       emailVerified: new Date(),
       portfolioLinks: ["https://github.com/alicechen", "https://alicechen.dev"],
+      socialLinks: { website: "https://alicechen.dev", twitter: "alicechen_bio", linkedin: "https://linkedin.com/in/alicechen" },
     },
   });
 
@@ -92,6 +93,7 @@ async function main() {
       points: 580,
       emailVerified: new Date(),
       portfolioLinks: ["https://bobmartinez.research.io"],
+      socialLinks: { website: "https://bobmartinez.research.io", twitter: "bobmartinez_stats", linkedin: "https://linkedin.com/in/bobmartinez" },
     },
   });
 
@@ -120,6 +122,7 @@ async function main() {
       isVerified: false,
       points: 210,
       emailVerified: new Date(),
+      socialLinks: { twitter: "carolnguyen_ux", linkedin: "https://linkedin.com/in/carolnguyen" },
     },
   });
 
@@ -140,6 +143,7 @@ async function main() {
       website: "https://techcorp.example.com",
       hiringStatus: "ACTIVELY_HIRING",
       emailVerified: new Date(),
+      socialLinks: { website: "https://techcorp.example.com", twitter: "techcorp_research", linkedin: "https://linkedin.com/company/techcorp" },
     },
   });
 
