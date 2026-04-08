@@ -1,4 +1,14 @@
 import Link from "next/link";
+import { Newspaper, MessageCircle, BookOpen, Mic, Megaphone, Wrench, type LucideIcon } from "lucide-react";
+
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  news: Newspaper,
+  opinion: MessageCircle,
+  how_to: BookOpen,
+  interview: Mic,
+  announcement: Megaphone,
+  makers: Wrench,
+};
 
 const ARTICLE_CATEGORIES = [
   { label: "News", value: "news" },
@@ -38,8 +48,12 @@ export function NewsSidebar() {
             <li key={cat.value}>
               <Link
                 href={`/news?category=${encodeURIComponent(cat.value)}`}
-                className="block px-2 py-1.5 text-sm text-text-secondary dark:text-text-dark-secondary hover:text-primary hover:bg-primary-lighter rounded-md transition-colors"
+                className="flex items-center gap-2 px-2 py-1.5 text-sm text-text-secondary dark:text-text-dark-secondary hover:text-primary hover:bg-primary-lighter rounded-md transition-colors"
               >
+                {CATEGORY_ICONS[cat.value] && (() => {
+                  const Icon = CATEGORY_ICONS[cat.value];
+                  return <Icon className="w-4 h-4 text-text-tertiary" />;
+                })()}
                 {cat.label}
               </Link>
             </li>
