@@ -2,11 +2,8 @@
 
 import Link from "next/link";
 import {
-  Globe,
-  ExternalLink,
   Mail,
   MessageSquare,
-  BookOpen,
 } from "lucide-react";
 import { TieBrand } from "@/components/shared/tie-logo";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,9 +16,6 @@ const footerConfig = {
     email: "support@theintellectualexchange.com",
   },
   socials: [
-    { icon: Globe, href: "#", label: "Website" },
-    { icon: ExternalLink, href: "#", label: "Twitter" },
-    { icon: BookOpen, href: "#", label: "Blog" },
     { icon: MessageSquare, href: "/forum", label: "Exchange Floor" },
     { icon: Mail, href: "mailto:support@theintellectualexchange.com", label: "Email" },
   ],
@@ -67,9 +61,9 @@ const footerConfig = {
       links: [
         { label: "About Us", href: "/about" },
         { label: "Contact Us", href: "/contact" },
-        { label: "Privacy Policy", href: "#" },
-        { label: "Terms of Service", href: "#" },
-        { label: "Cookie Policy", href: "#" },
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Terms of Service", href: "/terms" },
+        { label: "Cookie Policy", href: "/cookies" },
       ],
     },
   ],
@@ -160,9 +154,9 @@ export default function Footer() {
         <div className="mt-12 pt-6 border-t border-border dark:border-border-dark flex flex-col md:flex-row justify-between items-center text-xs text-text-tertiary dark:text-text-dark-tertiary gap-4">
           <p>&copy; {new Date().getFullYear()} The Intellectual Exchange. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Terms</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Sitemap</Link>
+            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">Terms</Link>
+            <Link href="/sitemap.xml" className="hover:text-primary transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>

@@ -27,7 +27,7 @@ export async function GET(
       <text x="16" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#21293C">${displayName}</text>
       <text x="16" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#6F7287">@${user.username} · ${tier.name}</text>
       <text x="16" y="66" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">${user.points} pts · ${user._count.answers} answers · ${user.currentStreak}d streak</text>
-      <text x="260" y="66" font-family="system-ui, sans-serif" font-size="9" fill="#DA552F">ResearchHub</text>
+      <text x="260" y="66" font-family="system-ui, sans-serif" font-size="9" fill="#DA552F">T.I.E</text>
     </svg>
   `;
 

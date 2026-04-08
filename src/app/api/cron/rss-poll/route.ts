@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
     for (const source of sources) {
       try {
         const response = await fetch(source.url, {
-          headers: { "User-Agent": "ResearchHub RSS Poller/1.0" },
+          headers: { "User-Agent": "T.I.E RSS Poller/1.0" },
         });
         if (!response.ok) continue;
 
@@ -89,7 +89,7 @@ export async function GET(request: NextRequest) {
               const response = await anthropic.messages.create({
                 model: "claude-sonnet-4-6",
                 max_tokens: 2000,
-                system: "You are a professional science journalist writing for ResearchHub, a platform for researchers and academics. Write in HTML format.",
+                system: "You are a professional science journalist writing for The Intellectual Exchange, a platform for researchers and academics. Write in HTML format.",
                 messages: [{
                   role: "user",
                   content: `Write a comprehensive article (minimum 800 words) based on this research news. Include: an engaging introduction, key findings and methodology, implications for the field, and a conclusion. At the end, add a source attribution line.\n\nTitle: ${item.title}\nDescription: ${item.description}\nSource URL: ${item.link}`,

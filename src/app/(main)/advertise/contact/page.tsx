@@ -50,10 +50,10 @@ export default function AdvertiseContactPage() {
               Email us directly
             </p>
             <a
-              href="mailto:info@researchhub.com"
+              href="mailto:info@theintellectualexchange.com"
               className="text-sm font-medium text-primary hover:underline"
             >
-              info@researchhub.com
+              info@theintellectualexchange.com
             </a>
           </div>
         </div>

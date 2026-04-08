@@ -24,8 +24,8 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   const params = await searchParams;
   const q = params.q || "";
   return {
-    title: q ? `"${q}" — Search — ResearchHub` : "Search — ResearchHub",
-    description: "Search across questions, listings, articles, researchers, and jobs on ResearchHub.",
+    title: q ? `"${q}" — Search — T.I.E` : "Search — T.I.E",
+    description: "Search across questions, listings, articles, researchers, and jobs on T.I.E.",
   };
 }
 
@@ -85,7 +85,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       {!query ? (
         <div className="text-center py-20 text-text-tertiary">
           <Search className="w-12 h-12 mx-auto mb-4 opacity-30" />
-          <p className="text-lg font-medium">Search ResearchHub</p>
+          <p className="text-lg font-medium">Search T.I.E</p>
           <p className="text-sm mt-1">Find questions, marketplace listings, researchers, and more</p>
         </div>
       ) : (

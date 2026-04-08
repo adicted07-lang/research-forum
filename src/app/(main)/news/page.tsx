@@ -6,7 +6,7 @@ import { ArticleList } from "@/components/news/article-list";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "The Journal — ResearchHub",
+  title: "The Journal — T.I.E",
 };
 
 export default async function NewsPage({

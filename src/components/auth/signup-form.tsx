@@ -36,7 +36,7 @@ export function SignupForm() {
           R
         </div>
         <h1 className="text-2xl font-bold text-text-primary dark:text-text-dark-primary">
-          Join ResearchHub
+          Join T.I.E
         </h1>
         <p className="text-sm text-text-secondary dark:text-text-dark-secondary mt-1">
           Create your researcher account

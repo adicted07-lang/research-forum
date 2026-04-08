@@ -18,11 +18,11 @@ export async function generateMetadata({ params }: DatasetPageProps): Promise<Me
   try {
     const dataset = await getDatasetBySlug(slug);
     if (!dataset) {
-      return { title: "Dataset Not Found — ResearchHub" };
+      return { title: "Dataset Not Found — T.I.E" };
     }
     const description = dataset.description.replace(/<[^>]*>/g, "").slice(0, 160);
     return {
-      title: `${dataset.title} — ResearchHub Datasets`,
+      title: `${dataset.title} — T.I.E Datasets`,
       description,
       openGraph: {
         title: dataset.title,
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: DatasetPageProps): Promise<Me
       },
     };
   } catch {
-    return { title: "Datasets — ResearchHub" };
+    return { title: "Datasets — T.I.E" };
   }
 }
 

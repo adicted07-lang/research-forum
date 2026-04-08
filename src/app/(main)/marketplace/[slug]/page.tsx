@@ -18,11 +18,11 @@ export async function generateMetadata({ params }: ListingPageProps): Promise<Me
   try {
     const listing = await getListingBySlug(slug);
     if (!listing) {
-      return { title: "Listing Not Found — ResearchHub" };
+      return { title: "Listing Not Found — T.I.E" };
     }
     const description = listing.tagline ?? undefined;
     return {
-      title: `${listing.title} — ResearchHub Marketplace`,
+      title: `${listing.title} — T.I.E Marketplace`,
       description,
       openGraph: {
         title: listing.title,
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: ListingPageProps): Promise<Me
       },
     };
   } catch {
-    return { title: "Marketplace — ResearchHub" };
+    return { title: "Marketplace — T.I.E" };
   }
 }
 

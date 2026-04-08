@@ -9,8 +9,8 @@ import { Plus } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Ad Dashboard — ResearchHub",
-  description: "Manage your advertising campaigns on ResearchHub.",
+  title: "Ad Dashboard — T.I.E",
+  description: "Manage your advertising campaigns on T.I.E.",
 };
 
 export default async function AdDashboardPage() {

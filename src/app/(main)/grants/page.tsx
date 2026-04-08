@@ -8,7 +8,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Research Grants — ResearchHub",
+  title: "Research Grants — T.I.E",
   description: "Find open research grants and funding opportunities.",
 };
 

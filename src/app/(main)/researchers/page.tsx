@@ -6,8 +6,8 @@ import { SectionHeader } from "@/components/shared/section-header";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Browse Researchers — ResearchHub",
-  description: "Find expert researchers available for hire on ResearchHub.",
+  title: "Browse Researchers — T.I.E",
+  description: "Find expert researchers available for hire on T.I.E.",
 };
 
 interface ResearchersPageProps {

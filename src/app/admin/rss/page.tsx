@@ -4,7 +4,7 @@ import { RSSManager } from "./rss-manager";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "RSS Sources — Admin — ResearchHub",
+  title: "RSS Sources — Admin — T.I.E",
 };
 
 export default function AdminRSSPage() {

@@ -5,8 +5,8 @@ import { ListingForm } from "@/components/marketplace/listing-form";
 import { SectionHeader } from "@/components/shared/section-header";
 
 export const metadata: Metadata = {
-  title: "List Your Service — ResearchHub",
-  description: "Add your research service or tool to the ResearchHub marketplace.",
+  title: "List Your Service — T.I.E",
+  description: "Add your research service or tool to the T.I.E marketplace.",
 };
 
 export default function NewListingPage() {

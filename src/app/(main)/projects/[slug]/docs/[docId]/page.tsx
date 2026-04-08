@@ -16,9 +16,9 @@ interface DocPageProps {
 export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
   const { docId } = await params;
   const doc = await getDocument(docId);
-  if (!doc) return { title: "Document Not Found — ResearchHub" };
+  if (!doc) return { title: "Document Not Found — T.I.E" };
   return {
-    title: `${doc.title} — ResearchHub`,
+    title: `${doc.title} — T.I.E`,
     description: doc.body.replace(/<[^>]*>/g, "").slice(0, 160),
   };
 }

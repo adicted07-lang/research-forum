@@ -7,8 +7,8 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { DatasetForm } from "@/components/datasets/dataset-form";
 
 export const metadata: Metadata = {
-  title: "Upload a Dataset — ResearchHub",
-  description: "Share your research dataset with the ResearchHub community.",
+  title: "Upload a Dataset — T.I.E",
+  description: "Share your research dataset with the T.I.E community.",
 };
 
 export default async function NewDatasetPage() {

@@ -14,7 +14,7 @@ export async function sendEmail({
   try {
     if (!process.env.RESEND_API_KEY) return; // Skip if not configured
     await resend.emails.send({
-      from: "ResearchHub <noreply@researchhub.com>",
+      from: "The Intellectual Exchange <noreply@theintellectualexchange.com>",
       to,
       subject,
       html,

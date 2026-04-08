@@ -55,7 +55,7 @@ export async function toggleFollow(targetUserId: string) {
       if (targetUser?.email) {
         sendEmail({
           to: targetUser.email,
-          subject: `${followerName} started following you on ResearchHub`,
+          subject: `${followerName} started following you on T.I.E`,
           html: newFollowerEmail(followerName),
         });
       }

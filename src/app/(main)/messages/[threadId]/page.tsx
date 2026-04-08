@@ -11,7 +11,7 @@ import { ArrowLeft } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Conversation — ResearchHub",
+  title: "Conversation — T.I.E",
 };
 
 interface ThreadPageProps {

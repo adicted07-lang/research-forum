@@ -5,8 +5,8 @@ import { JobForm } from "@/components/hire/job-form";
 import { SectionHeader } from "@/components/shared/section-header";
 
 export const metadata: Metadata = {
-  title: "Post a Job — ResearchHub",
-  description: "Post a research project and find the perfect expert on ResearchHub.",
+  title: "Post a Job — T.I.E",
+  description: "Post a research project and find the perfect expert on T.I.E.",
 };
 
 export default function NewJobPage() {

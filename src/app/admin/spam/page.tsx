@@ -5,7 +5,7 @@ import { BanButton } from "@/components/admin/ban-button";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Spam Detection — Admin — ResearchHub",
+  title: "Spam Detection — Admin — T.I.E",
 };
 
 export default async function AdminSpamPage() {

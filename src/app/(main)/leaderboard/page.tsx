@@ -11,7 +11,7 @@ import { getLevel } from "@/lib/reputation";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Leaderboard — ResearchHub",
+  title: "Leaderboard — T.I.E",
 };
 
 const rankMedal: Record<number, string> = {

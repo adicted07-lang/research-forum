@@ -11,8 +11,8 @@ import { getDatasets } from "@/server/actions/datasets";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Dataset Marketplace — ResearchHub",
-  description: "Discover and share research datasets from the ResearchHub community.",
+  title: "Dataset Marketplace — T.I.E",
+  description: "Discover and share research datasets from the T.I.E community.",
 };
 
 interface DatasetsPageProps {

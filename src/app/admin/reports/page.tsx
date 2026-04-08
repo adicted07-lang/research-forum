@@ -5,7 +5,7 @@ import { ReportActions } from "@/components/admin/report-actions";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Reports — Admin — ResearchHub",
+  title: "Reports — Admin — T.I.E",
 };
 
 export default async function AdminReportsPage() {

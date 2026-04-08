@@ -7,7 +7,7 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { ProjectForm } from "@/components/projects/project-form";
 
 export const metadata: Metadata = {
-  title: "New Project — ResearchHub",
+  title: "New Project — T.I.E",
   description: "Create a new research project workspace for your team.",
 };
 

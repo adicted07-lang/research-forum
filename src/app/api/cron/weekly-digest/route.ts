@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { sendEmail } from "@/lib/email";
 import { getLevel } from "@/lib/reputation";
 
-const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://researchhub.com";
+const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");

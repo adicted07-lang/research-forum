@@ -4,7 +4,7 @@ import { FeaturedContentManager } from "./featured-manager";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Featured Content — Admin — ResearchHub",
+  title: "Featured Content — Admin — T.I.E",
 };
 
 export default function AdminFeaturedPage() {

@@ -16,7 +16,7 @@ import {
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Site Analytics — Admin — ResearchHub",
+  title: "Site Analytics — Admin — T.I.E",
 };
 
 export default async function AdminAnalyticsPage() {

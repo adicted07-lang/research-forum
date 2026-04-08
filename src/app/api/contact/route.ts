@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
 
   try {
     await sendEmail({
-      to: "support@researchhub.com",
+      to: "support@theintellectualexchange.com",
       subject: `Contact Form: ${subject}`,
       html: `<p><strong>From:</strong> ${name} (${email})</p><p><strong>Subject:</strong> ${subject}</p><p>${message}</p>`,
     });

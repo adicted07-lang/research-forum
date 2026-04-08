@@ -21,11 +21,11 @@ interface ProjectPageProps {
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
-  if (!project) return { title: "Project Not Found — ResearchHub" };
+  if (!project) return { title: "Project Not Found — T.I.E" };
 
   const description = project.description.replace(/<[^>]*>/g, "").slice(0, 160);
   return {
-    title: `${project.name} — ResearchHub Projects`,
+    title: `${project.name} — T.I.E Projects`,
     description,
   };
 }

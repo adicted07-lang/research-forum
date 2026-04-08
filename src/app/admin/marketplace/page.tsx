@@ -4,7 +4,7 @@ import { AdminListingsTable } from "@/components/admin/admin-listings-table";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Marketplace — Admin — ResearchHub",
+  title: "Marketplace — Admin — T.I.E",
 };
 
 interface MarketplacePageProps {

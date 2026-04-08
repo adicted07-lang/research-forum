@@ -5,9 +5,9 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { Megaphone, LayoutDashboard, Star, TrendingUp, DollarSign, Users } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Advertise — ResearchHub",
+  title: "Advertise — T.I.E",
   description:
-    "Reach thousands of research professionals with targeted ads on ResearchHub.",
+    "Reach thousands of research professionals with targeted ads on T.I.E.",
 };
 
 const AD_TYPES = [
@@ -22,7 +22,7 @@ const AD_TYPES = [
     icon: <Megaphone className="w-6 h-6 text-primary" />,
     title: "Banner Ads",
     description:
-      "Prominent placement in the sidebar across all pages. High-visibility format for brand awareness and product launches targeting the entire ResearchHub audience.",
+      "Prominent placement in the sidebar across all pages. High-visibility format for brand awareness and product launches targeting the entire T.I.E audience.",
     pricing: "From $5.00 CPM or $1.00 CPC",
   },
   {

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
-  title: "Contact Us — ResearchHub",
-  description: "Get in touch with the ResearchHub team.",
+  title: "Contact Us — T.I.E",
+  description: "Get in touch with the T.I.E team.",
 };
 
 export default function ContactPage() {

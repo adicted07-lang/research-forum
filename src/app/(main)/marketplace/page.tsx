@@ -7,8 +7,8 @@ import { SectionHeader } from "@/components/shared/section-header";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Marketplace — ResearchHub",
-  description: "Discover research services and tools from the ResearchHub community.",
+  title: "Marketplace — T.I.E",
+  description: "Discover research services and tools from the T.I.E community.",
 };
 
 interface MarketplacePageProps {

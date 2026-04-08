@@ -34,16 +34,16 @@ export function newFollowerEmail(followerName: string): string {
         You have a new follower!
       </h2>
       <p style="margin: 0 0 16px; color: #6b7280; font-size: 15px;">
-        <strong>${followerName}</strong> started following you on ResearchHub.
+        <strong>${followerName}</strong> started following you on T.I.E.
       </p>
       <p style="margin: 0 0 16px; color: #374151; font-size: 14px;">
         Connect with your community and share your research insights.
       </p>
-      <a href="https://researchhub.com" style="${buttonStyles}">
-        View ResearchHub
+      <a href="https://theintellectualexchange.com" style="${buttonStyles}">
+        View T.I.E
       </a>
       <div style="${footerStyles}">
-        <p>You're receiving this email because you're a member of ResearchHub.</p>
+        <p>You're receiving this email because you're a member of The Intellectual Exchange.</p>
       </div>
     </div>
   `;
@@ -61,11 +61,11 @@ export function newAnswerEmail(questionTitle: string): string {
       <p style="margin: 0 0 16px; color: #374151; font-size: 14px;">
         Check out the answer and mark it as accepted if it solves your problem.
       </p>
-      <a href="https://researchhub.com/forum" style="${buttonStyles}">
+      <a href="https://theintellectualexchange.com/forum" style="${buttonStyles}">
         View Answer
       </a>
       <div style="${footerStyles}">
-        <p>You're receiving this email because someone answered your question on ResearchHub.</p>
+        <p>You're receiving this email because someone answered your question on T.I.E.</p>
       </div>
     </div>
   `;
@@ -95,11 +95,11 @@ export function applicationStatusEmail(jobTitle: string, status: string): string
       <p style="margin: 0 0 16px; color: #374151; font-size: 14px;">
         Status: <strong>${status}</strong>
       </p>
-      <a href="https://researchhub.com/hire" style="${buttonStyles}">
+      <a href="https://theintellectualexchange.com/hire" style="${buttonStyles}">
         View Applications
       </a>
       <div style="${footerStyles}">
-        <p>You're receiving this email because you applied to a job on ResearchHub.</p>
+        <p>You're receiving this email because you applied to a job on T.I.E.</p>
       </div>
     </div>
   `;
@@ -112,16 +112,16 @@ export function newMessageEmail(senderName: string): string {
         New message from ${senderName}
       </h2>
       <p style="margin: 0 0 16px; color: #6b7280; font-size: 15px;">
-        <strong>${senderName}</strong> sent you a message on ResearchHub.
+        <strong>${senderName}</strong> sent you a message on T.I.E.
       </p>
       <p style="margin: 0 0 16px; color: #374151; font-size: 14px;">
         Log in to read and reply to the message.
       </p>
-      <a href="https://researchhub.com/messages" style="${buttonStyles}">
+      <a href="https://theintellectualexchange.com/messages" style="${buttonStyles}">
         View Message
       </a>
       <div style="${footerStyles}">
-        <p>You're receiving this email because someone messaged you on ResearchHub.</p>
+        <p>You're receiving this email because someone messaged you on T.I.E.</p>
       </div>
     </div>
   `;
@@ -137,8 +137,8 @@ export function newsletterEmail(subject: string, body: string): string {
         ${body}
       </div>
       <div style="${footerStyles}">
-        <p>You're receiving this because you subscribed to ResearchHub newsletters.</p>
-        <p><a href="https://researchhub.com/settings" style="color: #DA552F;">Manage preferences</a></p>
+        <p>You're receiving this because you subscribed to T.I.E newsletters.</p>
+        <p><a href="https://theintellectualexchange.com/settings" style="color: #DA552F;">Manage preferences</a></p>
       </div>
     </div>
   `;

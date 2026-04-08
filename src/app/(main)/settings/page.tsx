@@ -12,8 +12,8 @@ import { getUserSubscriptions } from "@/server/actions/newsletter";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Settings — ResearchHub",
-  description: "Manage your account settings and profile on ResearchHub.",
+  title: "Settings — T.I.E",
+  description: "Manage your account settings and profile on T.I.E.",
 };
 
 export default async function SettingsPage() {

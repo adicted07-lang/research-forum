@@ -14,10 +14,10 @@ interface GrantPageProps {
 export async function generateMetadata({ params }: GrantPageProps): Promise<Metadata> {
   const { slug } = await params;
   const grant = await getGrantBySlug(slug);
-  if (!grant) return { title: "Grant Not Found — ResearchHub" };
+  if (!grant) return { title: "Grant Not Found — T.I.E" };
 
   return {
-    title: `${grant.title} — ResearchHub Grants`,
+    title: `${grant.title} — T.I.E Grants`,
     description: grant.description.replace(/<[^>]*>/g, "").slice(0, 160),
     openGraph: {
       title: grant.title,

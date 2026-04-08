@@ -6,7 +6,7 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { ArticleForm } from "@/components/news/article-form";
 
 export const metadata: Metadata = {
-  title: "Submit Article — ResearchHub",
+  title: "Submit Article — T.I.E",
 };
 
 export default async function SubmitArticlePage() {

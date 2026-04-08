@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://researchhub.com";
+const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export function organizationSchema() {
   return {

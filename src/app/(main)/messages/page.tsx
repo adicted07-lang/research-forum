@@ -12,8 +12,8 @@ import { MessageSquare } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Messages — ResearchHub",
-  description: "Your conversations on ResearchHub.",
+  title: "Messages — T.I.E",
+  description: "Your conversations on T.I.E.",
 };
 
 function formatTime(date: Date): string {

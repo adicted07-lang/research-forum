@@ -4,7 +4,7 @@ import { AnnouncementsManager } from "./announcements-manager";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Announcements — Admin — ResearchHub",
+  title: "Announcements — Admin — T.I.E",
 };
 
 export default function AdminAnnouncementsPage() {

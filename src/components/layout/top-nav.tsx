@@ -30,7 +30,7 @@ export function TopNav() {
             R
           </div>
           <span className="text-xl font-bold text-text-primary dark:text-text-dark-primary tracking-tight">
-            ResearchHub
+            The Intellectual Exchange
           </span>
         </Link>
 

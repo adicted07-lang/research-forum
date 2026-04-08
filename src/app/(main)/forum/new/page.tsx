@@ -4,7 +4,7 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { QuestionForm } from "@/components/forum/question-form";
 
 export const metadata: Metadata = {
-  title: "Ask a Question — ResearchHub",
+  title: "Ask a Question — T.I.E",
 };
 
 export default function AskQuestionPage() {

@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Data Export — Admin — ResearchHub",
+  title: "Data Export — Admin — T.I.E",
 };
 
 const EXPORT_TYPES = [

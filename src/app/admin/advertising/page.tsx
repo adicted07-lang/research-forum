@@ -4,7 +4,7 @@ import { AdminCampaignsTable } from "@/components/admin/admin-campaigns-table";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Advertising — Admin — ResearchHub",
+  title: "Advertising — Admin — T.I.E",
 };
 
 export default async function AdminAdvertisingPage() {

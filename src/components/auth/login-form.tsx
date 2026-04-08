@@ -39,7 +39,7 @@ export function LoginForm() {
           Welcome back
         </h1>
         <p className="text-sm text-text-secondary dark:text-text-dark-secondary mt-1">
-          Sign in to your ResearchHub account
+          Sign in to your T.I.E account
         </p>
       </div>
 

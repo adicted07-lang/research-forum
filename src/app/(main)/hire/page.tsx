@@ -10,8 +10,8 @@ import { Briefcase } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Talent Board — ResearchHub",
-  description: "Find expert researchers for your projects on ResearchHub.",
+  title: "Talent Board — T.I.E",
+  description: "Find expert researchers for your projects on T.I.E.",
 };
 
 interface HirePageProps {

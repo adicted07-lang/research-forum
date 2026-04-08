@@ -4,7 +4,7 @@ import { ModerationQueue } from "@/components/admin/moderation-queue";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Moderation — Admin — ResearchHub",
+  title: "Moderation — Admin — T.I.E",
 };
 
 interface ModerationPageProps {

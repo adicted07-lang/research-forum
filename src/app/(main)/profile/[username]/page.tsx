@@ -15,16 +15,16 @@ interface ProfilePageProps {
 
 export async function generateMetadata({ params }: ProfilePageProps): Promise<Metadata> {
   const { username } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://researchhub.com";
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
   // Try researcher first, then company
   try {
     const researcher = await getResearcherProfile(username);
     if (researcher) {
       const displayName = researcher.name || researcher.username || "Researcher";
-      const description = researcher.bio || `View ${displayName}'s profile on ResearchHub`;
+      const description = researcher.bio || `View ${displayName}'s profile on T.I.E`;
       return {
-        title: `${displayName} — ResearchHub`,
+        title: `${displayName} — T.I.E`,
         description,
         alternates: {
           canonical: `${baseUrl}/profile/${username}`,
@@ -37,9 +37,9 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
     const company = await getCompanyProfile(username);
     if (company) {
       const displayName = company.companyName || company.username || "Company";
-      const description = company.description || `View ${displayName}'s profile on ResearchHub`;
+      const description = company.description || `View ${displayName}'s profile on T.I.E`;
       return {
-        title: `${displayName} — ResearchHub`,
+        title: `${displayName} — T.I.E`,
         description,
         alternates: {
           canonical: `${baseUrl}/profile/${username}`,
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
     // DB error — return default
   }
 
-  return { title: "Profile — ResearchHub" };
+  return { title: "Profile — T.I.E" };
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {

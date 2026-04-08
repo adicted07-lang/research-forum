@@ -87,7 +87,7 @@ export async function sendMessage(threadId: string, formData: FormData) {
         const senderName = sender?.name || sender?.username || "Someone";
         sendEmail({
           to: recipient.email,
-          subject: `New message from ${senderName} on ResearchHub`,
+          subject: `New message from ${senderName} on T.I.E`,
           html: newMessageEmail(senderName),
         });
       }

@@ -15,11 +15,11 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  let title = "Campaign Detail — ResearchHub";
+  let title = "Campaign Detail — T.I.E";
   try {
     const campaign = await getCampaignById(id);
     if (campaign) {
-      title = `${campaign.campaignName} — ResearchHub`;
+      title = `${campaign.campaignName} — T.I.E`;
     }
   } catch {
     // ignore

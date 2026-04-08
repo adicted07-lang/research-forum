@@ -10,7 +10,7 @@ import { getMyProjects } from "@/server/actions/projects";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "My Projects — ResearchHub",
+  title: "My Projects — T.I.E",
   description: "Collaborate with researchers on shared project workspaces.",
 };
 

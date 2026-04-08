@@ -16,12 +16,12 @@ interface JobPageProps {
 export async function generateMetadata({ params }: JobPageProps): Promise<Metadata> {
   const { slug } = await params;
   const job = await getJobBySlug(slug);
-  if (!job) return { title: "Job Not Found — ResearchHub" };
+  if (!job) return { title: "Job Not Found — T.I.E" };
 
   const companyName = job.company.companyName ?? job.company.username ?? "Company";
-  const title = `${job.title} at ${companyName} — ResearchHub`;
+  const title = `${job.title} at ${companyName} — T.I.E`;
   const description = job.description.replace(/<[^>]*>/g, "").slice(0, 160);
-  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://researchhub.com";
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
   return {
     title,

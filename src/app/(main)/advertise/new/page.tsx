@@ -6,8 +6,8 @@ import { CampaignForm } from "@/components/advertising/campaign-form";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Create Campaign — ResearchHub",
-  description: "Create a new advertising campaign on ResearchHub.",
+  title: "Create Campaign — T.I.E",
+  description: "Create a new advertising campaign on T.I.E.",
 };
 
 export default async function NewCampaignPage() {
