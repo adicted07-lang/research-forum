@@ -12,22 +12,28 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "ResearchHub — Research Exchange & Marketplace",
+  title: "The Intellectual Exchange — Research Community & Marketplace",
   description:
     "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
   openGraph: {
-    title: "ResearchHub — Research Exchange & Marketplace",
+    title: "The Intellectual Exchange — Research Community & Marketplace",
     description:
       "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
-    siteName: "ResearchHub",
+    siteName: "The Intellectual Exchange",
     type: "website",
     locale: "en_US",
+    images: [{ url: "/logo.png", width: 512, height: 512 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ResearchHub — Research Exchange & Marketplace",
+    title: "The Intellectual Exchange — Research Community & Marketplace",
     description:
       "A professional platform for researchers, academics, and companies.",
+    images: ["/logo.png"],
   },
 };
 

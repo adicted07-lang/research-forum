@@ -86,8 +86,8 @@ interface Navbar1Props {
 const Navbar1 = ({
   logo = {
     url: "/",
-    alt: "ResearchHub",
-    title: "ResearchHub",
+    alt: "The Intellectual Exchange",
+    title: "The Intellectual Exchange",
   },
   menu = [
     { title: "Home", url: "/" },
@@ -213,9 +213,8 @@ const Navbar1 = ({
         <nav className="hidden justify-between lg:flex h-16 items-center">
           <div className="flex items-center gap-6">
             <a href={logo.url} className="flex items-center gap-2.5 shrink-0">
-              <div className="w-9 h-9 bg-primary rounded-[10px] flex items-center justify-center text-white font-bold text-lg shadow-[0_2px_8px_rgba(218,85,47,0.3)]">
-                R
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt={logo.alt} className="w-9 h-9 rounded-[10px] shadow-[0_2px_8px_rgba(218,85,47,0.3)]" />
               <span className="text-xl font-bold tracking-tight">
                 {logo.title}
               </span>
@@ -244,9 +243,8 @@ const Navbar1 = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between h-16">
             <a href={logo.url} className="flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-primary rounded-[10px] flex items-center justify-center text-white font-bold text-lg shadow-[0_2px_8px_rgba(218,85,47,0.3)]">
-                R
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt={logo.alt} className="w-9 h-9 rounded-[10px] shadow-[0_2px_8px_rgba(218,85,47,0.3)]" />
               <span className="text-lg font-bold tracking-tight">
                 {logo.title}
               </span>
@@ -259,9 +257,8 @@ const Navbar1 = ({
                 <SheetHeader>
                   <SheetTitle>
                     <a href={logo.url} className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-base shadow-[0_2px_8px_rgba(218,85,47,0.3)]">
-                        R
-                      </div>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/logo.png" alt={logo.alt} className="w-8 h-8 rounded-lg shadow-[0_2px_8px_rgba(218,85,47,0.3)]" />
                       <span className="text-lg font-bold tracking-tight">
                         {logo.title}
                       </span>

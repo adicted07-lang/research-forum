@@ -13,16 +13,16 @@ import { Button } from "@/components/ui/button";
 
 const footerConfig = {
   description:
-    "ResearchHub is a professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
+    "The Intellectual Exchange is a professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
   contact: {
-    email: "support@researchhub.com",
+    email: "support@theintellectualexchange.com",
   },
   socials: [
     { icon: Globe, href: "#", label: "Website" },
     { icon: ExternalLink, href: "#", label: "Twitter" },
     { icon: BookOpen, href: "#", label: "Blog" },
     { icon: MessageSquare, href: "/forum", label: "Exchange Floor" },
-    { icon: Mail, href: "mailto:support@researchhub.com", label: "Email" },
+    { icon: Mail, href: "mailto:support@theintellectualexchange.com", label: "Email" },
   ],
   columns: [
     {
@@ -81,11 +81,10 @@ export default function Footer() {
         {/* Top Section: Logo and Description */}
         <div className="mb-12">
           <Link href="/" className="flex items-center gap-2.5 mb-6">
-            <div className="w-9 h-9 bg-primary rounded-[10px] flex items-center justify-center text-white font-bold text-lg shadow-[0_2px_8px_rgba(218,85,47,0.3)]">
-              R
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="The Intellectual Exchange" className="w-9 h-9 rounded-[10px] shadow-[0_2px_8px_rgba(218,85,47,0.3)]" />
             <span className="text-xl font-bold tracking-tight">
-              ResearchHub
+              The Intellectual Exchange
             </span>
           </Link>
           <p className="text-sm text-text-secondary dark:text-text-dark-secondary leading-relaxed max-w-2xl">
@@ -162,7 +161,7 @@ export default function Footer() {
 
         {/* Bottom Section */}
         <div className="mt-12 pt-6 border-t border-border dark:border-border-dark flex flex-col md:flex-row justify-between items-center text-xs text-text-tertiary dark:text-text-dark-tertiary gap-4">
-          <p>&copy; {new Date().getFullYear()} ResearchHub. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} The Intellectual Exchange. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
             <Link href="#" className="hover:text-primary transition-colors">Terms</Link>

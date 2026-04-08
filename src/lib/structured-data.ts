@@ -4,7 +4,7 @@ export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "ResearchHub",
+    name: "The Intellectual Exchange",
     url: BASE_URL,
     description: "A professional platform for researchers, academics, and companies.",
     sameAs: [],
@@ -55,7 +55,7 @@ export function articleSchema(article: {
     headline: article.title,
     datePublished: article.publishedAt?.toISOString(),
     author: { "@type": "Person", name: article.author.name || "Anonymous" },
-    publisher: { "@type": "Organization", name: "ResearchHub", url: BASE_URL },
+    publisher: { "@type": "Organization", name: "The Intellectual Exchange", url: BASE_URL },
     image: article.coverImage || undefined,
     url: `${BASE_URL}/news/${article.slug}`,
   };

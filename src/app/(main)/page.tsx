@@ -70,10 +70,10 @@ export default async function HomePage() {
     >
       <div className="text-center py-12 mb-8 border-b border-border-light dark:border-border-dark-light">
         <h1 className="text-3xl font-bold text-text-primary dark:text-text-dark-primary mb-3 tracking-tight">
-          The Research Community Platform
+          The Intellectual Exchange
         </h1>
         <p className="text-text-secondary dark:text-text-dark-secondary text-lg mb-4 max-w-xl mx-auto">
-          Ask questions, share knowledge, hire experts, and discover research tools.
+          Where researchers exchange knowledge, hire experts, and discover tools.
         </p>
         <p className="text-sm text-text-secondary dark:text-text-dark-secondary">
           Join 500+ researchers
