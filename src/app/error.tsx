@@ -1,14 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 
 export default function ErrorPage({
   error,
-  reset,
+  unstable_retry,
 }: {
-  error: Error;
-  reset: () => void;
+  error: Error & { digest?: string };
+  unstable_retry: () => void;
 }) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-surface dark:bg-surface-dark px-4">
       <h1 className="text-3xl font-bold text-text-primary dark:text-text-dark-primary">
@@ -19,7 +24,7 @@ export default function ErrorPage({
       </p>
       <div className="mt-8 flex gap-4">
         <button
-          onClick={reset}
+          onClick={unstable_retry}
           className="bg-primary text-white rounded-md px-4 py-2 hover:opacity-90 transition-opacity"
         >
           Try again

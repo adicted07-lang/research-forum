@@ -117,7 +117,7 @@ export async function GET(request: NextRequest) {
 
             ${articlesHtml ? `
             <!-- From News -->
-            <h2 style="margin: 0 0 12px; font-size: 16px; font-weight: 700; color: #1a1f36;">📰 From News</h2>
+            <h2 style="margin: 0 0 12px; font-size: 16px; font-weight: 700; color: #1a1f36;">📰 Latest News</h2>
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">${articlesHtml}</table>
             ` : ""}
 

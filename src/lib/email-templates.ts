@@ -34,13 +34,13 @@ export function newFollowerEmail(followerName: string): string {
         You have a new follower!
       </h2>
       <p style="margin: 0 0 16px; color: #6b7280; font-size: 15px;">
-        <strong>${followerName}</strong> started following you on T.I.E.
+        <strong>${followerName}</strong> started following you on The Intellectual Exchange.
       </p>
       <p style="margin: 0 0 16px; color: #374151; font-size: 14px;">
         Connect with your community and share your research insights.
       </p>
       <a href="https://theintellectualexchange.com" style="${buttonStyles}">
-        View T.I.E
+        View The Exchange
       </a>
       <div style="${footerStyles}">
         <p>You're receiving this email because you're a member of The Intellectual Exchange.</p>
@@ -65,7 +65,7 @@ export function newAnswerEmail(questionTitle: string): string {
         View Answer
       </a>
       <div style="${footerStyles}">
-        <p>You're receiving this email because someone answered your question on T.I.E.</p>
+        <p>You're receiving this email because someone answered your question on The Intellectual Exchange.</p>
       </div>
     </div>
   `;
@@ -99,7 +99,7 @@ export function applicationStatusEmail(jobTitle: string, status: string): string
         View Applications
       </a>
       <div style="${footerStyles}">
-        <p>You're receiving this email because you applied to a job on T.I.E.</p>
+        <p>You're receiving this email because you applied to a job on The Intellectual Exchange.</p>
       </div>
     </div>
   `;
@@ -112,7 +112,7 @@ export function newMessageEmail(senderName: string): string {
         New message from ${senderName}
       </h2>
       <p style="margin: 0 0 16px; color: #6b7280; font-size: 15px;">
-        <strong>${senderName}</strong> sent you a message on T.I.E.
+        <strong>${senderName}</strong> sent you a message on The Intellectual Exchange.
       </p>
       <p style="margin: 0 0 16px; color: #374151; font-size: 14px;">
         Log in to read and reply to the message.
@@ -121,7 +121,7 @@ export function newMessageEmail(senderName: string): string {
         View Message
       </a>
       <div style="${footerStyles}">
-        <p>You're receiving this email because someone messaged you on T.I.E.</p>
+        <p>You're receiving this email because someone messaged you on The Intellectual Exchange.</p>
       </div>
     </div>
   `;
@@ -137,7 +137,7 @@ export function newsletterEmail(subject: string, body: string): string {
         ${body}
       </div>
       <div style="${footerStyles}">
-        <p>You're receiving this because you subscribed to T.I.E newsletters.</p>
+        <p>You're receiving this because you subscribed to The Intellectual Exchange newsletters.</p>
         <p><a href="https://theintellectualexchange.com/settings" style="color: #DA552F;">Manage preferences</a></p>
       </div>
     </div>

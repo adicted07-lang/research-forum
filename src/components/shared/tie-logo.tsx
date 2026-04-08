@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 
 export function TieLogo({ size = 36, className }: { size?: number; className?: string }) {
   return (
-    <img
+    <Image
       src="/logo.png"
       alt="The Intellectual Exchange"
       width={size}
@@ -13,6 +13,6 @@ export function TieLogo({ size = 36, className }: { size?: number; className?: s
   );
 }
 
-export function TieBrand() {
-  return <TieLogo size={40} />;
+export function TieBrand({ compact }: { compact?: boolean }) {
+  return <TieLogo size={compact ? 28 : 40} />;
 }

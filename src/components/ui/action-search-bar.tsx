@@ -160,7 +160,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
             <div className="relative flex flex-col justify-start items-center min-h-[300px]">
                 <div className="w-full max-w-sm sticky top-0 bg-background z-10 pt-4 pb-1">
                     <label
-                        className="text-xs font-medium text-gray-500 dark:text-text-dark-tertiary mb-1 block"
+                        className="text-xs font-medium text-text-secondary dark:text-text-dark-tertiary mb-1 block"
                         htmlFor="search"
                     >
                         Search Commands
@@ -187,7 +187,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                                         exit={{ y: 20, opacity: 0 }}
                                         transition={{ duration: 0.2 }}
                                     >
-                                        <Send className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                                        <Send className="w-4 h-4 text-text-tertiary dark:text-text-dark-tertiary" />
                                     </motion.div>
                                 ) : (
                                     <motion.div
@@ -197,7 +197,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                                         exit={{ y: 20, opacity: 0 }}
                                         transition={{ duration: 0.2 }}
                                     >
-                                        <Search className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                                        <Search className="w-4 h-4 text-text-tertiary dark:text-text-dark-tertiary" />
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -209,7 +209,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                     <AnimatePresence>
                         {isFocused && result && !selectedAction && (
                             <motion.div
-                                className="w-full border rounded-md shadow-sm overflow-hidden dark:border-gray-800 bg-white dark:bg-[#0F0F13] mt-1"
+                                className="w-full border rounded-md shadow-sm overflow-hidden dark:border-border-dark bg-white dark:bg-surface-dark mt-1"
                                 variants={container}
                                 initial="hidden"
                                 animate="show"
@@ -219,7 +219,7 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                                     {result.actions.map((action) => (
                                         <motion.li
                                             key={action.id}
-                                            className="px-3 py-2 flex items-center justify-between hover:bg-gray-200 dark:hover:bg-surface-dark cursor-pointer rounded-md"
+                                            className="px-3 py-2 flex items-center justify-between hover:bg-surface-hover dark:hover:bg-surface-dark cursor-pointer rounded-md"
                                             variants={item}
                                             layout
                                             onClick={() =>
@@ -228,30 +228,30 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
                                         >
                                             <div className="flex items-center gap-2 justify-between">
                                                 <div className="flex items-center gap-2">
-                                                    <span className="text-gray-500">
+                                                    <span className="text-text-secondary dark:text-text-dark-secondary">
                                                         {action.icon}
                                                     </span>
-                                                    <span className="text-sm font-medium text-gray-900 dark:text-text-dark-primary">
+                                                    <span className="text-sm font-medium text-text-primary dark:text-text-dark-primary">
                                                         {action.label}
                                                     </span>
-                                                    <span className="text-xs text-gray-400">
+                                                    <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
                                                         {action.description}
                                                     </span>
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-2">
-                                                <span className="text-xs text-gray-400">
+                                                <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
                                                     {action.short}
                                                 </span>
-                                                <span className="text-xs text-gray-400 text-right">
+                                                <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary text-right">
                                                     {action.end}
                                                 </span>
                                             </div>
                                         </motion.li>
                                     ))}
                                 </motion.ul>
-                                <div className="mt-2 px-3 py-2 border-t border-gray-100 dark:border-gray-800">
-                                    <div className="flex items-center justify-between text-xs text-gray-500">
+                                <div className="mt-2 px-3 py-2 border-t border-border-light dark:border-border-dark">
+                                    <div className="flex items-center justify-between text-xs text-text-secondary dark:text-text-dark-secondary">
                                         <span>Press ⌘K to open commands</span>
                                         <span>ESC to cancel</span>
                                     </div>

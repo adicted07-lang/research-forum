@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { SearchBar } from "@/components/shared/search-bar";
 import { NotificationBell } from "@/components/social/notification-bell";
+import { TieBrand } from "@/components/shared/tie-logo";
 
 const navLinks = [
   { label: "Forum", href: "/forum" },
@@ -26,9 +27,7 @@ export function TopNav() {
     <nav className="sticky top-0 z-50 bg-white/92 backdrop-blur-xl border-b border-border-light dark:bg-[#0F0F13]/92 dark:border-border-dark-light">
       <div className="max-w-[1280px] mx-auto px-6 h-16 flex items-center gap-8">
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-9 h-9 bg-primary rounded-[10px] flex items-center justify-center text-white font-bold text-lg shadow-[0_2px_8px_rgba(218,85,47,0.3)]">
-            R
-          </div>
+          <TieBrand />
           <span className="text-xl font-bold text-text-primary dark:text-text-dark-primary tracking-tight">
             The Intellectual Exchange
           </span>

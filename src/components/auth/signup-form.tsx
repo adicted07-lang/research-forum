@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { OAuthButtons } from "./oauth-buttons";
 import { researcherSignupAction } from "@/server/actions/auth";
+import { TieLogo } from "@/components/shared/tie-logo";
 
 export function SignupForm() {
   const router = useRouter();
@@ -32,9 +33,7 @@ export function SignupForm() {
   return (
     <div className="w-full max-w-md">
       <div className="flex flex-col items-center mb-8">
-        <div className="w-12 h-12 bg-primary rounded-[14px] flex items-center justify-center text-white font-bold text-2xl shadow-[0_4px_12px_rgba(218,85,47,0.35)] mb-4">
-          R
-        </div>
+        <TieLogo size={36} className="mb-4" />
         <h1 className="text-2xl font-bold text-text-primary dark:text-text-dark-primary">
           Join T.I.E
         </h1>
