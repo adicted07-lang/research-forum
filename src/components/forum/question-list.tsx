@@ -4,6 +4,7 @@ import { FORUM_CATEGORIES } from "@/lib/validations/forum";
 import { INDUSTRIES } from "@/lib/constants/industries";
 import { QuestionCard } from "@/components/forum/question-card";
 import { EmptyState } from "@/components/shared/empty-state";
+import { FilterSelect } from "@/components/forum/filter-select";
 import { MessageSquare } from "lucide-react";
 import { getActiveFeedAds } from "@/server/actions/campaigns";
 import { AdFeedCard } from "@/components/advertising/ad-feed-card";
@@ -106,38 +107,22 @@ export async function QuestionList({
         </p>
         <div className="flex gap-1 flex-wrap">
           {/* Domain filter */}
-          <select
-            onChange={(e) => {
-              const domain = e.target.value;
-              window.location.href = buildUrl({ category, researchDomain: domain || undefined, industry, sort, page: 1 });
-            }}
+          <FilterSelect
+            options={[...RESEARCH_DOMAINS]}
             value={researchDomain || ""}
+            placeholder="All domains"
+            buildUrl={(val) => buildUrl({ category, researchDomain: val || undefined, industry, sort, page: 1 })}
             className="px-3 py-1.5 rounded-md text-xs font-medium border border-border dark:border-border-dark bg-white dark:bg-surface-dark text-text-secondary dark:text-text-dark-secondary transition-colors hover:border-primary hover:text-primary dark:hover:text-text-dark-primary"
-          >
-            <option value="">All domains</option>
-            {RESEARCH_DOMAINS.map((domain) => (
-              <option key={domain} value={domain}>
-                {domain}
-              </option>
-            ))}
-          </select>
+          />
 
           {/* Industry filter */}
-          <select
-            onChange={(e) => {
-              const ind = e.target.value;
-              window.location.href = buildUrl({ category, researchDomain, industry: ind || undefined, sort, page: 1 });
-            }}
+          <FilterSelect
+            options={[...INDUSTRIES]}
             value={industry || ""}
+            placeholder="All industries"
+            buildUrl={(val) => buildUrl({ category, researchDomain, industry: val || undefined, sort, page: 1 })}
             className="px-3 py-1.5 rounded-md text-xs font-medium border border-border dark:border-border-dark bg-white dark:bg-surface-dark text-text-secondary dark:text-text-dark-secondary transition-colors hover:border-primary hover:text-primary dark:hover:text-text-dark-primary"
-          >
-            <option value="">All industries</option>
-            {INDUSTRIES.map((ind) => (
-              <option key={ind} value={ind}>
-                {ind}
-              </option>
-            ))}
-          </select>
+          />
 
           {/* Sort options */}
           {SORT_OPTIONS.map((opt) => (
