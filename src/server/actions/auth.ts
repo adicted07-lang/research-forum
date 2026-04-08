@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { signIn } from "@/auth";
 import { loginSchema, researcherSignupSchema, companySignupSchema } from "@/lib/validations/auth";
+import { isCorporateEmail } from "@/lib/validations/corporate-email";
 import { UserRole } from "@prisma/client";
 
 export type AuthActionResult = {
@@ -68,6 +69,11 @@ export async function companySignupAction(formData: FormData): Promise<AuthActio
   const raw = { companyName: formData.get("companyName"), email: formData.get("email"), password: formData.get("password"), username: formData.get("username"), industry: formData.get("industry") };
   const parsed = companySignupSchema.safeParse(raw);
   if (!parsed.success) return { error: parsed.error.issues[0].message };
+
+  const email = parsed.data.email;
+  if (!isCorporateEmail(email)) {
+    return { error: "Please use your company email address" };
+  }
 
   const existingUser = await db.user.findFirst({
     where: { OR: [{ email: parsed.data.email }, { username: parsed.data.username }] },

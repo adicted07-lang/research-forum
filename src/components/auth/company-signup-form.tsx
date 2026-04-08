@@ -5,11 +5,22 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { OAuthButtons } from "./oauth-buttons";
 import { companySignupAction } from "@/server/actions/auth";
+import { isCorporateEmail } from "@/lib/validations/corporate-email";
 
 export function CompanySignupForm() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  function handleEmailBlur(e: React.FocusEvent<HTMLInputElement>) {
+    const email = e.target.value;
+    if (email && !isCorporateEmail(email)) {
+      setEmailError("Please use your company email address");
+    } else {
+      setEmailError(null);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -17,6 +28,13 @@ export function CompanySignupForm() {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    if (!isCorporateEmail(email)) {
+      setError("Please use your company email address");
+      setLoading(false);
+      return;
+    }
+
     const result = await companySignupAction(formData);
 
     setLoading(false);
@@ -102,9 +120,13 @@ export function CompanySignupForm() {
               type="email"
               autoComplete="email"
               required
+              onBlur={handleEmailBlur}
               placeholder="you@company.com"
               className="w-full px-3.5 py-2.5 text-sm border border-border dark:border-border-dark rounded-md bg-white dark:bg-[#0F0F13] text-text-primary dark:text-text-dark-primary placeholder:text-text-tertiary dark:placeholder:text-text-dark-tertiary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-light transition-colors"
             />
+            {emailError && (
+              <p className="mt-1 text-xs text-error">{emailError}</p>
+            )}
           </div>
 
           <div>
