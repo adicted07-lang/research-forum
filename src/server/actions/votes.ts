@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { TargetType, VoteValue } from "@prisma/client";
 import { awardPoints, deductPoints } from "@/server/actions/points";
 import { POINTS } from "@/lib/points-config";
+import { hasPrivilege } from "@/lib/reputation";
 
 export async function toggleVote(
   targetType: string,
@@ -24,6 +25,14 @@ export async function toggleVote(
   }
   if (!Object.values(VoteValue).includes(voteValueEnum)) {
     return { error: "Invalid vote value" };
+  }
+
+  // Privilege gate: downvoting requires Level 2+
+  if (voteValueEnum === VoteValue.DOWNVOTE) {
+    const user = await db.user.findUnique({ where: { id: userId }, select: { points: true } });
+    if (!user || !hasPrivilege(user.points, "downvote")) {
+      return { error: "You need at least 50 points to downvote" };
+    }
   }
 
   try {
@@ -72,7 +81,7 @@ export async function toggleVote(
       } else if (targetTypeEnum === TargetType.ANSWER) {
         const a = await tx.answer.update({
           where: { id: targetId },
-          data: { upvoteCount: upvotes },
+          data: { upvoteCount: upvotes, downvoteCount: downvotes },
           select: { authorId: true },
         });
         contentAuthorId = a.authorId;
