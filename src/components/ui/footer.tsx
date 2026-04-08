@@ -64,6 +64,8 @@ const footerConfig = {
     {
       title: "Legal",
       links: [
+        { label: "About Us", href: "/about" },
+        { label: "Contact Us", href: "/contact" },
         { label: "Privacy Policy", href: "#" },
         { label: "Terms of Service", href: "#" },
         { label: "Cookie Policy", href: "#" },
