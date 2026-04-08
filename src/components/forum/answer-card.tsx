@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CheckCircle } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
-import { VoteButton } from "@/components/forum/vote-button";
+import { VoteControls } from "@/components/shared/vote-controls";
 import { AcceptAnswerButton } from "@/components/forum/accept-answer-button";
 import { RichTextDisplay } from "@/components/shared/rich-text-display";
 
@@ -17,6 +17,7 @@ interface AnswerCardProps {
     id: string;
     body: string;
     upvoteCount: number;
+    downvoteCount?: number;
     isAccepted: boolean;
     author: AnswerAuthor;
     createdAt: Date;
@@ -24,6 +25,8 @@ interface AnswerCardProps {
   questionAuthorId?: string | null;
   currentUserId?: string | null;
   questionHasAccepted: boolean;
+  userVote?: null | "UPVOTE" | "DOWNVOTE";
+  userPoints?: number;
 }
 
 function relativeTime(date: Date): string {
@@ -45,6 +48,8 @@ export function AnswerCard({
   questionAuthorId,
   currentUserId,
   questionHasAccepted,
+  userVote,
+  userPoints,
 }: AnswerCardProps) {
   const authorName =
     answer.author.name ?? answer.author.username ?? "Anonymous";
@@ -61,11 +66,13 @@ export function AnswerCard({
     >
       {/* Vote */}
       <div className="shrink-0 flex flex-col items-center gap-2">
-        <VoteButton
+        <VoteControls
           targetType="ANSWER"
           targetId={answer.id}
-          initialCount={answer.upvoteCount}
-          initialVote={null}
+          upvoteCount={answer.upvoteCount}
+          downvoteCount={answer.downvoteCount ?? 0}
+          initialVote={userVote ?? null}
+          userPoints={userPoints ?? 0}
         />
         {answer.isAccepted && (
           <div className="flex flex-col items-center gap-0.5">

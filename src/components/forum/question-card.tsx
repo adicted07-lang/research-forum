@@ -3,7 +3,7 @@ import { MessageSquare } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { StatusBadge } from "@/components/shared/status-badge";
-import { VoteButton } from "@/components/forum/vote-button";
+import { VoteControls } from "@/components/shared/vote-controls";
 
 interface QuestionAuthor {
   id: string;
@@ -25,10 +25,13 @@ interface QuestionCardProps {
     bounty: number;
     status: string;
     upvoteCount: number;
+    downvoteCount?: number;
     answerCount: number;
     author: QuestionAuthor;
     createdAt: Date;
   };
+  userVote?: null | "UPVOTE" | "DOWNVOTE";
+  userPoints?: number;
 }
 
 function normalizeStatus(
@@ -41,7 +44,7 @@ function normalizeStatus(
   return "open";
 }
 
-export function QuestionCard({ question }: QuestionCardProps) {
+export function QuestionCard({ question, userVote, userPoints }: QuestionCardProps) {
   const authorName = question.author.name ?? question.author.username ?? "Anonymous";
   const excerpt = question.body.length > 120
     ? question.body.slice(0, 120) + "..."
@@ -51,11 +54,13 @@ export function QuestionCard({ question }: QuestionCardProps) {
     <div className="flex gap-4 bg-white border border-border-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all duration-200 dark:bg-surface-dark dark:border-border-dark-light dark:hover:border-border-dark">
       {/* Vote button */}
       <div className="shrink-0">
-        <VoteButton
+        <VoteControls
           targetType="QUESTION"
           targetId={question.id}
-          initialCount={question.upvoteCount}
-          initialVote={null}
+          upvoteCount={question.upvoteCount}
+          downvoteCount={question.downvoteCount ?? 0}
+          initialVote={userVote ?? null}
+          userPoints={userPoints ?? 0}
         />
       </div>
 

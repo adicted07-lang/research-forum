@@ -27,6 +27,7 @@ import { getUserBadges } from "@/server/actions/badges";
 import { auth } from "@/auth";
 import { ActivityFeed } from "@/components/profile/activity-feed";
 import { getReputationTier } from "@/lib/reputation";
+import { LevelBadge } from "@/components/shared/level-badge";
 
 type ResearcherProfileData = {
   id: string;
@@ -135,6 +136,9 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
                 {profile.username}
               </p>
             )}
+            <div className="mt-1.5">
+              <LevelBadge points={profile.points} showProgress />
+            </div>
           </div>
 
           {/* Bio */}
