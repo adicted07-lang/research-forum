@@ -1,0 +1,8 @@
+{"type":"server-started","port":58770,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:58770","screen_dir":"/Users/akshay/research-forum/.superpowers/brainstorm/7937-1774954285"}
+{"type":"screen-added","file":"/Users/akshay/research-forum/.superpowers/brainstorm/7937-1774954285/homepage-icons.html"}
+{"type":"screen-added","file":"/Users/akshay/research-forum/.superpowers/brainstorm/7937-1774954285/linkedin-messenger.html"}
+{"type":"screen-added","file":"/Users/akshay/research-forum/.superpowers/brainstorm/7937-1774954285/messenger-with-widget.html"}
+{"type":"screen-added","file":"/Users/akshay/research-forum/.superpowers/brainstorm/7937-1774954285/widget-fixed.html"}
+{"type":"screen-updated","file":"/Users/akshay/research-forum/.superpowers/brainstorm/7937-1774954285/widget-fixed.html"}
+{"type":"screen-updated","file":"/Users/akshay/research-forum/.superpowers/brainstorm/7937-1774954285/widget-fixed.html"}
+{"type":"server-stopped","reason":"idle timeout"}
