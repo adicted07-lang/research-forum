@@ -6,6 +6,12 @@ import { createQuestion } from "@/server/actions/questions";
 import { FORUM_CATEGORIES } from "@/lib/validations/forum";
 import { RichTextEditor } from "@/components/shared/rich-text-editor";
 
+const RESEARCH_DOMAINS = [
+  "Machine Learning", "Data Science", "Bioinformatics", "Climate Science",
+  "Neuroscience", "Physics", "Chemistry", "Economics", "Social Sciences",
+  "Genomics", "Statistics", "Epidemiology", "Quantum Computing", "NLP", "Other",
+];
+
 export function QuestionForm() {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
@@ -96,6 +102,19 @@ export function QuestionForm() {
               <option key={cat} value={cat}>
                 {cat}
               </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Research Domain */}
+        <div>
+          <label className="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-1.5">
+            Research Domain <span className="text-text-tertiary font-normal">(optional)</span>
+          </label>
+          <select name="researchDomain" className="w-full px-3.5 py-2.5 text-sm border border-border dark:border-border-dark rounded-md bg-white dark:bg-surface-dark text-text-primary dark:text-text-dark-primary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-light transition-colors">
+            <option value="">Select domain...</option>
+            {RESEARCH_DOMAINS.map((d) => (
+              <option key={d} value={d}>{d}</option>
             ))}
           </select>
         </div>

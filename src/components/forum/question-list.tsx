@@ -14,14 +14,22 @@ const SORT_OPTIONS = [
   { label: "Unanswered", value: "unanswered" },
 ];
 
+const RESEARCH_DOMAINS = [
+  "Machine Learning", "Data Science", "Bioinformatics", "Climate Science",
+  "Neuroscience", "Physics", "Chemistry", "Economics", "Social Sciences",
+  "Genomics", "Statistics", "Epidemiology", "Quantum Computing", "NLP", "Other",
+];
+
 interface QuestionListProps {
   category?: string;
+  researchDomain?: string;
   sort?: string;
   page?: number;
 }
 
 export async function QuestionList({
   category,
+  researchDomain,
   sort = "newest",
   page = 1,
 }: QuestionListProps) {
@@ -29,7 +37,7 @@ export async function QuestionList({
   let totalPages = 1;
   let currentPage = page;
   try {
-    const result = await getQuestions({ category, sort, page });
+    const result = await getQuestions({ category, researchDomain, sort, page });
     questions = result.questions;
     totalPages = result.totalPages;
     currentPage = result.currentPage;
@@ -47,6 +55,7 @@ export async function QuestionList({
   function buildUrl(params: Record<string, string | number | undefined>) {
     const searchParams = new URLSearchParams();
     if (params.category) searchParams.set("category", String(params.category));
+    if (params.researchDomain) searchParams.set("domain", String(params.researchDomain));
     if (params.sort && params.sort !== "newest")
       searchParams.set("sort", String(params.sort));
     if (params.page && Number(params.page) > 1)
@@ -84,18 +93,36 @@ export async function QuestionList({
         ))}
       </div>
 
-      {/* Sort dropdown row */}
-      <div className="flex items-center justify-between mb-4">
+      {/* Sort dropdown row and domain filter */}
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <p className="text-sm text-text-secondary dark:text-text-dark-secondary">
           {questions.length === 0
             ? "No questions"
             : `Page ${currentPage} of ${totalPages}`}
         </p>
-        <div className="flex gap-1">
+        <div className="flex gap-1 flex-wrap">
+          {/* Domain filter */}
+          <select
+            onChange={(e) => {
+              const domain = e.target.value;
+              window.location.href = buildUrl({ category, researchDomain: domain || undefined, sort, page: 1 });
+            }}
+            value={researchDomain || ""}
+            className="px-3 py-1.5 rounded-md text-xs font-medium border border-border dark:border-border-dark bg-white dark:bg-surface-dark text-text-secondary dark:text-text-dark-secondary transition-colors hover:border-primary hover:text-primary dark:hover:text-text-dark-primary"
+          >
+            <option value="">All domains</option>
+            {RESEARCH_DOMAINS.map((domain) => (
+              <option key={domain} value={domain}>
+                {domain}
+              </option>
+            ))}
+          </select>
+
+          {/* Sort options */}
           {SORT_OPTIONS.map((opt) => (
             <Link
               key={opt.value}
-              href={buildUrl({ category, sort: opt.value, page: 1 })}
+              href={buildUrl({ category, researchDomain, sort: opt.value, page: 1 })}
               className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${
                 sort === opt.value || (!sort && opt.value === "newest")
                   ? "border-primary text-primary bg-primary-light"

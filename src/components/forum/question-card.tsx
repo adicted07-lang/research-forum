@@ -20,6 +20,7 @@ interface QuestionCardProps {
     slug: string;
     tags: string[];
     category: string;
+    researchDomain?: string | null;
     bounty: number;
     status: string;
     upvoteCount: number;
@@ -87,6 +88,13 @@ export function QuestionCard({ question }: QuestionCardProps) {
             <MessageSquare className="w-3.5 h-3.5" />
             <span>{question.answerCount} answers</span>
           </div>
+
+          {/* Research Domain */}
+          {question.researchDomain && (
+            <span className="text-xs font-medium text-primary bg-primary-lighter px-2 py-0.5 rounded-full">
+              {question.researchDomain}
+            </span>
+          )}
 
           {/* Tags */}
           {question.tags.slice(0, 3).map((tag) => (

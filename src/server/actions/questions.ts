@@ -34,6 +34,7 @@ export async function createQuestion(formData: FormData) {
     body: formData.get("body"),
     tags: formData.getAll("tags"),
     category: formData.get("category") ?? "General Discussion",
+    researchDomain: formData.get("researchDomain") as string | null,
     bounty: Number(formData.get("bounty") ?? 0),
   };
 
@@ -49,6 +50,7 @@ export async function createQuestion(formData: FormData) {
         slug,
         tags: parsed.data.tags,
         category: parsed.data.category,
+        researchDomain: raw.researchDomain || null,
         bounty: parsed.data.bounty,
         authorId: session.user.id,
       },
@@ -67,6 +69,7 @@ export async function getQuestions(opts: {
   category?: string;
   tag?: string;
   tags?: string[];
+  researchDomain?: string;
   sort?: string;
   page?: number;
   limit?: number;
@@ -81,6 +84,7 @@ export async function getQuestions(opts: {
   if (opts.tags && opts.tags.length > 0) {
     where.tags = { hasSome: opts.tags };
   }
+  if (opts.researchDomain) where.researchDomain = opts.researchDomain;
   if (opts.sort === "unanswered") where.answerCount = 0;
 
   let orderBy: Record<string, string> | Array<Record<string, string>>;
