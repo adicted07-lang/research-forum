@@ -57,13 +57,14 @@ const footerConfig = {
       ],
     },
     {
-      title: "Legal",
+      title: "Resources",
       links: [
         { label: "About Us", href: "/about" },
         { label: "Contact Us", href: "/contact" },
+        { label: "Researcher Guide", href: "/guide" },
+        { label: "Company Guide", href: "/guide/companies" },
         { label: "Privacy Policy", href: "/privacy" },
         { label: "Terms of Service", href: "/terms" },
-        { label: "Cookie Policy", href: "/cookies" },
       ],
     },
   ],
