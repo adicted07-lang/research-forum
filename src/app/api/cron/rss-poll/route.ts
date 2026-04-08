@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { anthropic } from "@/lib/claude";
 
 function generateSlug(title: string): string {
   const base = title
@@ -69,19 +70,48 @@ export async function GET(request: NextRequest) {
         });
         if (!admin) continue;
 
+        const newItems = [];
         for (const item of items.slice(0, 10)) {
           const exists = await db.article.findFirst({
             where: { sourceUrl: item.link },
           });
           if (exists) continue;
+          newItems.push(item);
+        }
 
-          const wordCount = item.description.trim().split(/\s+/).length;
+        // Cap at 5 per run to control API costs
+        for (const item of newItems.slice(0, 5)) {
+          let body = item.description || `<p>Read the full article at <a href="${item.link}">${item.link}</a></p>`;
+          let isAIGenerated = false;
+
+          if (process.env.ANTHROPIC_API_KEY) {
+            try {
+              const response = await anthropic.messages.create({
+                model: "claude-sonnet-4-6",
+                max_tokens: 2000,
+                system: "You are a professional science journalist writing for ResearchHub, a platform for researchers and academics. Write in HTML format.",
+                messages: [{
+                  role: "user",
+                  content: `Write a comprehensive article (minimum 800 words) based on this research news. Include: an engaging introduction, key findings and methodology, implications for the field, and a conclusion. At the end, add a source attribution line.\n\nTitle: ${item.title}\nDescription: ${item.description}\nSource URL: ${item.link}`,
+                }],
+              });
+              const textBlock = response.content.find((b: any) => b.type === "text");
+              if (textBlock && "text" in textBlock) {
+                body = textBlock.text;
+                isAIGenerated = true;
+              }
+            } catch (err) {
+              console.error(`Claude API failed for "${item.title}":`, err);
+            }
+          }
+
+          const wordCount = body.trim().split(/\s+/).length;
           const slug = generateSlug(item.title);
 
           await db.article.create({
             data: {
               title: item.title,
-              body: item.description || `<p>Read the full article at <a href="${item.link}">${item.link}</a></p>`,
+              body,
               slug,
               authorId: admin.id,
               category: "news",
@@ -90,6 +120,7 @@ export async function GET(request: NextRequest) {
               readTime: Math.max(1, Math.ceil(wordCount / 200)),
               status: "PUBLISHED",
               publishedAt: new Date(),
+              isAIGenerated,
             },
           });
           totalCreated++;

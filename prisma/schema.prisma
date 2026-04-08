@@ -617,6 +617,7 @@ model Article {
   readTime        Int?
   tags            String[]
   isFeatured      Boolean       @default(false)
+  isAIGenerated   Boolean       @default(false)
   status          ArticleStatus @default(DRAFT)
   rejectionReason String?
   publishedAt     DateTime?

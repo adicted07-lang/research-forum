@@ -23,6 +23,7 @@ export interface ArticleCardData {
   author: ArticleAuthor;
   publishedAt: Date | null;
   createdAt: Date;
+  isAIGenerated?: boolean;
 }
 
 interface ArticleCardProps {
@@ -125,8 +126,8 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
               </p>
             </Link>
 
-            {/* Author + meta */}
-            <div className="flex items-center gap-3 text-xs text-text-tertiary dark:text-text-dark-tertiary">
+            {/* Author + meta + AI badge */}
+            <div className="flex items-center gap-3 text-xs text-text-tertiary dark:text-text-dark-tertiary flex-wrap">
               <div className="flex items-center gap-1.5">
                 <UserAvatar name={authorName} src={article.author.image} size="sm" />
                 {article.author.username ? (
@@ -153,6 +154,11 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
                   <Clock className="w-3.5 h-3.5" />
                   <span>{article.readTime} min read</span>
                 </div>
+              )}
+              {article.isAIGenerated && (
+                <span className="text-[10px] font-medium text-text-tertiary dark:text-text-dark-tertiary bg-surface dark:bg-surface-dark px-1.5 py-0.5 rounded">
+                  AI Generated
+                </span>
               )}
             </div>
           </div>
@@ -191,7 +197,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
           </Link>
 
           {/* Meta */}
-          <div className="flex items-center gap-2 text-[11px] text-text-tertiary dark:text-text-dark-tertiary">
+          <div className="flex items-center gap-2 text-[11px] text-text-tertiary dark:text-text-dark-tertiary flex-wrap">
             <div className="flex items-center gap-1">
               <UserAvatar name={authorName} src={article.author.image} size="sm" />
               {article.author.username ? (
@@ -212,6 +218,14 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
                   <Clock className="w-3 h-3" />
                   <span>{article.readTime} min</span>
                 </div>
+              </>
+            )}
+            {article.isAIGenerated && (
+              <>
+                <span>·</span>
+                <span className="text-[10px] font-medium text-text-tertiary dark:text-text-dark-tertiary">
+                  AI Generated
+                </span>
               </>
             )}
           </div>
