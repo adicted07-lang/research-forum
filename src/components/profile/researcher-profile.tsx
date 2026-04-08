@@ -15,6 +15,9 @@ import {
   Trophy,
   HelpCircle,
   FileText,
+  Twitter,
+  Linkedin,
+  Github,
 } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
@@ -186,28 +189,23 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
               <Calendar className="w-4 h-4" />
               <span>Joined {new Date(profile.createdAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })}</span>
             </div>
-            {links.website && (
-              <div className="flex items-center gap-2">
-                <LinkIcon className="w-4 h-4" />
-                <a href={links.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline truncate">
-                  {links.website.replace(/^https?:\/\//, "")}
-                </a>
-              </div>
-            )}
-            {links.twitter && (
-              <div className="flex items-center gap-2">
-                <Globe className="w-4 h-4" />
-                <a href={`https://twitter.com/${links.twitter.replace("@", "")}`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  {links.twitter}
-                </a>
-              </div>
-            )}
-            {links.linkedin && (
-              <div className="flex items-center gap-2">
-                <LinkIcon className="w-4 h-4" />
-                <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  LinkedIn
-                </a>
+            {(links.website || links.twitter || links.linkedin) && (
+              <div className="flex items-center gap-2 mt-2">
+                {links.website && (
+                  <a href={links.website} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors" title="Website">
+                    <LinkIcon className="w-5 h-5" />
+                  </a>
+                )}
+                {links.twitter && (
+                  <a href={`https://twitter.com/${links.twitter.replace("@", "")}`} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors" title="Twitter">
+                    <Twitter className="w-5 h-5" />
+                  </a>
+                )}
+                {links.linkedin && (
+                  <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors" title="LinkedIn">
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                )}
               </div>
             )}
           </div>

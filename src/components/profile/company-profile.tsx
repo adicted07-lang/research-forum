@@ -8,6 +8,8 @@ import {
   Briefcase,
   Building2,
   ExternalLink,
+  Twitter,
+  Linkedin,
 } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { FollowButton } from "@/components/social/follow-button";
@@ -196,28 +198,21 @@ export async function CompanyProfile({ profile }: CompanyProfileProps) {
         </div>
 
         {/* Social links */}
-        {Object.keys(links).length > 0 && (
-          <div className="flex flex-wrap gap-3 text-sm">
+        {(links.website || links.twitter || links.linkedin) && (
+          <div className="flex items-center gap-2 mt-2">
+            {links.website && (
+              <a href={links.website} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors" title="Website">
+                <LinkIcon className="w-5 h-5" />
+              </a>
+            )}
             {links.twitter && (
-              <a
-                href={`https://twitter.com/${links.twitter.replace("@", "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-primary hover:underline"
-              >
-                <LinkIcon className="w-4 h-4" />
-                Twitter
+              <a href={`https://twitter.com/${links.twitter.replace("@", "")}`} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors" title="Twitter">
+                <Twitter className="w-5 h-5" />
               </a>
             )}
             {links.linkedin && (
-              <a
-                href={links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-primary hover:underline"
-              >
-                <LinkIcon className="w-4 h-4" />
-                LinkedIn
+              <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors" title="LinkedIn">
+                <Linkedin className="w-5 h-5" />
               </a>
             )}
           </div>
