@@ -4,6 +4,7 @@ import { useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createQuestion } from "@/server/actions/questions";
 import { FORUM_CATEGORIES } from "@/lib/validations/forum";
+import { INDUSTRIES } from "@/lib/constants/industries";
 import { RichTextEditor } from "@/components/shared/rich-text-editor";
 
 const RESEARCH_DOMAINS = [
@@ -115,6 +116,19 @@ export function QuestionForm() {
             <option value="">Select domain...</option>
             {RESEARCH_DOMAINS.map((d) => (
               <option key={d} value={d}>{d}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Industry */}
+        <div>
+          <label className="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-1.5">
+            Industry <span className="text-text-tertiary font-normal">(optional)</span>
+          </label>
+          <select name="industry" className="w-full px-3.5 py-2.5 text-sm border border-border dark:border-border-dark rounded-md bg-white dark:bg-surface-dark text-text-primary dark:text-text-dark-primary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-light transition-colors">
+            <option value="">Select industry...</option>
+            {INDUSTRIES.map((ind) => (
+              <option key={ind} value={ind}>{ind}</option>
             ))}
           </select>
         </div>

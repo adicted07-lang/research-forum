@@ -21,6 +21,7 @@ interface QuestionCardProps {
     tags: string[];
     category: string;
     researchDomain?: string | null;
+    industry?: string | null;
     bounty: number;
     status: string;
     upvoteCount: number;
@@ -93,6 +94,13 @@ export function QuestionCard({ question }: QuestionCardProps) {
           {question.researchDomain && (
             <span className="text-xs font-medium text-primary bg-primary-lighter px-2 py-0.5 rounded-full">
               {question.researchDomain}
+            </span>
+          )}
+
+          {/* Industry */}
+          {question.industry && (
+            <span className="text-xs font-medium text-orange-700 bg-orange-100 dark:bg-orange-900/30 dark:text-orange-400 px-2 py-0.5 rounded-full">
+              {question.industry}
             </span>
           )}
 

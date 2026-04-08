@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getQuestions } from "@/server/actions/questions";
 import { FORUM_CATEGORIES } from "@/lib/validations/forum";
+import { INDUSTRIES } from "@/lib/constants/industries";
 import { QuestionCard } from "@/components/forum/question-card";
 import { EmptyState } from "@/components/shared/empty-state";
 import { MessageSquare } from "lucide-react";
@@ -23,6 +24,7 @@ const RESEARCH_DOMAINS = [
 interface QuestionListProps {
   category?: string;
   researchDomain?: string;
+  industry?: string;
   sort?: string;
   page?: number;
 }
@@ -30,6 +32,7 @@ interface QuestionListProps {
 export async function QuestionList({
   category,
   researchDomain,
+  industry,
   sort = "newest",
   page = 1,
 }: QuestionListProps) {
@@ -37,7 +40,7 @@ export async function QuestionList({
   let totalPages = 1;
   let currentPage = page;
   try {
-    const result = await getQuestions({ category, researchDomain, sort, page });
+    const result = await getQuestions({ category, researchDomain, industry, sort, page });
     questions = result.questions;
     totalPages = result.totalPages;
     currentPage = result.currentPage;
@@ -56,6 +59,7 @@ export async function QuestionList({
     const searchParams = new URLSearchParams();
     if (params.category) searchParams.set("category", String(params.category));
     if (params.researchDomain) searchParams.set("domain", String(params.researchDomain));
+    if (params.industry) searchParams.set("industry", String(params.industry));
     if (params.sort && params.sort !== "newest")
       searchParams.set("sort", String(params.sort));
     if (params.page && Number(params.page) > 1)
@@ -105,7 +109,7 @@ export async function QuestionList({
           <select
             onChange={(e) => {
               const domain = e.target.value;
-              window.location.href = buildUrl({ category, researchDomain: domain || undefined, sort, page: 1 });
+              window.location.href = buildUrl({ category, researchDomain: domain || undefined, industry, sort, page: 1 });
             }}
             value={researchDomain || ""}
             className="px-3 py-1.5 rounded-md text-xs font-medium border border-border dark:border-border-dark bg-white dark:bg-surface-dark text-text-secondary dark:text-text-dark-secondary transition-colors hover:border-primary hover:text-primary dark:hover:text-text-dark-primary"
@@ -118,11 +122,28 @@ export async function QuestionList({
             ))}
           </select>
 
+          {/* Industry filter */}
+          <select
+            onChange={(e) => {
+              const ind = e.target.value;
+              window.location.href = buildUrl({ category, researchDomain, industry: ind || undefined, sort, page: 1 });
+            }}
+            value={industry || ""}
+            className="px-3 py-1.5 rounded-md text-xs font-medium border border-border dark:border-border-dark bg-white dark:bg-surface-dark text-text-secondary dark:text-text-dark-secondary transition-colors hover:border-primary hover:text-primary dark:hover:text-text-dark-primary"
+          >
+            <option value="">All industries</option>
+            {INDUSTRIES.map((ind) => (
+              <option key={ind} value={ind}>
+                {ind}
+              </option>
+            ))}
+          </select>
+
           {/* Sort options */}
           {SORT_OPTIONS.map((opt) => (
             <Link
               key={opt.value}
-              href={buildUrl({ category, researchDomain, sort: opt.value, page: 1 })}
+              href={buildUrl({ category, researchDomain, industry, sort: opt.value, page: 1 })}
               className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${
                 sort === opt.value || (!sort && opt.value === "newest")
                   ? "border-primary text-primary bg-primary-light"
@@ -183,7 +204,7 @@ export async function QuestionList({
         <div className="flex items-center justify-center gap-3 mt-6">
           {currentPage > 1 && (
             <Link
-              href={buildUrl({ category, sort, page: currentPage - 1 })}
+              href={buildUrl({ category, researchDomain, industry, sort, page: currentPage - 1 })}
               className="px-4 py-2 border border-border rounded-md text-sm font-medium text-text-primary hover:bg-surface transition-colors dark:border-border-dark dark:text-text-dark-primary dark:hover:bg-surface-dark"
             >
               Previous
@@ -194,7 +215,7 @@ export async function QuestionList({
           </span>
           {currentPage < totalPages && (
             <Link
-              href={buildUrl({ category, sort, page: currentPage + 1 })}
+              href={buildUrl({ category, researchDomain, industry, sort, page: currentPage + 1 })}
               className="px-4 py-2 border border-border rounded-md text-sm font-medium text-text-primary hover:bg-surface transition-colors dark:border-border-dark dark:text-text-dark-primary dark:hover:bg-surface-dark"
             >
               Next

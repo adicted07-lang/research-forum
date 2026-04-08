@@ -51,12 +51,13 @@ export default async function ForumPage({
   const params = await searchParams;
   const category = typeof params.category === "string" ? params.category : undefined;
   const domain = typeof params.domain === "string" ? params.domain : undefined;
+  const industry = typeof params.industry === "string" ? params.industry : undefined;
   const sort = typeof params.sort === "string" ? params.sort : "newest";
   const page = typeof params.page === "string" ? parseInt(params.page, 10) : 1;
 
   return (
     <PageLayout sidebar={<ForumSidebar />}>
-      <QuestionList category={category} researchDomain={domain} sort={sort} page={page} />
+      <QuestionList category={category} researchDomain={domain} industry={industry} sort={sort} page={page} />
     </PageLayout>
   );
 }
