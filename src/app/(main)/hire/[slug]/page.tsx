@@ -63,7 +63,7 @@ export default async function JobPage({ params }: JobPageProps) {
           __html: JSON.stringify(jobSchema(job as any)),
         }}
       />
-      <div className="space-y-6">
+      <div className="max-w-4xl mx-auto space-y-6">
         <JobDetail job={job} />
         <ApplicationForm
           jobId={job.id}
