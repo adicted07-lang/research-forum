@@ -10,6 +10,7 @@ import {
   markAsRead,
   markAllAsRead,
 } from "@/server/actions/notifications";
+import { NotificationsMenu } from "@/components/ui/notifications-menu";
 
 type Notification = {
   id: string;
@@ -91,73 +92,18 @@ export function NotificationBell() {
     <div ref={containerRef} className="relative">
       <button
         onClick={handleOpen}
-        className="relative p-2 rounded-md text-text-tertiary hover:bg-muted hover:text-accent-foreground transition-colors"
+        className="relative p-2 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors"
         aria-label="Notifications"
       >
-        <Bell className="size-5" />
+        <Bell className="w-5 h-5" />
         {unreadCount > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white leading-none">
-            {unreadCount > 9 ? "9+" : unreadCount}
-          </span>
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-80 rounded-xl border border-border dark:border-border-dark bg-white dark:bg-surface-dark shadow-lg z-50 overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-border dark:border-border-dark">
-            <span className="text-sm font-semibold text-text-primary dark:text-text-dark-primary">
-              Notifications
-            </span>
-            {unreadCount > 0 && (
-              <button
-                onClick={handleMarkAllRead}
-                className="text-xs text-primary hover:underline"
-              >
-                Mark all read
-              </button>
-            )}
-          </div>
-
-          <div className="max-h-96 overflow-y-auto">
-            {loading ? (
-              <div className="flex items-center justify-center py-10">
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-              </div>
-            ) : notifications.length === 0 ? (
-              <div className="flex flex-col items-center justify-center gap-2 py-10 text-text-tertiary">
-                <Bell className="size-8 opacity-40" />
-                <span className="text-sm">No notifications yet</span>
-              </div>
-            ) : (
-              notifications.map((notification) => (
-                <button
-                  key={notification.id}
-                  onClick={() => handleNotificationClick(notification)}
-                  className={cn(
-                    "w-full text-left px-4 py-3 flex items-start gap-3 hover:bg-muted transition-colors border-b border-border dark:border-border-dark last:border-0",
-                    !notification.isRead && "bg-primary/5"
-                  )}
-                >
-                  {!notification.isRead && (
-                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-blue-500" />
-                  )}
-                  <div className={cn("flex-1 min-w-0", notification.isRead && "pl-5")}>
-                    <p className="text-sm font-medium text-text-primary dark:text-text-dark-primary truncate">
-                      {notification.title}
-                    </p>
-                    {notification.body && (
-                      <p className="text-xs text-text-secondary dark:text-text-dark-secondary line-clamp-2 mt-0.5">
-                        {notification.body}
-                      </p>
-                    )}
-                    <p className="text-xs text-text-tertiary mt-1">
-                      {timeAgo(notification.createdAt)}
-                    </p>
-                  </div>
-                </button>
-              ))
-            )}
-          </div>
+        <div className="absolute right-0 top-full mt-2 z-50">
+          <NotificationsMenu />
         </div>
       )}
     </div>
