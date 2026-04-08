@@ -8,8 +8,7 @@ import {
   Briefcase,
   Building2,
   ExternalLink,
-  Twitter,
-  Linkedin,
+  AtSign,
 } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { FollowButton } from "@/components/social/follow-button";
@@ -207,12 +206,12 @@ export async function CompanyProfile({ profile }: CompanyProfileProps) {
             )}
             {links.twitter && (
               <a href={`https://twitter.com/${links.twitter.replace("@", "")}`} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors" title="Twitter">
-                <Twitter className="w-5 h-5" />
+                <AtSign className="w-5 h-5" />
               </a>
             )}
             {links.linkedin && (
               <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-md text-text-tertiary hover:text-primary hover:bg-primary-lighter transition-colors" title="LinkedIn">
-                <Linkedin className="w-5 h-5" />
+                <ExternalLink className="w-5 h-5" />
               </a>
             )}
           </div>
