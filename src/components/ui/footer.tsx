@@ -8,6 +8,7 @@ import {
   MessageSquare,
   BookOpen,
 } from "lucide-react";
+import { TieLogo, TieWordmark } from "@/components/shared/tie-logo";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -81,11 +82,8 @@ export default function Footer() {
         {/* Top Section: Logo and Description */}
         <div className="mb-12">
           <Link href="/" className="flex items-center gap-2.5 mb-6">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="The Intellectual Exchange" className="w-9 h-9 rounded-[10px] shadow-[0_2px_8px_rgba(218,85,47,0.3)]" />
-            <span className="text-xl font-bold tracking-tight">
-              The Intellectual Exchange
-            </span>
+            <TieLogo size={34} />
+            <TieWordmark className="text-[15px] tracking-[-0.01em]" />
           </Link>
           <p className="text-sm text-text-secondary dark:text-text-dark-secondary leading-relaxed max-w-2xl">
             {footerConfig.description}

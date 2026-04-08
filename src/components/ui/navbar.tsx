@@ -25,6 +25,7 @@ import { NotificationBell } from "@/components/notifications/notification-bell";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { UnreadMessageBadge } from "@/components/messages/unread-badge";
 import { AuthButtons } from "@/components/ui/auth-buttons";
+import { TieLogo, TieWordmark } from "@/components/shared/tie-logo";
 import { useSession } from "next-auth/react";
 
 import {
@@ -213,11 +214,8 @@ const Navbar1 = ({
         <nav className="hidden justify-between lg:flex h-16 items-center">
           <div className="flex items-center gap-6">
             <a href={logo.url} className="flex items-center gap-2.5 shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt={logo.alt} className="w-9 h-9 rounded-[10px] shadow-[0_2px_8px_rgba(218,85,47,0.3)]" />
-              <span className="text-xl font-bold tracking-tight">
-                {logo.title}
-              </span>
+              <TieLogo size={34} />
+              <TieWordmark className="text-[15px] tracking-[-0.01em]" />
             </a>
             <div className="flex items-center">
               <NavigationMenu>
@@ -243,11 +241,8 @@ const Navbar1 = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between h-16">
             <a href={logo.url} className="flex items-center gap-2.5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt={logo.alt} className="w-9 h-9 rounded-[10px] shadow-[0_2px_8px_rgba(218,85,47,0.3)]" />
-              <span className="text-lg font-bold tracking-tight">
-                {logo.title}
-              </span>
+              <TieLogo size={34} />
+              <TieWordmark className="text-[15px] tracking-[-0.01em]" />
             </a>
             <Sheet>
               <SheetTrigger className={buttonVariants({ variant: "outline", size: "icon" })}>
@@ -257,11 +252,8 @@ const Navbar1 = ({
                 <SheetHeader>
                   <SheetTitle>
                     <a href={logo.url} className="flex items-center gap-2.5">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src="/logo.png" alt={logo.alt} className="w-8 h-8 rounded-lg shadow-[0_2px_8px_rgba(218,85,47,0.3)]" />
-                      <span className="text-lg font-bold tracking-tight">
-                        {logo.title}
-                      </span>
+                      <TieLogo size={30} />
+                      <TieWordmark className="text-sm tracking-[-0.01em]" />
                     </a>
                   </SheetTitle>
                 </SheetHeader>
