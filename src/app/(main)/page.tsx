@@ -143,7 +143,7 @@ export default async function HomePage() {
 
       {/* News */}
       <section className="mb-8">
-        <SectionHeader title="The Journal" href="/news" icon={Newspaper} />
+        <SectionHeader title="News" href="/news" icon={Newspaper} />
         {articles.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {articles.map((a: any) => (

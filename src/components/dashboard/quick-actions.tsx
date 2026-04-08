@@ -42,7 +42,7 @@ const researchActions: Action[] = [
     id: "4",
     label: "Write an Article",
     icon: <FileText className="h-4 w-4 text-green-500" />,
-    description: "The Journal",
+    description: "News",
     short: "",
     end: "Create",
   },

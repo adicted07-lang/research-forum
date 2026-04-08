@@ -27,7 +27,7 @@ const footerConfig = {
         { label: "Ask a Question", href: "/forum/new" },
         { label: "Leaderboard", href: "/leaderboard" },
         { label: "Researchers", href: "/researchers" },
-        { label: "The Journal", href: "/news" },
+        { label: "News", href: "/news" },
       ],
     },
     {

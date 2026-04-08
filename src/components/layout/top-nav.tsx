@@ -13,7 +13,7 @@ const navLinks = [
   { label: "Forum", href: "/forum" },
   { label: "Marketplace", href: "/marketplace" },
   { label: "Talent Board", href: "/hire" },
-  { label: "The Journal", href: "/news" },
+  { label: "News", href: "/news" },
   { label: "Advertise", href: "/advertise" },
 ];
 

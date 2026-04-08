@@ -165,7 +165,7 @@ const Navbar1 = ({
       ],
     },
     {
-      title: "The Journal",
+      title: "News",
       url: "/news",
     },
     {

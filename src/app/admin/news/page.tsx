@@ -17,7 +17,7 @@ export default async function AdminNewsPage({ searchParams }: NewsPageProps) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-foreground mb-2">The Journal</h1>
+      <h1 className="text-2xl font-bold text-foreground mb-2">News</h1>
       <p className="text-muted-foreground mb-6">
         Review and publish article submissions from community members.
       </p>
