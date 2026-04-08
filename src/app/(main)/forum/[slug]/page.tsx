@@ -15,6 +15,7 @@ import { getSuggestedAnswers } from "@/server/actions/suggestions";
 import { SuggestedAnswers } from "@/components/forum/suggested-answers";
 import { getRelatedContent } from "@/server/actions/citations";
 import { RelatedContent } from "@/components/shared/related-content";
+import { questionSchema } from "@/lib/structured-data";
 
 export async function generateMetadata({
   params,
@@ -26,10 +27,14 @@ export async function generateMetadata({
   if (!question) return { title: "Question Not Found — ResearchHub" };
 
   const description = question.body.replace(/<[^>]*>/g, "").slice(0, 160);
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://researchhub.com";
 
   return {
     title: `${question.title} — ResearchHub`,
     description,
+    alternates: {
+      canonical: `${baseUrl}/forum/${slug}`,
+    },
     openGraph: {
       title: question.title,
       description,
@@ -87,6 +92,12 @@ export default async function QuestionDetailPage({
 
   return (
     <PageLayout sidebar={<ForumSidebar />}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(questionSchema(question as any)),
+        }}
+      />
       <div className="space-y-6">
         {/* Question */}
         <QuestionDetail question={question} currentUserId={currentUserId} />

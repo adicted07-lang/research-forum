@@ -5,6 +5,7 @@ import { JobDetail } from "@/components/hire/job-detail";
 import { ApplicationForm } from "@/components/hire/application-form";
 import { getJobBySlug, incrementJobViews } from "@/server/actions/jobs";
 import { auth } from "@/auth";
+import { jobSchema } from "@/lib/structured-data";
 
 export const dynamic = "force-dynamic";
 
@@ -20,9 +21,14 @@ export async function generateMetadata({ params }: JobPageProps): Promise<Metada
   const companyName = job.company.companyName ?? job.company.username ?? "Company";
   const title = `${job.title} at ${companyName} — ResearchHub`;
   const description = job.description.replace(/<[^>]*>/g, "").slice(0, 160);
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://researchhub.com";
+
   return {
     title,
     description,
+    alternates: {
+      canonical: `${baseUrl}/hire/${slug}`,
+    },
     openGraph: {
       title,
       description,
@@ -51,6 +57,12 @@ export default async function JobPage({ params }: JobPageProps) {
 
   return (
     <PageLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jobSchema(job as any)),
+        }}
+      />
       <div className="space-y-6">
         <JobDetail job={job} />
         <ApplicationForm

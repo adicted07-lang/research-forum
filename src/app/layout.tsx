@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { SessionProvider } from "next-auth/react";
+import { organizationSchema } from "@/lib/structured-data";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -38,6 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${outfit.variable} font-sans antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+        />
         <SessionProvider>
           <ThemeProvider
             attribute="class"

@@ -5,6 +5,7 @@ import { ResearcherProfile } from "@/components/profile/researcher-profile";
 import { CompanyProfile } from "@/components/profile/company-profile";
 import { getResearcherProfile, getCompanyProfile } from "@/server/actions/profiles";
 import { getUserActivity } from "@/server/actions/activity";
+import { personSchema, organizationProfileSchema } from "@/lib/structured-data";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +15,7 @@ interface ProfilePageProps {
 
 export async function generateMetadata({ params }: ProfilePageProps): Promise<Metadata> {
   const { username } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://researchhub.com";
 
   // Try researcher first, then company
   try {
@@ -24,6 +26,9 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
       return {
         title: `${displayName} — ResearchHub`,
         description,
+        alternates: {
+          canonical: `${baseUrl}/profile/${username}`,
+        },
         openGraph: { title: displayName, description, type: "profile" },
         twitter: { card: "summary", title: displayName, description },
       };
@@ -36,6 +41,9 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
       return {
         title: `${displayName} — ResearchHub`,
         description,
+        alternates: {
+          canonical: `${baseUrl}/profile/${username}`,
+        },
         openGraph: { title: displayName, description, type: "profile" },
         twitter: { card: "summary", title: displayName, description },
       };
@@ -63,6 +71,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       }
       return (
         <PageLayout>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(personSchema(researcher as any)),
+            }}
+          />
           <ResearcherProfile profile={researcher} activity={activity} />
         </PageLayout>
       );
@@ -73,6 +87,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     if (company) {
       return (
         <PageLayout>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(organizationProfileSchema(company as any)),
+            }}
+          />
           <CompanyProfile profile={company} />
         </PageLayout>
       );

@@ -10,6 +10,7 @@ import { getArticleBySlug } from "@/server/actions/articles";
 import { getComments } from "@/server/actions/comments";
 import { getRelatedContent } from "@/server/actions/citations";
 import { RelatedContent } from "@/components/shared/related-content";
+import { articleSchema } from "@/lib/structured-data";
 
 export async function generateMetadata({
   params,
@@ -21,10 +22,14 @@ export async function generateMetadata({
   if (!article) return { title: "Article Not Found — ResearchHub" };
 
   const description = article.body.replace(/<[^>]*>/g, "").slice(0, 160);
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://researchhub.com";
 
   return {
     title: `${article.title} — ResearchHub`,
     description,
+    alternates: {
+      canonical: `${baseUrl}/news/${slug}`,
+    },
     openGraph: {
       title: article.title,
       description,
@@ -70,6 +75,12 @@ export default async function ArticleDetailPage({
 
   return (
     <PageLayout sidebar={<NewsSidebar />}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema(article as any)),
+        }}
+      />
       <div className="space-y-6">
         {/* Article */}
         <ArticleDetail article={article} />
