@@ -10,7 +10,7 @@ import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
 import { getArticles } from "@/server/actions/articles";
-import { Flame, LayoutGrid, Users, Newspaper, Brain, Globe, Dna, Activity, BarChart3, Network, HeartPulse, Atom, MessageSquare, Database, type LucideIcon } from "lucide-react";
+import { TrendingUp, Sparkles, Briefcase, Newspaper, Brain, Globe, Dna, Activity, BarChart3, Network, HeartPulse, Atom, MessageSquare, Database, type LucideIcon } from "lucide-react";
 
 const POPULAR_TAGS = [
   "machine-learning", "climate-science", "genomics", "neuroscience", "statistics",
@@ -83,7 +83,7 @@ export default async function HomePage() {
 
       {/* Trending Questions */}
       <section className="mb-8">
-        <SectionHeader title="Trending Questions" href="/forum" icon={Flame} />
+        <SectionHeader title="Trending Questions" href="/forum" icon={TrendingUp} />
         {questions.length > 0 ? (
           <div className="space-y-3">
             {questions.map((q: any) => (
@@ -106,7 +106,7 @@ export default async function HomePage() {
 
       {/* Top Services */}
       <section className="mb-8">
-        <SectionHeader title="Top Services & Tools" href="/marketplace" icon={LayoutGrid} />
+        <SectionHeader title="Top Services & Tools" href="/marketplace" icon={Sparkles} />
         {listings.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {listings.map((l: any) => (
@@ -125,7 +125,7 @@ export default async function HomePage() {
 
       {/* Jobs */}
       <section className="mb-8">
-        <SectionHeader title="Talent Board" href="/talent-board" icon={Users} />
+        <SectionHeader title="Talent Board" href="/talent-board" icon={Briefcase} />
         {jobs.length > 0 ? (
           <div className="space-y-3">
             {jobs.map((j: any) => (

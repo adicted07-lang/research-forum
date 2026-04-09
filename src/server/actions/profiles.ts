@@ -36,7 +36,8 @@ export async function getResearcherProfile(username: string) {
       },
     });
     return user;
-  } catch {
+  } catch (err) {
+    console.error("[getResearcherProfile] Error:", err);
     return null;
   }
 }

@@ -141,6 +141,7 @@ model User {
   expertise      String[]
   experienceYears Int?
   hourlyRate     Float?
+  availability   String?
   portfolioLinks String[]
   socialLinks    Json?
   resumeUrl      String?
