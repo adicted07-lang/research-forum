@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { anthropic } from "@/lib/claude";
+import { sendEmail } from "@/lib/email";
+
+const ADMIN_EMAIL = "adicted07@gmail.com";
 
 function generateSlug(title: string): string {
   return title
@@ -255,6 +258,25 @@ CRITICAL RULES:
         }
       }
     }
+
+    // Send admin digest email
+    const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+    const questionsList = createdQuestions.map((q: any) =>
+      `<li><a href="${baseUrl}/forum/${q.slug}">${q.title}</a></li>`
+    ).join("");
+
+    sendEmail({
+      to: ADMIN_EMAIL,
+      subject: `Forum update: ${createdQuestions.length} new questions, ${answersCreated} new answers`,
+      html: `
+        <h2>Daily Forum Update</h2>
+        <h3>New Questions (${createdQuestions.length})</h3>
+        <ul>${questionsList}</ul>
+        <h3>New Answers</h3>
+        <p>${answersCreated} expert answers posted on existing questions.</p>
+        <p style="color:#888;font-size:12px;">— The Intellectual Exchange Auto-Content System</p>
+      `,
+    });
 
     return NextResponse.json({
       success: true,
