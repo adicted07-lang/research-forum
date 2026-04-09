@@ -5,6 +5,8 @@ import { QuestionForm } from "@/components/forum/question-form";
 
 export const metadata: Metadata = {
   title: "Ask a Question — T.I.E",
+  description: "Post a new question to the T.I.E research forum.",
+  robots: { index: false, follow: false },
 };
 
 export default function AskQuestionPage() {

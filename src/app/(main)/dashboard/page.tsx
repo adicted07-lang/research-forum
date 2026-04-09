@@ -21,6 +21,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Dashboard — T.I.E",
   description: "Manage your research projects and applications.",
+  robots: { index: false, follow: false },
 };
 
 function applicationStatusClass(status: string): string {

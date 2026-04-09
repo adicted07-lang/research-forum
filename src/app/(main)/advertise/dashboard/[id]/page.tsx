@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   } catch {
     // ignore
   }
-  return { title };
+  return { title, robots: { index: false, follow: false } };
 }
 
 export default async function CampaignDetailPage({ params }: PageProps) {

@@ -9,17 +9,27 @@ import { ChevronLeft } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 interface DocPageProps {
   params: Promise<{ slug: string; docId: string }>;
 }
 
 export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
-  const { docId } = await params;
+  const { slug, docId } = await params;
   const doc = await getDocument(docId);
   if (!doc) return { title: "Document Not Found — T.I.E" };
+  const description = doc.body.replace(/<[^>]*>/g, "").slice(0, 160);
   return {
     title: `${doc.title} — T.I.E`,
-    description: doc.body.replace(/<[^>]*>/g, "").slice(0, 160),
+    description,
+    alternates: { canonical: `${baseUrl}/projects/${slug}/docs/${docId}` },
+    openGraph: {
+      title: `${doc.title} — T.I.E`,
+      description,
+      siteName: "The Intellectual Exchange",
+      images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(doc.title)}&subtitle=T.I.E`, width: 1200, height: 630 }],
+    },
   };
 }
 

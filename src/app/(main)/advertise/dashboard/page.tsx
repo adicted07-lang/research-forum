@@ -11,6 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Ad Dashboard — T.I.E",
   description: "Manage your advertising campaigns on T.I.E.",
+  robots: { index: false, follow: false },
 };
 
 export default async function AdDashboardPage() {

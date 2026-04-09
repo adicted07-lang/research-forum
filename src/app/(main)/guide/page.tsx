@@ -13,6 +13,18 @@ export const metadata: Metadata = {
   title: "Getting Started — T.I.E",
   description: "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
   alternates: { canonical: `${baseUrl}/guide` },
+  openGraph: {
+    title: "Getting Started — T.I.E",
+    description: "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
+    siteName: "The Intellectual Exchange",
+    images: [{ url: `${baseUrl}/api/og?title=Getting Started&subtitle=T.I.E`, width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Getting Started — T.I.E",
+    description: "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
+    images: [`${baseUrl}/api/og?title=Getting Started&subtitle=T.I.E`],
+  },
 };
 
 function Section({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {

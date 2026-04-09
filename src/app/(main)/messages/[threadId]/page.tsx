@@ -12,6 +12,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Conversation — T.I.E",
+  robots: { index: false, follow: false },
 };
 
 interface ThreadPageProps {

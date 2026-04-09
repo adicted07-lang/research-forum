@@ -7,6 +7,8 @@ import { ArticleForm } from "@/components/news/article-form";
 
 export const metadata: Metadata = {
   title: "Submit Article — T.I.E",
+  description: "Submit a research article or news story to T.I.E.",
+  robots: { index: false, follow: false },
 };
 
 export default async function SubmitArticlePage() {

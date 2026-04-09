@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/shared/section-header";
 export const metadata: Metadata = {
   title: "List Your Service — T.I.E",
   description: "Add your research service or tool to the T.I.E marketplace.",
+  robots: { index: false, follow: false },
 };
 
 export default function NewListingPage() {

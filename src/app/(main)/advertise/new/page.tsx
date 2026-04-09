@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Create Campaign — T.I.E",
   description: "Create a new advertising campaign on T.I.E.",
+  robots: { index: false, follow: false },
 };
 
 export default async function NewCampaignPage() {

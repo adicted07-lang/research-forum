@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/shared/section-header";
 export const metadata: Metadata = {
   title: "Post a Job — T.I.E",
   description: "Post a research project and find the perfect expert on T.I.E.",
+  robots: { index: false, follow: false },
 };
 
 export default function NewJobPage() {

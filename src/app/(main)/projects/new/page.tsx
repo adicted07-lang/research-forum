@@ -9,6 +9,7 @@ import { ProjectForm } from "@/components/projects/project-form";
 export const metadata: Metadata = {
   title: "New Project — T.I.E",
   description: "Create a new research project workspace for your team.",
+  robots: { index: false, follow: false },
 };
 
 export default async function NewProjectPage() {

@@ -14,6 +14,8 @@ import { FileText, Lock, Globe } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -27,6 +29,19 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   return {
     title: `${project.name} — T.I.E Projects`,
     description,
+    alternates: { canonical: `${baseUrl}/projects/${slug}` },
+    openGraph: {
+      title: `${project.name} — T.I.E Projects`,
+      description,
+      siteName: "The Intellectual Exchange",
+      images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(project.name)}&subtitle=T.I.E`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} — T.I.E Projects`,
+      description,
+      images: [`${baseUrl}/api/og?title=${encodeURIComponent(project.name)}&subtitle=T.I.E`],
+    },
   };
 }
 

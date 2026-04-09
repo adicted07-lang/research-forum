@@ -14,6 +14,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Settings — T.I.E",
   description: "Manage your account settings and profile on T.I.E.",
+  robots: { index: false, follow: false },
 };
 
 export default async function SettingsPage() {
