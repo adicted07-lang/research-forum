@@ -26,7 +26,10 @@ export const metadata: Metadata = {
     "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
   alternates: { canonical: baseUrl },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
     apple: "/apple-icon.png",
   },
   openGraph: {
