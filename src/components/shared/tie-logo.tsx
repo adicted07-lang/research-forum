@@ -13,5 +13,5 @@ export function TieLogo({ size = 36, className }: { size?: number; className?: s
 }
 
 export function TieBrand({ compact }: { compact?: boolean }) {
-  return <TieLogo size={compact ? 32 : 44} />;
+  return <TieLogo size={compact ? 36 : 56} />;
 }
