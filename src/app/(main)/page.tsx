@@ -33,15 +33,17 @@ const TAG_ICONS: Record<string, LucideIcon> = {
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  let questions: any[] = [];
-  let listings: any[] = [];
-  let jobs: any[] = [];
-  let articles: any[] = [];
+  const [questionsResult, listingsResult, jobsResult, articlesResult] = await Promise.allSettled([
+    getQuestions({ sort: "trending", limit: 4 }),
+    getListings({ sort: "trending", limit: 4 }),
+    getJobs({ sort: "newest", limit: 3 }),
+    getArticles({ sort: "latest", limit: 3 }),
+  ]);
 
-  try { questions = (await getQuestions({ sort: "trending", limit: 4 })).questions; } catch {}
-  try { listings = await getListings({ sort: "trending", limit: 4 }); } catch {}
-  try { jobs = await getJobs({ sort: "newest", limit: 3 }); } catch {}
-  try { articles = (await getArticles({ sort: "latest", limit: 3 })).articles; } catch {}
+  const questions = questionsResult.status === "fulfilled" ? questionsResult.value.questions : [];
+  const listings = listingsResult.status === "fulfilled" ? listingsResult.value : [];
+  const jobs = jobsResult.status === "fulfilled" ? jobsResult.value : [];
+  const articles = articlesResult.status === "fulfilled" ? articlesResult.value.articles : [];
 
   return (
     <PageLayout
@@ -144,7 +146,7 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <EmptyState title="No listings yet" description="List your service or tool." />
+          <EmptyState title="No listings yet" description="List your service or tool." action={<Link href="/marketplace/new" className="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors">List a Service</Link>} />
         )}
       </section>
 
@@ -173,7 +175,7 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <EmptyState title="No jobs yet" description="Post a research project." />
+          <EmptyState title="No jobs yet" description="Post a research project." action={<Link href="/talent-board/new" className="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-hover transition-colors">Post a Job</Link>} />
         )}
       </section>
 
@@ -184,7 +186,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {articles.map((a: any) => (
               <div key={a.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md overflow-hidden hover:border-border hover:shadow-sm transition-all">
-                <Link href={`/news/${a.slug}`} className="block">
+                <Link href={`/news/${a.slug}`} className="block" aria-label={a.title}>
                   {a.coverImage ? (
                     <Image src={a.coverImage} alt={a.title} width={400} height={225} className="w-full object-cover" style={{ aspectRatio: "16/9" }} />
                   ) : (

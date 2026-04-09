@@ -141,11 +141,11 @@ export async function HomepageSidebar({ tags }: HomepageSidebarProps) {
         <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">
           Trending Topics
         </h3>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5 overflow-hidden">
           {tags.map(({ tag, icon: Icon }) => (
             <Link key={tag} href={`/forum?tag=${tag}`}>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-lighter text-primary text-xs font-medium hover:bg-primary/10 transition-colors">
-                {Icon && <Icon className="w-3.5 h-3.5" />}
+              <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-primary-lighter text-primary text-[11px] sm:text-xs font-medium hover:bg-primary/10 transition-colors whitespace-nowrap">
+                {Icon && <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
                 {tag}
               </span>
             </Link>

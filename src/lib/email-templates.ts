@@ -10,7 +10,7 @@ const baseStyles = `
 const buttonStyles = `
   display: inline-block;
   padding: 10px 20px;
-  background: #DA552F;
+  background: #b8461f;
   color: #ffffff;
   text-decoration: none;
   border-radius: 6px;
@@ -138,7 +138,7 @@ export function newsletterEmail(subject: string, body: string): string {
       </div>
       <div style="${footerStyles}">
         <p>You're receiving this because you subscribed to The Intellectual Exchange newsletters.</p>
-        <p><a href="https://theintellectualexchange.com/settings" style="color: #DA552F;">Manage preferences</a></p>
+        <p><a href="https://theintellectualexchange.com/settings" style="color: #b8461f;">Manage preferences</a></p>
       </div>
     </div>
   `;

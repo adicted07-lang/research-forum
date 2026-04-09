@@ -133,14 +133,14 @@ export async function GET(request: NextRequest) {
 
             <!-- CTA -->
             <div style="text-align: center; margin: 32px 0;">
-              <a href="${BASE_URL}" style="display: inline-block; padding: 12px 28px; background: #DA552F; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 14px;">Visit The Exchange</a>
+              <a href="${BASE_URL}" style="display: inline-block; padding: 12px 28px; background: #b8461f; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 14px;">Visit The Exchange</a>
             </div>
           </div>
 
           <!-- Footer -->
           <div style="padding: 16px 24px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">
             <p style="margin: 0 0 4px;">You're receiving this because you subscribed to the weekly digest on The Intellectual Exchange.</p>
-            <p style="margin: 0;"><a href="${BASE_URL}/settings" style="color: #DA552F;">Manage preferences</a> · <a href="${BASE_URL}/settings" style="color: #DA552F;">Unsubscribe</a></p>
+            <p style="margin: 0;"><a href="${BASE_URL}/settings" style="color: #b8461f;">Manage preferences</a> · <a href="${BASE_URL}/settings" style="color: #b8461f;">Unsubscribe</a></p>
           </div>
         </div>
       `;

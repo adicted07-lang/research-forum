@@ -14,10 +14,10 @@ const config: Config = {
       },
       colors: {
         primary: {
-          DEFAULT: "#DA552F",
-          hover: "#c44a28",
-          light: "rgba(218, 85, 47, 0.08)",
-          lighter: "rgba(218, 85, 47, 0.04)",
+          DEFAULT: "#b8461f",
+          hover: "#a33d1b",
+          light: "rgba(184, 70, 31, 0.08)",
+          lighter: "rgba(184, 70, 31, 0.04)",
         },
         surface: {
           DEFAULT: "#F7F7F7",

@@ -29,11 +29,11 @@ export async function GET(
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="320" height="80" viewBox="0 0 320 80">
       <rect width="320" height="80" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
-      <rect width="320" height="4" fill="#DA552F" rx="0"/>
+      <rect width="320" height="4" fill="#b8461f" rx="0"/>
       <text x="16" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#21293C">${displayName}</text>
       <text x="16" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#6F7287">@${user.username} · ${tier.name}</text>
       <text x="16" y="66" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">${user.points} pts · ${user._count.answers} answers · ${user.currentStreak}d streak</text>
-      <text x="260" y="66" font-family="system-ui, sans-serif" font-size="9" fill="#DA552F">The Intellectual Exchange</text>
+      <text x="260" y="66" font-family="system-ui, sans-serif" font-size="9" fill="#b8461f">The Intellectual Exchange</text>
     </svg>
   `;
 

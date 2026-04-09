@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
               width: "44px",
               height: "44px",
               borderRadius: "11px",
-              backgroundColor: "#DA552F",
+              backgroundColor: "#b8461f",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

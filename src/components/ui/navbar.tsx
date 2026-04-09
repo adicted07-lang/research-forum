@@ -243,7 +243,7 @@ const Navbar1 = ({
               <TieBrand />
             </a>
             <Sheet>
-              <SheetTrigger className={buttonVariants({ variant: "outline", size: "icon" })}>
+              <SheetTrigger className={buttonVariants({ variant: "outline", size: "icon" })} aria-label="Open menu">
                 <Menu className="size-4" />
               </SheetTrigger>
               <SheetContent className="overflow-y-auto">
