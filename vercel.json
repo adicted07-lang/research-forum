@@ -3,6 +3,13 @@
   "functions": {
     "app/**": {
       "maxDuration": 30
+    },
+    "app/api/cron/**": {
+      "maxDuration": 60
     }
-  }
+  },
+  "crons": [
+    { "path": "/api/cron/auto-qa", "schedule": "0 8 * * *" },
+    { "path": "/api/cron/auto-news", "schedule": "0 10 * * *" }
+  ]
 }
