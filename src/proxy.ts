@@ -5,7 +5,14 @@ const protectedPaths = ["/settings", "/dashboard", "/messages", "/forum/new", "/
 const authPaths = ["/login", "/signup"];
 
 export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
+  const host = request.headers.get("host") || "";
+
+  // www to non-www redirect
+  if (host.startsWith("www.")) {
+    const url = new URL(`https://${host.replace("www.", "")}${pathname}${search}`);
+    return NextResponse.redirect(url, 301);
+  }
 
   // Profile URL redirects
   if (pathname.startsWith("/@")) {
