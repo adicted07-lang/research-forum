@@ -4,13 +4,13 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { SectionHeader } from "@/components/shared/section-header";
 import { EmptyState } from "@/components/shared/empty-state";
 import { BadgePill } from "@/components/shared/badge-pill";
-import { AdUnit } from "@/components/shared/ad-unit";
 import { ArticleCover } from "@/components/news/article-cover";
 import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
 import { getArticles } from "@/server/actions/articles";
 import { TrendingUp, Sparkles, Briefcase, Newspaper, Brain, Globe, Dna, Activity, BarChart3, Network, HeartPulse, Atom, MessageSquare, Database, HelpCircle, ShoppingBag, MapPin, type LucideIcon } from "lucide-react";
+import { HomepageSidebar } from "@/components/home/homepage-sidebar";
 
 const POPULAR_TAGS = [
   "machine-learning", "climate-science", "genomics", "neuroscience", "statistics",
@@ -46,27 +46,9 @@ export default async function HomePage() {
   return (
     <PageLayout
       sidebar={
-        <div className="space-y-6">
-          <div className="bg-white border border-border-light rounded-lg p-5 dark:bg-surface-dark dark:border-border-dark-light">
-            <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-4">
-              Trending Topics
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {POPULAR_TAGS.map((tag) => {
-                const Icon = TAG_ICONS[tag];
-                return (
-                  <Link key={tag} href={`/forum?tag=${tag}`}>
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary-lighter text-primary text-xs font-medium hover:bg-primary/10 transition-colors">
-                      {Icon && <Icon className="w-3.5 h-3.5" />}
-                      {tag}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-          <AdUnit slot="homepage-sidebar" format="rectangle" className="mt-4" />
-        </div>
+        <HomepageSidebar
+          tags={POPULAR_TAGS.map((tag) => ({ tag, icon: TAG_ICONS[tag] }))}
+        />
       }
     >
       <div className="text-center py-12 mb-8 border-b border-border-light dark:border-border-dark-light">
