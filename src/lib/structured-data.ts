@@ -7,8 +7,10 @@ export function organizationSchema() {
     name: "The Intellectual Exchange",
     url: BASE_URL,
     description: "A professional platform for researchers, academics, and companies.",
-    // TODO: Add social media URLs when available
-    sameAs: [],
+    sameAs: [
+      "https://www.linkedin.com/company/the-intellectual-exchange/",
+      "https://x.com/intellectualexc",
+    ],
   };
 }
 

@@ -51,16 +51,47 @@ export default async function HomePage() {
         />
       }
     >
-      <div className="text-center py-12 mb-8 border-b border-border-light dark:border-border-dark-light">
-        <h1 className="text-3xl font-bold text-text-primary dark:text-text-dark-primary mb-3 tracking-tight">
-          The Intellectual Exchange
-        </h1>
-        <p className="text-text-secondary dark:text-text-dark-secondary text-lg mb-4 max-w-xl mx-auto">
-          Where researchers exchange knowledge, hire experts, and discover tools.
-        </p>
-        <p className="text-sm text-text-secondary dark:text-text-dark-secondary">
-          Join 500+ researchers
-        </p>
+      <div className="relative text-center py-16 mb-8 border-b border-border-light dark:border-border-dark-light overflow-hidden rounded-xl">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-[0.04] dark:opacity-[0.06] pointer-events-none" aria-hidden="true">
+          {/* Grid pattern */}
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-text-primary dark:text-text-dark-primary" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hero-grid)" />
+          </svg>
+        </div>
+        {/* Gradient orbs */}
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
+        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" aria-hidden="true" />
+        {/* Floating icons */}
+        <div className="absolute top-6 left-8 opacity-[0.06] dark:opacity-[0.08]" aria-hidden="true">
+          <Briefcase className="w-10 h-10 text-primary rotate-[-15deg]" />
+        </div>
+        <div className="absolute top-8 right-12 opacity-[0.06] dark:opacity-[0.08]" aria-hidden="true">
+          <MessageSquare className="w-8 h-8 text-blue-500 rotate-[10deg]" />
+        </div>
+        <div className="absolute bottom-8 left-16 opacity-[0.06] dark:opacity-[0.08]" aria-hidden="true">
+          <Database className="w-7 h-7 text-purple-500 rotate-[20deg]" />
+        </div>
+        <div className="absolute bottom-6 right-8 opacity-[0.06] dark:opacity-[0.08]" aria-hidden="true">
+          <TrendingUp className="w-9 h-9 text-green-500 rotate-[-10deg]" />
+        </div>
+        {/* Content */}
+        <div className="relative z-10">
+          <h1 className="text-3xl font-bold text-text-primary dark:text-text-dark-primary mb-3 tracking-tight">
+            The Intellectual Exchange
+          </h1>
+          <p className="text-text-secondary dark:text-text-dark-secondary text-lg mb-4 max-w-xl mx-auto">
+            Where researchers exchange knowledge, hire experts, and discover tools.
+          </p>
+          <p className="text-sm text-text-secondary dark:text-text-dark-secondary">
+            Join 500+ researchers
+          </p>
+        </div>
       </div>
 
       {/* Trending Questions */}
