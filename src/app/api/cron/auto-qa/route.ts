@@ -86,13 +86,13 @@ export async function POST(request: NextRequest) {
     // --- Generate Questions ---
     const pickedIndustries = INDUSTRIES.sort(() => Math.random() - 0.5).slice(0, questionCount);
 
-    const questionPrompt = `Generate ${questionCount} unique market research questions for a professional Q&A forum. Each question should reflect a real challenge that market researchers face in their work, focused on specific industries.
+    const questionPrompt = `Generate ${questionCount} short, natural market research questions for a Q&A forum. These should sound like a real person typing a quick question — NOT an academic paper.
 
-Return ONLY valid JSON (no markdown, no code fences) in this exact format:
+Return ONLY valid JSON (no markdown, no code fences):
 [
   {
-    "title": "Specific, detailed question title",
-    "body": "Detailed question body (200-400 words) with context, specific challenges, and what kind of answers would be helpful. Use paragraphs separated by newlines.",
+    "title": "Short question in sentence case (like a real person would ask)",
+    "body": "1-2 sentences of context. Keep it casual and brief.",
     "tags": ["tag1", "tag2", "tag3"],
     "category": "Category Name",
     "researchDomain": "specific domain",
@@ -100,18 +100,16 @@ Return ONLY valid JSON (no markdown, no code fences) in this exact format:
   }
 ]
 
-IMPORTANT — Each question MUST be about one of these industries (one per question):
+Industries (one per question):
 ${pickedIndustries.map((ind, i) => `Question ${i + 1}: ${ind}`).join("\n")}
 
-Rules:
-- Titles should be specific and practical, not generic (e.g., "How do you handle sample size calculation for conjoint studies in the automotive sector with 20+ attributes?" not "How to do surveys?")
-- Body should demonstrate expertise: mention specific methodologies, tools, frameworks, or real scenarios relevant to the assigned industry
-- Pick 3-5 tags from: ${QUESTION_TAGS.join(", ")}
-- Pick category from: ${CATEGORIES.join(", ")}
-- Each question should cover a different topic area within its assigned industry
-- Write as if you are an experienced market researcher seeking peer advice
-- Include specific numbers, tools, or scenarios to make it authentic
-- The "industry" field must match the assigned industry exactly`;
+CRITICAL RULES:
+- Title: sentence case (only first word capitalized), max 15 words, sounds like a real person asking a colleague. Examples: "What's the best way to size the EV battery market?", "Anyone done conjoint analysis for food packaging recently?"
+- Body: 1-2 short sentences max. Just enough context. Like a Slack message, not an essay.
+- NO title case (don't capitalize every word)
+- NO academic language. Write like a human, not a textbook.
+- Tags from: ${QUESTION_TAGS.join(", ")}
+- Category from: ${CATEGORIES.join(", ")}`;
 
     const questionResponse = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
@@ -195,24 +193,24 @@ Rules:
       for (const question of unansweredQuestions.slice(0, answerCount)) {
         const answerer = answerers[answersCreated % answerers.length];
 
-        const answerPrompt = `You are ${answerer.name}, an experienced market researcher with expertise in ${(answerer.expertise || []).join(", ")}. Write a detailed, expert answer (300-500 words) to this question on a professional market research Q&A forum.
+        const answerPrompt = `You are ${answerer.name}, a market researcher. Give a short, helpful reply to this forum question.
 
-Question Title: ${question.title}
-Question Body: ${question.body}
-Tags: ${question.tags.join(", ")}
+Question: ${question.title}
+Context: ${question.body}
 
 Return ONLY valid JSON (no markdown, no code fences):
 {
-  "body": "Your detailed expert answer here. Use paragraphs separated by newlines. Demonstrate expertise by referencing specific methodologies, frameworks, tools, or real-world examples. Be genuinely helpful and practical."
+  "body": "Your short answer here"
 }
 
-Rules:
-- Write in ${answerer.name}'s voice as an expert with ${answerer.expertise?.join(", ")} background
-- Include specific methodologies, frameworks, or tools
-- Provide actionable advice, not generic platitudes
-- Reference real research concepts and best practices
-- Structure the answer with clear paragraphs
-- Be conversational but professional`;
+CRITICAL RULES:
+- Keep it to 2-3 sentences MAX. Like a quick helpful reply on a forum.
+- Sound like a real human having a conversation, not writing an essay.
+- Be specific and practical — mention a tool, method, or number if relevant.
+- NO long paragraphs. NO academic tone. Think Reddit/StackOverflow style.
+- Example good answer: "We used MaxDiff for this last year in the packaging space. Worked well with 15 attributes and ~400 respondents. Happy to share the design if you want."
+- Example bad answer: "In my extensive experience spanning multiple industries, I have found that the optimal approach involves carefully considering several methodological frameworks..."`;
+
 
         try {
           const answerResponse = await anthropic.messages.create({
