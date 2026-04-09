@@ -3,9 +3,6 @@
   "functions": {
     "app/**": {
       "maxDuration": 30
-    },
-    "app/api/cron/**": {
-      "maxDuration": 60
     }
   },
   "crons": [
