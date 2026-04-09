@@ -124,7 +124,7 @@ Tags: pick 3-5 from: ${ARTICLE_TAGS.join(", ")}
 authorIndex: number from 0 to ${researchers.length - 1} (distribute evenly)`;
 
     const response = await anthropic.messages.create({
-      model: "claude-sonnet-4-5-20250514",
+      model: "claude-sonnet-4-6",
       max_tokens: 16384,
       messages: [{ role: "user", content: prompt }],
     });
