@@ -4,8 +4,10 @@ import { Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import CookieConsent from "@/components/shared/cookie-consent";
 import { SessionProvider } from "next-auth/react";
-import { organizationSchema } from "@/lib/structured-data";
+import { organizationSchema, websiteSchema } from "@/lib/structured-data";
 import "./globals.css";
+
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -22,6 +24,7 @@ export const metadata: Metadata = {
   title: "The Intellectual Exchange — Research Community & Marketplace",
   description:
     "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
+  alternates: { canonical: baseUrl },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-icon.png",
@@ -33,14 +36,15 @@ export const metadata: Metadata = {
     siteName: "The Intellectual Exchange",
     type: "website",
     locale: "en_US",
-    images: [{ url: "/logo.png", width: 512, height: 512 }],
+    url: baseUrl,
+    images: [{ url: `${baseUrl}/api/og?title=The Intellectual Exchange&subtitle=Research Community`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Intellectual Exchange — Research Community & Marketplace",
     description:
       "A professional platform for researchers, academics, and companies.",
-    images: ["/logo.png"],
+    images: [`${baseUrl}/api/og?title=The Intellectual Exchange&subtitle=Research Community`],
   },
 };
 
@@ -52,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="author" href={`${baseUrl}/about`} />
         <link rel="preconnect" href="https://api.dicebear.com" />
         <link rel="dns-prefetch" href="https://api.dicebear.com" />
         <link rel="preconnect" href="https://images.unsplash.com" />
@@ -61,6 +66,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
         <SessionProvider>
           <ThemeProvider

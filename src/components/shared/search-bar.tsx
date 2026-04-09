@@ -27,6 +27,7 @@ export function SearchBar({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        aria-label="Search"
         className={cn(
           "w-full py-1 pl-8 pr-3 text-xs rounded-md border border-border",
           "bg-surface text-text-primary placeholder:text-text-tertiary",

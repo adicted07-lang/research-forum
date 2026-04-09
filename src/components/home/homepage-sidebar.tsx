@@ -274,10 +274,13 @@ export async function HomepageSidebar({ tags }: HomepageSidebarProps) {
           Top questions, new tools, and research highlights delivered to your inbox every week.
         </p>
         <form action="/api/newsletter" method="POST" className="space-y-2">
+          <label htmlFor="newsletter-email" className="sr-only">Email address</label>
           <input
+            id="newsletter-email"
             type="email"
             name="email"
             required
+            aria-label="Email address for newsletter"
             placeholder="you@university.edu"
             className="w-full px-3 py-2 text-xs border border-border dark:border-border-dark rounded-md bg-white dark:bg-[#0F0F13] text-text-primary dark:text-text-dark-primary placeholder:text-text-tertiary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary-light transition-colors"
           />

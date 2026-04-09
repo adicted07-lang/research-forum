@@ -12,6 +12,24 @@ export function organizationSchema() {
   };
 }
 
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "The Intellectual Exchange",
+    url: BASE_URL,
+    description: "A professional platform for researchers, academics, and companies to share knowledge and collaborate.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${BASE_URL}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
 export function questionSchema(question: {
   title: string;
   body: string;

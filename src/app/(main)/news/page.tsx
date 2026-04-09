@@ -40,6 +40,7 @@ export default async function NewsPage({
 
   return (
     <PageLayout sidebar={<NewsSidebar />}>
+      <h1 className="sr-only">Research News and Articles</h1>
       <ArticleList category={category} sort={sort} page={page} />
     </PageLayout>
   );
