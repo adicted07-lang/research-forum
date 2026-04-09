@@ -7,8 +7,8 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { DatasetForm } from "@/components/datasets/dataset-form";
 
 export const metadata: Metadata = {
-  title: "Upload a Dataset — T.I.E",
-  description: "Share your research dataset with the T.I.E community.",
+  title: "Upload a Dataset — The Intellectual Exchange",
+  description: "Share your research dataset with the The Intellectual Exchange community.",
   robots: { index: false, follow: false },
 };
 

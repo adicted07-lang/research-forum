@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
     for (const source of sources) {
       try {
         const response = await fetch(source.url, {
-          headers: { "User-Agent": "T.I.E RSS Poller/1.0" },
+          headers: { "User-Agent": "The Intellectual Exchange RSS Poller/1.0" },
         });
         if (!response.ok) continue;
 

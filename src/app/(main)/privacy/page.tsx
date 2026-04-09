@@ -5,7 +5,7 @@ import { PageLayout } from "@/components/layout/page-layout";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — T.I.E",
+  title: "Privacy Policy — The Intellectual Exchange",
   description: "Privacy Policy for The Intellectual Exchange platform.",
   alternates: { canonical: `${baseUrl}/privacy` },
 };

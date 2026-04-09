@@ -19,7 +19,7 @@ import { Briefcase, FileText, Users, BookmarkIcon } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Dashboard — T.I.E",
+  title: "Dashboard — The Intellectual Exchange",
   description: "Manage your research projects and applications.",
   robots: { index: false, follow: false },
 };

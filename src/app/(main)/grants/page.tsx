@@ -10,20 +10,20 @@ export const dynamic = "force-dynamic";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Research Grants — T.I.E",
+  title: "Research Grants — The Intellectual Exchange",
   description: "Find open research grants and funding opportunities.",
   alternates: { canonical: `${baseUrl}/grants` },
   openGraph: {
-    title: "Research Grants — T.I.E",
+    title: "Research Grants — The Intellectual Exchange",
     description: "Find open research grants and funding opportunities.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=Research Grants&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=Research Grants&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Research Grants — T.I.E",
+    title: "Research Grants — The Intellectual Exchange",
     description: "Find open research grants and funding opportunities.",
-    images: [`${baseUrl}/api/og?title=Research Grants&subtitle=T.I.E`],
+    images: [`${baseUrl}/api/og?title=Research Grants&subtitle=The Intellectual Exchange`],
   },
 };
 

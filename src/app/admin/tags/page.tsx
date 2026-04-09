@@ -4,7 +4,7 @@ import { TagManager } from "@/components/admin/tag-manager";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Tags — Admin — T.I.E",
+  title: "Tags — Admin — The Intellectual Exchange",
 };
 
 export default async function AdminTagsPage() {

@@ -7,9 +7,9 @@ import { Megaphone, LayoutDashboard, Star, TrendingUp, DollarSign, Users } from 
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Advertise — T.I.E",
+  title: "Advertise — The Intellectual Exchange",
   description:
-    "Reach thousands of research professionals with targeted ads on T.I.E.",
+    "Reach thousands of research professionals with targeted ads on The Intellectual Exchange.",
   alternates: { canonical: `${baseUrl}/advertise` },
 };
 
@@ -25,7 +25,7 @@ const AD_TYPES = [
     icon: <Megaphone className="w-6 h-6 text-primary" />,
     title: "Banner Ads",
     description:
-      "Prominent placement in the sidebar across all pages. High-visibility format for brand awareness and product launches targeting the entire T.I.E audience.",
+      "Prominent placement in the sidebar across all pages. High-visibility format for brand awareness and product launches targeting the entire The Intellectual Exchange audience.",
     pricing: "From $5.00 CPM or $1.00 CPC",
   },
   {

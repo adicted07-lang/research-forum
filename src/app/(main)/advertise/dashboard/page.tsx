@@ -9,8 +9,8 @@ import { Plus } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Ad Dashboard — T.I.E",
-  description: "Manage your advertising campaigns on T.I.E.",
+  title: "Ad Dashboard — The Intellectual Exchange",
+  description: "Manage your advertising campaigns on The Intellectual Exchange.",
   robots: { index: false, follow: false },
 };
 

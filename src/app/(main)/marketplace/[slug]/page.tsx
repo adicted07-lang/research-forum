@@ -18,12 +18,12 @@ export async function generateMetadata({ params }: ListingPageProps): Promise<Me
   try {
     const listing = await getListingBySlug(slug);
     if (!listing) {
-      return { title: "Listing Not Found — T.I.E" };
+      return { title: "Listing Not Found — The Intellectual Exchange" };
     }
     const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
     const description = listing.tagline ?? undefined;
     return {
-      title: `${listing.title} — T.I.E Marketplace`,
+      title: `${listing.title} — The Intellectual Exchange`,
       description,
       alternates: {
         canonical: `${baseUrl}/marketplace/${slug}`,
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: ListingPageProps): Promise<Me
       },
     };
   } catch {
-    return { title: "Marketplace — T.I.E" };
+    return { title: "Marketplace — The Intellectual Exchange" };
   }
 }
 

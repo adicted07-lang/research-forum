@@ -5,8 +5,8 @@ import { JobForm } from "@/components/hire/job-form";
 import { SectionHeader } from "@/components/shared/section-header";
 
 export const metadata: Metadata = {
-  title: "Post a Job — T.I.E",
-  description: "Post a research project and find the perfect expert on T.I.E.",
+  title: "Post a Job — The Intellectual Exchange",
+  description: "Post a research project and find the perfect expert on The Intellectual Exchange.",
   robots: { index: false, follow: false },
 };
 

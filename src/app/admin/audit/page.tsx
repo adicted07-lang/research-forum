@@ -4,7 +4,7 @@ import { getAuditLogs } from "@/server/actions/audit";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Audit Log — Admin — T.I.E",
+  title: "Audit Log — Admin — The Intellectual Exchange",
 };
 
 interface AuditPageProps {

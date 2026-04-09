@@ -4,7 +4,7 @@ import { UserTable } from "@/components/admin/user-table";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Users — Admin — T.I.E",
+  title: "Users — Admin — The Intellectual Exchange",
 };
 
 interface UsersPageProps {

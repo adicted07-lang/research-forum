@@ -18,17 +18,17 @@ interface DocPageProps {
 export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
   const { slug, docId } = await params;
   const doc = await getDocument(docId);
-  if (!doc) return { title: "Document Not Found — T.I.E" };
+  if (!doc) return { title: "Document Not Found — The Intellectual Exchange" };
   const description = doc.body.replace(/<[^>]*>/g, "").slice(0, 160);
   return {
-    title: `${doc.title} — T.I.E`,
+    title: `${doc.title} — The Intellectual Exchange`,
     description,
     alternates: { canonical: `${baseUrl}/projects/${slug}/docs/${docId}` },
     openGraph: {
-      title: `${doc.title} — T.I.E`,
+      title: `${doc.title} — The Intellectual Exchange`,
       description,
       siteName: "The Intellectual Exchange",
-      images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(doc.title)}&subtitle=T.I.E`, width: 1200, height: 630 }],
+      images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(doc.title)}&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
     },
   };
 }

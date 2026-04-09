@@ -18,13 +18,13 @@ export async function generateMetadata({ params }: DatasetPageProps): Promise<Me
   try {
     const dataset = await getDatasetBySlug(slug);
     if (!dataset) {
-      return { title: "Dataset Not Found — T.I.E" };
+      return { title: "Dataset Not Found — The Intellectual Exchange" };
     }
     const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
     const description = dataset.description.replace(/<[^>]*>/g, "").slice(0, 160);
     const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(dataset.title)}&subtitle=Datasets`;
     return {
-      title: `${dataset.title} — T.I.E Datasets`,
+      title: `${dataset.title} — The Intellectual Exchange`,
       description,
       alternates: { canonical: `${baseUrl}/datasets/${slug}` },
       openGraph: {
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: DatasetPageProps): Promise<Me
       },
     };
   } catch {
-    return { title: "Datasets — T.I.E" };
+    return { title: "Datasets — The Intellectual Exchange" };
   }
 }
 

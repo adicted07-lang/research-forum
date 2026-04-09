@@ -35,7 +35,7 @@ export function SignupForm() {
       <div className="flex flex-col items-center mb-8">
         <TieLogo size={36} className="mb-4" />
         <h1 className="text-2xl font-bold text-text-primary dark:text-text-dark-primary">
-          Join T.I.E
+          Join The Intellectual Exchange
         </h1>
         <p className="text-sm text-text-secondary dark:text-text-dark-secondary mt-1">
           Create your researcher account

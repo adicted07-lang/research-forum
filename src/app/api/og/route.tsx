@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
               color: "white",
             }}
           >
-            T.I.E
+            The Intellectual Exchange
           </div>
           <span style={{ fontSize: "18px", color: "#9CA3AF" }}>
             The Intellectual Exchange

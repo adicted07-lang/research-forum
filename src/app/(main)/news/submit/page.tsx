@@ -6,8 +6,8 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { ArticleForm } from "@/components/news/article-form";
 
 export const metadata: Metadata = {
-  title: "Submit Article — T.I.E",
-  description: "Submit a research article or news story to T.I.E.",
+  title: "Submit Article — The Intellectual Exchange",
+  description: "Submit a research article or news story to The Intellectual Exchange.",
   robots: { index: false, follow: false },
 };
 

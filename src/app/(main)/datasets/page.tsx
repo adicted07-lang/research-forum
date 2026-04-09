@@ -13,20 +13,20 @@ export const dynamic = "force-dynamic";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Dataset Marketplace — T.I.E",
-  description: "Discover and share research datasets from the T.I.E community.",
+  title: "Dataset Marketplace — The Intellectual Exchange",
+  description: "Discover and share research datasets from the The Intellectual Exchange community.",
   alternates: { canonical: `${baseUrl}/datasets` },
   openGraph: {
-    title: "Dataset Marketplace — T.I.E",
-    description: "Discover and share research datasets from the T.I.E community.",
+    title: "Dataset Marketplace — The Intellectual Exchange",
+    description: "Discover and share research datasets from the The Intellectual Exchange community.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=Datasets&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=Datasets&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dataset Marketplace — T.I.E",
-    description: "Discover and share research datasets from the T.I.E community.",
-    images: [`${baseUrl}/api/og?title=Datasets&subtitle=T.I.E`],
+    title: "Dataset Marketplace — The Intellectual Exchange",
+    description: "Discover and share research datasets from the The Intellectual Exchange community.",
+    images: [`${baseUrl}/api/og?title=Datasets&subtitle=The Intellectual Exchange`],
   },
 };
 

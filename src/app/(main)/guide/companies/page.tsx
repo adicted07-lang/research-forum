@@ -10,20 +10,20 @@ import {
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Company Guide — T.I.E",
+  title: "Company Guide — The Intellectual Exchange",
   description: "Learn how companies can hire researchers, post jobs, and advertise on The Intellectual Exchange.",
   alternates: { canonical: `${baseUrl}/guide/companies` },
   openGraph: {
-    title: "Company Guide — T.I.E",
+    title: "Company Guide — The Intellectual Exchange",
     description: "Learn how companies can hire researchers, post jobs, and advertise on The Intellectual Exchange.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=Company Guide&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=Company Guide&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Company Guide — T.I.E",
+    title: "Company Guide — The Intellectual Exchange",
     description: "Learn how companies can hire researchers, post jobs, and advertise on The Intellectual Exchange.",
-    images: [`${baseUrl}/api/og?title=Company Guide&subtitle=T.I.E`],
+    images: [`${baseUrl}/api/og?title=Company Guide&subtitle=The Intellectual Exchange`],
   },
 };
 
@@ -81,7 +81,7 @@ export default function CompanyGuidePage() {
             Company Guide
           </h1>
           <p className="text-text-secondary dark:text-text-dark-secondary mb-4">
-            Hire top researchers, promote your brand, and grow on T.I.E.
+            Hire top researchers, promote your brand, and grow on The Intellectual Exchange.
           </p>
           <Link href="/guide" className="inline-flex items-center gap-1.5 text-sm text-primary font-medium hover:underline">
             <Users className="w-4 h-4" /> Looking for the Researcher Guide? <ArrowRight className="w-3.5 h-3.5" />
@@ -158,7 +158,7 @@ export default function CompanyGuidePage() {
         </Section>
 
         {/* Advertising */}
-        <Section icon={Megaphone} title="Advertising on T.I.E">
+        <Section icon={Megaphone} title="Advertising on The Intellectual Exchange">
           <p>Reach thousands of researchers with targeted advertising. Three formats available:</p>
           <div className="space-y-2 mt-2">
             <AdCard title="Feed Ads" desc="Inline with forum questions and articles." price="From $2 CPM" />

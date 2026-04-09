@@ -6,8 +6,8 @@ import { CampaignForm } from "@/components/advertising/campaign-form";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Create Campaign — T.I.E",
-  description: "Create a new advertising campaign on T.I.E.",
+  title: "Create Campaign — The Intellectual Exchange",
+  description: "Create a new advertising campaign on The Intellectual Exchange.",
   robots: { index: false, follow: false },
 };
 

@@ -14,11 +14,11 @@ interface UserProfilePageProps {
 export async function generateMetadata({ params }: UserProfilePageProps): Promise<Metadata> {
   const { username } = await params;
   const profile = await getResearcherProfile(username);
-  if (!profile) return { title: "User not found — T.I.E", robots: { index: false, follow: false } };
+  if (!profile) return { title: "User not found — The Intellectual Exchange", robots: { index: false, follow: false } };
   const displayName = profile.name || profile.username || "Researcher";
-  const description = profile.bio || `View ${displayName}'s profile on T.I.E`;
+  const description = profile.bio || `View ${displayName}'s profile on The Intellectual Exchange`;
   return {
-    title: `${displayName} — T.I.E`,
+    title: `${displayName} — The Intellectual Exchange`,
     description,
     robots: { index: false, follow: false },
     openGraph: {

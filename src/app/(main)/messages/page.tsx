@@ -12,8 +12,8 @@ import { MessageSquare } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Messages — T.I.E",
-  description: "Your conversations on T.I.E.",
+  title: "Messages — The Intellectual Exchange",
+  description: "Your conversations on The Intellectual Exchange.",
   robots: { index: false, follow: false },
 };
 

@@ -4,7 +4,7 @@ import { GrantsManager } from "./grants-manager";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Grants — Admin — T.I.E",
+  title: "Grants — Admin — The Intellectual Exchange",
 };
 
 export default function AdminGrantsPage() {

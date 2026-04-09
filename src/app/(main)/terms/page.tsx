@@ -4,7 +4,7 @@ import { PageLayout } from "@/components/layout/page-layout";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — T.I.E",
+  title: "Terms of Service — The Intellectual Exchange",
   description: "Terms of Service for The Intellectual Exchange platform.",
   alternates: { canonical: `${baseUrl}/terms` },
 };

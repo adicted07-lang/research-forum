@@ -16,7 +16,7 @@ import {
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Dashboard — Admin — T.I.E",
+  title: "Dashboard — Admin — The Intellectual Exchange",
 };
 
 export default async function AdminDashboardPage() {
@@ -35,7 +35,7 @@ export default async function AdminDashboardPage() {
     <div>
       <h1 className="text-2xl font-bold text-foreground mb-2">Dashboard</h1>
       <p className="text-muted-foreground mb-8">
-        Overview of T.I.E platform activity.
+        Overview of The Intellectual Exchange platform activity.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

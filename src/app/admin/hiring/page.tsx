@@ -4,7 +4,7 @@ import { AdminJobsTable } from "@/components/admin/admin-jobs-table";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Hiring — Admin — T.I.E",
+  title: "Hiring — Admin — The Intellectual Exchange",
 };
 
 interface HiringPageProps {

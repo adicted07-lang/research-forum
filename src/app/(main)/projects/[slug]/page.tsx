@@ -23,24 +23,24 @@ interface ProjectPageProps {
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
-  if (!project) return { title: "Project Not Found — T.I.E" };
+  if (!project) return { title: "Project Not Found — The Intellectual Exchange" };
 
   const description = project.description.replace(/<[^>]*>/g, "").slice(0, 160);
   return {
-    title: `${project.name} — T.I.E Projects`,
+    title: `${project.name} — The Intellectual Exchange`,
     description,
     alternates: { canonical: `${baseUrl}/projects/${slug}` },
     openGraph: {
-      title: `${project.name} — T.I.E Projects`,
+      title: `${project.name} — The Intellectual Exchange`,
       description,
       siteName: "The Intellectual Exchange",
-      images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(project.name)}&subtitle=T.I.E`, width: 1200, height: 630 }],
+      images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(project.name)}&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.name} — T.I.E Projects`,
+      title: `${project.name} — The Intellectual Exchange`,
       description,
-      images: [`${baseUrl}/api/og?title=${encodeURIComponent(project.name)}&subtitle=T.I.E`],
+      images: [`${baseUrl}/api/og?title=${encodeURIComponent(project.name)}&subtitle=The Intellectual Exchange`],
     },
   };
 }

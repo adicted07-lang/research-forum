@@ -4,8 +4,8 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { QuestionForm } from "@/components/forum/question-form";
 
 export const metadata: Metadata = {
-  title: "Ask a Question — T.I.E",
-  description: "Post a new question to the T.I.E research forum.",
+  title: "Ask a Question — The Intellectual Exchange",
+  description: "Post a new question to the The Intellectual Exchange research forum.",
   robots: { index: false, follow: false },
 };
 

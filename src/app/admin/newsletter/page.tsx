@@ -4,7 +4,7 @@ import { NewsletterComposer } from "./newsletter-composer";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Newsletter — Admin — T.I.E",
+  title: "Newsletter — Admin — The Intellectual Exchange",
 };
 
 export default function AdminNewsletterPage() {

@@ -12,20 +12,20 @@ export const dynamic = "force-dynamic";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Talent Board — T.I.E",
-  description: "Find expert researchers for your projects on T.I.E.",
+  title: "Talent Board — The Intellectual Exchange",
+  description: "Find expert researchers for your projects on The Intellectual Exchange.",
   alternates: { canonical: `${baseUrl}/talent-board` },
   openGraph: {
-    title: "Talent Board — T.I.E",
-    description: "Find expert researchers for your projects on T.I.E.",
+    title: "Talent Board — The Intellectual Exchange",
+    description: "Find expert researchers for your projects on The Intellectual Exchange.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=Talent Board&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=Talent Board&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Talent Board — T.I.E",
-    description: "Find expert researchers for your projects on T.I.E.",
-    images: [`${baseUrl}/api/og?title=Talent Board&subtitle=T.I.E`],
+    title: "Talent Board — The Intellectual Exchange",
+    description: "Find expert researchers for your projects on The Intellectual Exchange.",
+    images: [`${baseUrl}/api/og?title=Talent Board&subtitle=The Intellectual Exchange`],
   },
 };
 

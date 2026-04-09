@@ -4,7 +4,7 @@ import { PageLayout } from "@/components/layout/page-layout";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — T.I.E",
+  title: "Cookie Policy — The Intellectual Exchange",
   description: "Cookie Policy for The Intellectual Exchange platform.",
   alternates: { canonical: `${baseUrl}/cookies` },
 };
@@ -20,7 +20,7 @@ export default function CookiePolicyPage() {
           </p>
 
           <p>
-            The Intellectual Exchange (&quot;T.I.E&quot;) uses cookies and similar
+            The Intellectual Exchange (&quot;The Intellectual Exchange,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) uses cookies and similar
             technologies on theintellectualexchange.com. This Cookie Policy
             explains what cookies are, the types we use, and how you can manage
             them.

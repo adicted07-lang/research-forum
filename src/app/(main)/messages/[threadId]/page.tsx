@@ -11,7 +11,7 @@ import { ArrowLeft } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Conversation — T.I.E",
+  title: "Conversation — The Intellectual Exchange",
   robots: { index: false, follow: false },
 };
 

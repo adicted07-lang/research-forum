@@ -3,9 +3,8 @@ import type { Metadata } from "next";
 import { SignupForm } from "@/components/auth/signup-form";
 
 export const metadata: Metadata = {
-  title: "Sign Up — T.I.E",
+  title: "Sign Up — The Intellectual Exchange",
   description: "Create a free researcher account on The Intellectual Exchange.",
-  robots: { index: false, follow: false },
 };
 
 export default function SignupPage() {

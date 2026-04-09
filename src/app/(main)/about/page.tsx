@@ -9,20 +9,20 @@ import {
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "About Us — T.I.E",
+  title: "About Us — The Intellectual Exchange",
   description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
   alternates: { canonical: `${baseUrl}/about` },
   openGraph: {
-    title: "About Us — T.I.E",
+    title: "About Us — The Intellectual Exchange",
     description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=About Us&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=About Us&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Us — T.I.E",
+    title: "About Us — The Intellectual Exchange",
     description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
-    images: [`${baseUrl}/api/og?title=About Us&subtitle=T.I.E`],
+    images: [`${baseUrl}/api/og?title=About Us&subtitle=The Intellectual Exchange`],
   },
 };
 
@@ -118,7 +118,7 @@ export default function AboutPage() {
         <section className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-xl p-8">
           <h2 className="text-xl font-semibold text-text-primary dark:text-text-dark-primary mb-3">Our Team</h2>
           <p className="text-text-secondary dark:text-text-dark-secondary leading-relaxed">
-            T.I.E is built by a passionate team of engineers, researchers, and designers dedicated to connecting the global research community. We come from diverse academic and industry backgrounds, united by the belief that breaking down barriers between disciplines and institutions leads to better science.
+            The Intellectual Exchange is built by a passionate team of engineers, researchers, and designers dedicated to connecting the global research community. We come from diverse academic and industry backgrounds, united by the belief that breaking down barriers between disciplines and institutions leads to better science.
           </p>
         </section>
       </div>

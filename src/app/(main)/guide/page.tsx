@@ -10,20 +10,20 @@ import {
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Getting Started — T.I.E",
+  title: "Getting Started — The Intellectual Exchange",
   description: "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
   alternates: { canonical: `${baseUrl}/guide` },
   openGraph: {
-    title: "Getting Started — T.I.E",
+    title: "Getting Started — The Intellectual Exchange",
     description: "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=Getting Started&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=Getting Started&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Getting Started — T.I.E",
+    title: "Getting Started — The Intellectual Exchange",
     description: "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
-    images: [`${baseUrl}/api/og?title=Getting Started&subtitle=T.I.E`],
+    images: [`${baseUrl}/api/og?title=Getting Started&subtitle=The Intellectual Exchange`],
   },
 };
 
@@ -75,7 +75,7 @@ export default function GuidePage() {
             Researcher Guide
           </h1>
           <p className="text-text-secondary dark:text-text-dark-secondary mb-4">
-            Everything you need to know to get the most out of T.I.E.
+            Everything you need to know to get the most out of The Intellectual Exchange.
           </p>
           <Link href="/guide/companies" className="inline-flex items-center gap-1.5 text-sm text-primary font-medium hover:underline">
             <Building2 className="w-4 h-4" /> Looking for the Company Guide? <ArrowRight className="w-3.5 h-3.5" />
@@ -83,11 +83,11 @@ export default function GuidePage() {
         </div>
 
         {/* Welcome */}
-        <Section icon={Lightbulb} title="Welcome to T.I.E">
+        <Section icon={Lightbulb} title="Welcome to The Intellectual Exchange">
           <p>
             The Intellectual Exchange is the professional platform where researchers exchange knowledge,
             hire domain experts, and discover tools that accelerate their work. Whether you are an early-career
-            academic, a seasoned industry scientist, or an independent consultant — T.I.E gives you the
+            academic, a seasoned industry scientist, or an independent consultant — The Intellectual Exchange gives you the
             community and infrastructure to grow.
           </p>
         </Section>
@@ -113,7 +113,7 @@ export default function GuidePage() {
 
         {/* Forum */}
         <Section icon={MessageSquare} title="Forum — Ask & Answer">
-          <p>The forum is the heart of T.I.E — where researchers pose questions, share insights, and solve problems together.</p>
+          <p>The forum is the heart of The Intellectual Exchange — where researchers pose questions, share insights, and solve problems together.</p>
 
           <div className="space-y-3 mt-2">
             <div className="p-4 rounded-lg bg-surface dark:bg-surface-dark border border-border-light dark:border-border-dark-light">
@@ -209,7 +209,7 @@ export default function GuidePage() {
           <ul className="space-y-2">
             {[
               ["Complete your profile", "Profiles with a photo, bio, and expertise tags get significantly more engagement."],
-              ["Be active daily", "T.I.E tracks activity streaks — consistent participation keeps you visible."],
+              ["Be active daily", "The Intellectual Exchange tracks activity streaks — consistent participation keeps you visible."],
               ["Answer in your expertise", "Focused, high-quality answers build reputation faster than broad, shallow ones."],
               ["Write quality content", "Detailed questions, clear answers, and thoughtful reviews all strengthen your profile."],
               ["Engage with the community", "Upvote helpful content, leave reviews, and follow researchers whose work interests you."],

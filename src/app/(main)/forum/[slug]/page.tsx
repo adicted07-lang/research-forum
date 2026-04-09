@@ -24,13 +24,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const question = await getQuestionBySlug(slug);
-  if (!question) return { title: "Question Not Found — T.I.E" };
+  if (!question) return { title: "Question Not Found — The Intellectual Exchange" };
 
   const description = question.body.replace(/<[^>]*>/g, "").slice(0, 160);
   const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
   return {
-    title: `${question.title} — T.I.E`,
+    title: `${question.title} — The Intellectual Exchange`,
     description,
     alternates: {
       canonical: `${baseUrl}/forum/${slug}`,

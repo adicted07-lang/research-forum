@@ -22,9 +22,9 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
     const researcher = await getResearcherProfile(username);
     if (researcher) {
       const displayName = researcher.name || researcher.username || "Researcher";
-      const description = researcher.bio || `View ${displayName}'s profile on T.I.E`;
+      const description = researcher.bio || `View ${displayName}'s profile on The Intellectual Exchange`;
       return {
-        title: `${displayName} — T.I.E`,
+        title: `${displayName} — The Intellectual Exchange`,
         description,
         alternates: {
           canonical: `${baseUrl}/profile/${username}`,
@@ -42,9 +42,9 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
     const company = await getCompanyProfile(username);
     if (company) {
       const displayName = company.companyName || company.username || "Company";
-      const description = company.description || `View ${displayName}'s profile on T.I.E`;
+      const description = company.description || `View ${displayName}'s profile on The Intellectual Exchange`;
       return {
-        title: `${displayName} — T.I.E`,
+        title: `${displayName} — The Intellectual Exchange`,
         description,
         alternates: {
           canonical: `${baseUrl}/profile/${username}`,
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
     // DB error — return default
   }
 
-  return { title: "Profile — T.I.E" };
+  return { title: "Profile — The Intellectual Exchange" };
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {

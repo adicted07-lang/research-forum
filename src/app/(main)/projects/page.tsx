@@ -12,14 +12,14 @@ export const dynamic = "force-dynamic";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "My Projects — T.I.E",
+  title: "My Projects — The Intellectual Exchange",
   description: "Collaborate with researchers on shared project workspaces.",
   alternates: { canonical: `${baseUrl}/projects` },
   openGraph: {
-    title: "My Projects — T.I.E",
+    title: "My Projects — The Intellectual Exchange",
     description: "Collaborate with researchers on shared project workspaces.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=Projects&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=Projects&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
 };
 

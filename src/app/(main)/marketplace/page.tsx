@@ -9,20 +9,20 @@ export const dynamic = "force-dynamic";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Marketplace — T.I.E",
-  description: "Discover research services and tools from the T.I.E community.",
+  title: "Marketplace — The Intellectual Exchange",
+  description: "Discover research services and tools from the The Intellectual Exchange community.",
   alternates: { canonical: `${baseUrl}/marketplace` },
   openGraph: {
-    title: "Marketplace — T.I.E",
-    description: "Discover research services and tools from the T.I.E community.",
+    title: "Marketplace — The Intellectual Exchange",
+    description: "Discover research services and tools from the The Intellectual Exchange community.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=Marketplace&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=Marketplace&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marketplace — T.I.E",
-    description: "Discover research services and tools from the T.I.E community.",
-    images: [`${baseUrl}/api/og?title=Marketplace&subtitle=T.I.E`],
+    title: "Marketplace — The Intellectual Exchange",
+    description: "Discover research services and tools from the The Intellectual Exchange community.",
+    images: [`${baseUrl}/api/og?title=Marketplace&subtitle=The Intellectual Exchange`],
   },
 };
 

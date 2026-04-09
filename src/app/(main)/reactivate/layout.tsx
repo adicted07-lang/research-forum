@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Reactivate Account — T.I.E",
+  title: "Reactivate Account — The Intellectual Exchange",
   description: "Reactivate your deactivated account on The Intellectual Exchange.",
   robots: { index: false, follow: false },
 };

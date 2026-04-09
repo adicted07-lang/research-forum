@@ -13,20 +13,20 @@ export const dynamic = "force-dynamic";
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
 export const metadata: Metadata = {
-  title: "Leaderboard — T.I.E",
+  title: "Leaderboard — The Intellectual Exchange",
   description: "See the top contributors and researchers on The Intellectual Exchange.",
   alternates: { canonical: `${baseUrl}/leaderboard` },
   openGraph: {
-    title: "Leaderboard — T.I.E",
+    title: "Leaderboard — The Intellectual Exchange",
     description: "See the top contributors and researchers on The Intellectual Exchange.",
     siteName: "The Intellectual Exchange",
-    images: [{ url: `${baseUrl}/api/og?title=Leaderboard&subtitle=T.I.E`, width: 1200, height: 630 }],
+    images: [{ url: `${baseUrl}/api/og?title=Leaderboard&subtitle=The Intellectual Exchange`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Leaderboard — T.I.E",
+    title: "Leaderboard — The Intellectual Exchange",
     description: "See the top contributors and researchers on The Intellectual Exchange.",
-    images: [`${baseUrl}/api/og?title=Leaderboard&subtitle=T.I.E`],
+    images: [`${baseUrl}/api/og?title=Leaderboard&subtitle=The Intellectual Exchange`],
   },
 };
 
