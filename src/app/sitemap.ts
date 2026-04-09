@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: baseUrl, changeFrequency: "daily", priority: 1 },
     { url: `${baseUrl}/forum`, changeFrequency: "hourly", priority: 0.9 },
     { url: `${baseUrl}/marketplace`, changeFrequency: "daily", priority: 0.8 },
-    { url: `${baseUrl}/hire`, changeFrequency: "daily", priority: 0.8 },
+    { url: `${baseUrl}/talent-board`, changeFrequency: "daily", priority: 0.8 },
     { url: `${baseUrl}/news`, changeFrequency: "hourly", priority: 0.8 },
     { url: `${baseUrl}/researchers`, changeFrequency: "daily", priority: 0.7 },
     { url: `${baseUrl}/grants`, changeFrequency: "weekly", priority: 0.6 },
@@ -64,7 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6
     })),
     ...jobs.map((j) => ({
-      url: `${baseUrl}/hire/${j.slug}`,
+      url: `${baseUrl}/talent-board/${j.slug}`,
       lastModified: j.updatedAt,
       changeFrequency: "weekly" as const,
       priority: 0.5

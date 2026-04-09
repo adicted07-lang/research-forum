@@ -5,9 +5,18 @@ import { SectionHeader } from "@/components/shared/section-header";
 
 export const dynamic = "force-dynamic";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Browse Researchers — T.I.E",
   description: "Find expert researchers available for hire on T.I.E.",
+  alternates: { canonical: `${baseUrl}/researchers` },
+  openGraph: {
+    title: "Browse Researchers — T.I.E",
+    description: "Find expert researchers available for hire on T.I.E.",
+    siteName: "The Intellectual Exchange",
+    images: [{ url: `${baseUrl}/api/og?title=Browse Researchers&subtitle=T.I.E`, width: 1200, height: 630 }],
+  },
 };
 
 interface ResearchersPageProps {

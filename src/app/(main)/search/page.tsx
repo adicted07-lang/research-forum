@@ -312,7 +312,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                         {results!.jobs.map((j) => (
                           <Link
                             key={j.id}
-                            href={`/hire/${j.slug}`}
+                            href={`/talent-board/${j.slug}`}
                             className="flex items-center justify-between p-4 rounded-lg border border-border dark:border-border-dark bg-white dark:bg-surface-dark hover:bg-surface dark:hover:bg-surface-dark/60 transition-colors"
                           >
                             <div className="min-w-0 flex-1">

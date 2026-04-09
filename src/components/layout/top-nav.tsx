@@ -13,7 +13,7 @@ import { TieBrand } from "@/components/shared/tie-logo";
 const navLinks = [
   { label: "Forum", href: "/forum" },
   { label: "Marketplace", href: "/marketplace" },
-  { label: "Talent Board", href: "/hire" },
+  { label: "Talent Board", href: "/talent-board" },
   { label: "News", href: "/news" },
   { label: "Advertise", href: "/advertise" },
 ];

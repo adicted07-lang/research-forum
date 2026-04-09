@@ -10,8 +10,18 @@ import { getLevel } from "@/lib/reputation";
 
 export const dynamic = "force-dynamic";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Leaderboard — T.I.E",
+  description: "See the top contributors and researchers on The Intellectual Exchange.",
+  alternates: { canonical: `${baseUrl}/leaderboard` },
+  openGraph: {
+    title: "Leaderboard — T.I.E",
+    description: "See the top contributors and researchers on The Intellectual Exchange.",
+    siteName: "The Intellectual Exchange",
+    images: [{ url: `${baseUrl}/api/og?title=Leaderboard&subtitle=T.I.E`, width: 1200, height: 630 }],
+  },
 };
 
 const rankMedal: Record<number, string> = {

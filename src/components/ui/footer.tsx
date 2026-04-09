@@ -42,8 +42,8 @@ const footerConfig = {
     {
       title: "Hiring",
       links: [
-        { label: "Browse Jobs", href: "/hire" },
-        { label: "Post a Job", href: "/hire/new" },
+        { label: "Browse Jobs", href: "/talent-board" },
+        { label: "Post a Job", href: "/talent-board/new" },
         { label: "Research Grants", href: "/grants" },
       ],
     },

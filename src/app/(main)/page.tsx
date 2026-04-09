@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
 import { SectionHeader } from "@/components/shared/section-header";
@@ -124,12 +125,12 @@ export default async function HomePage() {
 
       {/* Jobs */}
       <section className="mb-8">
-        <SectionHeader title="Talent Board" href="/hire" icon={Users} />
+        <SectionHeader title="Talent Board" href="/talent-board" icon={Users} />
         {jobs.length > 0 ? (
           <div className="space-y-3">
             {jobs.map((j: any) => (
               <div key={j.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all">
-                <Link href={`/hire/${j.slug}`}>
+                <Link href={`/talent-board/${j.slug}`}>
                   <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1">{j.title}</h3>
                 </Link>
                 <p className="text-xs text-text-tertiary">{j.locationPreference} · {j.projectType}</p>
@@ -150,8 +151,7 @@ export default async function HomePage() {
               <div key={a.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md overflow-hidden hover:border-border hover:shadow-sm transition-all">
                 <Link href={`/news/${a.slug}`} className="block">
                   {a.coverImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={a.coverImage} alt={a.title} className="w-full object-cover" style={{ aspectRatio: "16/9" }} />
+                    <Image src={a.coverImage} alt={a.title} width={400} height={225} className="w-full object-cover" style={{ aspectRatio: "16/9" }} />
                   ) : (
                     <ArticleCover category={a.category ?? "news"} title={a.title} />
                   )}

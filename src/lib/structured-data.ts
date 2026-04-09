@@ -82,7 +82,7 @@ export function jobSchema(job: {
     datePosted: job.createdAt.toISOString(),
     hiringOrganization: { "@type": "Organization", name: job.company.companyName || "Unknown" },
     jobLocationType: job.locationPreference === "REMOTE" ? "TELECOMMUTE" : undefined,
-    url: `${BASE_URL}/hire/${job.slug}`,
+    url: `${BASE_URL}/talent-board/${job.slug}`,
   };
 }
 

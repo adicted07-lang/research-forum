@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
@@ -69,11 +70,11 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       {/* Cover image */}
       <div className="relative h-64 sm:h-80">
         {article.coverImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={article.coverImage}
             alt={article.title}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         ) : (
           <div className={`w-full h-full bg-gradient-to-br ${gradient}`} />

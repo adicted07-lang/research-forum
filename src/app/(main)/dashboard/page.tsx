@@ -110,7 +110,7 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
             <FileText className="w-5 h-5 text-primary" />
             My Applications
           </h2>
-          <Link href="/hire" className="text-sm text-primary hover:underline">
+          <Link href="/talent-board" className="text-sm text-primary hover:underline">
             Browse jobs →
           </Link>
         </div>
@@ -128,7 +128,7 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
                       <Link
-                        href={`/hire/${app.job.slug}`}
+                        href={`/talent-board/${app.job.slug}`}
                         className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors"
                       >
                         {app.job.title}
@@ -171,7 +171,7 @@ async function ResearcherDashboard({ userId }: { userId: string }) {
             icon={<Briefcase className="w-10 h-10" />}
             action={
               <Link
-                href="/hire"
+                href="/talent-board"
                 className="inline-flex items-center px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
               >
                 Browse Jobs
@@ -245,7 +245,7 @@ async function CompanyDashboard({ userId }: { userId: string }) {
             My Job Postings
           </h2>
           <Link
-            href="/hire/new"
+            href="/talent-board/new"
             className="inline-flex items-center px-3 py-1.5 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
           >
             + Post a Job
@@ -262,7 +262,7 @@ async function CompanyDashboard({ userId }: { userId: string }) {
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <Link
-                      href={`/hire/${job.slug}`}
+                      href={`/talent-board/${job.slug}`}
                       className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors"
                     >
                       {job.title}
@@ -289,7 +289,7 @@ async function CompanyDashboard({ userId }: { userId: string }) {
                     </span>
                     {job.applicationsCount > 0 && (
                       <Link
-                        href={`/hire/${job.slug}#applicants`}
+                        href={`/talent-board/${job.slug}#applicants`}
                         className="text-xs text-primary hover:underline"
                       >
                         View applicants →
@@ -314,7 +314,7 @@ async function CompanyDashboard({ userId }: { userId: string }) {
             icon={<Briefcase className="w-10 h-10" />}
             action={
               <Link
-                href="/hire/new"
+                href="/talent-board/new"
                 className="inline-flex items-center px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
               >
                 Post Your First Job

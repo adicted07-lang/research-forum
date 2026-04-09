@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
 import { PageLayout } from "@/components/layout/page-layout";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "About Us — T.I.E",
   description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
+  alternates: { canonical: `${baseUrl}/about` },
   openGraph: {
     title: "About Us — T.I.E",
     description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
     siteName: "The Intellectual Exchange",
+    images: [{ url: `${baseUrl}/api/og?title=About Us&subtitle=T.I.E`, width: 1200, height: 630 }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "About Us — T.I.E",
     description: "Learn about The Intellectual Exchange, the professional platform for researchers, academics, and companies.",
+    images: [`${baseUrl}/api/og?title=About Us&subtitle=T.I.E`],
   },
 };
 

@@ -93,7 +93,7 @@ export function JobCard({ job }: JobCardProps) {
     <div className="bg-white border border-border-light rounded-lg p-5 hover:border-primary/40 hover:shadow-sm transition-all dark:bg-surface-dark dark:border-border-dark-light dark:hover:border-primary/40 group">
       {/* Top: logo + title + company */}
       <div className="flex items-start gap-3 mb-3">
-        <Link href={`/hire/${job.slug}`} className="block shrink-0">
+        <Link href={`/talent-board/${job.slug}`} className="block shrink-0">
           <div
             className={`w-10 h-10 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-sm`}
           >
@@ -101,7 +101,7 @@ export function JobCard({ job }: JobCardProps) {
           </div>
         </Link>
         <div className="flex-1 min-w-0">
-          <Link href={`/hire/${job.slug}`} className="block">
+          <Link href={`/talent-board/${job.slug}`} className="block">
             <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary group-hover:text-primary transition-colors leading-snug">
               {job.title}
             </h3>
@@ -163,7 +163,7 @@ export function JobCard({ job }: JobCardProps) {
       {/* Action link */}
       <div className="pt-3 border-t border-border-light dark:border-border-dark-light">
         <Link
-          href={`/hire/${job.slug}`}
+          href={`/talent-board/${job.slug}`}
           className="flex items-center justify-center px-3 py-1.5 rounded-md bg-primary text-white text-xs font-medium hover:bg-primary/90 transition-colors"
         >
           View Details

@@ -7,9 +7,12 @@ import {
   Zap, Award, Shield, BookOpen, FolderOpen, ChevronRight,
 } from "lucide-react";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Getting Started — T.I.E",
   description: "Learn how to use The Intellectual Exchange platform. A complete guide for researchers, academics, and professionals.",
+  alternates: { canonical: `${baseUrl}/guide` },
 };
 
 function Section({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {

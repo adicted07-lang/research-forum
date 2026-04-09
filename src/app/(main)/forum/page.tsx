@@ -39,18 +39,23 @@ const communityMembers: TooltipItem[] = [
   },
 ];
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Forum — T.I.E",
   description: "Browse and discuss research questions from the global community on The Intellectual Exchange.",
+  alternates: { canonical: `${baseUrl}/forum` },
   openGraph: {
     title: "Forum — T.I.E",
     description: "Browse and discuss research questions from the global community on The Intellectual Exchange.",
     siteName: "The Intellectual Exchange",
+    images: [{ url: `${baseUrl}/api/og?title=Forum&subtitle=T.I.E`, width: 1200, height: 630 }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Forum — T.I.E",
     description: "Browse and discuss research questions from the global community on The Intellectual Exchange.",
+    images: [`${baseUrl}/api/og?title=Forum&subtitle=T.I.E`],
   },
 };
 

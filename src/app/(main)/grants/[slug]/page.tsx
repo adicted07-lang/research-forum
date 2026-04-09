@@ -13,21 +13,27 @@ interface GrantPageProps {
 
 export async function generateMetadata({ params }: GrantPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
   const grant = await getGrantBySlug(slug);
   if (!grant) return { title: "Grant Not Found — T.I.E" };
 
+  const description = grant.description.replace(/<[^>]*>/g, "").slice(0, 160);
+  const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(grant.title)}&subtitle=Grants`;
   return {
     title: `${grant.title} — T.I.E Grants`,
-    description: grant.description.replace(/<[^>]*>/g, "").slice(0, 160),
+    description,
+    alternates: { canonical: `${baseUrl}/grants/${slug}` },
     openGraph: {
       title: grant.title,
-      description: grant.description.replace(/<[^>]*>/g, "").slice(0, 160),
+      description,
       type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: grant.title,
-      description: grant.description.replace(/<[^>]*>/g, "").slice(0, 160),
+      description,
+      images: [ogImage],
     },
   };
 }

@@ -9,18 +9,23 @@ import { Briefcase } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Talent Board — T.I.E",
   description: "Find expert researchers for your projects on T.I.E.",
+  alternates: { canonical: `${baseUrl}/talent-board` },
   openGraph: {
     title: "Talent Board — T.I.E",
     description: "Find expert researchers for your projects on T.I.E.",
     siteName: "The Intellectual Exchange",
+    images: [{ url: `${baseUrl}/api/og?title=Talent Board&subtitle=T.I.E`, width: 1200, height: 630 }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Talent Board — T.I.E",
     description: "Find expert researchers for your projects on T.I.E.",
+    images: [`${baseUrl}/api/og?title=Talent Board&subtitle=T.I.E`],
   },
 };
 
@@ -74,7 +79,7 @@ export default async function HirePage({ searchParams }: HirePageProps) {
                 Find the perfect researcher for your project.
               </p>
               <Link
-                href="/hire/new"
+                href="/talent-board/new"
                 className="block w-full text-center px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
               >
                 Post a Job
@@ -106,7 +111,7 @@ export default async function HirePage({ searchParams }: HirePageProps) {
             <div className="flex flex-wrap gap-1.5">
               {RESEARCH_DOMAINS.map((d) => {
                 const isActive = domain === d;
-                const href = isActive ? "/hire" : `/hire?domain=${d}`;
+                const href = isActive ? "/talent-board" : `/talent-board?domain=${d}`;
                 return (
                   <Link key={d} href={href}>
                     <BadgePill

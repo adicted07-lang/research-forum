@@ -148,13 +148,13 @@ const Navbar1 = ({
     },
     {
       title: "Talent Board",
-      url: "/hire",
+      url: "/talent-board",
       items: [
         {
           title: "Browse Jobs",
           description: "Find freelance research opportunities (For Researchers)",
           icon: <Briefcase className="size-5 shrink-0" />,
-          url: "/hire",
+          url: "/talent-board",
         },
         {
           title: "Browse Researchers",
@@ -200,7 +200,7 @@ const Navbar1 = ({
             title: "Post a Job",
             description: "Find the perfect research expert for your project",
             icon: <FileText className="size-5 shrink-0" />,
-            url: "/hire/new",
+            url: "/talent-board/new",
           },
         ],
       };

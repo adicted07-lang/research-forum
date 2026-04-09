@@ -4,10 +4,13 @@ import Link from "next/link";
 import { PageLayout } from "@/components/layout/page-layout";
 import { Megaphone, LayoutDashboard, Star, TrendingUp, DollarSign, Users } from "lucide-react";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Advertise — T.I.E",
   description:
     "Reach thousands of research professionals with targeted ads on T.I.E.",
+  alternates: { canonical: `${baseUrl}/advertise` },
 };
 
 const AD_TYPES = [

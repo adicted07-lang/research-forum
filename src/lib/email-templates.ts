@@ -95,7 +95,7 @@ export function applicationStatusEmail(jobTitle: string, status: string): string
       <p style="margin: 0 0 16px; color: #374151; font-size: 14px;">
         Status: <strong>${status}</strong>
       </p>
-      <a href="https://theintellectualexchange.com/hire" style="${buttonStyles}">
+      <a href="https://theintellectualexchange.com/talent-board" style="${buttonStyles}">
         View Applications
       </a>
       <div style="${footerStyles}">

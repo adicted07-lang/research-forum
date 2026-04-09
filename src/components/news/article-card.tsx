@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Clock, Calendar } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
@@ -68,11 +69,11 @@ function CoverGradient({
 }) {
   if (coverImage) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <Image
         src={coverImage}
         alt={title || "Article cover"}
-        className={`object-cover w-full h-full ${className ?? ""}`}
+        fill
+        className={`object-cover ${className ?? ""}`}
       />
     );
   }

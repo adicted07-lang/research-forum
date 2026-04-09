@@ -20,19 +20,24 @@ export async function generateMetadata({ params }: DatasetPageProps): Promise<Me
     if (!dataset) {
       return { title: "Dataset Not Found — T.I.E" };
     }
+    const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
     const description = dataset.description.replace(/<[^>]*>/g, "").slice(0, 160);
+    const ogImage = `${baseUrl}/api/og?title=${encodeURIComponent(dataset.title)}&subtitle=Datasets`;
     return {
       title: `${dataset.title} — T.I.E Datasets`,
       description,
+      alternates: { canonical: `${baseUrl}/datasets/${slug}` },
       openGraph: {
         title: dataset.title,
         description,
         type: "website",
+        images: [{ url: ogImage, width: 1200, height: 630 }],
       },
       twitter: {
-        card: "summary",
+        card: "summary_large_image",
         title: dataset.title,
         description,
+        images: [ogImage],
       },
     };
   } catch {

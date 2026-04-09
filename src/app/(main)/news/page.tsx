@@ -5,18 +5,23 @@ import { ArticleList } from "@/components/news/article-list";
 
 export const dynamic = "force-dynamic";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "News — T.I.E",
   description: "Latest research news, how-tos, and insights from The Intellectual Exchange community.",
+  alternates: { canonical: `${baseUrl}/news` },
   openGraph: {
     title: "News — T.I.E",
     description: "Latest research news, how-tos, and insights from The Intellectual Exchange community.",
     siteName: "The Intellectual Exchange",
+    images: [{ url: `${baseUrl}/api/og?title=News&subtitle=T.I.E`, width: 1200, height: 630 }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "News — T.I.E",
     description: "Latest research news, how-tos, and insights from The Intellectual Exchange community.",
+    images: [`${baseUrl}/api/og?title=News&subtitle=T.I.E`],
   },
 };
 

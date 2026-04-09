@@ -32,11 +32,13 @@ export async function generateMetadata({ params }: ListingPageProps): Promise<Me
         title: listing.title,
         description,
         type: "website",
+        images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(listing.title)}&subtitle=Marketplace`, width: 1200, height: 630 }],
       },
       twitter: {
-        card: "summary",
+        card: "summary_large_image",
         title: listing.title,
         description,
+        images: [`${baseUrl}/api/og?title=${encodeURIComponent(listing.title)}&subtitle=Marketplace`],
       },
     };
   } catch {

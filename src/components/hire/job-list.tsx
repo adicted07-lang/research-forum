@@ -50,7 +50,7 @@ export async function JobList({
             if (pill.value) params.set("location", pill.value);
             if (sort && sort !== "newest") params.set("sort", sort);
             if (domain) params.set("domain", domain);
-            const href = params.toString() ? `/hire?${params.toString()}` : "/hire";
+            const href = params.toString() ? `/talent-board?${params.toString()}` : "/talent-board";
             return (
               <Link
                 key={pill.label}
@@ -78,7 +78,7 @@ export async function JobList({
             return (
               <Link
                 key={opt.value}
-                href={`/hire?${params.toString()}`}
+                href={`/talent-board?${params.toString()}`}
                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   isActive
                     ? "text-primary bg-primary-light"
@@ -106,7 +106,7 @@ export async function JobList({
             <div className="flex justify-center mt-6 gap-3">
               {page > 1 && (
                 <Link
-                  href={`/hire?${new URLSearchParams({
+                  href={`/talent-board?${new URLSearchParams({
                     ...(location ? { location } : {}),
                     ...(domain ? { domain } : {}),
                     sort: sort ?? "newest",
@@ -118,7 +118,7 @@ export async function JobList({
                 </Link>
               )}
               <Link
-                href={`/hire?${new URLSearchParams({
+                href={`/talent-board?${new URLSearchParams({
                   ...(location ? { location } : {}),
                   ...(domain ? { domain } : {}),
                   sort: sort ?? "newest",
@@ -138,7 +138,7 @@ export async function JobList({
           icon={<Briefcase className="w-12 h-12" />}
           action={
             <Link
-              href="/hire/new"
+              href="/talent-board/new"
               className="inline-flex items-center px-4 py-2 rounded-md bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               Post a Job

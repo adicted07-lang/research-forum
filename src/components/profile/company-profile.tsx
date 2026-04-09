@@ -238,7 +238,7 @@ export async function CompanyProfile({ profile }: CompanyProfileProps) {
               Open Positions
             </h2>
             <Link
-              href={`/hire?company=${profile.username}`}
+              href={`/talent-board?company=${profile.username}`}
               className="text-sm text-primary hover:underline"
             >
               View all →
@@ -248,7 +248,7 @@ export async function CompanyProfile({ profile }: CompanyProfileProps) {
             {profile.companyJobs.map((job) => (
               <Link
                 key={job.id}
-                href={`/hire/${job.slug}`}
+                href={`/talent-board/${job.slug}`}
                 className="flex items-center justify-between p-4 rounded-lg border border-border dark:border-border-dark hover:bg-surface dark:hover:bg-surface-dark/60 transition-colors"
               >
                 <div>

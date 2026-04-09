@@ -30,7 +30,7 @@ const quickActions = [
   { label: "Browse Forum", icon: <MessageSquare className="w-4 h-4 text-orange-500" />, href: "/forum" },
   { label: "List a Service", icon: <ShoppingBag className="w-4 h-4 text-purple-500" />, href: "/marketplace/new" },
   { label: "Write an Article", icon: <FileText className="w-4 h-4 text-green-500" />, href: "/news/submit" },
-  { label: "Post a Job", icon: <Briefcase className="w-4 h-4 text-blue-500" />, href: "/hire/new" },
+  { label: "Post a Job", icon: <Briefcase className="w-4 h-4 text-blue-500" />, href: "/talent-board/new" },
   { label: "Upload Dataset", icon: <Database className="w-4 h-4 text-amber-500" />, href: "/datasets/new" },
   { label: "Find Researchers", icon: <Users className="w-4 h-4 text-teal-500" />, href: "/researchers" },
 ];
@@ -236,7 +236,7 @@ export function SearchWithResults() {
                       key={j.id}
                       label={j.title}
                       meta={j.locationPreference}
-                      href={`/hire/${j.slug}`}
+                      href={`/talent-board/${j.slug}`}
                       onNavigate={() => setOpen(false)}
                     />
                   ))}

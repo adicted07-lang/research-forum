@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "2mb",
     },
   },
+  async redirects() {
+    return [
+      { source: "/hire", destination: "/talent-board", permanent: true },
+      { source: "/hire/:path*", destination: "/talent-board/:path*", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

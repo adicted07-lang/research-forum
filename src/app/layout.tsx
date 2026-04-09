@@ -51,6 +51,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://api.dicebear.com" />
+        <link rel="dns-prefetch" href="https://api.dicebear.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body className={`${outfit.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"

@@ -29,7 +29,7 @@ const mobileNavItems: MenuBarItem[] = [
   {
     icon: (props) => <Briefcase {...props} />,
     label: "Jobs",
-    href: "/hire",
+    href: "/talent-board",
   },
   {
     icon: (props) => <BookOpen {...props} />,

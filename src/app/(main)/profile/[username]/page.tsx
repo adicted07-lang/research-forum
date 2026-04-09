@@ -29,8 +29,13 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
         alternates: {
           canonical: `${baseUrl}/profile/${username}`,
         },
-        openGraph: { title: displayName, description, type: "profile" },
-        twitter: { card: "summary", title: displayName, description },
+        openGraph: {
+          title: displayName,
+          description,
+          type: "profile",
+          images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(displayName)}&subtitle=Researcher Profile`, width: 1200, height: 630 }],
+        },
+        twitter: { card: "summary_large_image", title: displayName, description, images: [`${baseUrl}/api/og?title=${encodeURIComponent(displayName)}&subtitle=Researcher Profile`] },
       };
     }
 
@@ -44,8 +49,13 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
         alternates: {
           canonical: `${baseUrl}/profile/${username}`,
         },
-        openGraph: { title: displayName, description, type: "profile" },
-        twitter: { card: "summary", title: displayName, description },
+        openGraph: {
+          title: displayName,
+          description,
+          type: "profile",
+          images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(displayName)}&subtitle=Company Profile`, width: 1200, height: 630 }],
+        },
+        twitter: { card: "summary_large_image", title: displayName, description, images: [`${baseUrl}/api/og?title=${encodeURIComponent(displayName)}&subtitle=Company Profile`] },
       };
     }
   } catch {

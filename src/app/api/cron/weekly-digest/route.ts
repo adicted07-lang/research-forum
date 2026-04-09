@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
 
       const jobsHtml = newJobs.length > 0
         ? newJobs.map(j =>
-            `<tr><td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><a href="${BASE_URL}/hire/${j.slug}" style="color: #1a1f36; text-decoration: none; font-weight: 600; font-size: 14px;">${j.title}</a><br><span style="color: #9ca3af; font-size: 12px;">${j.company?.companyName || "Company"} · ${j.locationPreference}</span></td></tr>`
+            `<tr><td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><a href="${BASE_URL}/talent-board/${j.slug}" style="color: #1a1f36; text-decoration: none; font-weight: 600; font-size: 14px;">${j.title}</a><br><span style="color: #9ca3af; font-size: 12px;">${j.company?.companyName || "Company"} · ${j.locationPreference}</span></td></tr>`
           ).join("")
         : "";
 

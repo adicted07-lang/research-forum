@@ -60,7 +60,7 @@ export function JobForm() {
         return;
       }
       if ("slug" in result && result.slug) {
-        router.push(`/hire/${result.slug}`);
+        router.push(`/talent-board/${result.slug}`);
       }
     });
   };

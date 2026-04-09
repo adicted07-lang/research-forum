@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: JobPageProps): Promise<Metada
     title,
     description,
     alternates: {
-      canonical: `${baseUrl}/hire/${slug}`,
+      canonical: `${baseUrl}/talent-board/${slug}`,
     },
     openGraph: {
       title,
@@ -70,8 +70,8 @@ export default async function JobPage({ params }: JobPageProps) {
           __html: JSON.stringify(
             breadcrumbSchema([
               { name: "Home", url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}` },
-              { name: "Talent Board", url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}/hire` },
-              { name: job.title, url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}/hire/${slug}` },
+              { name: "Talent Board", url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}/talent-board` },
+              { name: job.title, url: `${process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com"}/talent-board/${slug}` },
             ])
           ),
         }}

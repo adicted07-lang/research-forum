@@ -7,9 +7,12 @@ import {
   BarChart3, Lightbulb,
 } from "lucide-react";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Company Guide — T.I.E",
   description: "Learn how companies can hire researchers, post jobs, and advertise on The Intellectual Exchange.",
+  alternates: { canonical: `${baseUrl}/guide/companies` },
 };
 
 function Section({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) {
@@ -108,7 +111,7 @@ export default function CompanyGuidePage() {
         <Section icon={FileText} title="Posting Research Jobs">
           <p>
             Post on the{" "}
-            <Link href="/hire" className="text-primary font-medium hover:underline">Talent Board</Link>{" "}
+            <Link href="/talent-board" className="text-primary font-medium hover:underline">Talent Board</Link>{" "}
             to find the right researcher for your project.
           </p>
           <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">

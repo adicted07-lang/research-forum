@@ -1,9 +1,24 @@
 import type { Metadata } from "next";
 import { ContactForm } from "./contact-form";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Contact Us — T.I.E",
   description: "Get in touch with the T.I.E team.",
+  alternates: { canonical: `${baseUrl}/contact` },
+  openGraph: {
+    title: "Contact Us — T.I.E",
+    description: "Get in touch with the T.I.E team.",
+    siteName: "The Intellectual Exchange",
+    images: [{ url: `${baseUrl}/api/og?title=Contact Us&subtitle=T.I.E`, width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us — T.I.E",
+    description: "Get in touch with the T.I.E team.",
+    images: [`${baseUrl}/api/og?title=Contact Us&subtitle=T.I.E`],
+  },
 };
 
 export default function ContactPage() {

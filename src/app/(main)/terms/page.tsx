@@ -1,9 +1,12 @@
 import { Metadata } from "next";
 import { PageLayout } from "@/components/layout/page-layout";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Terms of Service — T.I.E",
   description: "Terms of Service for The Intellectual Exchange platform.",
+  alternates: { canonical: `${baseUrl}/terms` },
 };
 
 export default function TermsOfServicePage() {

@@ -137,7 +137,7 @@ export async function JobDetail({ job }: JobDetailProps) {
             {isOwner && (
               <div className="shrink-0">
                 <Link
-                  href={`/hire/${job.slug}/edit`}
+                  href={`/talent-board/${job.slug}/edit`}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-border dark:border-border-dark text-sm text-text-secondary hover:border-primary hover:text-primary transition-colors dark:text-text-dark-secondary"
                 >
                   <Edit className="w-3.5 h-3.5" />

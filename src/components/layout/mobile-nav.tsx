@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const mobileLinks = [
   { label: "Exchange", href: "/forum", icon: MessageSquare },
   { label: "Market", href: "/marketplace", icon: ShoppingBag },
-  { label: "Talent", href: "/hire", icon: Users },
+  { label: "Talent", href: "/talent-board", icon: Users },
   { label: "Journal", href: "/news", icon: Newspaper },
   { label: "More", href: "/leaderboard", icon: BarChart3 },
 ];

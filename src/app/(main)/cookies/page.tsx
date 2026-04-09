@@ -1,9 +1,12 @@
 import { Metadata } from "next";
 import { PageLayout } from "@/components/layout/page-layout";
 
+const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+
 export const metadata: Metadata = {
   title: "Cookie Policy — T.I.E",
   description: "Cookie Policy for The Intellectual Exchange platform.",
+  alternates: { canonical: `${baseUrl}/cookies` },
 };
 
 export default function CookiePolicyPage() {
