@@ -20,7 +20,7 @@ export function SearchBar({
     <div className={cn("relative", className)}>
       <Search
         data-testid="search-icon"
-        className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary"
+        className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-text-tertiary"
       />
       <input
         type="text"
@@ -28,7 +28,7 @@ export function SearchBar({
         value={value}
         onChange={onChange}
         className={cn(
-          "w-full py-2.5 pl-10 pr-4 text-[13.5px] rounded-md border border-border",
+          "w-full py-1 pl-8 pr-3 text-xs rounded-md border border-border",
           "bg-surface text-text-primary placeholder:text-text-tertiary",
           "outline-none transition-all duration-200",
           "focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary-light",
