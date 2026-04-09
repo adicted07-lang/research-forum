@@ -3,12 +3,11 @@ import { db } from "@/lib/db";
 import { anthropic } from "@/lib/claude";
 
 function generateSlug(title: string): string {
-  const base = title
+  return title
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-  const suffix = Math.random().toString(36).slice(2, 8);
-  return `${base}-${suffix}`;
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
 }
 
 const QUESTION_TAGS = [
