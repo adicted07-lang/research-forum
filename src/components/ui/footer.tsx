@@ -48,15 +48,6 @@ const footerConfig = {
       ],
     },
     {
-      title: "Platform",
-      links: [
-        { label: "Projects", href: "/projects" },
-        { label: "Dashboard", href: "/dashboard" },
-        { label: "Settings", href: "/settings" },
-        { label: "Messages", href: "/messages" },
-      ],
-    },
-    {
       title: "Resources",
       links: [
         { label: "About Us", href: "/about" },
@@ -86,7 +77,7 @@ export default function Footer() {
 
         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-10">
           {/* Left Side: Links */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 flex-1">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 flex-1">
             {footerConfig.columns.map((col, idx) => (
               <div key={idx}>
                 <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">

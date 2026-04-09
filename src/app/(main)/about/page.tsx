@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { PageLayout } from "@/components/layout/page-layout";
+import {
+  BookOpen, Microscope, Globe, Handshake,
+  MessageSquare, ShoppingBag, Briefcase, Award,
+  Users, Lightbulb,
+} from "lucide-react";
 
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
@@ -21,65 +26,100 @@ export const metadata: Metadata = {
   },
 };
 
+const values = [
+  {
+    icon: BookOpen,
+    title: "Knowledge Sharing",
+    description: "Science advances fastest when insights are shared openly and accessibly across every discipline.",
+  },
+  {
+    icon: Microscope,
+    title: "Research Excellence",
+    description: "We hold every answer, listing, and publication on the platform to the highest standard of rigor and quality.",
+  },
+  {
+    icon: Globe,
+    title: "Global Community",
+    description: "Great research knows no borders — we connect academics, labs, and companies across every continent.",
+  },
+  {
+    icon: Handshake,
+    title: "Open Collaboration",
+    description: "The best breakthroughs happen when people with different expertise work together toward a common goal.",
+  },
+];
+
+const features = [
+  { icon: MessageSquare, title: "Forum", description: "Ask questions and get expert answers from the research community." },
+  { icon: ShoppingBag, title: "Marketplace", description: "Discover and list research services, tools, and datasets." },
+  { icon: Briefcase, title: "Talent Board", description: "Post jobs and find expert researchers for your projects." },
+  { icon: Award, title: "Reputation System", description: "Earn points and climb the leaderboard through quality contributions." },
+  { icon: Users, title: "Researcher Profiles", description: "Showcase your expertise, publications, and availability." },
+  { icon: Lightbulb, title: "News & Insights", description: "Stay updated with the latest research news and how-to guides." },
+];
+
 export default function AboutPage() {
   return (
     <PageLayout>
-      <div className="max-w-3xl mx-auto py-12 space-y-12">
+      <div className="max-w-4xl mx-auto py-12 space-y-16">
+        {/* Hero */}
         <section className="text-center">
           <h1 className="text-3xl font-bold text-text-primary dark:text-text-dark-primary mb-4">
             About The Intellectual Exchange
           </h1>
-          <p className="text-lg text-text-secondary dark:text-text-dark-secondary max-w-2xl mx-auto">
-            The Intellectual Exchange is a professional platform connecting researchers, academics, and companies to share knowledge, collaborate, and advance science together.
+          <p className="text-lg text-text-secondary dark:text-text-dark-secondary max-w-2xl mx-auto leading-relaxed">
+            A professional platform connecting researchers, academics, and companies to share knowledge, collaborate, and advance science together.
           </p>
         </section>
 
-        <section>
-          <h2 className="text-xl font-semibold text-text-primary dark:text-text-dark-primary mb-4">Our Mission</h2>
+        {/* Mission */}
+        <section className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-xl p-8">
+          <h2 className="text-xl font-semibold text-text-primary dark:text-text-dark-primary mb-3">Our Mission</h2>
           <p className="text-text-secondary dark:text-text-dark-secondary leading-relaxed">
             We believe that research thrives when knowledge is shared openly. Our mission is to build the best platform for the research community — a place to ask questions, find collaborators, hire experts, and discover tools that accelerate scientific progress.
           </p>
         </section>
 
+        {/* Values */}
         <section>
-          <h2 className="text-xl font-semibold text-text-primary dark:text-text-dark-primary mb-4">Our Team</h2>
-          <p className="text-text-secondary dark:text-text-dark-secondary leading-relaxed">
-            T.I.E is built by a passionate team of engineers, researchers, and designers dedicated to connecting the global research community. We come from diverse academic and industry backgrounds, united by the belief that breaking down barriers between disciplines and institutions leads to better science. Every feature we ship is guided by direct feedback from the researchers and companies who use the platform daily.
-          </p>
+          <h2 className="text-xl font-semibold text-text-primary dark:text-text-dark-primary mb-6">Our Values</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {values.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="flex items-start gap-4 bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-xl p-5">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <Icon className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-text-primary dark:text-text-dark-primary mb-1">{title}</h3>
+                  <p className="text-sm text-text-secondary dark:text-text-dark-secondary leading-relaxed">{description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
+        {/* What We Offer */}
         <section>
-          <h2 className="text-xl font-semibold text-text-primary dark:text-text-dark-primary mb-4">Our Values</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="flex items-start gap-3">
-              <span className="mt-1 flex-shrink-0 text-2xl" style={{ color: "#DA552F" }} aria-hidden="true">📖</span>
-              <div>
-                <h3 className="font-semibold text-text-primary dark:text-text-dark-primary">Knowledge Sharing</h3>
-                <p className="text-sm text-text-secondary dark:text-text-dark-secondary">Science advances fastest when insights are shared openly and accessibly across every discipline.</p>
+          <h2 className="text-xl font-semibold text-text-primary dark:text-text-dark-primary mb-6">What We Offer</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {features.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-xl p-5 text-center">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                  <Icon className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="font-semibold text-text-primary dark:text-text-dark-primary mb-1">{title}</h3>
+                <p className="text-sm text-text-secondary dark:text-text-dark-secondary">{description}</p>
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="mt-1 flex-shrink-0 text-2xl" style={{ color: "#DA552F" }} aria-hidden="true">🔬</span>
-              <div>
-                <h3 className="font-semibold text-text-primary dark:text-text-dark-primary">Research Excellence</h3>
-                <p className="text-sm text-text-secondary dark:text-text-dark-secondary">We hold every answer, listing, and publication on the platform to the highest standard of rigor and quality.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="mt-1 flex-shrink-0 text-2xl" style={{ color: "#DA552F" }} aria-hidden="true">🌍</span>
-              <div>
-                <h3 className="font-semibold text-text-primary dark:text-text-dark-primary">Global Community</h3>
-                <p className="text-sm text-text-secondary dark:text-text-dark-secondary">Great research knows no borders — we connect academics, labs, and companies across every continent.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="mt-1 flex-shrink-0 text-2xl" style={{ color: "#DA552F" }} aria-hidden="true">🤝</span>
-              <div>
-                <h3 className="font-semibold text-text-primary dark:text-text-dark-primary">Open Collaboration</h3>
-                <p className="text-sm text-text-secondary dark:text-text-dark-secondary">The best breakthroughs happen when people with different expertise work together toward a common goal.</p>
-              </div>
-            </div>
+            ))}
           </div>
+        </section>
+
+        {/* Team */}
+        <section className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-xl p-8">
+          <h2 className="text-xl font-semibold text-text-primary dark:text-text-dark-primary mb-3">Our Team</h2>
+          <p className="text-text-secondary dark:text-text-dark-secondary leading-relaxed">
+            T.I.E is built by a passionate team of engineers, researchers, and designers dedicated to connecting the global research community. We come from diverse academic and industry backgrounds, united by the belief that breaking down barriers between disciplines and institutions leads to better science.
+          </p>
         </section>
       </div>
     </PageLayout>
