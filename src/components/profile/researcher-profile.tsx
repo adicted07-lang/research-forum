@@ -113,12 +113,13 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
         <div className="lg:w-[280px] shrink-0">
           {/* Avatar */}
           <div className="mb-4">
-            <UserAvatar
-              name={displayName}
-              src={profile.image}
-              size="lg"
-              className="w-[260px] h-[260px] text-6xl mx-auto lg:mx-0 border border-border dark:border-border-dark"
-            />
+            <div className="w-[200px] h-[200px] mx-auto lg:mx-0 rounded-full overflow-hidden border border-border dark:border-border-dark bg-gradient-to-br from-primary to-warning flex items-center justify-center text-white text-6xl font-bold">
+              {profile.image ? (
+                <img src={profile.image} alt={displayName} className="w-full h-full object-cover" />
+              ) : (
+                displayName[0]?.toUpperCase() ?? "?"
+              )}
+            </div>
           </div>
 
           {/* Name */}

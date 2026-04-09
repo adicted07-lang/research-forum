@@ -10,7 +10,7 @@ import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
 import { getArticles } from "@/server/actions/articles";
-import { TrendingUp, Sparkles, Briefcase, Newspaper, Brain, Globe, Dna, Activity, BarChart3, Network, HeartPulse, Atom, MessageSquare, Database, type LucideIcon } from "lucide-react";
+import { TrendingUp, Sparkles, Briefcase, Newspaper, Brain, Globe, Dna, Activity, BarChart3, Network, HeartPulse, Atom, MessageSquare, Database, HelpCircle, ShoppingBag, MapPin, type LucideIcon } from "lucide-react";
 
 const POPULAR_TAGS = [
   "machine-learning", "climate-science", "genomics", "neuroscience", "statistics",
@@ -87,14 +87,19 @@ export default async function HomePage() {
         {questions.length > 0 ? (
           <div className="space-y-3">
             {questions.map((q: any) => (
-              <div key={q.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all">
-                <Link href={`/forum/${q.slug}`}>
-                  <h3 className="text-base font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1">{q.title}</h3>
-                </Link>
-                <div className="flex items-center gap-3 text-xs text-text-tertiary">
-                  <span>{q.upvoteCount} upvotes</span>
-                  <span>{q.answerCount} answers</span>
-                  <div className="flex gap-1">{q.tags?.slice(0, 3).map((t: string) => <BadgePill key={t} label={t} />)}</div>
+              <div key={q.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all flex gap-3">
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <HelpCircle className="w-4.5 h-4.5 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <Link href={`/forum/${q.slug}`}>
+                    <h3 className="text-base font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1">{q.title}</h3>
+                  </Link>
+                  <div className="flex items-center gap-3 text-xs text-text-tertiary">
+                    <span>{q.upvoteCount} upvotes</span>
+                    <span>{q.answerCount} answers</span>
+                    <div className="flex gap-1">{q.tags?.slice(0, 3).map((t: string) => <BadgePill key={t} label={t} />)}</div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -110,11 +115,16 @@ export default async function HomePage() {
         {listings.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {listings.map((l: any) => (
-              <div key={l.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all">
-                <Link href={`/marketplace/${l.slug}`}>
-                  <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1">{l.title}</h3>
-                </Link>
-                <p className="text-xs text-text-secondary dark:text-text-dark-secondary line-clamp-2">{l.tagline}</p>
+              <div key={l.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all flex gap-3">
+                <div className="w-9 h-9 rounded-lg bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center shrink-0">
+                  <ShoppingBag className="w-4.5 h-4.5 text-purple-600 dark:text-purple-400" />
+                </div>
+                <div className="min-w-0">
+                  <Link href={`/marketplace/${l.slug}`}>
+                    <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1">{l.title}</h3>
+                  </Link>
+                  <p className="text-xs text-text-secondary dark:text-text-dark-secondary line-clamp-2">{l.tagline}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -129,11 +139,21 @@ export default async function HomePage() {
         {jobs.length > 0 ? (
           <div className="space-y-3">
             {jobs.map((j: any) => (
-              <div key={j.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all">
-                <Link href={`/talent-board/${j.slug}`}>
-                  <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1">{j.title}</h3>
-                </Link>
-                <p className="text-xs text-text-tertiary">{j.locationPreference} · {j.projectType}</p>
+              <div key={j.id} className="bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark-light rounded-md p-4 hover:border-border hover:shadow-sm transition-all flex gap-3">
+                <div className="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0">
+                  <Briefcase className="w-4.5 h-4.5 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div className="min-w-0">
+                  <Link href={`/talent-board/${j.slug}`}>
+                    <h3 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-primary transition-colors mb-1">{j.title}</h3>
+                  </Link>
+                  <div className="flex items-center gap-1.5 text-xs text-text-tertiary">
+                    <MapPin className="w-3 h-3" />
+                    <span>{j.locationPreference}</span>
+                    <span>·</span>
+                    <span>{j.projectType}</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
