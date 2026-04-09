@@ -5,7 +5,7 @@ import {
   Mail,
   MessageSquare,
 } from "lucide-react";
-import { TieBrand } from "@/components/shared/tie-logo";
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -77,7 +77,7 @@ export default function Footer() {
         {/* Top Section: Logo and Description */}
         <div className="mb-12">
           <Link href="/" className="inline-flex mb-6">
-            <TieBrand />
+            <Image src="/tie-logo-full.svg" alt="The Intellectual Exchange" width={200} height={80} className="dark:invert" />
           </Link>
           <p className="text-sm text-text-secondary dark:text-text-dark-secondary leading-relaxed max-w-2xl">
             {footerConfig.description}
