@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface UserAvatarProps {
@@ -13,8 +12,6 @@ const sizeClasses = {
   md: "w-8 h-8 text-xs",
   lg: "w-10 h-10 text-sm",
 };
-
-const sizePx = { sm: 24, md: 32, lg: 40 };
 
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/);
@@ -39,7 +36,8 @@ export function UserAvatar({
           className
         )}
       >
-        <Image src={src} alt={name} width={sizePx[size]} height={sizePx[size]} className="w-full h-full object-cover" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={name} className="w-full h-full object-cover" />
       </div>
     );
   }

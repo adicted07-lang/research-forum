@@ -9,7 +9,7 @@ import { getQuestions } from "@/server/actions/questions";
 import { getListings } from "@/server/actions/listings";
 import { getJobs } from "@/server/actions/jobs";
 import { getArticles } from "@/server/actions/articles";
-import { TrendingUp, Sparkles, Briefcase, Newspaper, Brain, Globe, Dna, Activity, BarChart3, Network, HeartPulse, Atom, MessageSquare, Database, HelpCircle, ShoppingBag, MapPin, type LucideIcon } from "lucide-react";
+import { TrendingUp, Sparkles, Briefcase, Newspaper, Brain, Globe, Dna, Activity, BarChart3, Network, HeartPulse, Atom, MessageSquare, Database, HelpCircle, ShoppingBag, MapPin, Microscope, FlaskConical, BookOpen, GraduationCap, Lightbulb, FileSearch, type LucideIcon } from "lucide-react";
 import { HomepageSidebar } from "@/components/home/homepage-sidebar";
 
 const POPULAR_TAGS = [
@@ -67,18 +67,20 @@ export default async function HomePage() {
         {/* Gradient orbs */}
         <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
         <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" aria-hidden="true" />
-        {/* Floating icons */}
-        <div className="absolute top-6 left-8 opacity-[0.06] dark:opacity-[0.08]" aria-hidden="true">
-          <Briefcase className="w-10 h-10 text-primary rotate-[-15deg]" />
-        </div>
-        <div className="absolute top-8 right-12 opacity-[0.06] dark:opacity-[0.08]" aria-hidden="true">
-          <MessageSquare className="w-8 h-8 text-blue-500 rotate-[10deg]" />
-        </div>
-        <div className="absolute bottom-8 left-16 opacity-[0.06] dark:opacity-[0.08]" aria-hidden="true">
-          <Database className="w-7 h-7 text-purple-500 rotate-[20deg]" />
-        </div>
-        <div className="absolute bottom-6 right-8 opacity-[0.06] dark:opacity-[0.08]" aria-hidden="true">
-          <TrendingUp className="w-9 h-9 text-green-500 rotate-[-10deg]" />
+        {/* Floating research icons */}
+        <div className="absolute inset-0 pointer-events-none opacity-70 dark:opacity-50" aria-hidden="true">
+          <Microscope className="absolute top-4 left-[5%] w-8 h-8 text-primary/20 rotate-[-12deg]" />
+          <Dna className="absolute top-3 left-[25%] w-7 h-7 text-blue-400/20 rotate-[18deg]" />
+          <FlaskConical className="absolute top-6 right-[30%] w-9 h-9 text-purple-400/20 rotate-[-8deg]" />
+          <Atom className="absolute top-3 right-[8%] w-8 h-8 text-teal-400/20 rotate-[15deg]" />
+          <Brain className="absolute top-[40%] left-[3%] w-10 h-10 text-rose-400/20 rotate-[10deg]" />
+          <GraduationCap className="absolute top-[45%] right-[4%] w-9 h-9 text-amber-400/20 rotate-[-20deg]" />
+          <BookOpen className="absolute bottom-[35%] left-[12%] w-7 h-7 text-green-400/20 rotate-[22deg]" />
+          <Globe className="absolute bottom-[38%] right-[15%] w-8 h-8 text-sky-400/20 rotate-[-5deg]" />
+          <Lightbulb className="absolute bottom-6 left-[8%] w-8 h-8 text-yellow-400/20 rotate-[14deg]" />
+          <FileSearch className="absolute bottom-4 left-[35%] w-7 h-7 text-indigo-400/20 rotate-[-18deg]" />
+          <HeartPulse className="absolute bottom-5 right-[25%] w-8 h-8 text-red-400/20 rotate-[8deg]" />
+          <Network className="absolute bottom-4 right-[6%] w-9 h-9 text-cyan-400/20 rotate-[-12deg]" />
         </div>
         {/* Content */}
         <div className="relative z-10">
