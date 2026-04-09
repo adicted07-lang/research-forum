@@ -76,8 +76,8 @@ export default function Footer() {
       <div className="max-w-[1280px] mx-auto">
         {/* Top Section: Logo and Description */}
         <div className="mb-12">
-          <Link href="/" className="inline-flex mb-6">
-            <Image src="/tie-logo-full.svg" alt="The Intellectual Exchange" width={200} height={80} className="dark:invert" />
+          <Link href="/" className="inline-flex mb-4">
+            <Image src="/tie-logo-full.svg" alt="The Intellectual Exchange" width={180} height={55} className="dark:invert" />
           </Link>
           <p className="text-sm text-text-secondary dark:text-text-dark-secondary leading-relaxed max-w-2xl">
             {footerConfig.description}
