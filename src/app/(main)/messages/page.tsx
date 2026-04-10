@@ -7,7 +7,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { getThreads } from "@/server/actions/messages";
 import { auth } from "@/auth";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, User, Briefcase } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -63,9 +63,21 @@ export default async function MessagesPage() {
                   <UserAvatar name={otherName} src={other.image} size="lg" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
-                      <span className="text-sm font-semibold text-text-primary dark:text-text-dark-primary">
-                        {otherName}
-                      </span>
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        {thread.type === "DIRECT" ? (
+                          <User className="w-3.5 h-3.5 text-text-tertiary dark:text-text-dark-tertiary shrink-0" />
+                        ) : (
+                          <Briefcase className="w-3.5 h-3.5 text-text-tertiary dark:text-text-dark-tertiary shrink-0" />
+                        )}
+                        <span className="text-sm font-semibold text-text-primary dark:text-text-dark-primary truncate">
+                          {otherName}
+                        </span>
+                        {thread.status === "REQUEST" && thread.creatorId !== session?.user?.id && (
+                          <span className="text-xs px-2 py-0.5 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400 rounded-full shrink-0">
+                            Message request
+                          </span>
+                        )}
+                      </div>
                       {latestMessage && (
                         <span className="text-xs text-text-tertiary dark:text-text-dark-tertiary shrink-0">
                           {formatTime(latestMessage.createdAt)}
