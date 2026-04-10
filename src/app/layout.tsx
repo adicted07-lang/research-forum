@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import CookieConsent from "@/components/shared/cookie-consent";
 import { SessionProvider } from "next-auth/react";
 import { organizationSchema, websiteSchema } from "@/lib/structured-data";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
@@ -87,6 +89,8 @@ export default function RootLayout({
           >
             {children}
             <CookieConsent />
+            <Analytics />
+            <SpeedInsights />
           </ThemeProvider>
         </SessionProvider>
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (
