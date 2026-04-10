@@ -28,6 +28,9 @@ import { auth } from "@/auth";
 import { ActivityFeed } from "@/components/profile/activity-feed";
 import { getLevel } from "@/lib/reputation";
 import { LevelBadge } from "@/components/shared/level-badge";
+import { EndorseButton } from "@/components/profile/endorse-button";
+import { EndorsersPopover } from "@/components/profile/endorsers-popover";
+import type { EndorsementSummary } from "@/server/actions/endorsements";
 
 type ResearcherProfileData = {
   id: string;
@@ -70,6 +73,8 @@ function getSocialLinks(socialLinks: unknown): Record<string, string> {
 interface ResearcherProfileProps {
   profile: ResearcherProfileData;
   activity: Array<{ type: "question" | "answer" | "article"; title: string; url: string; createdAt: Date }>;
+  endorsements: EndorsementSummary[];
+  myEndorsements: string[];
 }
 
 const badgeIcons: Record<string, { icon: typeof Award; color: string }> = {
@@ -97,7 +102,7 @@ function timeAgo(date: Date): string {
   return `${months}mo ago`;
 }
 
-export async function ResearcherProfile({ profile, activity }: ResearcherProfileProps) {
+export async function ResearcherProfile({ profile, activity, endorsements, myEndorsements }: ResearcherProfileProps) {
   const session = await auth();
   const following = session?.user?.id ? await isFollowing(profile.id) : false;
   const badges = await getUserBadges(profile.id);
@@ -105,6 +110,7 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
   const displayName = profile.name || profile.username || "Researcher";
   const availability = profile.availability ? availabilityConfig[profile.availability] : null;
   const tier = getLevel(profile.points);
+  const isOwnProfile = session?.user?.id === profile.id;
 
   return (
     <div className="w-full">
@@ -240,16 +246,34 @@ export async function ResearcherProfile({ profile, activity }: ResearcherProfile
             </div>
           )}
 
-          {/* Expertise */}
+          {/* Expertise with Endorsements */}
           {profile.expertise.length > 0 && (
             <div className="pt-4 border-t border-border dark:border-border-dark">
               <h4 className="text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-3">
                 Expertise
               </h4>
-              <div className="flex flex-wrap gap-1.5">
-                {profile.expertise.map((tag) => (
-                  <BadgePill key={tag} label={tag} variant="primary" />
-                ))}
+              <div className="flex flex-wrap gap-2">
+                {profile.expertise
+                  .map((tag) => {
+                    const endorsement = endorsements.find(
+                      (e) => e.skill === tag.toLowerCase().replace(/\s+/g, "-")
+                    );
+                    return { tag, count: endorsement?.count || 0, endorsers: endorsement?.endorsers || [] };
+                  })
+                  .sort((a, b) => b.count - a.count)
+                  .map(({ tag, count, endorsers }) => (
+                    <div key={tag} className="flex items-center gap-1">
+                      <BadgePill label={tag} variant="primary" />
+                      <EndorsersPopover count={count} endorsers={endorsers} skill={tag} />
+                      {!isOwnProfile && (
+                        <EndorseButton
+                          endorseeId={profile.id}
+                          skill={tag}
+                          endorsed={myEndorsements.includes(tag.toLowerCase().replace(/\s+/g, "-"))}
+                        />
+                      )}
+                    </div>
+                  ))}
               </div>
             </div>
           )}

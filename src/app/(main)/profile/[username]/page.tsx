@@ -6,6 +6,7 @@ import { CompanyProfile } from "@/components/profile/company-profile";
 import { getResearcherProfile, getCompanyProfile } from "@/server/actions/profiles";
 import { getUserActivity } from "@/server/actions/activity";
 import { personSchema, organizationProfileSchema } from "@/lib/structured-data";
+import { getEndorsements, getMyEndorsementsForUser } from "@/server/actions/endorsements";
 
 export const dynamic = "force-dynamic";
 
@@ -79,6 +80,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       } catch {
         // Activity fetch failed
       }
+      const [endorsements, myEndorsements] = await Promise.all([
+        getEndorsements(researcher.id),
+        getMyEndorsementsForUser(researcher.id),
+      ]);
       return (
         <PageLayout>
           <script
@@ -87,7 +92,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
               __html: JSON.stringify(personSchema(researcher as any)),
             }}
           />
-          <ResearcherProfile profile={researcher} activity={activity} />
+          <ResearcherProfile profile={researcher} activity={activity} endorsements={endorsements} myEndorsements={myEndorsements} />
         </PageLayout>
       );
     }
