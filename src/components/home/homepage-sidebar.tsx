@@ -7,6 +7,7 @@ import { UserAvatar } from "@/components/shared/user-avatar";
 import { AdUnit } from "@/components/shared/ad-unit";
 import { db } from "@/lib/db";
 import { getLevel } from "@/lib/reputation";
+import { SuggestedResearchers } from "@/components/home/suggested-researchers";
 
 async function getRecentActivity(limit = 6) {
   try {
@@ -295,6 +296,8 @@ export async function HomepageSidebar({ tags }: HomepageSidebarProps) {
           No spam. Unsubscribe anytime.
         </p>
       </div>
+
+      <SuggestedResearchers />
     </div>
   );
 }
