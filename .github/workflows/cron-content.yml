@@ -6,6 +6,8 @@ on:
     - cron: "0 */6 * * *"
     # Auto Q&A: every 4 hours
     - cron: "0 */4 * * *"
+    # Daily trending email: every day at 8am UTC
+    - cron: "0 8 * * *"
   workflow_dispatch:
     inputs:
       job:
@@ -16,6 +18,7 @@ on:
           - auto-news
           - auto-qa
           - both
+          - daily-trending
 
 jobs:
   auto-news:
@@ -57,5 +60,25 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEXT_PUBLIC_URL: "https://theintellectualexchange.com"
+
+  daily-trending:
+    if: >
+      github.event.schedule == '0 8 * * *' ||
+      github.event_name == 'workflow_dispatch' && (github.event.inputs.job == 'daily-trending' || github.event.inputs.job == 'both')
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install @neondatabase/serverless
+      - name: Send trending digest
+        run: node scripts/daily-trending.mjs
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NEXT_PUBLIC_URL: "https://theintellectualexchange.com"
