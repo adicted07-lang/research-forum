@@ -24,6 +24,9 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
     if (researcher) {
       const displayName = researcher.name || researcher.username || "Researcher";
       const description = researcher.bio || `View ${displayName}'s profile on The Intellectual Exchange`;
+      const expertise: string[] = researcher.expertise ?? [];
+      const points: number = researcher.points ?? 0;
+      const ogImageUrl = `/api/og?type=profile&name=${encodeURIComponent(displayName)}${expertise.length > 0 ? `&expertise=${encodeURIComponent(expertise.slice(0, 3).join(","))}` : ""}&points=${points}`;
       return {
         title: `${displayName} — The Intellectual Exchange`,
         description,
@@ -34,9 +37,9 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
           title: displayName,
           description,
           type: "profile",
-          images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(displayName)}&subtitle=Researcher Profile`, width: 1200, height: 630 }],
+          images: [{ url: ogImageUrl, width: 1200, height: 630 }],
         },
-        twitter: { card: "summary_large_image", title: displayName, description, images: [`${baseUrl}/api/og?title=${encodeURIComponent(displayName)}&subtitle=Researcher Profile`] },
+        twitter: { card: "summary_large_image", title: displayName, description, images: [ogImageUrl] },
       };
     }
 
@@ -44,6 +47,7 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
     if (company) {
       const displayName = company.companyName || company.username || "Company";
       const description = company.description || `View ${displayName}'s profile on The Intellectual Exchange`;
+      const ogImageUrl = `/api/og?type=profile&name=${encodeURIComponent(displayName)}&expertise=${encodeURIComponent("Company")}&points=0`;
       return {
         title: `${displayName} — The Intellectual Exchange`,
         description,
@@ -54,9 +58,9 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
           title: displayName,
           description,
           type: "profile",
-          images: [{ url: `${baseUrl}/api/og?title=${encodeURIComponent(displayName)}&subtitle=Company Profile`, width: 1200, height: 630 }],
+          images: [{ url: ogImageUrl, width: 1200, height: 630 }],
         },
-        twitter: { card: "summary_large_image", title: displayName, description, images: [`${baseUrl}/api/og?title=${encodeURIComponent(displayName)}&subtitle=Company Profile`] },
+        twitter: { card: "summary_large_image", title: displayName, description, images: [ogImageUrl] },
       };
     }
   } catch {

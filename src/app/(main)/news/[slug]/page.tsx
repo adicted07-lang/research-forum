@@ -24,6 +24,16 @@ export async function generateMetadata({
   const description = article.body.replace(/<[^>]*>/g, "").slice(0, 160);
   const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
+  const author =
+    article.author?.name ||
+    article.author?.companyName ||
+    article.author?.username ||
+    "";
+  const readTime = article.readTime ?? "";
+  const ogImageUrl = article.coverImage
+    ? article.coverImage
+    : `/api/og?type=article&title=${encodeURIComponent(article.title)}${author ? `&author=${encodeURIComponent(author)}` : ""}${readTime ? `&readTime=${readTime}` : ""}`;
+
   return {
     title: `${article.title} — The Intellectual Exchange`,
     description,
@@ -34,10 +44,10 @@ export async function generateMetadata({
       title: article.title,
       description,
       type: "article",
-      images: [{ url: article.coverImage || `/api/og?title=${encodeURIComponent(article.title)}&subtitle=News`, width: 1200, height: 630 }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630 }],
     },
     twitter: {
-      card: article.coverImage ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title: article.title,
       description,
     },

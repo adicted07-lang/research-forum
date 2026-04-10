@@ -29,6 +29,10 @@ export async function generateMetadata({
   const description = question.body.replace(/<[^>]*>/g, "").slice(0, 160);
   const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
 
+  const answerCount = question.answers?.length ?? 0;
+  const upvoteCount = question.upvoteCount ?? 0;
+  const ogImageUrl = `/api/og?type=question&title=${encodeURIComponent(question.title)}&answers=${answerCount}&upvotes=${upvoteCount}`;
+
   return {
     title: `${question.title} — The Intellectual Exchange`,
     description,
@@ -39,10 +43,10 @@ export async function generateMetadata({
       title: question.title,
       description,
       type: "article",
-      images: [{ url: `/api/og?title=${encodeURIComponent(question.title)}&subtitle=Forum`, width: 1200, height: 630 }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630 }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: question.title,
       description,
     },
