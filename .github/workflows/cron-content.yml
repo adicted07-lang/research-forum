@@ -1,0 +1,61 @@
+name: Auto Content Generation
+
+on:
+  schedule:
+    # Auto-news: every 6 hours
+    - cron: "0 */6 * * *"
+    # Auto Q&A: every 4 hours
+    - cron: "0 */4 * * *"
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "Which job to run"
+        required: true
+        type: choice
+        options:
+          - auto-news
+          - auto-qa
+          - both
+
+jobs:
+  auto-news:
+    if: >
+      github.event.schedule == '0 */6 * * *' ||
+      github.event_name == 'workflow_dispatch' && (github.event.inputs.job == 'auto-news' || github.event.inputs.job == 'both')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install @anthropic-ai/sdk @neondatabase/serverless
+      - name: Generate articles
+        run: node scripts/auto-news.mjs
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEXT_PUBLIC_URL: "https://theintellectualexchange.com"
+
+  auto-qa:
+    if: >
+      github.event.schedule == '0 */4 * * *' ||
+      github.event_name == 'workflow_dispatch' && (github.event.inputs.job == 'auto-qa' || github.event.inputs.job == 'both')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install @anthropic-ai/sdk @neondatabase/serverless
+      - name: Generate Q&A
+        run: node scripts/auto-qa.mjs
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NEXT_PUBLIC_URL: "https://theintellectualexchange.com"
