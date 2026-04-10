@@ -24,7 +24,12 @@ export const metadata: Metadata = {
   title: "The Intellectual Exchange — Research Community & Marketplace",
   description:
     "A professional platform for researchers, academics, and companies. Ask questions, share knowledge, hire experts, and discover research tools.",
-  alternates: { canonical: baseUrl },
+  alternates: {
+    canonical: baseUrl,
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "48x48" },
