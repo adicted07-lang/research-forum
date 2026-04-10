@@ -131,8 +131,48 @@ authorIndex: number from 0 to ${researchers.length - 1} (distribute evenly)`;
       VALUES (${id}, ${article.title}, ${article.body}, ${slug}, ${author.id}, ${category}, ${article.tags}, ${readTime}, ${i === 0}, true, 'PUBLISHED', NOW(), NOW(), NOW())
     `;
 
-    createdArticles.push({ title: article.title, slug, author: author.name, readTime });
+    createdArticles.push({ id, title: article.title, slug, author: author.name, readTime, tags: article.tags });
     console.log(`  Created: "${article.title}" by ${author.name}`);
+  }
+
+  // Add SEO internal links to each created article
+  console.log("Adding internal links to articles...");
+  for (const article of createdArticles) {
+    const { id, slug, tags } = article;
+
+    const related = await sql`
+      SELECT title, slug, 'article' as type FROM articles
+      WHERE id != ${id}
+      AND tags && ${tags}
+      AND status = 'PUBLISHED'
+      AND "deletedAt" IS NULL
+      ORDER BY "publishedAt" DESC LIMIT 2
+    `;
+    const relatedQuestions = await sql`
+      SELECT title, slug, 'question' as type FROM questions
+      WHERE tags && ${tags}
+      AND "deletedAt" IS NULL
+      ORDER BY "createdAt" DESC LIMIT 1
+    `;
+
+    const allRelated = [...related, ...relatedQuestions];
+    if (allRelated.length > 0) {
+      const linksHtml = allRelated.map(r => {
+        const url = r.type === 'article' ? `/news/${r.slug}` : `/forum/${r.slug}`;
+        return `<li><a href="${url}">${r.title}</a></li>`;
+      }).join('');
+
+      const currentArticle = await sql`SELECT body FROM articles WHERE id = ${id}`;
+      const currentBody = currentArticle[0].body;
+      const updatedBody = currentBody + `
+    <hr>
+    <h3>Related on The Intellectual Exchange</h3>
+    <ul>${linksHtml}</ul>
+  `;
+
+      await sql`UPDATE articles SET body = ${updatedBody} WHERE id = ${id}`;
+      console.log(`  Linked ${allRelated.length} related items to "${article.title}"`);
+    }
   }
 
   // Send admin email via Resend

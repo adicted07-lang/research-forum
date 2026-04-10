@@ -118,6 +118,26 @@ CRITICAL RULES:
     console.log(`  Question: "${q.title}" by ${author.name}`);
   }
 
+  // Add SEO internal links to each created question
+  console.log("Adding internal links to questions...");
+  for (const q of createdQuestions) {
+    const relatedArticles = await sql`
+      SELECT title, slug FROM articles
+      WHERE tags && ${q.tags}
+      AND status = 'PUBLISHED'
+      AND "deletedAt" IS NULL
+      ORDER BY "publishedAt" DESC LIMIT 2
+    `;
+    if (relatedArticles.length > 0) {
+      const linksHtml = relatedArticles.map(a =>
+        `<li><a href="/news/${a.slug}">${a.title}</a></li>`
+      ).join('');
+      const updatedBody = q.body + `\n\n<p><strong>Related reading:</strong></p><ul>${linksHtml}</ul>`;
+      await sql`UPDATE questions SET body = ${updatedBody} WHERE id = ${q.id}`;
+      console.log(`  Linked ${relatedArticles.length} articles to "${q.title}"`);
+    }
+  }
+
   // --- Generate Answers for Unanswered Questions ---
   const unansweredQuestions = await sql`
     SELECT id, title, body, tags FROM questions
