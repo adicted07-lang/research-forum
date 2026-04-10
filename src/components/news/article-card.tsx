@@ -52,8 +52,9 @@ function formatDate(date: Date | null): string {
 }
 
 function getExcerpt(body: string, maxLen: number = 150): string {
-  if (body.length <= maxLen) return body;
-  return body.slice(0, maxLen).trimEnd() + "…";
+  const text = body.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  if (text.length <= maxLen) return text;
+  return text.slice(0, maxLen).trimEnd() + "…";
 }
 
 function CoverGradient({
@@ -152,11 +153,6 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
                   <span>{article.readTime} min read</span>
                 </div>
               )}
-              {article.isAIGenerated && (
-                <span className="text-[10px] font-medium text-text-tertiary dark:text-text-dark-tertiary bg-surface dark:bg-surface-dark px-1.5 py-0.5 rounded">
-                  AI Generated
-                </span>
-              )}
             </div>
           </div>
         </div>
@@ -216,14 +212,6 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
                   <Clock className="w-3 h-3" />
                   <span>{article.readTime} min</span>
                 </div>
-              </>
-            )}
-            {article.isAIGenerated && (
-              <>
-                <span>·</span>
-                <span className="text-[10px] font-medium text-text-tertiary dark:text-text-dark-tertiary">
-                  AI Generated
-                </span>
               </>
             )}
           </div>
