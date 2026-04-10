@@ -177,9 +177,11 @@ model User {
   bookmarks  Bookmark[]
 
   // Social relations
-  badges           Badge[]
-  following        Follow[]                 @relation("Following")
-  followers        Follow[]                 @relation("Followers")
+  badges               Badge[]
+  following            Follow[]                 @relation("Following")
+  followers            Follow[]                 @relation("Followers")
+  endorsementsGiven    SkillEndorsement[]       @relation("EndorsementsGiven")
+  endorsementsReceived SkillEndorsement[]       @relation("EndorsementsReceived")
   collections      Collection[]
   notifications    Notification[]
   newsletterSubs   NewsletterSubscription[]
@@ -394,6 +396,22 @@ model Badge {
   @@unique([userId, name])
   @@index([userId])
   @@map("badges")
+}
+
+model SkillEndorsement {
+  id         String   @id @default(cuid())
+  endorserId String
+  endorseeId String
+  skill      String
+  createdAt  DateTime @default(now())
+
+  endorser   User @relation("EndorsementsGiven", fields: [endorserId], references: [id], onDelete: Cascade)
+  endorsee   User @relation("EndorsementsReceived", fields: [endorseeId], references: [id], onDelete: Cascade)
+
+  @@unique([endorserId, endorseeId, skill])
+  @@index([endorseeId])
+  @@index([endorserId])
+  @@map("skill_endorsements")
 }
 
 model Follow {
