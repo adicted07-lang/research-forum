@@ -11,6 +11,7 @@ import {
   Megaphone,
 } from "lucide-react";
 import { FORUM_CATEGORIES } from "@/lib/validations/forum";
+import { SuggestedResearchers } from "@/components/home/suggested-researchers";
 
 const iconClass = "w-5 h-5 text-text-primary dark:text-text-dark-primary stroke-[1.5]";
 
@@ -24,7 +25,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   "Self-Promotion": <Lightbulb className={iconClass} />,
 };
 
-export function ForumSidebar() {
+export async function ForumSidebar() {
   return (
     <div className="space-y-6">
       {/* Ask a Question CTA */}
@@ -63,6 +64,9 @@ export function ForumSidebar() {
           ))}
         </ul>
       </div>
+
+      {/* Suggested Researchers */}
+      <SuggestedResearchers />
     </div>
   );
 }
