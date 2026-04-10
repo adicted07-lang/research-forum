@@ -7,4 +7,6 @@ export const POINTS = {
   POST_COMMENT: 2,
   WRITE_REVIEW: 5,
   PUBLISH_ARTICLE: 15,
+  ENDORSE_SKILL: 1,
+  RECEIVE_ENDORSEMENT: 3,
 } as const;
