@@ -218,6 +218,15 @@ export async function ResearcherProfile({ profile, activity, endorsements, myEnd
                 )}
               </div>
             )}
+            {isOwnProfile && profile.username && (
+              <Link
+                href={`/profile/${profile.username}/embed`}
+                className="text-xs text-text-secondary dark:text-text-dark-secondary hover:text-primary mt-2 inline-flex items-center gap-1"
+              >
+                <ExternalLink className="w-3 h-3" />
+                Embed badge
+              </Link>
+            )}
           </div>
 
           {/* Badges */}
