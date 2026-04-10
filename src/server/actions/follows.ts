@@ -87,6 +87,18 @@ export async function isFollowing(targetUserId: string): Promise<boolean> {
   }
 }
 
+export async function isMutualFollow(userAId: string, userBId: string): Promise<boolean> {
+  const count = await db.follow.count({
+    where: {
+      OR: [
+        { followerId: userAId, followingId: userBId },
+        { followerId: userBId, followingId: userAId },
+      ],
+    },
+  });
+  return count === 2;
+}
+
 export async function getFollowerCount(userId: string): Promise<number> {
   try {
     return await db.follow.count({ where: { followingId: userId } });
