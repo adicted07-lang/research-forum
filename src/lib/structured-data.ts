@@ -65,6 +65,57 @@ export function questionSchema(question: {
   };
 }
 
+export function discussionForumPostingSchema(question: {
+  title: string;
+  body: string;
+  slug: string;
+  createdAt: Date;
+  updatedAt: Date;
+  author: { name: string | null; username: string | null; image: string | null };
+  answers: { body: string; createdAt: Date; author: { name: string | null; username: string | null } }[];
+  upvoteCount?: number;
+}) {
+  const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.com";
+  return {
+    "@context": "https://schema.org",
+    "@type": "DiscussionForumPosting",
+    headline: question.title,
+    text: question.body.replace(/<[^>]*>/g, "").slice(0, 1000),
+    url: `${baseUrl}/forum/${question.slug}`,
+    datePublished: question.createdAt.toISOString(),
+    dateModified: question.updatedAt.toISOString(),
+    author: {
+      "@type": "Person",
+      name: question.author.name || "Anonymous",
+      url: question.author.username ? `${baseUrl}/profile/${question.author.username}` : undefined,
+      image: question.author.image || undefined,
+    },
+    interactionStatistic: {
+      "@type": "InteractionCounter",
+      interactionType: "https://schema.org/CommentAction",
+      userInteractionCount: question.answers.length,
+    },
+    ...(question.upvoteCount !== undefined && {
+      upvoteCount: question.upvoteCount,
+    }),
+    comment: question.answers.slice(0, 10).map((a) => ({
+      "@type": "Comment",
+      text: a.body.replace(/<[^>]*>/g, "").slice(0, 500),
+      dateCreated: a.createdAt.toISOString(),
+      author: {
+        "@type": "Person",
+        name: a.author.name || "Anonymous",
+        url: a.author.username ? `${baseUrl}/profile/${a.author.username}` : undefined,
+      },
+    })),
+    isPartOf: {
+      "@type": "DiscussionForum",
+      name: "The Intellectual Exchange Forum",
+      url: `${baseUrl}/forum`,
+    },
+  };
+}
+
 export function articleSchema(article: {
   title: string;
   body: string;

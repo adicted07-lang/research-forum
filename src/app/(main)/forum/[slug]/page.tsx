@@ -15,7 +15,7 @@ import { getSuggestedAnswers } from "@/server/actions/suggestions";
 import { SuggestedAnswers } from "@/components/forum/suggested-answers";
 import { getRelatedContent } from "@/server/actions/citations";
 import { RelatedContent } from "@/components/shared/related-content";
-import { questionSchema, breadcrumbSchema } from "@/lib/structured-data";
+import { questionSchema, discussionForumPostingSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 export async function generateMetadata({
   params,
@@ -100,7 +100,10 @@ export default async function QuestionDetailPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(questionSchema(question as any)),
+          __html: JSON.stringify([
+            questionSchema(question as any),
+            discussionForumPostingSchema(question as any),
+          ]),
         }}
       />
       <script
