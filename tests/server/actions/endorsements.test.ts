@@ -25,15 +25,6 @@ vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
 
-describe("normalizeSkill", () => {
-  it("lowercases and trims skill strings", async () => {
-    const { normalizeSkill } = await import("@/server/actions/endorsements");
-    expect(normalizeSkill("Conjoint Analysis")).toBe("conjoint-analysis");
-    expect(normalizeSkill("  UX Research  ")).toBe("ux-research");
-    expect(normalizeSkill("AI-in-Research")).toBe("ai-in-research");
-  });
-});
-
 describe("toggleEndorsement", () => {
   beforeEach(() => { vi.clearAllMocks(); });
 

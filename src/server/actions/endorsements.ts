@@ -6,7 +6,7 @@ import { awardPoints, deductPoints } from "@/server/actions/points";
 import { POINTS } from "@/lib/points-config";
 import { revalidatePath } from "next/cache";
 
-export function normalizeSkill(skill: string): string {
+function normalizeSkill(skill: string): string {
   return skill.trim().toLowerCase().replace(/\s+/g, "-");
 }
 
