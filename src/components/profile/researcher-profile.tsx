@@ -31,6 +31,8 @@ import { LevelBadge } from "@/components/shared/level-badge";
 import { EndorseButton } from "@/components/profile/endorse-button";
 import { EndorsersPopover } from "@/components/profile/endorsers-popover";
 import type { EndorsementSummary } from "@/server/actions/endorsements";
+import { DirectMessageButton } from "@/components/profile/direct-message-button";
+import { db } from "@/lib/db";
 
 type ResearcherProfileData = {
   id: string;
@@ -105,6 +107,15 @@ function timeAgo(date: Date): string {
 export async function ResearcherProfile({ profile, activity, endorsements, myEndorsements }: ResearcherProfileProps) {
   const session = await auth();
   const following = session?.user?.id ? await isFollowing(profile.id) : false;
+  const existingDmThread = session?.user?.id ? await db.messageThread.findFirst({
+    where: {
+      OR: [
+        { participant1: session.user.id, participant2: profile.id, type: "DIRECT" },
+        { participant1: profile.id, participant2: session.user.id, type: "DIRECT" },
+      ],
+    },
+    select: { id: true },
+  }) : null;
   const badges = await getUserBadges(profile.id);
   const links = getSocialLinks(profile.socialLinks);
   const displayName = profile.name || profile.username || "Researcher";
@@ -156,8 +167,15 @@ export async function ResearcherProfile({ profile, activity, endorsements, myEnd
           )}
 
           {/* Follow button */}
-          <div className="mb-4">
+          <div className="mb-4 flex flex-wrap gap-2">
             <FollowButton targetUserId={profile.id} initialFollowing={following} />
+            {!isOwnProfile && session?.user && (
+              <DirectMessageButton
+                recipientId={profile.id}
+                isFollowing={following}
+                existingThreadId={existingDmThread?.id}
+              />
+            )}
           </div>
 
           {/* Followers/Following */}
