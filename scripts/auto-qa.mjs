@@ -118,6 +118,38 @@ CRITICAL RULES:
     console.log(`  Question: "${q.title}" by ${author.name}`);
   }
 
+  // Fetch and append Semantic Scholar papers to each question
+  console.log("Adding academic references to questions...");
+  for (let idx = 0; idx < createdQuestions.length; idx++) {
+    const q = createdQuestions[idx];
+    if (idx > 0) await new Promise(r => setTimeout(r, 1500)); // Rate limit: 1 req/sec
+    try {
+      const searchQuery = encodeURIComponent(q.title.slice(0, 100));
+      const res = await fetch(
+        `https://api.semanticscholar.org/graph/v1/paper/search?query=${searchQuery}&limit=2&fields=title,authors,year,citationCount,url`,
+        { headers: { "User-Agent": "TheIntellectualExchange/1.0" } }
+      );
+      if (!res.ok) continue;
+      const data = await res.json();
+      const papers = (data.data || []).filter(p => p.title && p.url);
+
+      if (papers.length > 0) {
+        const papersHtml = papers.map(p => {
+          const authors = (p.authors || []).slice(0, 2).map(a => a.name).join(", ");
+          return `<li><a href="${p.url}" target="_blank" rel="noopener">${p.title}</a> — ${authors}${p.year ? ` (${p.year})` : ""}</li>`;
+        }).join("");
+
+        const currentQ = await sql`SELECT body FROM questions WHERE id = ${q.id}`;
+        const currentBody = currentQ[0].body;
+        const updatedBody = currentBody + `\n\n<p><strong>Related papers:</strong></p><ul>${papersHtml}</ul>`;
+        await sql`UPDATE questions SET body = ${updatedBody} WHERE id = ${q.id}`;
+        console.log(`  Added ${papers.length} papers to "${q.title}"`);
+      }
+    } catch (err) {
+      console.error(`  Failed to fetch papers for "${q.title}":`, err.message);
+    }
+  }
+
   // Add SEO internal links to each created question
   console.log("Adding internal links to questions...");
   for (const q of createdQuestions) {

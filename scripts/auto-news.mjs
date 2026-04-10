@@ -135,6 +135,43 @@ authorIndex: number from 0 to ${researchers.length - 1} (distribute evenly)`;
     console.log(`  Created: "${article.title}" by ${author.name}`);
   }
 
+  // Fetch and append Semantic Scholar papers to each article
+  console.log("Adding academic references...");
+  for (let idx = 0; idx < createdArticles.length; idx++) {
+    const article = createdArticles[idx];
+    if (idx > 0) await new Promise(r => setTimeout(r, 1500)); // Rate limit: 1 req/sec
+    try {
+      const searchQuery = encodeURIComponent(article.title.slice(0, 100));
+      const res = await fetch(
+        `https://api.semanticscholar.org/graph/v1/paper/search?query=${searchQuery}&limit=3&fields=title,authors,year,citationCount,url`,
+        { headers: { "User-Agent": "TheIntellectualExchange/1.0" } }
+      );
+      if (!res.ok) continue;
+      const data = await res.json();
+      const papers = (data.data || []).filter(p => p.title && p.url);
+
+      if (papers.length > 0) {
+        const papersHtml = papers.map(p => {
+          const authors = (p.authors || []).slice(0, 3).map(a => a.name).join(", ");
+          const citation = p.citationCount ? ` · ${p.citationCount} citations` : "";
+          return `<li><a href="${p.url}" target="_blank" rel="noopener">${p.title}</a><br><span style="color:#6b7280;font-size:13px;">${authors}${p.year ? ` (${p.year})` : ""}${citation}</span></li>`;
+        }).join("");
+
+        const currentArticle = await sql`SELECT body FROM articles WHERE id = ${article.id}`;
+        const currentBody = currentArticle[0].body;
+        const updatedBody = currentBody + `
+    <h3>Academic References</h3>
+    <p style="color:#6b7280;font-size:13px;">Related research papers via <a href="https://www.semanticscholar.org" target="_blank" rel="noopener">Semantic Scholar</a></p>
+    <ul>${papersHtml}</ul>
+  `;
+        await sql`UPDATE articles SET body = ${updatedBody} WHERE id = ${article.id}`;
+        console.log(`  Added ${papers.length} papers to "${article.title}"`);
+      }
+    } catch (err) {
+      console.error(`  Failed to fetch papers for "${article.title}":`, err.message);
+    }
+  }
+
   // Add SEO internal links to each created article
   console.log("Adding internal links to articles...");
   for (const article of createdArticles) {
