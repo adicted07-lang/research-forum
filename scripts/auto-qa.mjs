@@ -192,10 +192,11 @@ CRITICAL RULES:
     for (const question of unansweredQuestions.slice(0, answerCount)) {
       const answerer = answerers[answersCreated % answerers.length];
 
+      const cleanBody = question.body.replace(/<[^>]*>/g, "").replace(/Related reading:.*$/s, "").replace(/Related papers:.*$/s, "").trim();
       const answerPrompt = `You are ${answerer.name}, a market researcher. Give a short, helpful reply to this forum question.
 
 Question: ${question.title}
-Context: ${question.body}
+Context: ${cleanBody}
 
 Return ONLY valid JSON (no markdown, no code fences):
 {
