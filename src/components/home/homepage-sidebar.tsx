@@ -8,8 +8,9 @@ import { AdUnit } from "@/components/shared/ad-unit";
 import { db } from "@/lib/db";
 import { getLevel } from "@/lib/reputation";
 import { SuggestedResearchers } from "@/components/home/suggested-researchers";
+import { unstable_cache } from "next/cache";
 
-async function getRecentActivity(limit = 6) {
+const getRecentActivity = unstable_cache(async (limit = 6) => {
   try {
     const [questions, answers] = await Promise.all([
       db.question.findMany({
@@ -57,9 +58,9 @@ async function getRecentActivity(limit = 6) {
   } catch {
     return [];
   }
-}
+}, ["recent-activity"], { revalidate: 300 });
 
-async function getFeaturedResearcher() {
+const getFeaturedResearcher = unstable_cache(async () => {
   try {
     const user = await db.user.findFirst({
       where: { role: "RESEARCHER", deletedAt: null },
@@ -78,7 +79,7 @@ async function getFeaturedResearcher() {
   } catch {
     return null;
   }
-}
+}, ["featured-researcher"], { revalidate: 600 });
 
 function timeAgo(date: Date): string {
   const seconds = Math.floor((Date.now() - new Date(date).getTime()) / 1000);

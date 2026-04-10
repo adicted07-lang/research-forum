@@ -54,7 +54,7 @@ export async function getFeedItems(
     db.question.findMany({
       where: { deletedAt: null, createdAt: { gte: since } },
       orderBy: { createdAt: "desc" },
-      take: 100,
+      take: 30,
       select: {
         id: true, title: true, body: true, slug: true, tags: true, industry: true,
         upvoteCount: true, answerCount: true, createdAt: true,
@@ -64,7 +64,7 @@ export async function getFeedItems(
     db.article.findMany({
       where: { status: "PUBLISHED", deletedAt: null, publishedAt: { gte: since } },
       orderBy: { publishedAt: "desc" },
-      take: 100,
+      take: 30,
       select: {
         id: true, title: true, body: true, slug: true, tags: true, readTime: true,
         publishedAt: true,
@@ -74,7 +74,7 @@ export async function getFeedItems(
     db.answer.findMany({
       where: { deletedAt: null, upvoteCount: { gte: 3 }, createdAt: { gte: since } },
       orderBy: { upvoteCount: "desc" },
-      take: 50,
+      take: 10,
       select: {
         id: true, body: true, upvoteCount: true, createdAt: true,
         author: { select: { name: true, username: true, image: true, id: true } },
