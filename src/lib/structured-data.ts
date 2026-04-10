@@ -113,20 +113,51 @@ export function personSchema(user: {
   about?: string | null;
   expertise?: string[];
   socialLinks?: Record<string, string> | null;
+  experienceYears?: number | null;
+  points?: number;
+  _count?: { questions: number; answers: number; followers: number };
 }) {
-  const sameAs = user.socialLinks
-    ? Object.values(user.socialLinks).filter(Boolean)
-    : undefined;
+  const sameAs: string[] = [];
+  if (user.socialLinks) {
+    Object.values(user.socialLinks).forEach((url) => {
+      if (typeof url === "string" && url.startsWith("http")) sameAs.push(url);
+    });
+  }
 
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     name: user.name || user.username,
     url: `${BASE_URL}/profile/${user.username}`,
-    description: (user.about || user.bio)?.slice(0, 160) || undefined,
-    jobTitle: user.bio?.slice(0, 100) || undefined,
+    description: (user.about || user.bio || "").slice(0, 160) || undefined,
+    jobTitle: user.bio ? user.bio.slice(0, 100) : "Market Researcher",
     knowsAbout: user.expertise && user.expertise.length > 0 ? user.expertise : undefined,
-    sameAs: sameAs && sameAs.length > 0 ? sameAs : undefined,
+    sameAs: sameAs.length > 0 ? sameAs : undefined,
+    ...(user.experienceYears && {
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "Market Researcher",
+        experienceRequirements: `${user.experienceYears} years`,
+      },
+    }),
+    interactionStatistic: [
+      ...(user._count?.answers ? [{
+        "@type": "InteractionCounter",
+        interactionType: "https://schema.org/WriteAction",
+        userInteractionCount: user._count.answers,
+        name: "Answers",
+      }] : []),
+      ...(user._count?.followers ? [{
+        "@type": "InteractionCounter",
+        interactionType: "https://schema.org/FollowAction",
+        userInteractionCount: user._count.followers,
+        name: "Followers",
+      }] : []),
+    ],
+    mainEntityOfPage: {
+      "@type": "ProfilePage",
+      url: `${BASE_URL}/profile/${user.username}`,
+    },
   };
 }
 

@@ -93,7 +93,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-              __html: JSON.stringify(personSchema(researcher as any)),
+              __html: JSON.stringify(personSchema({
+                ...researcher,
+                username: researcher.username || "",
+                socialLinks: researcher.socialLinks as Record<string, string> | null,
+                _count: researcher._count,
+              })),
             }}
           />
           <ResearcherProfile profile={researcher} activity={activity} endorsements={endorsements} myEndorsements={myEndorsements} />
