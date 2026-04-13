@@ -6,6 +6,9 @@ import { ReviewSection } from "@/components/marketplace/review-section";
 import { ReviewForm } from "@/components/marketplace/review-form";
 import { getListingBySlug, getListings } from "@/server/actions/listings";
 import { auth } from "@/auth";
+import { getRelatedContent } from "@/server/actions/citations";
+import { RelatedContent } from "@/components/shared/related-content";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -68,18 +71,27 @@ export default async function ListingPage({ params }: ListingPageProps) {
     // unauthenticated
   }
 
-  // Fetch related listings
+  // Fetch related listings and cross-content
   let relatedListings: any[] = [];
+  let relatedContent: { type: "question" | "article"; title: string; url: string }[] = [];
   try {
-    const allListings = await getListings({ limit: 4 });
+    const [allListings, related] = await Promise.all([
+      getListings({ limit: 4 }),
+      getRelatedContent("listing", listing.id, listing.categoryTags ?? []),
+    ]);
     relatedListings = allListings
       .filter((l: any) => l.id !== listing.id)
       .slice(0, 3);
+    relatedContent = related;
   } catch {}
 
   return (
     <PageLayout>
       <div className="max-w-4xl mx-auto space-y-6">
+        <Breadcrumbs items={[
+          { label: "Marketplace", href: "/marketplace" },
+          { label: listing.title },
+        ]} />
         <ListingDetail listing={listing} relatedListings={relatedListings} />
         <ReviewSection targetType="LISTING" targetId={listing.id} />
         <ReviewForm
@@ -87,6 +99,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
           targetId={listing.id}
           isLoggedIn={isLoggedIn}
         />
+        {relatedContent.length > 0 && <RelatedContent items={relatedContent} />}
       </div>
     </PageLayout>
   );

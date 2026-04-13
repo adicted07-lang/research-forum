@@ -10,7 +10,7 @@ interface RelatedContent {
 }
 
 export async function getRelatedContent(
-  contentType: "question" | "article",
+  contentType: string,
   contentId: string,
   tags: string[],
   limit = 5

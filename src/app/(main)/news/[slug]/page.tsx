@@ -11,6 +11,8 @@ import { getComments } from "@/server/actions/comments";
 import { getRelatedContent } from "@/server/actions/citations";
 import { RelatedContent } from "@/components/shared/related-content";
 import { articleSchema, breadcrumbSchema } from "@/lib/structured-data";
+import { InlineNewsletterCta } from "@/components/newsletter/inline-newsletter-cta";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export async function generateMetadata({
   params,
@@ -104,8 +106,15 @@ export default async function ArticleDetailPage({
         }}
       />
       <div className="space-y-6">
+        <Breadcrumbs items={[
+          { label: "News", href: "/news" },
+          { label: article.title },
+        ]} />
         {/* Article */}
         <ArticleDetail article={article} />
+
+        {/* Newsletter CTA */}
+        <InlineNewsletterCta />
 
         {/* Comments */}
         <div className="bg-white border border-border-light rounded-md px-6 pb-6 pt-4 dark:bg-surface-dark dark:border-border-dark-light">

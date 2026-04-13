@@ -4,6 +4,9 @@ import { Calendar, DollarSign, ExternalLink, Users } from "lucide-react";
 import { PageLayout } from "@/components/layout/page-layout";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { getGrantBySlug } from "@/server/actions/grants";
+import { getRelatedContent } from "@/server/actions/citations";
+import { RelatedContent } from "@/components/shared/related-content";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -43,11 +46,16 @@ export default async function GrantPage({ params }: GrantPageProps) {
   const grant = await getGrantBySlug(slug);
   if (!grant) notFound();
 
+  const relatedContent = await getRelatedContent("grant", grant.id, grant.tags ?? []);
   const isExpired = grant.deadline && new Date(grant.deadline) < new Date();
 
   return (
     <PageLayout>
       <div className="max-w-3xl mx-auto space-y-6">
+        <Breadcrumbs items={[
+          { label: "Grants", href: "/grants" },
+          { label: grant.title },
+        ]} />
         <div className="bg-white border border-border-light rounded-md p-6 dark:bg-surface-dark dark:border-border-dark-light">
           <h1 className="text-2xl font-bold text-text-primary dark:text-text-dark-primary mb-2">
             {grant.title}
@@ -119,6 +127,8 @@ export default async function GrantPage({ params }: GrantPageProps) {
             </p>
           </div>
         )}
+
+        {relatedContent.length > 0 && <RelatedContent items={relatedContent} />}
       </div>
     </PageLayout>
   );

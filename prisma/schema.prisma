@@ -213,6 +213,11 @@ model User {
   // Invite codes
   inviteCodes InviteCode[] @relation("InviteCodesCreated")
 
+  // Referral system
+  referralCode      String?    @unique
+  referralsMade     Referral[] @relation("ReferralsMade")
+  referralsReceived Referral?  @relation("ReferralsReceived")
+
   // Dataset relations
   datasets Dataset[]
 
@@ -894,6 +899,22 @@ model InviteCode {
 
   @@index([code])
   @@map("invite_codes")
+}
+
+// === REFERRALS ===
+
+model Referral {
+  id          String   @id @default(cuid())
+  referrerId  String
+  referredId  String   @unique
+  pointsAwarded Int    @default(0)
+  createdAt   DateTime @default(now())
+
+  referrer User @relation("ReferralsMade", fields: [referrerId], references: [id])
+  referred User @relation("ReferralsReceived", fields: [referredId], references: [id])
+
+  @@index([referrerId])
+  @@map("referrals")
 }
 
 // === TAG FOLLOWS ===

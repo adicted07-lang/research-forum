@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Eye } from "lucide-react";
+import { SocialShare } from "@/components/shared/social-share";
+import { LastUpdated } from "@/components/shared/last-updated";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { StatusBadge } from "@/components/shared/status-badge";
@@ -27,6 +29,7 @@ interface QuestionDetailProps {
     viewCount: number;
     author: QuestionAuthor;
     createdAt: Date;
+    updatedAt?: Date;
   };
   currentUserId?: string | null;
 }
@@ -126,10 +129,12 @@ export function QuestionDetail({ question, currentUserId }: QuestionDetailProps)
               <time dateTime={new Date(question.createdAt).toISOString()} className="text-xs text-text-tertiary dark:text-text-dark-tertiary">
                 {relativeTime(question.createdAt)}
               </time>
+              {question.updatedAt && <LastUpdated date={question.updatedAt} />}
               <div className="flex items-center gap-1 text-xs text-text-tertiary">
                 <Eye className="w-3.5 h-3.5" />
                 <span>{question.viewCount} views</span>
               </div>
+              <SocialShare url={`/forum/${question.slug}`} title={question.title} />
             </div>
 
             {isAuthor && (

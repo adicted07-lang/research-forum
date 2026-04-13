@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
+import { SocialShare } from "@/components/shared/social-share";
+import { LastUpdated } from "@/components/shared/last-updated";
 import { UserAvatar } from "@/components/shared/user-avatar";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { VoteButton } from "@/components/forum/vote-button";
@@ -27,6 +29,7 @@ interface ArticleDetailProps {
     author: ArticleAuthor;
     publishedAt: Date | null;
     createdAt: Date;
+    updatedAt?: Date;
   };
 }
 
@@ -123,6 +126,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
                     <span>{article.readTime} min read</span>
                   </div>
                 )}
+                {article.updatedAt && <LastUpdated date={article.updatedAt} />}
               </div>
             </div>
           </div>
@@ -141,14 +145,17 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           <RichTextDisplay content={article.body} />
         </div>
 
-        {/* Tags */}
-        {article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-4 border-t border-border-light dark:border-border-dark-light">
-            {article.tags.map((tag) => (
-              <BadgePill key={tag} label={tag} variant="primary" />
-            ))}
-          </div>
-        )}
+        {/* Tags + Share */}
+        <div className="flex items-center justify-between pt-4 border-t border-border-light dark:border-border-dark-light">
+          {article.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {article.tags.map((tag) => (
+                <BadgePill key={tag} label={tag} variant="primary" />
+              ))}
+            </div>
+          )}
+          <SocialShare url={`/news/${article.slug}`} title={article.title} />
+        </div>
       </div>
     </article>
   );

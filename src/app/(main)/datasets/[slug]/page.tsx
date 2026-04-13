@@ -6,6 +6,9 @@ import { PageLayout } from "@/components/layout/page-layout";
 import { RichTextDisplay } from "@/components/shared/rich-text-display";
 import { BadgePill } from "@/components/shared/badge-pill";
 import { getDatasetBySlug } from "@/server/actions/datasets";
+import { getRelatedContent } from "@/server/actions/citations";
+import { RelatedContent } from "@/components/shared/related-content";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -59,6 +62,7 @@ export default async function DatasetPage({ params }: DatasetPageProps) {
     notFound();
   }
 
+  const relatedContent = await getRelatedContent("dataset", dataset.id, dataset.tags ?? []);
   const displayName = dataset.author.name ?? dataset.author.username ?? "Unknown";
   const priceLabel = dataset.price === 0 ? "Free" : `$${dataset.price.toFixed(2)}`;
   const isPaid = dataset.price > 0;
@@ -66,6 +70,10 @@ export default async function DatasetPage({ params }: DatasetPageProps) {
   return (
     <PageLayout>
       <div className="max-w-3xl mx-auto space-y-6">
+        <Breadcrumbs items={[
+          { label: "Datasets", href: "/datasets" },
+          { label: dataset.title },
+        ]} />
         {/* Header */}
         <div className="bg-white border border-border-light rounded-lg p-6 dark:bg-surface-dark dark:border-border-dark-light">
           <div className="flex items-start gap-4 mb-4">
@@ -171,6 +179,8 @@ export default async function DatasetPage({ params }: DatasetPageProps) {
           </h2>
           <RichTextDisplay content={dataset.description} />
         </div>
+
+        {relatedContent.length > 0 && <RelatedContent items={relatedContent} />}
       </div>
     </PageLayout>
   );

@@ -127,14 +127,21 @@ export function articleSchema(article: {
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "NewsArticle",
     headline: article.title,
     datePublished: article.publishedAt?.toISOString(),
     dateModified: article.updatedAt.toISOString(),
     author: { "@type": "Person", name: article.author.name || "Anonymous" },
-    publisher: { "@type": "Organization", name: "The Intellectual Exchange", url: BASE_URL },
-    image: article.coverImage || undefined,
+    publisher: {
+      "@type": "Organization",
+      name: "The Intellectual Exchange",
+      url: BASE_URL,
+      logo: { "@type": "ImageObject", url: `${BASE_URL}/favicon.svg` },
+    },
+    image: article.coverImage || `${BASE_URL}/api/og?title=${encodeURIComponent(article.title)}&subtitle=News`,
     url: `${BASE_URL}/news/${article.slug}`,
+    description: article.body.replace(/<[^>]*>/g, "").slice(0, 200),
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}/news/${article.slug}` },
   };
 }
 

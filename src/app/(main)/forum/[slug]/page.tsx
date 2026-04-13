@@ -16,6 +16,7 @@ import { SuggestedAnswers } from "@/components/forum/suggested-answers";
 import { getRelatedContent } from "@/server/actions/citations";
 import { RelatedContent } from "@/components/shared/related-content";
 import { questionSchema, discussionForumPostingSchema, breadcrumbSchema } from "@/lib/structured-data";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export async function generateMetadata({
   params,
@@ -119,6 +120,10 @@ export default async function QuestionDetailPage({
         }}
       />
       <div className="space-y-6">
+        <Breadcrumbs items={[
+          { label: "Forum", href: "/forum" },
+          { label: question.title },
+        ]} />
         {/* Question */}
         <QuestionDetail question={question} currentUserId={currentUserId} />
 

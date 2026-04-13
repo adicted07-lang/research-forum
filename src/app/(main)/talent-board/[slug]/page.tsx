@@ -6,6 +6,9 @@ import { ApplicationForm } from "@/components/hire/application-form";
 import { getJobBySlug, incrementJobViews } from "@/server/actions/jobs";
 import { auth } from "@/auth";
 import { jobSchema, breadcrumbSchema } from "@/lib/structured-data";
+import { getRelatedContent } from "@/server/actions/citations";
+import { RelatedContent } from "@/components/shared/related-content";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 export const dynamic = "force-dynamic";
 
@@ -52,7 +55,10 @@ export default async function JobPage({ params }: JobPageProps) {
   // Increment view count (fire and forget)
   incrementJobViews(job.id);
 
-  const session = await auth();
+  const [session, relatedContent] = await Promise.all([
+    auth(),
+    getRelatedContent("job", job.id, job.requiredSkills ?? []),
+  ]);
   const isAuthenticated = !!session?.user?.id;
   const isResearcher = session?.user?.role === "RESEARCHER";
 
@@ -77,12 +83,17 @@ export default async function JobPage({ params }: JobPageProps) {
         }}
       />
       <div className="max-w-4xl mx-auto space-y-6">
+        <Breadcrumbs items={[
+          { label: "Talent Board", href: "/talent-board" },
+          { label: job.title },
+        ]} />
         <JobDetail job={job} />
         <ApplicationForm
           jobId={job.id}
           isAuthenticated={isAuthenticated}
           isResearcher={isResearcher}
         />
+        {relatedContent.length > 0 && <RelatedContent items={relatedContent} />}
       </div>
     </PageLayout>
   );

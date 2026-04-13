@@ -8,6 +8,7 @@ import { PasswordForm } from "@/components/settings/password-form";
 import { DangerZone } from "@/components/settings/danger-zone";
 import { NewsletterSettings } from "@/components/settings/newsletter-settings";
 import { getUserSubscriptions } from "@/server/actions/newsletter";
+import { ReferralCard } from "@/components/referral/referral-card";
 
 export const dynamic = "force-dynamic";
 
@@ -96,6 +97,11 @@ export default async function SettingsPage() {
             Choose which newsletters you&apos;d like to receive.
           </p>
           <NewsletterSettings initialSubscriptions={subscriptions} />
+        </section>
+
+        {/* Referral program */}
+        <section className="mb-6">
+          <ReferralCard />
         </section>
 
         {/* Danger zone */}
