@@ -38,28 +38,49 @@ export function questionSchema(question: {
   slug: string;
   createdAt: Date;
   updatedAt: Date;
-  author: { name: string | null };
-  answers: { body: string; isAccepted: boolean; createdAt: Date; author: { name: string | null } }[];
+  author: { name: string | null; username: string | null };
+  answers: { body: string; isAccepted: boolean; createdAt: Date; author: { name: string | null; username: string | null } }[];
 }) {
   const accepted = question.answers.find((a) => a.isAccepted);
+  const suggested = question.answers.filter((a) => !a.isAccepted);
+
+  function authorObj(a: { name: string | null; username: string | null }) {
+    return {
+      "@type": "Person" as const,
+      name: a.name || "Anonymous",
+      url: a.username ? `${BASE_URL}/profile/${a.username}` : undefined,
+    };
+  }
+
   return {
     "@context": "https://schema.org",
     "@type": "QAPage",
     mainEntity: {
       "@type": "Question",
       name: question.title,
-      text: question.body.slice(0, 500),
+      text: question.body.replace(/<[^>]*>/g, "").slice(0, 500),
+      url: `${BASE_URL}/forum/${question.slug}`,
       dateCreated: question.createdAt.toISOString(),
       dateModified: question.updatedAt.toISOString(),
-      author: { "@type": "Person", name: question.author.name || "Anonymous" },
+      author: authorObj(question.author),
       answerCount: question.answers.length,
       acceptedAnswer: accepted
         ? {
             "@type": "Answer",
-            text: accepted.body.slice(0, 500),
+            text: accepted.body.replace(/<[^>]*>/g, "").slice(0, 500),
             dateCreated: accepted.createdAt.toISOString(),
-            author: { "@type": "Person", name: accepted.author.name || "Anonymous" },
+            author: authorObj(accepted.author),
+            url: `${BASE_URL}/forum/${question.slug}`,
           }
+        : undefined,
+      suggestedAnswer: !accepted && suggested.length > 0
+        ? suggested.slice(0, 3).map((a) => ({
+            "@type": "Answer",
+            text: a.body.replace(/<[^>]*>/g, "").slice(0, 500),
+            dateCreated: a.createdAt.toISOString(),
+            author: authorObj(a.author),
+            url: `${BASE_URL}/forum/${question.slug}`,
+          }))
         : undefined,
     },
   };

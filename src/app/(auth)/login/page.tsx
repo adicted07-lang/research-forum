@@ -7,6 +7,7 @@ const baseUrl = process.env.NEXT_PUBLIC_URL || "https://theintellectualexchange.
 export const metadata: Metadata = {
   title: "Sign In — The Intellectual Exchange",
   description: "Sign in to your account on The Intellectual Exchange. Access the research community forum, marketplace, and talent board.",
+  robots: { index: false, follow: true },
   alternates: { canonical: `${baseUrl}/login` },
   openGraph: {
     title: "Sign In — The Intellectual Exchange",
