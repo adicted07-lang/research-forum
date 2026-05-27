@@ -33,8 +33,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
+    // /favicon.ico is emitted automatically from src/app/favicon.ico (multi-size 16/32/48/64).
+    // Modern browsers prefer the crisp SVG below; the PNG covers Android/PWA.
     icon: [
-      { url: "/favicon.ico", sizes: "48x48" },
       { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
       { url: "/logo-512-0.png", sizes: "192x192", type: "image/png" },
     ],
