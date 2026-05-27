@@ -1,10 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
-  ArrowRight, Mail, Sparkles, Star, Megaphone,
+  ArrowRight, Mail, Sparkles, Star,
   MessageSquare, FileText, ShoppingBag,
 } from "lucide-react";
 import { UserAvatar } from "@/components/shared/user-avatar";
-import { AdUnit } from "@/components/shared/ad-unit";
 import { db } from "@/lib/db";
 import { getLevel } from "@/lib/reputation";
 import { SuggestedResearchers } from "@/components/home/suggested-researchers";
@@ -199,25 +199,25 @@ export async function HomepageSidebar({ tags }: HomepageSidebarProps) {
         </div>
       )}
 
-      {/* Ad Placement */}
-      <div className="bg-white border border-border-light rounded-xl overflow-hidden dark:bg-surface-dark dark:border-border-dark-light">
-        <AdUnit slot="homepage-sidebar" format="rectangle" />
-        <div className="border border-dashed border-border dark:border-border-dark rounded-lg p-6 m-4 text-center">
-          <Megaphone className="w-6 h-6 text-primary/40 mx-auto mb-2" />
-          <p className="text-xs font-medium text-text-secondary dark:text-text-dark-secondary mb-1">
-            Reach 500+ researchers
-          </p>
-          <p className="text-[10px] text-text-tertiary mb-3">
-            Promote your product, service, or event to the research community
-          </p>
-          <Link
-            href="/advertise"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-primary border border-primary/30 rounded-md hover:bg-primary/5 transition-colors"
-          >
-            Advertise Here
-            <ArrowRight className="w-3 h-3" />
-          </Link>
-        </div>
+      {/* Ad Placement — hardcoded house banner */}
+      <div className="relative">
+        <span className="absolute top-1.5 right-1.5 z-10 text-[9px] font-semibold text-white/80 uppercase tracking-wide bg-black/30 px-1.5 py-0.5 rounded">
+          Sponsored
+        </span>
+        <a
+          href="https://www.meridianconsensus.com/"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="block rounded-xl overflow-hidden border border-border-light dark:border-border-dark-light hover:shadow-md transition-shadow"
+        >
+          <Image
+            src="/ads/meridian-earlybird-300x250.png"
+            alt="Meridian Consensus — Earlybird access, 60% off with code EARLYBIRD60"
+            width={300}
+            height={250}
+            className="block w-full h-auto"
+          />
+        </a>
       </div>
 
       {/* Featured Researcher */}
