@@ -12,7 +12,7 @@ const daysAgo = (d) => new Date(Date.now() - d * 24 * 60 * 60 * 1000);
 // createdAt staggered over the last ~8 weeks so they look organic
 const researchers = [
   {
-    name: "Sofia Rossi", username: "sofia_rossi", email: "sofia.rossi.research@gmail.com",
+    name: "Sofia Rossi", username: "sofia_rossi", email: "sofia.rossi@researchhub.dev",
     avatarSeed: "Sofia", bg: "ffd5dc", createdDaysAgo: 53,
     expertise: ["innovation-research", "concept-testing", "qualitative-methods", "jobs-to-be-done", "trend-analysis"],
     experienceYears: 10, hourlyRate: 190, points: 540, industry: "Food and Beverages",
@@ -20,7 +20,7 @@ const researchers = [
     about: "Over a decade running front-end innovation programmes for CPG companies across Europe. I specialise in turning fuzzy consumer needs into validated product concepts, combining ethnographic immersion with iterative concept testing and jobs-to-be-done frameworks.",
   },
   {
-    name: "Daniel Okonkwo", username: "daniel_okonkwo", email: "daniel.okonkwo@outlook.com",
+    name: "Daniel Okonkwo", username: "daniel_okonkwo", email: "daniel.okonkwo@researchhub.dev",
     avatarSeed: "Daniel", bg: "d6e4ff", createdDaysAgo: 46,
     expertise: ["B2B-research", "win-loss-analysis", "competitive-analysis", "market-sizing", "strategic-planning"],
     experienceYears: 13, hourlyRate: 205, points: 610, industry: "ICT",
@@ -28,7 +28,7 @@ const researchers = [
     about: "I build always-on competitive intelligence and win/loss functions for B2B technology companies. My work has directly informed pricing, positioning, and roadmap decisions at several high-growth SaaS firms.",
   },
   {
-    name: "Mei Lin", username: "mei_lin", email: "mei.lin.insights@gmail.com",
+    name: "Mei Lin", username: "mei_lin", email: "mei.lin@researchhub.dev",
     avatarSeed: "Mei", bg: "c0e8d5", createdDaysAgo: 39,
     expertise: ["quantitative-methods", "survey-design", "market-segmentation", "data-analytics", "brand-tracking"],
     experienceYears: 9, hourlyRate: 175, points: 470, industry: "Consumer Goods",
@@ -36,7 +36,7 @@ const researchers = [
     about: "Hands-on quant researcher with deep experience in large-sample survey design, advanced segmentation, and continuous brand health tracking. Fluent in Mandarin and English, I frequently bridge global brand teams with local market realities.",
   },
   {
-    name: "Omar Haddad", username: "omar_haddad", email: "omar.haddad.mr@proton.me",
+    name: "Omar Haddad", username: "omar_haddad", email: "omar.haddad@researchhub.dev",
     avatarSeed: "Omar", bg: "fde2b3", createdDaysAgo: 31,
     expertise: ["pricing-research", "conjoint-analysis", "choice-modeling", "quantitative-methods", "product-research"],
     experienceYears: 14, hourlyRate: 225, points: 690, industry: "Automotive",
@@ -44,7 +44,7 @@ const researchers = [
     about: "I help manufacturers and mobility startups optimise pricing, feature bundles, and trim strategies using conjoint analysis and discrete choice models. Fourteen years across OEMs and consultancies, with a strong applied-econometrics foundation.",
   },
   {
-    name: "Isabella Moreau", username: "isabella_moreau", email: "isabella.moreau@gmail.com",
+    name: "Isabella Moreau", username: "isabella_moreau", email: "isabella.moreau@researchhub.dev",
     avatarSeed: "Isabella", bg: "e0d4f7", createdDaysAgo: 24,
     expertise: ["UX-research", "usability-testing", "voice-of-customer", "customer-experience", "qualitative-research"],
     experienceYears: 8, hourlyRate: 180, points: 430, industry: "Healthcare",
@@ -52,7 +52,7 @@ const researchers = [
     about: "I work at the intersection of market and UX research for healthcare and medtech. My focus is voice-of-customer programmes, usability testing of clinical software, and translating patient experience data into product priorities.",
   },
   {
-    name: "Rajesh Nair", username: "rajesh_nair", email: "rajesh.nair.research@outlook.com",
+    name: "Rajesh Nair", username: "rajesh_nair", email: "rajesh.nair@researchhub.dev",
     avatarSeed: "Rajesh", bg: "cce5cc", createdDaysAgo: 17,
     expertise: ["data-analytics", "social-listening", "trend-analysis", "AI-in-research", "mixed-methods"],
     experienceYears: 11, hourlyRate: 200, points: 560, industry: "Energy and Power",
@@ -60,7 +60,7 @@ const researchers = [
     about: "I combine traditional survey research with social listening, text analytics, and emerging AI tooling to give energy and infrastructure clients a faster read on stakeholder sentiment and emerging issues.",
   },
   {
-    name: "Hannah Becker", username: "hannah_becker", email: "hannah.becker.insights@gmail.com",
+    name: "Hannah Becker", username: "hannah_becker", email: "hannah.becker@researchhub.dev",
     avatarSeed: "Hannah", bg: "ffe0b2", createdDaysAgo: 11,
     expertise: ["qualitative-methods", "focus-groups", "moderation", "ethnographic-research", "cultural-insights"],
     experienceYears: 16, hourlyRate: 210, points: 720, industry: "Packaging",
@@ -68,7 +68,7 @@ const researchers = [
     about: "Sixteen years as an independent qualitative researcher and moderator. I run focus groups, IDIs, and ethnographic studies, with particular strength in packaging, shopper, and sensory research for FMCG brands.",
   },
   {
-    name: "Thomas Nguyen", username: "thomas_nguyen", email: "thomas.nguyen.mr@gmail.com",
+    name: "Thomas Nguyen", username: "thomas_nguyen", email: "thomas.nguyen@researchhub.dev",
     avatarSeed: "Thomas", bg: "f5cba7", createdDaysAgo: 6,
     expertise: ["competitive-analysis", "market-sizing", "B2B-research", "strategic-planning", "positioning"],
     experienceYears: 7, hourlyRate: 165, points: 360, industry: "Aerospace and Defence",
